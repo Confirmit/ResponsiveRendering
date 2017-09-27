@@ -1,0 +1,75 @@
+.cf-smartbanner {
+  height: 78px;
+  font-family: helvetica, arial, sans-serif;
+  background-color: #F2F2F2;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+  text-shadow: 0 1px 1px white;
+
+  &_hidden {
+    display: none;
+  }
+
+  &__container {
+    height: 78px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__close-button {
+    display: block;
+    font-size: 27px;
+    text-decoration: none;
+    -webkit-font-smoothing: subpixel-antialiased;
+    color: #747474;
+    margin: 9px;
+  }
+
+  &__icon {
+    display: block;
+    height: 57px;
+    background-color: #fff;
+    background-size: cover;
+    border-radius: 10px;
+    min-width: 57px;
+    margin: 10px 10px 10px 0;
+  }
+
+  &__info {
+    font-size: 12px;
+    margin-right: 2px;
+    line-height: 1.2em;
+    font-weight: bold;
+    color: #6A6A6A;
+  }
+
+  &__title {
+    font-size: 15px;
+    line-height: 17px;
+    color: #4D4D4D;
+    font-weight: bold;
+  }
+
+  &__buttons {
+    flex-grow: 2;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  &__button {
+    display: inline-block;
+    margin: 4px 10px 4px 0;
+    padding: 1px 14px 0;
+    font-size: 14px;
+    line-height: 26px;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: none;
+    border-radius: 4px;
+    text-align: center;
+    border-bottom: 1px outset;
+    min-width: 111px;
+  }
+}

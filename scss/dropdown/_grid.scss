@@ -1,0 +1,5 @@
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-dd-grid-answer {
+    @include grid-layout-answer-content-indent(2em, 1.4em);
+  }
+}

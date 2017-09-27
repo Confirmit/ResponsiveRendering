@@ -1,0 +1,16 @@
+$progress_height: 0.5em;
+
+.cf-progress {
+  position: relative;
+  height: $progress_height;
+  background: $progress-color;
+
+  &__indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: $progress_height;
+
+    background: $progress-indicator-color;
+  }
+}

@@ -1,0 +1,9 @@
+@mixin grid-layout-answer-content-indent($item-size, $text-size, $other-size: ($control-size + 0.2)) {
+  &__text {
+    margin-top: ($item-size - $text-size) / 2;
+  }
+
+  &__other {
+    margin-top: ($item-size - $other-size) / 2;
+  }
+}

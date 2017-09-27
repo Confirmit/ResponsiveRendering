@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../">
+  <title data-ice="title">Manual | Responsive Rendering</title>
+   <link rel="shortcut icon" type="image/x-icon" href="./image/favicon.ico">
+   <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+   <link type="text/css" rel="stylesheet" href="css/style.css">
+   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+   <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Responsive Rendering Api"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Responsive Rendering"><meta property="twitter:description" content="Responsive Rendering Api"></head>
+<body class="layout-container manual-root" data-ice="rootContainer">
+
+<div class="navbar navbar-default navbar-fixed-top">
+	<div>
+		<div class="navbar-header">
+			 <a class="navbar-brand" href="./index.html">
+				<img src="./image/brand_logo.png" style="width:30px;">
+			</a>
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			<li><a href="./index.html" data-ice="manualHeaderLink"> Articles and Guides </a></li>
+			<li><a href="identifiers.html" data-ice="manualHeaderLink">Library <div class="label label-default">API</div></a></li>
+			<li><a href="https://github.com/Confirmit/ResponsiveRendering"><img width="20px" src="./image/github.png"></a></li>
+		</ul>
+            <div class="pull-right">
+                 <div class="search-box">
+					<span>
+						<img src="./image/search.png">
+						<span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+					</span>
+					<ul class="search-result"></ul>
+				</div>
+            </div>
+	</div>
+	</div>
+</div>
+
+<nav class="navigation" data-ice="nav">
+<div class="manual-toc-root">
+  
+<div data-ice="manual" class="nav-anchor">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/index.html"><a class="manual-toc-href" href="manual/index.html" data-ice="link">Confirmit Responsive Survey Rendering documentation</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/index.html"><a class="manual-toc-href" href="manual/index.html#what-is-it-" data-ice="link">What is it?</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/index.html"><a class="manual-toc-href" href="manual/index.html#how-to-start-using" data-ice="link">How to start using</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/index.html"><a class="manual-toc-href" href="manual/index.html#key-concepts" data-ice="link">Key concepts</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/index.html"><a class="manual-toc-href" href="manual/index.html#launch-validation" data-ice="link">Launch validation</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/index.html"><a class="manual-toc-href" href="manual/index.html#browser-support" data-ice="link">Browser support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/index.html"><a class="manual-toc-href" href="manual/index.html#further-reading" data-ice="link">Further reading</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/index.html"><a class="manual-toc-href" href="manual/index.html#testlab-survey-with-examples---a-href--https---author-testlab-firmglobal-net-surveydesigner-p1010101--p1010101--a-" data-ice="link">Testlab survey with examples: p1010101</a></li>
+</ul>
+  </div>
+<div data-ice="manual" class="nav-anchor">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/styling.html"><a class="manual-toc-href" href="manual/styling.html" data-ice="link">How to do styling</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/styling.html"><a class="manual-toc-href" href="manual/styling.html#style-bundle-customization" data-ice="link">Style bundle customization</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/styling.html"><a class="manual-toc-href" href="manual/styling.html#custom-css" data-ice="link">Custom CSS</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/styling.html"><a class="manual-toc-href" href="manual/styling.html#totally-custom-css" data-ice="link">Totally custom CSS</a></li>
+</ul>
+  </div>
+<div data-ice="manual" class="nav-anchor">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/stylebundle.html"><a class="manual-toc-href" href="manual/stylebundle.html" data-ice="link">Style Bundle</a></li>
+</ul>
+  </div>
+<div data-ice="manual" class="nav-anchor">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/scripting.html"><a class="manual-toc-href" href="manual/scripting.html" data-ice="link">How to do scripting</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/scripting.html"><a class="manual-toc-href" href="manual/scripting.html#overview" data-ice="link">Overview</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/scripting.html"><a class="manual-toc-href" href="manual/scripting.html#where-to-put-code" data-ice="link">Where to put code</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/scripting.html"><a class="manual-toc-href" href="manual/scripting.html#how-to-send-data-to-server" data-ice="link">How to send data to server</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/scripting.html"><a class="manual-toc-href" href="manual/scripting.html#client-side-events" data-ice="link">Client-side events</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/scripting.html"><a class="manual-toc-href" href="manual/scripting.html#changeevent" data-ice="link">ChangeEvent</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/scripting.html"><a class="manual-toc-href" href="manual/scripting.html#validationevent" data-ice="link">ValidationEvent</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/scripting.html"><a class="manual-toc-href" href="manual/scripting.html#validationcompleteevent" data-ice="link">ValidationCompleteEvent</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/scripting.html"><a class="manual-toc-href" href="manual/scripting.html#server-side-piping" data-ice="link">Server side piping</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/scripting.html"><a class="manual-toc-href" href="manual/scripting.html#custom-question-experience" data-ice="link">Custom question experience</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/scripting.html"><a class="manual-toc-href" href="manual/scripting.html#custom-jquery-slider-example" data-ice="link">Custom jQuery slider example</a></li>
+</ul>
+  </div>
+<div data-ice="manual" class="nav-anchor">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/customViews.html"><a class="manual-toc-href" href="manual/customViews.html" data-ice="link">Augmenting Confirmit questions</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/customViews.html"><a class="manual-toc-href" href="manual/customViews.html#overview" data-ice="link">Overview</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/customViews.html"><a class="manual-toc-href" href="manual/customViews.html#api-spec" data-ice="link">API spec</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/customViews.html"><a class="manual-toc-href" href="manual/customViews.html#examples" data-ice="link">Examples</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customViews.html"><a class="manual-toc-href" href="manual/customViews.html#question-level" data-ice="link">Question level</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customViews.html"><a class="manual-toc-href" href="manual/customViews.html#question-type-level" data-ice="link">Question type level</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customViews.html"><a class="manual-toc-href" href="manual/customViews.html#side-by-side-views" data-ice="link">Side by side views</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customViews.html"><a class="manual-toc-href" href="manual/customViews.html#inherit-from-default-views" data-ice="link">Inherit from default views</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customViews.html"><a class="manual-toc-href" href="manual/customViews.html#replace-default-view-with-custom" data-ice="link">Replace default view with custom</a></li>
+</ul>
+  </div>
+<div data-ice="manual" class="nav-anchor">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html" data-ice="link">Custom questions</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#overview" data-ice="link">Overview</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#single-slider" data-ice="link">Single slider</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#overview" data-ice="link">Overview</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#implementation" data-ice="link">Implementation</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#grid-slider" data-ice="link">Grid slider</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#overview" data-ice="link">Overview</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#implementation" data-ice="link">Implementation</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#grid-slider-re-rendered" data-ice="link">Grid slider re-rendered</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#overview" data-ice="link">Overview</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#implementation" data-ice="link">Implementation</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#multi-accordion-with-bootstrap" data-ice="link">Multi accordion with bootstrap</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#overview" data-ice="link">Overview</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#implementation" data-ice="link">Implementation</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/customQuestions.html"><a class="manual-toc-href" href="manual/customQuestions.html#custom-factory-example" data-ice="link">Custom factory example</a></li>
+</ul>
+  </div>
+<div data-ice="manual" class="nav-anchor">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/cheatsheet.html"><a class="manual-toc-href" href="manual/cheatsheet.html" data-ice="link">Useful style and code snippets</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/cheatsheet.html"><a class="manual-toc-href" href="manual/cheatsheet.html#background-image" data-ice="link">Background image</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/cheatsheet.html"><a class="manual-toc-href" href="manual/cheatsheet.html#solid-picture" data-ice="link">Solid picture</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/cheatsheet.html"><a class="manual-toc-href" href="manual/cheatsheet.html#repeating-picture" data-ice="link">Repeating picture</a></li>
+</ul>
+  </div>
+<div data-ice="manual" class="nav-anchor">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/layout.html"><a class="manual-toc-href" href="manual/layout.html" data-ice="link">What&apos;s changed in survey layouts</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/layout.html"><a class="manual-toc-href" href="manual/layout.html#rendering-version" data-ice="link">Rendering version</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/layout.html"><a class="manual-toc-href" href="manual/layout.html#new-in-survey-layouts" data-ice="link">New in survey layouts</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/layout.html"><a class="manual-toc-href" href="manual/layout.html#removed-from-survey-layouts" data-ice="link">Removed from survey layouts</a></li>
+</ul>
+  </div>
+<div data-ice="manual" class="nav-anchor">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/versioning.html"><a class="manual-toc-href" href="manual/versioning.html" data-ice="link">Confirmit Responsive Rendering versioning</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/versioning.html"><a class="manual-toc-href" href="manual/versioning.html#rendering-version" data-ice="link">Rendering Version</a></li>
+</ul>
+  </div>
+</div></nav>
+<div class="content" data-ice="content">
+<div class="github-markdown" data-ice="content"><h1 id="confirmit-responsive-rendering-versioning">Confirmit Responsive Rendering versioning</h1><p>Rendering versioning is a new concept that allows us to evolve responsive rendering and roll out breaking changes that won&apos;t automatically affect existing surveys.</p>
+<h2 id="rendering-version">Rendering Version</h2><p>The rendering version contains:</p>
+<ul>
+<li>Server-side markup generation code</li>
+<li>Client-side JavaScript code</li>
+<li>CSS files (style bundles)</li>
+</ul>
+<p>Each responsive survey layout references a specific rendering version. This means that a survey using this layout uses html markup, JavaScript and CSS from this rendering version. It is possible to change the rendering version in the layout properties, and override it in survey settings.
+For layout templates, you have the option of setting the rendering version. If this is not set, it will by default use the latest available version. It will be useful for layouts that only reference style bundles but do not contain any version-specific customizations.
+For surveys, it is mandatory to have the rendering version selected. When a survey is created its rendering version will be fixed (to the version supported by the layout), and it will not automatically change later even if new versions become available.</p>
+</div>
+</div>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+
+<script src="script/jquery-3.2.1.min.js"></script>
+<script src="script/bootstrap.min.js"></script>
+</body>
+</html>

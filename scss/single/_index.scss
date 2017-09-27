@@ -1,0 +1,11 @@
+.cf-single-answer {
+  @include radio($control-size);
+
+  &__other-input {
+    width: 15em;
+  }
+
+  &--selected {
+    @include radio($control-size, true);
+  }
+}

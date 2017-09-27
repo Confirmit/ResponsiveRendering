@@ -1,0 +1,51 @@
+@mixin checkbox_radio_common($size: 1.4em) {
+  padding-left: $size + 0.8em;
+  line-height: $size;
+  min-height: $size;
+  background-size: $size;
+  background-repeat: no-repeat;
+  background-position: 0 top;
+  cursor: pointer;
+}
+
+@mixin radio($size: 1.4em, $selected: false) {
+  @if($selected) {
+    background-image: svg-url('<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" fill="#{$control-active-color}" /><circle cx="16" cy="16" r="5" fill="#{$question-bg-color}" /></svg>');
+  } @else {
+    @include checkbox_radio_common($size);
+    background-image: svg-url('<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" fill="#{$control-primary-color}"/></svg>');
+  }
+}
+
+@mixin checkbox($size: 1.4em, $selected: false) {
+  @if($selected) {
+    background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" ><rect fill="#{$control-active-color}" height="30" width="30" y="1" x="1" /><path fill="#{$question-bg-color}" d="M 6.5,16.5 14.5,24.5 24.5,10 20,10 14,19 11.5,16.5 Z" /></svg>');
+  } @else {
+    @include checkbox_radio_common($size);
+    background-image: svg-url('<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="30" height="30" fill="#{$control-primary-color}" /></svg>');
+  }
+}
+
+@mixin radio_list($size: 1.4em) {
+  @include list;
+
+  &-item {
+    @include radio($size);
+
+    &--selected{
+      @include radio($size, true);
+    }
+  }
+}
+
+@mixin checkbox_list($size: 1.4em) {
+  @include list;
+
+  &-item {
+    @include checkbox($size);
+
+    &--selected{
+      @include checkbox($size, true);
+    }
+  }
+}

@@ -1,0 +1,68 @@
+.cf-toast {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 1;
+  transition: top 0.5s, opacity 0.5s;
+  z-index: 666;
+
+
+  &__wrapper {
+    max-width: $max-width - (2 * $padding-desktop);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em $padding-desktop;
+    min-height: 4em;
+  }
+
+  &__content {
+    flex: 1 1 auto;
+  }
+
+  &__close {
+    flex: 0 0 auto;
+    cursor: pointer;
+    width: $control-size;
+    height: $control-size;
+    background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="13" fill="none" stroke="#fff" stroke-width="1.5" /><line x1="10" y1="10" x2="20" y2="20" stroke-width="1.5" stroke="#fff"/><line x1="10" y1="20" x2="20" y2="10" stroke-width="1.5" stroke="#fff"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%, 100%;
+  }
+
+  &--hidden {
+    top: -4em;
+    opacity: 0;
+  }
+
+  &--error {
+    .cf-toast__wrapper {
+      background-color: $error-tost-bg-color;
+      color: $error-tost-font-color;
+    }
+  }
+}
+
+@media (max-width: $max-width) {
+  .cf-toast {
+    &__wrapper {
+      max-width: none;
+      padding-left: $padding-tablet;
+      padding-right: $padding-tablet;
+    }
+  }
+}
+
+@media (max-width: $delimiter-mobile) {
+  .cf-toast {
+    &__wrapper {
+      padding-left: $padding-mobile;
+      padding-right: $padding-mobile;
+      min-height: 3em;
+    }
+  }
+}
+

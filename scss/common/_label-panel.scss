@@ -1,0 +1,27 @@
+// LABEL PANEL
+.cf-label-panel {
+  background-color: $control-head-color;
+  color: $control-head-font-color;
+  padding: 0.4em 0.4em;
+  font-size: 1em;
+  line-height: 1em;
+
+  &__label {
+    max-width: 40%;
+
+    &--min {
+      float: left;
+    }
+
+    &--max {
+      float: right;
+      text-align: right;
+    }
+  }
+
+  &--floating {
+    position: fixed;
+    border-bottom: 2px solid $question-bg-color;
+    z-index: 10;
+  }
+}

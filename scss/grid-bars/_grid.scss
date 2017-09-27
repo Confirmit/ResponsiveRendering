@@ -1,0 +1,175 @@
+$gb-item-indent: 4px;
+
+.cf-gb-grid-answer {
+
+  &__control {
+    display: flex;
+  }
+
+  &__scale-container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__scale {
+    display: flex;
+    flex: 1 0 auto;
+
+    &-item {
+      @include scale_item();
+      flex: 1 0 0px;
+      transition-delay: 0.1s;
+
+      &--hover {
+        @extend .cf-gb-grid-answer__scale-item--selected;
+        transition: background 0.5s linear;
+      }
+    }
+  }
+
+  &__scale-label-panel {
+    overflow: auto;
+  }
+
+  &__scale-texts {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  &__scale-text {
+    flex: 1 1 0px;
+
+    text-align: center;
+    transition-delay: 0.1s;
+
+    margin-right: $gb-item-indent;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &--selected {
+      color: $control-active-color;
+    }
+
+    &--hover {
+      color: $control-active-color;
+      transition: color 0.5s linear;
+    }
+  }
+}
+
+@media (max-width: $desktop-layout-delimiter) {
+  .cf-gb-grid-answer {
+    margin-bottom: 2em;
+
+    &__other {
+      width: 100%;
+    }
+
+    &__control {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &__scale-container {
+      margin-bottom: 1em;
+    }
+
+    &__scale-label-panel {
+      display: none;
+    }
+
+    &__scale-item {
+      margin-right: $gb-item-indent/2;
+    }
+
+    &__na {
+      @include radio_list();
+
+      &-item {
+        margin-bottom: 0.5em;
+      }
+    }
+
+    &__scale-texts {
+      margin-bottom: 1em;
+    }
+
+    &__scale-text {
+      margin-right: $gb-item-indent/2;
+    }
+
+    &--fake-for-panel {
+      margin-bottom: 0;
+
+      .cf-gb-grid-answer__scale-label-panel {
+        display: block;
+      }
+
+      .cf-gb-grid-answer__text,
+      .cf-gb-grid-answer__scale-texts,
+      .cf-gb-grid-answer__na {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-gb-grid-answer {
+    @include grid-layout-answer-content-indent(2.4em, 1.2em);
+
+    margin-bottom: $gb-item-indent;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &__text {
+      line-height: 1.2em;
+    }
+
+    &__scale-label-panel {
+      display: none;
+    }
+
+    &__scale-texts {
+      display: none;
+    }
+
+    &__na {
+      @include na_scale();
+
+      margin-left: 16px;
+    }
+
+    &--fake-for-panel {
+      .cf-gb-grid-answer {
+        &__scale-texts {
+          display: flex;
+          padding: 0.5em 0;
+        }
+
+        &__scale-label-panel {
+          display: block;
+        }
+
+        &__na {
+          visibility: hidden;
+          height: 1px;
+        }
+      }
+    }
+  }
+}
+
+// extra
+.cf-gb-grid {
+
+
+}
+

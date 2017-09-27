@@ -1,0 +1,19 @@
+.cf-multi-answer {
+  @include checkbox($control-size);
+
+  &__other-input {
+    width: 15em;
+  }
+
+  &--selected {
+    @include checkbox($control-size, true);
+  }
+
+  &--exclusive {
+    @include radio($control-size);
+
+    &.cf-multi-answer--selected {
+      @include radio($control-size, true);
+    }
+  }
+}

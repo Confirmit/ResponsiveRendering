@@ -1,0 +1,115 @@
+.cf-page {
+  margin: 0;
+  min-width: $min-width;
+  background-color: $window-bg-color;
+  background-image: url($window-bg-image);
+  background-position: center;
+  background-repeat: $window-bg-repeat;
+  font-family: helvetica, arial, sans-serif;
+  font-size: $font-size;
+  line-height: 1.4em;
+  color: $question-font-color;
+
+  -webkit-text-size-adjust: none;
+
+  &__header {
+    display: block;
+    min-height: 4em;
+    background-color: $header-bg-color;
+    background-image: url($header-bg-image);
+    background-position: $header-bg-position;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &__main {
+    max-width: $max-width - (2 * $padding-desktop);
+    margin: $padding-desktop auto;
+    overflow: auto;
+    height: auto;
+  }
+
+  &__question-list {
+    margin-bottom: $padding-desktop;
+  }
+
+  &__navigation {
+    margin-top: $padding-desktop;
+    margin-bottom: $padding-desktop;
+  }
+
+  &__powered-by-confirmit {
+    margin-bottom: $padding-desktop;
+  }
+
+  &__progress {
+    padding: 0 5%;
+    margin-bottom: $padding-desktop;
+
+    &-inner {
+      margin: 0 auto;
+      width: 100%;
+      max-width: $desktop-layout-delimiter;
+    }
+  }
+}
+
+@media (max-width: $max-width) {
+  .cf-page__main {
+    margin: $padding-desktop;
+  }
+}
+
+@media (max-width: $delimiter-tablet) {
+  .cf-page {
+    &__main {
+      margin: $padding-tablet;
+    }
+
+    &__question-list {
+      margin-bottom: $padding-tablet;
+    }
+
+    &__navigation {
+      margin-top: $padding-tablet;
+      margin-bottom: $padding-tablet;
+    }
+
+    &__powered-by-confirmit {
+      margin-bottom: $padding-tablet;
+    }
+
+    &__progress {
+      margin-bottom: $padding-tablet;
+    }
+  }
+}
+
+@media (max-width: $delimiter-mobile) {
+  .cf-page {
+    &__header {
+      min-height: 3em;
+    }
+
+    &__main {
+      margin: $padding-mobile;
+    }
+
+    &__question-list {
+      margin-bottom: $padding-mobile;
+    }
+
+    &__navigation {
+      margin-top: $padding-mobile;
+      margin-bottom: $padding-mobile;
+    }
+
+    &__powered-by-confirmit {
+      margin-bottom: $padding-mobile;
+    }
+
+    &__progress {
+      margin-bottom: $padding-mobile;
+    }
+  }
+}

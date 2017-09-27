@@ -1,0 +1,68 @@
+.cf-grid-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  &__row {
+    display: flex;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (max-width: $desktop-layout-delimiter) {
+  .cf-grid-layout {
+    &__row {
+      margin-bottom: 2em;
+      flex-direction: column;
+      align-items: stretch;
+
+      &-text {
+        flex: 1 1 auto;
+        align-self: stretch;
+        width: auto;
+        max-width: none;
+        margin-right: 0;
+        margin-bottom: 1em;
+      }
+
+      &-control {
+        flex: 1 0 auto;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-grid-layout {
+    &__row {
+      margin-bottom: 1em;
+      flex-direction: row;
+      align-items: flex-start;
+
+      &-text {
+        flex: 0 0 auto;
+        width: 30%;
+        max-width: 260px;
+        margin-right: 2em;
+      }
+
+      &-text-other {
+        margin-left: -0.5em;
+      }
+
+      &-control {
+        flex: 0 1 auto;
+        min-width: 1px; // 1px instead of 0px due to fix ie11 bug
+      }
+    }
+  }
+}
+
+.cf-grid-layout--stretched {
+  .cf-grid-layout__row-control {
+    flex-grow: 1;
+  }
+}

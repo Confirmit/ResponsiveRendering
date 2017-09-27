@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../">
+  <title data-ice="title">QuestionValidationResult | Responsive Rendering</title>
+   <link rel="shortcut icon" type="image/x-icon" href="./image/favicon.ico">
+   <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+   <link type="text/css" rel="stylesheet" href="css/style.css">
+   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+   <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Responsive Rendering Api"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Responsive Rendering"><meta property="twitter:description" content="Responsive Rendering Api"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<div class="navbar navbar-default navbar-fixed-top">
+	<div>
+		<div class="navbar-header">
+			 <a class="navbar-brand" href="./index.html">
+				<img src="./image/brand_logo.png" style="width:30px;">
+			</a>
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			<li><a href="./index.html" data-ice="manualHeaderLink"> Articles and Guides </a></li>
+			<li><a href="identifiers.html" data-ice="manualHeaderLink">Library <div class="label label-default">API</div></a></li>
+			<li><a href="https://github.com/Confirmit/ResponsiveRendering"><img width="20px" src="./image/github.png"></a></li>
+		</ul>
+            <div class="pull-right">
+                 <div class="search-box">
+					<span>
+						<img src="./image/search.png">
+						<span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+					</span>
+					<ul class="search-result"></ul>
+				</div>
+            </div>
+	</div>
+	</div>
+</div>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/event.js~Event.html">Event</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#api">api</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/api.js~cfApi.html">cfApi</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/page.js~Page.html">Page</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name" class="name"><span><a href="typedef/index.html#static-typedef-CultureInfo">CultureInfo</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#api-models-base">api/models/base</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/base/answer.js~Answer.html">Answer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/base/question-base.js~QuestionBase.html">QuestionBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/base/question-with-answers.js~QuestionWithAnswers.html">QuestionWithAnswers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/base/question.js~Question.html">Question</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/base/scale.js~Scale.html">Scale</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#api-models-questions">api/models/questions</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/date-question.js~DateQuestion.html">DateQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/dynamic-question-placeholder.js~DynamicQuestionPlaceholder.html">DynamicQuestionPlaceholder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/geolocation-question.js~GeolocationQuestion.html">GeolocationQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/grid-3d-question.js~Grid3DQuestion.html">Grid3DQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/grid-question-base.js~GridQuestionBase.html">GridQuestionBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/grid-question.js~GridQuestion.html">GridQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/grid-rating-question.js~GridRatingQuestion.html">GridRatingQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion.html">HorizontalRatingScaleSingleQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/info-question.js~InfoQuestion.html">InfoQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/multi-question.js~MultiQuestion.html">MultiQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html">NumericListQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/numeric-question.js~NumericQuestion.html">NumericQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/open-text-list-question.js~OpenTextListQuestion.html">OpenTextListQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/open-text-question.js~OpenTextQuestion.html">OpenTextQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/ranking-question.js~RankingQuestion.html">RankingQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/single-question.js~SingleQuestion.html">SingleQuestion</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#api-models-validation">api/models/validation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/validation/answer-validation-result.js~AnswerValidationResult.html">AnswerValidationResult</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/validation/gird3d-question-validation-result.js~Grid3dQuestionValidationResult.html">Grid3dQuestionValidationResult</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/validation/page-validation-result.js~PageValidationResult.html">PageValidationResult</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span class="active"><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html">QuestionValidationResult</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/validation/validation-error.js~ValidationError.html">ValidationError</a></span></span></li>
+</ul>
+</div>
+</nav>
+<div class="content" data-ice="content"><div class="header-notice">
+  
+  <span data-ice="access">public</span>
+  <span data-ice="kind">class</span>
+  
+  
+  
+  <span data-ice="source">| <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/validation/question-validation-result.js#L5">source</a></span></span>
+</div>
+
+<div class="self-detail detail">
+  <h1 data-ice="name">QuestionValidationResult</h1>
+
+  
+
+  
+  
+  
+  <div class="flat-list" data-ice="directSubclass"><h4>Direct Subclass:</h4><div><span><a href="class/app/api/models/validation/gird3d-question-validation-result.js~Grid3dQuestionValidationResult.html">Grid3dQuestionValidationResult</a></span></div></div>
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+</div>
+
+
+
+<div data-ice="constructorSummary"><h2>Constructor Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Public Constructor</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(questionId: <span>string</span>, errors: <span><span>string</span><span>[]</span></span>, answerValidationResults: <span><span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html#instance-get-answerValidationResults">answerValidationResults</a></span><span>[]</span></span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description" class="inline"><p>Create instance.</p>
+</div>
+        <div data-ice="parent" class="inline"></div>
+      </div>
+    </td>
+    <td>
+      
+      
+      <span data-ice="source"> </span>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<div data-ice="memberSummary"><h2>Member Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Public Members</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      <span class="kind" data-ice="kind">get</span>
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html#instance-get-answerValidationResults">answerValidationResults</a></span></span><span class="code" data-ice="signature">: <span><span><a href="class/app/api/models/validation/answer-validation-result.js~AnswerValidationResult.html">AnswerValidationResult</a></span><span>[]</span></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description" class="inline"><p>Answer validation results.</p>
+</div>
+        
+      </div>
+    </td>
+    <td>
+      
+      
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/validation/question-validation-result.js#L50">source</a></span></span>
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      <span class="kind" data-ice="kind">get</span>
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html#instance-get-errors">errors</a></span></span><span class="code" data-ice="signature">: <span><span><a href="class/app/api/models/validation/validation-error.js~ValidationError.html">ValidationError</a></span><span>[]</span></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description" class="inline"><p>Question specific errors.</p>
+</div>
+        
+      </div>
+    </td>
+    <td>
+      
+      
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/validation/question-validation-result.js#L41">source</a></span></span>
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      <span class="kind" data-ice="kind">get</span>
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html#instance-get-isValid">isValid</a></span></span><span class="code" data-ice="signature">: <span>boolean</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description" class="inline"><p>Is it valid.</p>
+</div>
+        
+      </div>
+    </td>
+    <td>
+      
+      
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/validation/question-validation-result.js#L23">source</a></span></span>
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      <span class="kind" data-ice="kind">get</span>
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html#instance-get-questionId">questionId</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description" class="inline"><p>Question id.</p>
+</div>
+        
+      </div>
+    </td>
+    <td>
+      
+      
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/validation/question-validation-result.js#L32">source</a></span></span>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+<div data-ice="constructorDetails"><h2 data-ice="title">Public Constructors</h2>
+
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-constructor-constructor">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(questionId: <span>string</span>, errors: <span><span>string</span><span>[]</span></span>, answerValidationResults: <span><span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html#instance-get-answerValidationResults">answerValidationResults</a></span><span>[]</span></span>)</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/validation/question-validation-result.js#L12">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Create instance.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">questionId</td>
+      <td data-ice="type" class="code"><span>string</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>Question id.</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">errors</td>
+      <td data-ice="type" class="code"><span><span>string</span><span>[]</span></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>Question specific errors.</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">answerValidationResults</td>
+      <td data-ice="type" class="code"><span><span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html#instance-get-answerValidationResults">answerValidationResults</a></span><span>[]</span></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>Answer validation results.</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+</div>
+<div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
+
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-get-answerValidationResults">
+    <span class="access" data-ice="access">public</span>
+    
+    <span class="kind" data-ice="kind">get</span>
+    
+    
+    
+    <span class="code" data-ice="name">answerValidationResults</span><span class="code" data-ice="signature">: <span><span><a href="class/app/api/models/validation/answer-validation-result.js~AnswerValidationResult.html">AnswerValidationResult</a></span><span>[]</span></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/validation/question-validation-result.js#L50">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Answer validation results.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-get-errors">
+    <span class="access" data-ice="access">public</span>
+    
+    <span class="kind" data-ice="kind">get</span>
+    
+    
+    
+    <span class="code" data-ice="name">errors</span><span class="code" data-ice="signature">: <span><span><a href="class/app/api/models/validation/validation-error.js~ValidationError.html">ValidationError</a></span><span>[]</span></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/validation/question-validation-result.js#L41">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Question specific errors.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-get-isValid">
+    <span class="access" data-ice="access">public</span>
+    
+    <span class="kind" data-ice="kind">get</span>
+    
+    
+    
+    <span class="code" data-ice="name">isValid</span><span class="code" data-ice="signature">: <span>boolean</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/validation/question-validation-result.js#L23">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Is it valid.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-get-questionId">
+    <span class="access" data-ice="access">public</span>
+    
+    <span class="kind" data-ice="kind">get</span>
+    
+    
+    
+    <span class="code" data-ice="name">questionId</span><span class="code" data-ice="signature">: <span>string</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/validation/question-validation-result.js#L32">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Question id.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+</div>
+
+</div>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+
+<script src="script/jquery-3.2.1.min.js"></script>
+<script src="script/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+@media (max-width: $desktop-layout-delimiter) {
+  .cf-grid-answer--multi {
+    margin-bottom: 2em;
+
+    .cf-grid-answer__scale {
+      @include checkbox_list($control-size);
+
+      justify-content: space-between;
+
+      &-item {
+        &--exclusive {
+          @include radio($control-size);
+
+          &.cf-grid-answer__scale-item--selected {
+            @include radio($control-size, true);
+          }
+        }
+      }
+    }
+
+    .cf-grid-answer__labels {
+      display: none;
+    }
+
+    .cf-grid-answer__scale-group-labels {
+      display: none;
+    }
+
+    .cf-grid-answer__scale-group-heading,
+    .cf-grid-answer__scale-group-end {
+      width: 100%;
+      height: 0.75em;
+      margin: 1em auto;
+      border: 1px solid;
+      border-color: $control-head-color;
+      color: $control-head-color;
+    }
+
+    .cf-grid-answer__scale-group-heading {
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap;
+      border-bottom: none;
+    }
+
+    .cf-grid-answer__scale-group-title {
+      text-align: center;
+      overflow: hidden;
+      max-width: 80%;
+      margin-top: -0.75em;
+      padding-left: 1em;
+      padding-right: 1em;
+      background-color: $question-bg-color;
+    }
+
+    .cf-grid-answer__scale-group-end {
+      border-top: none;
+    }
+
+    .cf-grid-answer__scale-item + .cf-grid-answer__scale-group-heading,
+    .cf-grid-answer__scale-item + .cf-grid-answer__scale-group-end {
+      margin-top: 0;
+    }
+
+    .cf-grid-answer--fake-for-panel {
+      display: none;
+    }
+
+    .cf-grid-answer__other {
+      width: 15em;
+    }
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-grid-answer--multi {
+    .cf-grid-answer__scale-item {
+      @include checkbox($control-size);
+      padding: 0 1em;
+      background-position: center;
+    }
+    .cf-grid-answer__scale-item--selected {
+      @include checkbox($control-size, true);
+    }
+
+    .cf-grid-answer__scale-item--exclusive {
+      @include radio($control-size);
+      padding: 0 1em;
+      background-position: center;
+
+      &.cf-grid-answer__scale-item--selected {
+        @include radio($control-size, true);
+      }
+    }
+
+    .cf-grid-answer__other {
+      visibility: hidden;
+      width: 12em;
+    }
+
+    .cf-grid-answer__other--in-label {
+      visibility: visible;
+      max-width: none;
+      margin-top: 0;
+    }
+
+    .cf-grid-answer__scale-item .cf-error-block {
+      display: none;
+    }
+  }
+}

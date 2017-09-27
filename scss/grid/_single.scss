@@ -1,0 +1,161 @@
+@media (max-width: $desktop-layout-delimiter) {
+  .cf-grid-answer {
+    margin-bottom: 2em;
+
+    &__scale {
+      @include radio_list($control-size);
+
+      justify-content: space-between;
+    }
+
+    &__labels {
+      display: none;
+    }
+
+    &__scale-group-labels {
+      display: none;
+    }
+
+    &__scale-group-heading,
+    &__scale-group-end {
+      width: 100%;
+      height: 0.75em;
+      margin: 1em auto;
+      border: 1px solid;
+      border-color: $control-head-color;
+      color: $control-head-color;
+    }
+
+    &__scale-group-heading {
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap;
+      border-bottom: none;
+    }
+
+    &__scale-group-title {
+      text-align: center;
+      overflow: hidden;
+      max-width: 80%;
+      margin-top: -0.75em;
+      padding-left: 1em;
+      padding-right: 1em;
+      background-color: $question-bg-color;
+    }
+
+    &__scale-group-end {
+      border-top: none;
+    }
+
+    &__scale-item + &__scale-group-heading,
+    &__scale-item + &__scale-group-end {
+      margin-top: 0;
+    }
+
+    &--fake-for-panel {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-grid {
+    overflow: auto;
+    padding-left: $padding-desktop + $answer-group-border-width;
+    margin-left: -($padding-desktop + $answer-group-border-width);
+  }
+  .cf-grid-scale-group-panel{
+    margin-bottom: 0.25em;
+    &__group-name {
+      color: $control-head-color;
+      text-align: center;
+      line-height: 1.2em;
+      border-right: 0.25em solid transparent;
+      padding-bottom: 0.25em;
+      position: relative;
+
+      &--empty {
+        visibility: hidden;
+      }
+      &:after {
+        content: ' ';
+        height: 1px;
+        width: 100%;
+        background: $control-head-color;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }
+      &:last-child {
+        border:none;
+      }
+    }
+    &__scale-content{
+      text-align: center;
+      height: 1px;
+      padding: 0 1em;
+      visibility: hidden;
+    }
+  }
+
+  .cf-grid-answer {
+    @include grid-layout-answer-content-indent(3em, 1.2em);
+
+    margin-bottom: 0;
+
+    &__text {
+      line-height: 1.2em;
+    }
+
+    &__control {
+      flex: 0 1 auto;
+      min-width: auto;
+    }
+
+    &__scale {
+      @include grid_cells();
+
+      &-item {
+        @include radio($control-size);
+        @include grid_cell();
+
+        height: 3em;
+        background-position: center;
+
+        &-text {
+          @include grid_cell_text();
+        }
+
+        &--selected {
+          @include radio($control-size, true);
+        }
+      }
+    }
+
+    &__labels {
+      @include grid_cells();
+      align-items: center;
+      padding: 0.5em 0;
+      background-color: $control-head-color;
+      color: $control-head-font-color;
+      margin-bottom: 0.5em;
+    }
+
+    &__label {
+      @include grid_cell();
+    }
+
+    &__scale-group-heading,
+    &__scale-group-end {
+      display: none;
+    }
+
+    &--fake-for-panel {
+      .cf-grid-answer__scale {
+        visibility: hidden;
+        height: 1px;
+        margin-top: -1px;
+      }
+    }
+  }
+}
