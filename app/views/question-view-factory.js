@@ -21,10 +21,35 @@ import DropdownGridQuestionView from './questions/dropdown-grid-question-view.js
 import AnswerButtonsSingleQuestionView from './questions/answer-buttons-single-question-view.js';
 import AnswerButtonsMultiQuestionView from './questions/answer-buttons-multi-question-view.js';
 import GeolocationQuestionView from './questions/geolocation-question-view.js';
+import ImageUploadQuestionView from "./questions/image-upload-question-view";
+import LoginPageQuestionView from './questions/login-page-question-view.js';
 
+/**
+ * @desc Question view factory
+ */
 export default class QuestionViewFactory {
-    create(model) {
+    /**
+     * @param {QuestionViewSettings} questionViewSettings Question view settings.
+     */
+    constructor(questionViewSettings) {
+        this._questionViewSettings = questionViewSettings;
+    }
 
+    /**
+     * Question view settings.
+     * @returns {QuestionViewSettings}
+     * @readonly
+     */
+    get questionViewSettings() {
+        return this._questionViewSettings;
+    }
+
+    /**
+     * Create question view.
+     * @param {object} model Question model.
+     * @returns {object|undefined} Question view.
+     */
+    create(model) {
         if (model.customRendering) {
             return;
         }
@@ -37,31 +62,35 @@ export default class QuestionViewFactory {
             case 'Grid':
                 return this._createGridQuestionView(model);
             case 'Grid3d':
-                return new MultiGridQuestionView(model);
+                return new MultiGridQuestionView(model, this._questionViewSettings);
             case 'OpenText':
-                return new OpenTextQuestionView(model);
+                return new OpenTextQuestionView(model, this._questionViewSettings);
             case 'Numeric':
-                return new NumericQuestionView(model);
+                return new NumericQuestionView(model, this._questionViewSettings);
             case 'OpenTextList':
-                return new OpenTextListQuestionView(model);
+                return new OpenTextListQuestionView(model, this._questionViewSettings);
             case 'NumericList':
-                return new NumericListQuestionView(model);
+                return new NumericListQuestionView(model, this._questionViewSettings);
             case 'Date':
                 return this._createDateQuestionView(model);
             case 'Ranking':
-                return new RankingQuestionView(model);
+                return new RankingQuestionView(model, this._questionViewSettings);
             case 'HorizontalRatingScaleSingle':
-                return new HorizontalRatingSingleQuestionView(model);
+                return new HorizontalRatingSingleQuestionView(model, this._questionViewSettings);
             case 'HorizontalRatingScaleGrid':
-                return new HorizontalRatingGridQuestionView(model);
+                return new HorizontalRatingGridQuestionView(model, this._questionViewSettings);
             case 'GridBars':
-                return new GridBarsQuestionView(model);
+                return new GridBarsQuestionView(model, this._questionViewSettings);
             case 'StarRating':
-                return new StarRatingQuestionView(model);
+                return new StarRatingQuestionView(model, this._questionViewSettings);
             case 'GeoLocation':
-                return new GeolocationQuestionView(model);
+                return new GeolocationQuestionView(model, this._questionViewSettings);
+            case 'ImageUploader':
+                return new ImageUploadQuestionView(model);
             case 'DynamicQuestionPlaceholder':
                 return;
+            case 'Login':
+                return new LoginPageQuestionView(model);
             default:
                 return;
         }
@@ -69,18 +98,18 @@ export default class QuestionViewFactory {
 
     _createSingleQuestionView(model) {
         if(model.dropdown) {
-            return new DropdownSingleQuestionView(model);
+            return new DropdownSingleQuestionView(model, this._questionViewSettings);
         }
 
         if(model.slider) {
-            return new SingleSliderQuestionView(model);
+            return new SingleSliderQuestionView(model, this._questionViewSettings);
         }
 
         if (model.answerButtons) {
-            return new AnswerButtonsSingleQuestionView(model);
+            return new AnswerButtonsSingleQuestionView(model, this._questionViewSettings);
         }
 
-        return new SingleQuestionView(model);
+        return new SingleQuestionView(model, this._questionViewSettings);
     }
 
     _createDateQuestionView(model) {
@@ -88,38 +117,38 @@ export default class QuestionViewFactory {
 
         // load polyfill if needed
         if (!html5DateSupported()) {
-            return new DateQuestionPolyfillView(model);
+            return new DateQuestionPolyfillView(model, this._questionViewSettings);
         }
 
-        return new DateQuestionView(model);
+        return new DateQuestionView(model, this._questionViewSettings);
     }
 
     _createGridQuestionView(model) {
         if(model.dropdown) {
-            return new DropdownGridQuestionView(model);
+            return new DropdownGridQuestionView(model, this._questionViewSettings);
         }
         if(model.carousel) {
-            return new CarouselGridQuestionView(model);
+            return new CarouselGridQuestionView(model, this._questionViewSettings);
         }
 
-        return new GridQuestionView(model);
+        return new GridQuestionView(model, this._questionViewSettings);
     }
 
     _createMultiQuestionView(model) {
         if (model.answerButtons) {
-            return new AnswerButtonsMultiQuestionView(model);
+            return new AnswerButtonsMultiQuestionView(model, this._questionViewSettings);
         }
 
-        return new MultiQuestionView(model);
+        return new MultiQuestionView(model, this._questionViewSettings);
     }
 
     _createGrid3dQuestionView(model) {
-        return new MultiGridQuestionView(model);
+        return new MultiGridQuestionView(model, this._questionViewSettings);
 
         // if (model.MultiGrid) {
-        //     return new MultiGridQuestionView(model);
+        //     return new MultiGridQuestionView(model, this._questionViewSettings);
         // }
         //
-        // return new Grid3dQuestionView(model);
+        // return new Grid3dQuestionView(model, this._questionViewSettings);
     }
 }

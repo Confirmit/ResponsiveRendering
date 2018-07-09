@@ -72,6 +72,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "se.rendering.responsive/app/api/models/questions/image-upload-question.js~imageuploadquestion",
+    "class/app/api/models/questions/image-upload-question.js~ImageUploadQuestion.html",
+    "<span>ImageUploadQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/image-upload-question.js</span>",
+    "class"
+  ],
+  [
     "se.rendering.responsive/app/api/models/questions/info-question.js~infoquestion",
     "class/app/api/models/questions/info-question.js~InfoQuestion.html",
     "<span>InfoQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/info-question.js</span>",
@@ -108,9 +114,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "se.rendering.responsive/app/api/page.js~page",
-    "class/app/api/page.js~Page.html",
-    "<span>Page</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/page.js</span>",
+    "se.rendering.responsive/app/api/models/page.js~page",
+    "class/app/api/models/page.js~Page.html",
+    "<span>Page</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/page.js</span>",
     "class"
   ],
   [
@@ -162,6 +168,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "se.rendering.responsive/app/api/models/survey-info.js~surveyinfo",
+    "class/app/api/models/survey-info.js~SurveyInfo.html",
+    "<span>SurveyInfo</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/survey-info.js</span>",
+    "class"
+  ],
+  [
     "se.rendering.responsive/app/api/models/validation/validation-error.js~validationerror",
     "class/app/api/models/validation/validation-error.js~ValidationError.html",
     "<span>ValidationError</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/validation/validation-error.js</span>",
@@ -187,13 +199,13 @@ window.esdocSearchIndex = [
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-get-debug",
+    "class/app/api/api.js~cfApi.html#instance-set-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-set-debug",
+    "class/app/api/api.js~cfApi.html#instance-get-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
@@ -219,6 +231,12 @@ window.esdocSearchIndex = [
     "app/api/dynamic-questions-transport.js",
     "file/app/api/dynamic-questions-transport.js.html",
     "app/api/dynamic-questions-transport.js",
+    "file"
+  ],
+  [
+    "app/api/image-uploader.js",
+    "file/app/api/image-uploader.js.html",
+    "app/api/image-uploader.js",
     "file"
   ],
   [
@@ -495,6 +513,96 @@ window.esdocSearchIndex = [
     "app/api/models/base/scale.js~scale#text",
     "class/app/api/models/base/scale.js~Scale.html#instance-get-text",
     "app/api/models/base/scale.js~Scale#text",
+    "member"
+  ],
+  [
+    "app/api/models/page.js",
+    "file/app/api/models/page.js.html",
+    "app/api/models/page.js",
+    "file"
+  ],
+  [
+    "app/api/models/page.js~page#back",
+    "class/app/api/models/page.js~Page.html#instance-method-back",
+    "app/api/models/page.js~Page#back",
+    "method"
+  ],
+  [
+    "app/api/models/page.js~page#beforenavigateevent",
+    "class/app/api/models/page.js~Page.html#instance-get-beforeNavigateEvent",
+    "app/api/models/page.js~Page#beforeNavigateEvent",
+    "member"
+  ],
+  [
+    "app/api/models/page.js~page#constructor",
+    "class/app/api/models/page.js~Page.html#instance-constructor-constructor",
+    "app/api/models/page.js~Page#constructor",
+    "method"
+  ],
+  [
+    "app/api/models/page.js~page#dynamicquestiontriggerchangedevent",
+    "class/app/api/models/page.js~Page.html#instance-get-dynamicQuestionTriggerChangedEvent",
+    "app/api/models/page.js~Page#dynamicQuestionTriggerChangedEvent",
+    "member"
+  ],
+  [
+    "app/api/models/page.js~page#formvalues",
+    "class/app/api/models/page.js~Page.html#instance-get-formValues",
+    "app/api/models/page.js~Page#formValues",
+    "member"
+  ],
+  [
+    "app/api/models/page.js~page#getquestion",
+    "class/app/api/models/page.js~Page.html#instance-method-getQuestion",
+    "app/api/models/page.js~Page#getQuestion",
+    "method"
+  ],
+  [
+    "app/api/models/page.js~page#navigateevent",
+    "class/app/api/models/page.js~Page.html#instance-get-navigateEvent",
+    "app/api/models/page.js~Page#navigateEvent",
+    "member"
+  ],
+  [
+    "app/api/models/page.js~page#next",
+    "class/app/api/models/page.js~Page.html#instance-method-next",
+    "app/api/models/page.js~Page#next",
+    "method"
+  ],
+  [
+    "app/api/models/page.js~page#questions",
+    "class/app/api/models/page.js~Page.html#instance-get-questions",
+    "app/api/models/page.js~Page#questions",
+    "member"
+  ],
+  [
+    "app/api/models/page.js~page#replacedynamicquestion",
+    "class/app/api/models/page.js~Page.html#instance-method-replaceDynamicQuestion",
+    "app/api/models/page.js~Page#replaceDynamicQuestion",
+    "method"
+  ],
+  [
+    "app/api/models/page.js~page#surveyinfo",
+    "class/app/api/models/page.js~Page.html#instance-get-surveyInfo",
+    "app/api/models/page.js~Page#surveyInfo",
+    "member"
+  ],
+  [
+    "app/api/models/page.js~page#validate",
+    "class/app/api/models/page.js~Page.html#instance-method-validate",
+    "app/api/models/page.js~Page#validate",
+    "method"
+  ],
+  [
+    "app/api/models/page.js~page#validationcompleteevent",
+    "class/app/api/models/page.js~Page.html#instance-get-validationCompleteEvent",
+    "app/api/models/page.js~Page#validationCompleteEvent",
+    "member"
+  ],
+  [
+    "app/api/models/page.js~page#validationevent",
+    "class/app/api/models/page.js~Page.html#instance-get-validationEvent",
+    "app/api/models/page.js~Page#validationEvent",
     "member"
   ],
   [
@@ -792,6 +900,60 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/image-upload-question.js",
+    "file/app/api/models/questions/image-upload-question.js.html",
+    "app/api/models/questions/image-upload-question.js",
+    "file"
+  ],
+  [
+    "app/api/models/questions/image-upload-question.js~imageuploadquestion#cameraonly",
+    "class/app/api/models/questions/image-upload-question.js~ImageUploadQuestion.html#instance-get-cameraOnly",
+    "app/api/models/questions/image-upload-question.js~ImageUploadQuestion#cameraOnly",
+    "member"
+  ],
+  [
+    "app/api/models/questions/image-upload-question.js~imageuploadquestion#constructor",
+    "class/app/api/models/questions/image-upload-question.js~ImageUploadQuestion.html#instance-constructor-constructor",
+    "app/api/models/questions/image-upload-question.js~ImageUploadQuestion#constructor",
+    "method"
+  ],
+  [
+    "app/api/models/questions/image-upload-question.js~imageuploadquestion#formvalues",
+    "class/app/api/models/questions/image-upload-question.js~ImageUploadQuestion.html#instance-get-formValues",
+    "app/api/models/questions/image-upload-question.js~ImageUploadQuestion#formValues",
+    "member"
+  ],
+  [
+    "app/api/models/questions/image-upload-question.js~imageuploadquestion#maximageheight",
+    "class/app/api/models/questions/image-upload-question.js~ImageUploadQuestion.html#instance-get-maxImageHeight",
+    "app/api/models/questions/image-upload-question.js~ImageUploadQuestion#maxImageHeight",
+    "member"
+  ],
+  [
+    "app/api/models/questions/image-upload-question.js~imageuploadquestion#maximagewidth",
+    "class/app/api/models/questions/image-upload-question.js~ImageUploadQuestion.html#instance-get-maxImageWidth",
+    "app/api/models/questions/image-upload-question.js~ImageUploadQuestion#maxImageWidth",
+    "member"
+  ],
+  [
+    "app/api/models/questions/image-upload-question.js~imageuploadquestion#setvalue",
+    "class/app/api/models/questions/image-upload-question.js~ImageUploadQuestion.html#instance-method-setValue",
+    "app/api/models/questions/image-upload-question.js~ImageUploadQuestion#setValue",
+    "method"
+  ],
+  [
+    "app/api/models/questions/image-upload-question.js~imageuploadquestion#uploader",
+    "class/app/api/models/questions/image-upload-question.js~ImageUploadQuestion.html#instance-get-uploader",
+    "app/api/models/questions/image-upload-question.js~ImageUploadQuestion#uploader",
+    "member"
+  ],
+  [
+    "app/api/models/questions/image-upload-question.js~imageuploadquestion#value",
+    "class/app/api/models/questions/image-upload-question.js~ImageUploadQuestion.html#instance-get-value",
+    "app/api/models/questions/image-upload-question.js~ImageUploadQuestion#value",
+    "member"
+  ],
+  [
     "app/api/models/questions/info-question.js",
     "file/app/api/models/questions/info-question.js.html",
     "app/api/models/questions/info-question.js",
@@ -802,6 +964,12 @@ window.esdocSearchIndex = [
     "class/app/api/models/questions/info-question.js~InfoQuestion.html#instance-constructor-constructor",
     "app/api/models/questions/info-question.js~InfoQuestion#constructor",
     "method"
+  ],
+  [
+    "app/api/models/questions/login-page-question.js",
+    "file/app/api/models/questions/login-page-question.js.html",
+    "app/api/models/questions/login-page-question.js",
+    "file"
   ],
   [
     "app/api/models/questions/multi-question.js",
@@ -1170,6 +1338,42 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/survey-info.js",
+    "file/app/api/models/survey-info.js.html",
+    "app/api/models/survey-info.js",
+    "file"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#istest",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-isTest",
+    "app/api/models/survey-info.js~SurveyInfo#isTest",
+    "member"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#language",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-language",
+    "app/api/models/survey-info.js~SurveyInfo#language",
+    "member"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#messages",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-messages",
+    "app/api/models/survey-info.js~SurveyInfo#messages",
+    "member"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#mobilethreshold",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-mobileThreshold",
+    "app/api/models/survey-info.js~SurveyInfo#mobileThreshold",
+    "member"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#progress",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-progress",
+    "app/api/models/survey-info.js~SurveyInfo#progress",
+    "member"
+  ],
+  [
     "app/api/models/validation/answer-validation-result.js",
     "file/app/api/models/validation/answer-validation-result.js.html",
     "app/api/models/validation/answer-validation-result.js",
@@ -1324,96 +1528,6 @@ window.esdocSearchIndex = [
     "file/app/api/models/validation/validation-types.js.html",
     "app/api/models/validation/validation-types.js",
     "file"
-  ],
-  [
-    "app/api/page.js",
-    "file/app/api/page.js.html",
-    "app/api/page.js",
-    "file"
-  ],
-  [
-    "app/api/page.js~page#back",
-    "class/app/api/page.js~Page.html#instance-method-back",
-    "app/api/page.js~Page#back",
-    "method"
-  ],
-  [
-    "app/api/page.js~page#beforenavigateevent",
-    "class/app/api/page.js~Page.html#instance-get-beforeNavigateEvent",
-    "app/api/page.js~Page#beforeNavigateEvent",
-    "member"
-  ],
-  [
-    "app/api/page.js~page#constructor",
-    "class/app/api/page.js~Page.html#instance-constructor-constructor",
-    "app/api/page.js~Page#constructor",
-    "method"
-  ],
-  [
-    "app/api/page.js~page#dynamicquestiontriggerchangedevent",
-    "class/app/api/page.js~Page.html#instance-get-dynamicQuestionTriggerChangedEvent",
-    "app/api/page.js~Page#dynamicQuestionTriggerChangedEvent",
-    "member"
-  ],
-  [
-    "app/api/page.js~page#formvalues",
-    "class/app/api/page.js~Page.html#instance-get-formValues",
-    "app/api/page.js~Page#formValues",
-    "member"
-  ],
-  [
-    "app/api/page.js~page#getquestion",
-    "class/app/api/page.js~Page.html#instance-method-getQuestion",
-    "app/api/page.js~Page#getQuestion",
-    "method"
-  ],
-  [
-    "app/api/page.js~page#navigateevent",
-    "class/app/api/page.js~Page.html#instance-get-navigateEvent",
-    "app/api/page.js~Page#navigateEvent",
-    "member"
-  ],
-  [
-    "app/api/page.js~page#next",
-    "class/app/api/page.js~Page.html#instance-method-next",
-    "app/api/page.js~Page#next",
-    "method"
-  ],
-  [
-    "app/api/page.js~page#questions",
-    "class/app/api/page.js~Page.html#instance-get-questions",
-    "app/api/page.js~Page#questions",
-    "member"
-  ],
-  [
-    "app/api/page.js~page#replacedynamicquestion",
-    "class/app/api/page.js~Page.html#instance-method-replaceDynamicQuestion",
-    "app/api/page.js~Page#replaceDynamicQuestion",
-    "method"
-  ],
-  [
-    "app/api/page.js~page#surveyinfo",
-    "class/app/api/page.js~Page.html#instance-get-surveyInfo",
-    "app/api/page.js~Page#surveyInfo",
-    "member"
-  ],
-  [
-    "app/api/page.js~page#validate",
-    "class/app/api/page.js~Page.html#instance-method-validate",
-    "app/api/page.js~Page#validate",
-    "method"
-  ],
-  [
-    "app/api/page.js~page#validationcompleteevent",
-    "class/app/api/page.js~Page.html#instance-get-validationCompleteEvent",
-    "app/api/page.js~Page#validationCompleteEvent",
-    "member"
-  ],
-  [
-    "app/api/page.js~page#validationevent",
-    "class/app/api/page.js~Page.html#instance-get-validationEvent",
-    "app/api/page.js~Page#validationEvent",
-    "member"
   ],
   [
     "app/api/question-factory.js",

@@ -2,9 +2,14 @@ import QuestionErrorBlock from '../../error/question-error-block.js';
 import $ from 'jquery';
 
 export default class QuestionView {
-    constructor(question)
+    /**
+     * @param {Question} question
+     * @param {QuestionViewSettings} settings
+     */
+    constructor(question, settings = null)
     {
         this._question = question;
+        this._settings = settings;
         this._container = $(`#${this.id}`);
         this._errorBlock = new QuestionErrorBlock(this._container.find('.cf-question__error'));
         this._boundOnModelValueChange = this._onModelValueChange.bind(this);

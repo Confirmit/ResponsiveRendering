@@ -22,6 +22,8 @@ import DropdownGridQuestionView from './questions/dropdown-grid-question-view.js
 import AnswerButtonsSingleQuestionView from './questions/answer-buttons-single-question-view.js';
 import AnswerButtonsMultiQuestionView from './questions/answer-buttons-multi-question-view.js';
 import GeolocationQuestionView from './questions/geolocation-question-view.js';
+import ImageUploadQuestionView from './questions/image-upload-question-view.js';
+import LoginPageQuestionView from './questions/login-page-question-view.js';
 
 export default Object.freeze({
     'QuestionView': QuestionView,
@@ -47,5 +49,7 @@ export default Object.freeze({
     'DropdownGridQuestionView': DropdownGridQuestionView,
     'AnswerButtonsSingleQuestionView': AnswerButtonsSingleQuestionView,
     'AnswerButtonsMultiQuestionView': AnswerButtonsMultiQuestionView,
-    'GeolocationQuestionView': GeolocationQuestionView
+    'GeolocationQuestionView': GeolocationQuestionView,
+    'ImageUploadQuestionView': ImageUploadQuestionView,
+    'LoginPageQuestionView': LoginPageQuestionView
 });

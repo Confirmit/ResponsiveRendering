@@ -1,19 +1,24 @@
 import QuestionViewFactory from './question-view-factory.js';
+import QuestionViewSettings from './question-view-settings.js';
 import HiddenQuestionView from './questions/hidden-question-view.js';
 import PageErrorBlock  from './error/page-error-block.js';
 import $ from 'jquery';
 import SmartBanner from './controls/smart-banner';
 
-
 export default class PageView {
+    /**
+     * @param {Page} page
+     */
     constructor(page) {
         this._page = page;
+        this._questionViewSettings = new QuestionViewSettings(this._page.surveyInfo);
         this._questionViews = [];
         this._hiddenViews = [];
         this._pageErrorBlock = new PageErrorBlock();
         this._smartBanner = new SmartBanner();
 
-        this._questionViewFactory = new QuestionViewFactory();
+
+        this._questionViewFactory = new QuestionViewFactory(this._questionViewSettings);
         this._registeredCustomQuestionViews = {};
 
         this._pageForm = $('#page_form');
@@ -54,18 +59,41 @@ export default class PageView {
     }
 
     _attachQuestionView(model) {
-        const createCustomQuestionViewFn = this._registeredCustomQuestionViews[model.id];
-        const questionView = createCustomQuestionViewFn
-            ? createCustomQuestionViewFn(model)
-            : this._questionViewFactory.create(model);
+        const questionView = this._createQuestionView(model);
 
-        const hiddenView = new HiddenQuestionView(model);
-
-        if (questionView)
+        if (questionView !== undefined)
             this._questionViews.push(questionView);
 
-        if (hiddenView)
-            this._hiddenViews.push(hiddenView);
+        this._hiddenViews.push(new HiddenQuestionView(model));
+    }
+
+    _createQuestionView(model) {
+        const createCustomQuestionViewFn = this._registeredCustomQuestionViews[model.id];
+        if(createCustomQuestionViewFn !== undefined) {
+            return this._customTryCreateView(model, createCustomQuestionViewFn);
+        }
+
+        return this._factoryTryCreateView(model);
+    }
+
+    _customTryCreateView(model, createCustomQuestionViewFn) {
+        try {
+            return createCustomQuestionViewFn(model, this._questionViewSettings);
+        }
+        catch (error) {
+            // eslint-disable-next-line no-console
+            console.error(`Custom view creation for ${model.questionId} failed: ` + error);
+        }
+    }
+
+    _factoryTryCreateView(model) {
+        try {
+            return this._questionViewFactory.create(model);
+        }
+        catch (error) {
+            // eslint-disable-next-line no-console
+            console.error(`Factory view creation for ${model.questionId} failed: ` + error);
+        }
     }
 
     _detachQuestionView(questionId) {

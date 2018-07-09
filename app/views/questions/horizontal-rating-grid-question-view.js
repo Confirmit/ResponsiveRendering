@@ -2,8 +2,12 @@ import QuestionWithAnswersView from './base/question-with-answers-view.js';
 import FloatingLabels from '../controls/floating-labels.js';
 
 export default class HorizontalRatingGridQuestionView extends QuestionWithAnswersView {
-    constructor(question) {
-        super(question);
+    /**
+     * @param {GridRatingQuestion} question
+     * @param {QuestionViewSettings} settings
+     */
+    constructor(question, settings) {
+        super(question, settings);
 
         this._attachHandlersToDOM();
         this._initFloatingLabels();
@@ -42,7 +46,7 @@ export default class HorizontalRatingGridQuestionView extends QuestionWithAnswer
     _initFloatingLabels() {
         const panel = this._container.find('.cf-hrs-grid-answer--first .cf-label-panel');
         const lastItem = this._container.find('.cf-hrs-grid-answer:last-child .cf-hrs-grid-answer__scale').last();
-        new FloatingLabels(panel, lastItem);
+        new FloatingLabels(panel, lastItem, this._settings.mobileThreshold);
     }
 
     _onModelValueChange({changes}) {

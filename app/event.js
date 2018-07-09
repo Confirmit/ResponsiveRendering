@@ -44,7 +44,7 @@ export default class Event {
      * Trigger the event.
      * @param {object} data
      */
-    trigger(data) {
+    trigger(data = null) {
         this._subscribers.forEach(item => item(data));
     }
 }

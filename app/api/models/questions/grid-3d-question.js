@@ -1,4 +1,3 @@
-import QuestionFactory from 'api/question-factory.js';
 import QuestionWithAnswers from './../base/question-with-answers.js';
 import Answer from './../base/answer.js';
 import ValidationTypes from '../validation/validation-types.js';
@@ -14,10 +13,12 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
     /**
      * Create instance.
      * @param {object} model - The instance of the model.
+     * @param {QuestionFactory} questionFactory - Question factory.
      */
-    constructor(model) {
+    constructor(model, questionFactory) {
         super(model);
 
+        this._questionFactory = questionFactory;
         this._innerQuestions = [];
         this._multiGrid = model.multiGrid || false;
 
@@ -97,7 +98,7 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
 
     _parseQuestions({ questions }) {
         questions.forEach(questionModel => {
-            const question = QuestionFactory.create(questionModel);
+            const question = this._questionFactory.create(questionModel);
             this._innerQuestions.push(question);
         });
     }

@@ -1,8 +1,8 @@
-import Page from './page.js';
+import Page from './models/page.js';
 import PageView from './../views/page-view.js'
+import PageViewProxy from '../views/page-view-proxy';
 import DynamicQuestionsManager from "./dynamic-questions-manager";
 import DynamicQuestionsTransport from "./dynamic-questions-transport";
-import PageViewProxy from '../views/page-view-proxy';
 
 /**
  * @desc Root api object.

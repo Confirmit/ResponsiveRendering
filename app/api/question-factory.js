@@ -13,10 +13,16 @@ import GridRatingQuestion from './models/questions/grid-rating-question.js';
 import Grid3DQuestion from './models/questions/grid-3d-question.js';
 import GeolocationQuestion from './models/questions/geolocation-question.js';
 import DynamicQuestionPlaceholder from './models/questions/dynamic-question-placeholder.js';
+import ImageUploadQuestion from './models/questions/image-upload-question.js';
+import ImageUploader from "./image-uploader";
+import LoginPageQuestion from "./models/questions/login-page-question";
 
 export default class QuestionFactory {
-    static create(rawModel) {
+    constructor(endpoints) {
+        this._endpoints = endpoints;
+    }
 
+    create(rawModel) {
         switch (rawModel.nodeType) {
             case 'Single':
                 return new SingleQuestion(rawModel);
@@ -45,11 +51,15 @@ export default class QuestionFactory {
             case 'StarRating':
                 return new GridRatingQuestion(rawModel);
             case 'Grid3d':
-                return new Grid3DQuestion(rawModel);
+                return new Grid3DQuestion(rawModel, this);
             case 'GeoLocation':
                 return new GeolocationQuestion(rawModel);
             case 'DynamicQuestionPlaceholder':
                 return new DynamicQuestionPlaceholder(rawModel);
+            case 'ImageUploader':
+                return new ImageUploadQuestion(rawModel, new ImageUploader(this._endpoints.imageUploadEndpoint));
+            case 'Login':
+                return new LoginPageQuestion(rawModel);
             default:
                 return;
         }

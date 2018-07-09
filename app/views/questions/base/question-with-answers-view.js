@@ -3,9 +3,13 @@ import AnswerErrorManager from '../../error/answer-error-manager.js';
 import $ from 'jquery';
 
 export default class QuestionWithAnswersView extends QuestionView {
-    constructor(question)
+    /**
+     * @param {QuestionWithAnswers} question
+     * @param {QuestionViewSettings} settings
+     */
+    constructor(question, settings = null)
     {
-        super(question);
+        super(question, settings);
 
         this._answerErrorManager = new AnswerErrorManager();
     }

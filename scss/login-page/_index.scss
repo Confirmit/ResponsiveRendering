@@ -1,0 +1,29 @@
+.cf-question--login {
+  .cf-login {
+    max-width: 15em;
+
+    &__field {
+      margin-bottom: 1em;
+      display: flex;
+      align-items: center;
+
+      &--user-name .cf-login__field-icon {
+        background-image: svg-url('<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle fill="#{$back-button-font-color}" cx="50" cy="50" r="36"></circle><circle fill="#{$question-bg-color}" stroke-width="0" cx="50" cy="32" r="17"></circle><circle fill="none" stroke="#{$back-button-font-color}" stroke-width="14" cx="50" cy="50" r="42"></circle><path fill="#{$question-bg-color}" stroke-width="0" d="M 20.757 70.851 C 40.062 56.398 59.878 56.449 79.286 71.005 C 79.286 71.005 51.962 105.428 20.757 70.851 Z"></path></svg>');
+      }
+
+      &--password .cf-login__field-icon {
+        background-image: svg-url('<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect fill="#{$back-button-font-color}" x="15" y="35" width="70" height="60" rx="8" ry="8"></rect><path fill="none" stroke="#{$back-button-font-color}" stroke-width="8px" d="M 30.349 36.622 C 30.365 8.287 45.539 6.722 49.721 6.77 C 53.671 6.815 70.32 6.638 70.609 37.027"></path><circle fill="#fff" cx="50" cy="64" r="8"></circle></svg>');
+      }
+    }
+
+    &__field-icon {
+      height: $control-size;
+      width: $control-size;
+      margin-right: 0.6em;
+      background-size: cover;
+      background-repeat: no-repeat;
+      flex: 0 0 auto;
+    }
+  }
+}
+

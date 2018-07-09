@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  //align-items: center;
 }
 
 @mixin grid_cell() {
@@ -17,7 +16,6 @@
 @mixin grid_cell_text() {
   visibility: hidden;
   display: inline-block;
-  margin-top: -1px;
-  height: 1px;
+  height: 0px;
   overflow: hidden;
 }

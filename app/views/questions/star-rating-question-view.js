@@ -2,8 +2,12 @@ import QuestionWithAnswersView from './base/question-with-answers-view.js';
 import FloatingLabels from '../controls/floating-labels.js';
 
 export default class StarRatingQuestionView extends QuestionWithAnswersView {
-    constructor(question) {
-        super(question);
+    /**
+     * @param {GridRatingQuestion} question
+     * @param {QuestionViewSettings} settings
+     */
+    constructor(question, settings) {
+        super(question, settings);
 
         this._attachHandlersToDOM();
         this._initFloatingLabels();
@@ -51,7 +55,7 @@ export default class StarRatingQuestionView extends QuestionWithAnswersView {
     _initFloatingLabels() {
         const panel = this._container.find('.cf-sr-grid-answer--fake-for-panel .cf-label-panel');
         const lastItem = this._container.find('.cf-sr-grid-answer:last-child .cf-sr-grid-answer__scale').last();
-        new FloatingLabels(panel, lastItem);
+        new FloatingLabels(panel, lastItem, this._settings.mobileThreshold);
     }
 
     _onModelValueChange({changes}) {

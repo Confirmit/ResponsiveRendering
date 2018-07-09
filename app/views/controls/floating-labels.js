@@ -1,7 +1,8 @@
 import $ from 'jquery';
 
 export default class FloatingLabels {
-    constructor(panel, lastItem){
+    constructor(panel, lastItem, mobileThreshold){
+        this._mobileThreshold = mobileThreshold;
         this._panel = panel;
         this._lastItem = lastItem;
         this._clone = null;
@@ -32,7 +33,7 @@ export default class FloatingLabels {
             left: this._panel.offset().left
         });
 
-        if(window.innerWidth <= 640) {
+        if(window.innerWidth <= this._mobileThreshold) {
             this._float();
         }
         else {

@@ -94,6 +94,10 @@ $hrs-item-indent: 4px;
     }
 
     &--fake-for-panel {
+      .cf-hrs-grid-answer__scale {
+        display: none;
+      }
+
       .cf-hrs-grid-answer__scale-label-panel {
         display: block;
       }

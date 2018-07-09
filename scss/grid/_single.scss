@@ -64,39 +64,6 @@
     padding-left: $padding-desktop + $answer-group-border-width;
     margin-left: -($padding-desktop + $answer-group-border-width);
   }
-  .cf-grid-scale-group-panel{
-    margin-bottom: 0.25em;
-    &__group-name {
-      color: $control-head-color;
-      text-align: center;
-      line-height: 1.2em;
-      border-right: 0.25em solid transparent;
-      padding-bottom: 0.25em;
-      position: relative;
-
-      &--empty {
-        visibility: hidden;
-      }
-      &:after {
-        content: ' ';
-        height: 1px;
-        width: 100%;
-        background: $control-head-color;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-      }
-      &:last-child {
-        border:none;
-      }
-    }
-    &__scale-content{
-      text-align: center;
-      height: 1px;
-      padding: 0 1em;
-      visibility: hidden;
-    }
-  }
 
   .cf-grid-answer {
     @include grid-layout-answer-content-indent(3em, 1.2em);
@@ -156,6 +123,88 @@
         height: 1px;
         margin-top: -1px;
       }
+    }
+  }
+
+  .cf-grid-scale-group-panel {
+    margin-bottom: 0.25em;
+    &__labels {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 0.25em;
+    }
+
+    &__label--empty {
+      visibility: hidden;
+    }
+
+    &__label-text-wrapper {
+      display: flex;
+    }
+
+    &__label-text {
+      width: 1px;
+      flex: 1 1 auto;
+      line-height: 1.2em;
+      text-align: center;
+      color: $control-head-color;
+    }
+
+    &__scales, &__borders{
+      display: flex;
+    }
+
+    &__scale {
+      @include grid_cell();
+      height: 0px;
+      text-align: center;
+      visibility: hidden;
+    }
+
+    &__scale-text {
+      height: 0px;
+      overflow: hidden;
+    }
+
+    &__border {
+      @include grid_cell();
+      height: 1px;
+      position: relative;
+      &:after {
+        content: '';
+        background: $control-head-color;
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+      }
+
+      &--left-edge {
+        &:first-child {
+          &:after {
+            left: 0;
+          }
+        }
+        &:after {
+          left: 0.25em;
+        }
+      }
+
+      &--right-edge {
+        &:last-child {
+          &:after {
+            right: 0;
+          }
+        }
+        &:after {
+          right: 0.25em;
+        }
+      }
+    }
+    &__spacer {
+      @include grid_cell();
+      visibility: hidden;
     }
   }
 }
