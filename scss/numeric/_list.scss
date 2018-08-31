@@ -1,9 +1,3 @@
-@media (min-width: $desktop-layout-delimiter + 1) {
-  .cf-numeric-list-answer {
-    @include grid-layout-answer-content-indent(1.8em, 1.4em);
-  }
-}
-
 .cf-numeric-list-answer {
   &__control {
     display: flex;
@@ -31,15 +25,38 @@
     text-align: left;
     padding-left: 0.5em;
   }
-}
 
-
-.cf-numeric-list-auto-sum {
-  &__value {
-    background: none;
-    color: inherit;
-    -webkit-text-fill-color: inherit; /* fix bug in safari */
-    -webkit-opacity: 1; /* fix bug in safari */
+  &__input {
+    -moz-appearance: none;
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    &::-ms-clear{display: none;}
   }
 }
 
+.cf-numeric-list-auto-sum {
+  width: 10em;
+  flex-direction: row;
+
+  &__value {
+    padding: 0 0.5em;
+    text-align: right;
+    border-bottom: none;
+  }
+
+  .cf-grid-layout__row-control {
+    width: 10em;
+    flex-shrink: 1;
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-numeric-list-answer {
+    @include grid-layout-answer-content-indent(1.8em, 1.4em);
+  }
+  .cf-numeric-list-auto-sum {
+    width: auto;
+  }
+}

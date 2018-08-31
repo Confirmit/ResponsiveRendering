@@ -152,7 +152,7 @@
   </div>
 </div></nav>
 <div class="content" data-ice="content">
-<div class="github-markdown" data-ice="content"><h1 id="augmenting-confirmit-questions">Augmenting Confirmit questions</h1><h2 id="overview">Overview</h2><p>If you need to change or extend some aspects of client-side behavior of default Confirmit questions you can use custom views. Supports wide variety of scenarios.</p>
+<div class="github-markdown" data-ice="content"><h1 id="augmenting-confirmit-questions">Augmenting Confirmit questions</h1><h2 id="overview">Overview</h2><p>If you need to change or extend some aspects of client-side behavior of default Confirmit questions you can use custom views. Supports wide variety of scenarios.<br>We use a naming convention to distinguish between public and private methods and properties, use of private methods and properties is not supported. <strong>Methods and properties names starting with &#x201C;_&#x201D; are private and may be changed at any time without warning</strong> which could lead to unexpected behaviour or could prevent your survey from working.  </p>
 <h2 id="api-spec">API spec</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">window.Confirmit.pageView = {
     // dictionary of default question view types, could be used inherit own classes from them or override pieces of functionality using prototypes
     guestionViewTypes: {

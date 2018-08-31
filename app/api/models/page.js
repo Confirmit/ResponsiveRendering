@@ -2,6 +2,7 @@ import QuestionFactory from 'api/question-factory.js'
 import PageValidationResult from 'api/models/validation/page-validation-result.js';
 import SurveyInfo from './survey-info.js';
 import Event from 'event.js'
+import TestNavigator from './test-navigator'
 
 /**
  * @desc Represents the class for page.
@@ -9,7 +10,7 @@ import Event from 'event.js'
 export default class Page {
 	/**
      * @constructor
-     * @param {object} rawQuestionModels - Models of current page questions.
+     * @param {object[]} rawQuestionModels - Models of current page questions.
      * @param {object} rawSurveyInfo - Survey level information.
      */
     constructor(rawQuestionModels, rawSurveyInfo) {
@@ -22,8 +23,20 @@ export default class Page {
         this._beforeNavigateEvent = new Event('page:before-navigate');
         this._navigateEvent = new Event('page:navigate');
         this._dynamicQuestionTriggerChangedEvent = new Event('page:dynamic question trigger changed');
+        this._dynamicQuestionsChangeCompleteEvent = new Event('page:dynamic question change complete');
+
+       this._testNavigator = (rawSurveyInfo.testNavigator !== null && rawSurveyInfo.testNavigator !== undefined) ? new TestNavigator(rawSurveyInfo.testNavigator) : null;
 
         this._attach();
+    }
+
+    /**
+     * Test navigator model.
+     * @type {TestNavigator}
+     * @readonly
+     * */
+    get testNavigator() {
+        return this._testNavigator;
     }
 
     /**
@@ -36,7 +49,7 @@ export default class Page {
     }
 
     /**
-     * Fired on page validation. Use to implement custom validation logic.
+     * Fired on page validation; Use to implement custom validation logic.
      * @event validationEvent
      * @type {Event}
      * @memberOf Page
@@ -46,7 +59,7 @@ export default class Page {
     }
 
     /**
-     * Fired on page validation complete. Use to implement custom error handling.
+     * Fired on page validation complete; Use to implement custom error handling.
      * @event validationCompleteEvent
      * @type {Event}
      * @memberOf Page
@@ -86,6 +99,16 @@ export default class Page {
     }
 
     /**
+     * Fired after dynamic question trigger fire and dynamic questions are changed.
+     * @event dynamicQuestionTriggerChangedEvent
+     * @type {Event}
+     * @memberOf Page
+     */
+    get dynamicQuestionsChangeCompleteEvent() {
+        return this._dynamicQuestionsChangeCompleteEvent;
+    }
+
+    /**
      * Models of current page questions.
      * @type {Array}
      * @readonly
@@ -121,22 +144,22 @@ export default class Page {
     }
 
     /**
-     * Replace dynamic question.
-     * @param {string} questionId - Question id.
-     * @param {object} rawModel  - Question model.
-     * @param {boolean} isPlaceholder
-     * @return {Question} - Question object.
+     * Replace dynamic questions.
+     * @param {object[]} rawQuestionModels - Updated question models.
      */
-    replaceDynamicQuestion(questionId, rawModel, isPlaceholder) {
-        const index = this._questions.indexOf(this.getQuestion(questionId));
-        const model = this._questionFactory.create(JSON.parse(rawModel));
-        this._questions[index] = model;
+    replaceDynamicQuestions(rawQuestionModels) {
+        const models = rawQuestionModels.map(rawModel => this._questionFactory.create(rawModel));
+        models.forEach(model => {
+            const index = this._questions.indexOf(this.getQuestion(model.id));
+            this._questions[index] = model;
 
-        if (!isPlaceholder) {
-            this._attachToTriggerQuestion(model);
-        }
+            if (model.type !== 'DynamicQuestionPlaceholder' ) {
+                this._attachToTriggerQuestion(model);
+            }
+        });
 
-        return model;
+        this._dynamicQuestionsChangeCompleteEvent.trigger(models);
+        return models;
     }
     /**
      * Execute validation
@@ -159,7 +182,7 @@ export default class Page {
     }
 
     /**
-     * Get question by id
+     * Navigate forward in a survey
      * @param {boolean} [validate=true] - Needs to validate.
      */
     next(validate = true) {

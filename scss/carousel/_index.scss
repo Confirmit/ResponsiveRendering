@@ -128,9 +128,26 @@ $local_vertical_shift: 0.5em;
         visibility: visible;
         opacity: 1;
         transition: opacity 0.3s ease 0.4s;
+
+        &:after{
+          content: '';
+          display: block;
+          width: 0%;
+          height: 0%;
+          position: absolute;
+          top: 0;
+          z-index: 1;
+          animation: disable 0.5s ease;
+        }
       }
     }
   }
+}
+
+@keyframes disable {
+  from {width: 100%; height: 100%}
+  99% {width: 100%; height: 100%}
+  to   {width: 0; height: 0}
 }
 
 @media (max-width: $delimiter-mobile) {
@@ -144,3 +161,4 @@ $local_vertical_shift: 0.5em;
     }
   }
 }
+

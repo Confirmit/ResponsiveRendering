@@ -52,6 +52,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name" class="name"><span><a href="typedef/index.html#static-typedef-CultureInfo">CultureInfo</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#api-models">api/models</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span class="active"><a href="class/app/api/models/page.js~Page.html">Page</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/survey-info.js~SurveyInfo.html">SurveyInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/test-navigator-question.js~TestNavigatorQuestion.html">TestNavigatorQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/test-navigator.js~TestNavigator.html">TestNavigator</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#api-models-base">api/models/base</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/base/answer.js~Answer.html">Answer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/base/question-base.js~QuestionBase.html">QuestionBase</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/base/question-with-answers.js~QuestionWithAnswers.html">QuestionWithAnswers</a></span></span></li>
@@ -89,7 +91,7 @@
   
   
   
-  <span data-ice="source">| <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L9">source</a></span></span>
+  <span data-ice="source">| <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L10">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -142,7 +144,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/page.js~Page.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(rawQuestionModels: <span>object</span>, rawSurveyInfo: <span>object</span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/page.js~Page.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(rawQuestionModels: <span><span>object</span><span>[]</span></span>, rawSurveyInfo: <span>object</span>)</span>
         </p>
       </div>
       <div>
@@ -193,7 +195,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L64">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L77">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -224,7 +226,38 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L84">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L97">source</a></span></span>
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      <span class="kind" data-ice="kind">get</span>
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/page.js~Page.html#instance-get-dynamicQuestionsChangeCompleteEvent">dynamicQuestionsChangeCompleteEvent</a></span></span><span class="code" data-ice="signature">: <span><a href="class/app/event.js~Event.html">Event</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description" class="inline"><p>Fired after dynamic question trigger fire and dynamic questions are changed.</p>
+</div>
+        
+      </div>
+    </td>
+    <td>
+      
+      
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L107">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -255,7 +288,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L103">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L126">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -286,7 +319,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L74">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L87">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -317,7 +350,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L93">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L116">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -348,7 +381,38 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L34">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L47">source</a></span></span>
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      <span class="kind" data-ice="kind">get</span>
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/page.js~Page.html#instance-get-testNavigator">testNavigator</a></span></span><span class="code" data-ice="signature">: <span><a href="class/app/api/models/test-navigator.js~TestNavigator.html">TestNavigator</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description" class="inline"><p>Test navigator model.</p>
+</div>
+        
+      </div>
+    </td>
+    <td>
+      
+      
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L38">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -371,7 +435,7 @@
       <div>
         
         
-        <div data-ice="description" class="inline"><p>Fired on page validation complete.</p>
+        <div data-ice="description" class="inline"><p>Fired on page validation complete; Use to implement custom error handling.</p>
 </div>
         
       </div>
@@ -379,7 +443,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L54">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L67">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -402,7 +466,7 @@
       <div>
         
         
-        <div data-ice="description" class="inline"><p>Fired on page validation.</p>
+        <div data-ice="description" class="inline"><p>Fired on page validation; Use to implement custom validation logic.</p>
 </div>
         
       </div>
@@ -410,7 +474,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L44">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L57">source</a></span></span>
     </td>
   </tr>
 </tbody>
@@ -451,7 +515,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L182">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L205">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -482,7 +546,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L118">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L141">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -505,7 +569,7 @@
       <div>
         
         
-        <div data-ice="description" class="inline"><p>Get question by id</p>
+        <div data-ice="description" class="inline"><p>Navigate forward in a survey</p>
 </div>
         
       </div>
@@ -513,7 +577,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L165">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L188">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -530,13 +594,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/page.js~Page.html#instance-method-replaceDynamicQuestion">replaceDynamicQuestion</a></span></span><span class="code" data-ice="signature">(questionId: <span>string</span>, rawModel: <span>object</span>, isPlaceholder: <span>boolean</span>): <span><a href="class/app/api/models/base/question.js~Question.html">Question</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/page.js~Page.html#instance-method-replaceDynamicQuestions">replaceDynamicQuestions</a></span></span><span class="code" data-ice="signature">(rawQuestionModels: <span><span>object</span><span>[]</span></span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description" class="inline"><p>Replace dynamic question.</p>
+        <div data-ice="description" class="inline"><p>Replace dynamic questions.</p>
 </div>
         
       </div>
@@ -544,7 +608,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L130">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L150">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -575,7 +639,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L147">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L170">source</a></span></span>
     </td>
   </tr>
 </tbody>
@@ -596,11 +660,11 @@
     
     
     
-    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(rawQuestionModels: <span>object</span>, rawSurveyInfo: <span>object</span>)</span>
+    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(rawQuestionModels: <span><span>object</span><span>[]</span></span>, rawSurveyInfo: <span>object</span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L15">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L16">source</a></span></span>
     </span>
   </h3>
 
@@ -621,7 +685,7 @@
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">rawQuestionModels</td>
-      <td data-ice="type" class="code"><span>object</span></td>
+      <td data-ice="type" class="code"><span><span>object</span><span>[]</span></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>Models of current page questions.</p>
 </td>
@@ -670,7 +734,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L64">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L77">source</a></span></span>
     </span>
   </h3>
 
@@ -714,7 +778,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L84">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L97">source</a></span></span>
     </span>
   </h3>
 
@@ -722,6 +786,50 @@
   
   
   <div data-ice="description"><p>Fired on dynamic question trigger changed.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-get-dynamicQuestionsChangeCompleteEvent">
+    <span class="access" data-ice="access">public</span>
+    
+    <span class="kind" data-ice="kind">get</span>
+    
+    
+    
+    <span class="code" data-ice="name">dynamicQuestionsChangeCompleteEvent</span><span class="code" data-ice="signature">: <span><a href="class/app/event.js~Event.html">Event</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L107">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Fired after dynamic question trigger fire and dynamic questions are changed.</p>
 </div>
 
   
@@ -758,7 +866,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L103">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L126">source</a></span></span>
     </span>
   </h3>
 
@@ -802,7 +910,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L74">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L87">source</a></span></span>
     </span>
   </h3>
 
@@ -846,7 +954,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L93">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L116">source</a></span></span>
     </span>
   </h3>
 
@@ -890,7 +998,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L34">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L47">source</a></span></span>
     </span>
   </h3>
 
@@ -898,6 +1006,50 @@
   
   
   <div data-ice="description"><p>Survey level metadata.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-get-testNavigator">
+    <span class="access" data-ice="access">public</span>
+    
+    <span class="kind" data-ice="kind">get</span>
+    
+    
+    
+    <span class="code" data-ice="name">testNavigator</span><span class="code" data-ice="signature">: <span><a href="class/app/api/models/test-navigator.js~TestNavigator.html">TestNavigator</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L38">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Test navigator model.</p>
 </div>
 
   
@@ -934,14 +1086,14 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L54">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L67">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Fired on page validation complete. Use to implement custom error handling.</p>
+  <div data-ice="description"><p>Fired on page validation complete; Use to implement custom error handling.</p>
 </div>
 
   
@@ -978,14 +1130,14 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L44">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L57">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Fired on page validation. Use to implement custom validation logic.</p>
+  <div data-ice="description"><p>Fired on page validation; Use to implement custom validation logic.</p>
 </div>
 
   
@@ -1025,7 +1177,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L182">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L205">source</a></span></span>
     </span>
   </h3>
 
@@ -1089,7 +1241,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L118">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L141">source</a></span></span>
     </span>
   </h3>
 
@@ -1163,14 +1315,14 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L165">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L188">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Get question by id</p>
+  <div data-ice="description"><p>Navigate forward in a survey</p>
 </div>
 
   
@@ -1214,25 +1366,25 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-replaceDynamicQuestion">
+  <h3 data-ice="anchor" id="instance-method-replaceDynamicQuestions">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">replaceDynamicQuestion</span><span class="code" data-ice="signature">(questionId: <span>string</span>, rawModel: <span>object</span>, isPlaceholder: <span>boolean</span>): <span><a href="class/app/api/models/base/question.js~Question.html">Question</a></span></span>
+    <span class="code" data-ice="name">replaceDynamicQuestions</span><span class="code" data-ice="signature">(rawQuestionModels: <span><span>object</span><span>[]</span></span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L130">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L150">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Replace dynamic question.</p>
+  <div data-ice="description"><p>Replace dynamic questions.</p>
 </div>
 
   
@@ -1246,24 +1398,11 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">questionId</td>
-      <td data-ice="type" class="code"><span>string</span></td>
+      <td data-ice="name" class="code" data-depth="0">rawQuestionModels</td>
+      <td data-ice="type" class="code"><span><span>object</span><span>[]</span></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Question id.</p>
+      <td data-ice="description"><p>Updated question models.</p>
 </td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">rawModel</td>
-      <td data-ice="type" class="code"><span>object</span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Question model.</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">isPlaceholder</td>
-      <td data-ice="type" class="code"><span>boolean</span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
     </tr>
 </tbody>
   </table>
@@ -1275,9 +1414,8 @@
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span><a href="class/app/api/models/base/question.js~Question.html">Question</a></span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>Question object.</p>
-</td>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
         </tr>
       </tbody>
     </table>
@@ -1312,7 +1450,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L147">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/page.js#L170">source</a></span></span>
     </span>
   </h3>
 

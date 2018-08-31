@@ -28,11 +28,10 @@ export default class ImageUploadQuestionView extends QuestionView {
     /* this method have to be implemented in view, due to native app override */
     _upload() {
         this._fileInputNode.click();
+        this._question.setValue(null, null);
     }
 
     _showError(error) {
-        this._changeControlsState();
-
         this._errorBlock.showErrors([error]);
     }
 
@@ -40,12 +39,11 @@ export default class ImageUploadQuestionView extends QuestionView {
         this._hideErrors();
     }
 
-    _resetViewAndModel() {
-        this._question.setValue(null, null);
-        this._previewNode.find('.cf-image-upload-answer__preview-image').remove();
-        this._fileInputNode.val('');
-        this._hideError();
+    _resetControlStateAndShowError(error){
+        this._changeControlsState();
+        this._showError(error);
     }
+
 
     _changeControlsState(modifier) {
         this._answerNode.removeClass('cf-image-upload-answer--uploaded');
@@ -59,8 +57,6 @@ export default class ImageUploadQuestionView extends QuestionView {
     }
 
     async _processAndUploadImage(file) {
-        this._resetViewAndModel();
-
         this._progressControl.start();
         this._changeControlsState('process');
 
@@ -76,12 +72,12 @@ export default class ImageUploadQuestionView extends QuestionView {
 
     async _processImage(file, maxImageWidth, maxImageHeight) {
         if (!file.type) {
-            this._showError('Unsupported file type');
+            this._resetControlStateAndShowError('Unsupported file type');
             return;
         }
 
         if (/^image\/.*$/.test(file.type) === false) {
-            this._showError('Only image files allowed.');
+            this._resetControlStateAndShowError('Only image files allowed.');
             return;
         }
 
@@ -89,7 +85,7 @@ export default class ImageUploadQuestionView extends QuestionView {
         try {
             blob = await this._imageProcessor.process(file, maxImageWidth, maxImageHeight);
         } catch (error) {
-            this._showError(error.message);
+            this._resetControlStateAndShowError(error.message);
             return;
         }
 
@@ -104,7 +100,7 @@ export default class ImageUploadQuestionView extends QuestionView {
         try {
             this._question.uploader.upload(blob);
         } catch(error) {
-            this._showError(error.message);
+            this._resetControlStateAndShowError(error.message);
         }
     }
 
@@ -125,10 +121,14 @@ export default class ImageUploadQuestionView extends QuestionView {
     }
 
     async _onModelValueChange() {
+        this._previewNode.find('.cf-image-upload-answer__preview-image').remove();
+        this._hideError();
+
         if (this._question.value.imageId === null) {
             this._changeControlsState();
             return;
         }
+
 
         await this._showPreviewImage(this._question.value.imagePreviewUrl);
         this._changeControlsState('uploaded');
@@ -146,6 +146,8 @@ export default class ImageUploadQuestionView extends QuestionView {
     _onUploadComplete({imageId, imagePreviewUrl}) {
         this._progressControl.finish();
         this._question.setValue(imageId, imagePreviewUrl);
+
+        this.pending = false;
     }
 
     _onUploadCancel() {
@@ -155,6 +157,8 @@ export default class ImageUploadQuestionView extends QuestionView {
     _onUploadError(error) {
         this._progressControl.finish();
         this._showError(error);
+
+        this.pending = false;
     }
 
     _onFileInputChange(event) {
@@ -162,9 +166,11 @@ export default class ImageUploadQuestionView extends QuestionView {
             return;
         }
 
+        this.pending = true;
         const file = event.target.files[0];
 
-        this._processAndUploadImage(file)
+        this._processAndUploadImage(file);
+        event.target.value = '';
     }
 }
 

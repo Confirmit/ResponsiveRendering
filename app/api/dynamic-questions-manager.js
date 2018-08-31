@@ -20,10 +20,11 @@ export default class DynamicQuestionsManager {
     }
 
     _processResponse(result) {
+        const rawModels = result.questions.map(question => JSON.parse(question.model));
+        const models = this._page.replaceDynamicQuestions(rawModels);
         result.questions.forEach(question => {
-            const model = this._page.replaceDynamicQuestion(question.id, question.model, question.isPlaceholder);
-
-            this._pageView.replaceDynamicQuestion(question.id, model, question.html, question.startupScript, question.isPlaceholder);
+            const model = models.find(model => model.id === question.id);
+            this._pageView.replaceDynamicQuestion(model, question.html, question.startupScript);
         });
     }
 }

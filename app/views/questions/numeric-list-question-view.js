@@ -39,7 +39,7 @@ export default class NumericListQuestionView extends QuestionWithAnswersView {
 
     _updateTotalSum() {
         const sum = Object.values(this._question.values).reduce((prev, current) => prev + Utils.toNumber(current), 0);
-        this._container.find('.cf-numeric-list-auto-sum__value').val(sum.toFixed(this._question.numeric.scale));
+        this._container.find('.cf-numeric-list-auto-sum__value').text(sum.toFixed(this._question.numeric.scale));
     }
 
     _attachControlHandlers() {

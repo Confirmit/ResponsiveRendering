@@ -43,3 +43,12 @@
 .cf-navigation-ok {
   @extend .cf-navigation-next;
 }
+
+.cf-navigation--disabled {
+  pointer-events: none;
+  user-select: none;
+  .cf-navigation__button {
+    background: $question-border-color;
+    border-color: $question-border-color;
+  }
+}

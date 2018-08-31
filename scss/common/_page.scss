@@ -2,7 +2,7 @@
   margin: 0;
   min-width: $min-width;
   background-color: $window-bg-color;
-  background-image: url($window-bg-image);
+  background-image: $window-bg-image;
   background-position: center;
   background-repeat: $window-bg-repeat;
   font-family: helvetica, arial, sans-serif;
@@ -16,7 +16,7 @@
     display: block;
     min-height: 4em;
     background-color: $header-bg-color;
-    background-image: url($header-bg-image);
+    background-image: $header-bg-image;
     background-position: $header-bg-position;
     background-repeat: no-repeat;
     background-size: contain;

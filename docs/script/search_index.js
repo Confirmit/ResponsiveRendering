@@ -174,6 +174,18 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "se.rendering.responsive/app/api/models/test-navigator.js~testnavigator",
+    "class/app/api/models/test-navigator.js~TestNavigator.html",
+    "<span>TestNavigator</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/test-navigator.js</span>",
+    "class"
+  ],
+  [
+    "se.rendering.responsive/app/api/models/test-navigator-question.js~testnavigatorquestion",
+    "class/app/api/models/test-navigator-question.js~TestNavigatorQuestion.html",
+    "<span>TestNavigatorQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/test-navigator-question.js</span>",
+    "class"
+  ],
+  [
     "se.rendering.responsive/app/api/models/validation/validation-error.js~validationerror",
     "class/app/api/models/validation/validation-error.js~ValidationError.html",
     "<span>ValidationError</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/validation/validation-error.js</span>",
@@ -546,6 +558,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/page.js~page#dynamicquestionschangecompleteevent",
+    "class/app/api/models/page.js~Page.html#instance-get-dynamicQuestionsChangeCompleteEvent",
+    "app/api/models/page.js~Page#dynamicQuestionsChangeCompleteEvent",
+    "member"
+  ],
+  [
     "app/api/models/page.js~page#formvalues",
     "class/app/api/models/page.js~Page.html#instance-get-formValues",
     "app/api/models/page.js~Page#formValues",
@@ -576,15 +594,21 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "app/api/models/page.js~page#replacedynamicquestion",
-    "class/app/api/models/page.js~Page.html#instance-method-replaceDynamicQuestion",
-    "app/api/models/page.js~Page#replaceDynamicQuestion",
+    "app/api/models/page.js~page#replacedynamicquestions",
+    "class/app/api/models/page.js~Page.html#instance-method-replaceDynamicQuestions",
+    "app/api/models/page.js~Page#replaceDynamicQuestions",
     "method"
   ],
   [
     "app/api/models/page.js~page#surveyinfo",
     "class/app/api/models/page.js~Page.html#instance-get-surveyInfo",
     "app/api/models/page.js~Page#surveyInfo",
+    "member"
+  ],
+  [
+    "app/api/models/page.js~page#testnavigator",
+    "class/app/api/models/page.js~Page.html#instance-get-testNavigator",
+    "app/api/models/page.js~Page#testNavigator",
     "member"
   ],
   [
@@ -1374,6 +1398,54 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/test-navigator-question.js",
+    "file/app/api/models/test-navigator-question.js.html",
+    "app/api/models/test-navigator-question.js",
+    "file"
+  ],
+  [
+    "app/api/models/test-navigator-question.js~testnavigatorquestion#id",
+    "class/app/api/models/test-navigator-question.js~TestNavigatorQuestion.html#instance-get-id",
+    "app/api/models/test-navigator-question.js~TestNavigatorQuestion#id",
+    "member"
+  ],
+  [
+    "app/api/models/test-navigator-question.js~testnavigatorquestion#link",
+    "class/app/api/models/test-navigator-question.js~TestNavigatorQuestion.html#instance-get-link",
+    "app/api/models/test-navigator-question.js~TestNavigatorQuestion#link",
+    "member"
+  ],
+  [
+    "app/api/models/test-navigator-question.js~testnavigatorquestion#title",
+    "class/app/api/models/test-navigator-question.js~TestNavigatorQuestion.html#instance-get-title",
+    "app/api/models/test-navigator-question.js~TestNavigatorQuestion#title",
+    "member"
+  ],
+  [
+    "app/api/models/test-navigator-question.js~testnavigatorquestion#type",
+    "class/app/api/models/test-navigator-question.js~TestNavigatorQuestion.html#instance-get-type",
+    "app/api/models/test-navigator-question.js~TestNavigatorQuestion#type",
+    "member"
+  ],
+  [
+    "app/api/models/test-navigator.js",
+    "file/app/api/models/test-navigator.js.html",
+    "app/api/models/test-navigator.js",
+    "file"
+  ],
+  [
+    "app/api/models/test-navigator.js~testnavigator#currentquestionid",
+    "class/app/api/models/test-navigator.js~TestNavigator.html#instance-get-currentQuestionId",
+    "app/api/models/test-navigator.js~TestNavigator#currentQuestionId",
+    "member"
+  ],
+  [
+    "app/api/models/test-navigator.js~testnavigator#questions",
+    "class/app/api/models/test-navigator.js~TestNavigator.html#instance-get-questions",
+    "app/api/models/test-navigator.js~TestNavigator#questions",
+    "member"
+  ],
+  [
     "app/api/models/validation/answer-validation-result.js",
     "file/app/api/models/validation/answer-validation-result.js.html",
     "app/api/models/validation/answer-validation-result.js",
@@ -1582,6 +1654,12 @@ window.esdocSearchIndex = [
     "class/app/event.js~Event.html#instance-method-trigger",
     "app/event.js~Event#trigger",
     "method"
+  ],
+  [
+    "app/process-monitor.js",
+    "file/app/process-monitor.js.html",
+    "app/process-monitor.js",
+    "file"
   ],
   [
     "app/utils.js",

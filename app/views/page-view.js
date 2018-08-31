@@ -1,9 +1,11 @@
 import QuestionViewFactory from './question-view-factory.js';
 import QuestionViewSettings from './question-view-settings.js';
 import HiddenQuestionView from './questions/hidden-question-view.js';
-import PageErrorBlock  from './error/page-error-block.js';
+import PageErrorBlock from './error/page-error-block.js';
 import $ from 'jquery';
 import SmartBanner from './controls/smart-banner';
+import TestNavigatorView from './controls/test-navigator-view';
+import ProcessMonitor from '../process-monitor';
 
 export default class PageView {
     /**
@@ -17,6 +19,10 @@ export default class PageView {
         this._pageErrorBlock = new PageErrorBlock();
         this._smartBanner = new SmartBanner();
 
+        this._processMonitor = new ProcessMonitor();
+        this._processMonitor.changeStateEvent.on(this._onProcessMonitorStateChange.bind(this));
+
+        this._testNavigatorView = this._page.testNavigator !== null ? new TestNavigatorView(this._page.testNavigator) : null;
 
         this._questionViewFactory = new QuestionViewFactory(this._questionViewSettings);
         this._registeredCustomQuestionViews = {};
@@ -24,21 +30,21 @@ export default class PageView {
         this._pageForm = $('#page_form');
     }
 
-    init () {
+    init() {
         this._attachQuestionViews();
         this._attachModelHandlers();
         this._attachControlHandlers();
     }
 
-    get questionViewFactory () {
+    get questionViewFactory() {
         return this._questionViewFactory;
     }
 
-    set questionViewFactory (questionViewFactory) {
+    set questionViewFactory(questionViewFactory) {
         this._questionViewFactory = questionViewFactory;
     }
 
-    registerCustomQuestionView (questionId, createViewFn) {
+    registerCustomQuestionView(questionId, createViewFn) {
         this._registeredCustomQuestionViews[questionId] = createViewFn;
     }
 
@@ -61,15 +67,20 @@ export default class PageView {
     _attachQuestionView(model) {
         const questionView = this._createQuestionView(model);
 
-        if (questionView !== undefined)
+        if (questionView !== undefined) {
             this._questionViews.push(questionView);
+
+            if (questionView.pendingChangeEvent !== undefined) {
+                questionView.pendingChangeEvent.on(this._onQuestionPendingChange.bind(this));
+            }
+        }
 
         this._hiddenViews.push(new HiddenQuestionView(model));
     }
 
     _createQuestionView(model) {
         const createCustomQuestionViewFn = this._registeredCustomQuestionViews[model.id];
-        if(createCustomQuestionViewFn !== undefined) {
+        if (createCustomQuestionViewFn !== undefined) {
             return this._customTryCreateView(model, createCustomQuestionViewFn);
         }
 
@@ -108,12 +119,16 @@ export default class PageView {
     _attachModelHandlers() {
         this._page.validationCompleteEvent.on(validationResult => this._onValidationComplete(validationResult));
         this._page.navigateEvent.on(({next}) => this._navigate(next));
+
+        this._page.dynamicQuestionTriggerChangedEvent.on(() => this._processMonitor.addProcess('dynamic_manager'));
+        this._page.dynamicQuestionsChangeCompleteEvent.on(this._onDynamicQuestionChangeComplete.bind(this));
     }
 
     _attachControlHandlers() {
         $('.cf-navigation-next').on('click', () => this._onNavigationButtonClick(true));
         $('.cf-navigation-back').on('click', () => this._onNavigationButtonClick(false));
         $('.cf-navigation-ok').on('click', () => this._onOkButtonClick());
+
         this._preventFormSubmitOnEnter();
     }
 
@@ -127,11 +142,11 @@ export default class PageView {
 
     _scrollToFirstInvalidQuestion(validationResult) {
         const invalidQuestion = validationResult.questionValidationResults.find(question => !question.isValid);
-        if(!invalidQuestion) {
+        if (!invalidQuestion) {
             return;
         }
 
-        $(`#${invalidQuestion.questionId}`)[0].scrollIntoView({ behavior: 'smooth' });
+        $(`#${invalidQuestion.questionId}`)[0].scrollIntoView({behavior: 'smooth'});
     }
 
     _navigate(next) {
@@ -164,17 +179,18 @@ export default class PageView {
         this._pageForm.append(input);
     }
 
-    replaceDynamicQuestion(questionId, questionModel, html, startupScript, isPlaceholder) {
-        $(`#${questionId}`).replaceWith(html);
+    replaceDynamicQuestion(model, html, startupScript) {
+        $(`#${model.id}`).replaceWith(html);
 
-        this._detachQuestionView(questionId);
+        this._detachQuestionView(model.id);
 
-        if (!isPlaceholder) {
-            this._attachQuestionView(questionModel);
+        if (model.type === 'DynamicQuestionPlaceholder') {
+            return;
+        }
 
-            if (startupScript) {
-                this._runDynamicQuestionStartupScript(startupScript);
-            }
+        this._attachQuestionView(model);
+        if (startupScript) {
+            this._runDynamicQuestionStartupScript(startupScript)
         }
     }
 
@@ -189,6 +205,10 @@ export default class PageView {
     }
 
     _onNavigationButtonClick(next) {
+        if (!this._processMonitor.idle) {
+            return;
+        }
+
         if (next) {
             this._page.next();
         }
@@ -200,7 +220,7 @@ export default class PageView {
     _onOkButtonClick() {
         try {
             if (window.parent && typeof(window.parent.postMessage) === 'function') {
-                window.parent.postMessage({type:'cf-survey-end'}, '*');
+                window.parent.postMessage({type: 'cf-survey-end'}, '*');
             }
         }
         catch (error) {
@@ -218,5 +238,27 @@ export default class PageView {
         } else {
             this._hideErrors();
         }
+    }
+
+    _onDynamicQuestionChangeComplete(models){
+        this._processMonitor.removeProcess('dynamic_manager');
+
+        models.forEach(model => {
+            if(model.type === 'DynamicQuestionPlaceholder'){
+                this._processMonitor.removeProcess(`question_view_${model.id}`);
+            }
+        });
+    }
+
+    _onQuestionPendingChange({id, pending}) {
+        if(pending){
+            this._processMonitor.addProcess(`question_view_${id}`);
+        } else {
+            this._processMonitor.removeProcess(`question_view_${id}`);
+        }
+    }
+
+    _onProcessMonitorStateChange(){
+        $('.cf-page__navigation').toggleClass('cf-navigation--disabled', !this._processMonitor.idle);
     }
 }

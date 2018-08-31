@@ -1,23 +1,4 @@
-/* Colors */
-$window-bg-color: #f6f6f6;
-$window-bg-image: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
-$window-bg-repeat: no-repeat;
-
-$header-bg-color: #e0e0e0;
-$header-bg-image: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
-$header-bg-position: center;
-
-$question-bg-color: #ffffff;
-$question-border-color: #a8a8a8;
-$question-font-color: #000000;
-$question-instruction-color: #a8a8a8;
-
-$control-primary-color: #eeeeee;
-$control-secondary-color: $question-border-color;
-$control-active-color: #42bdd1;
-$control-head-color: #bbbbbb;
-$control-head-font-color: #ffffff;
-$answer-button-text-input-color: #6bcbdb;
+@import "_style_bundle_variables.scss";
 
 $error-color: #fcc;
 $error-text-color: #f00;
@@ -26,16 +7,6 @@ $error-border-color: #f00;
 $error-tost-bg-color: #f00;
 $error-tost-font-color: #ffffff;
 
-$back-button-border-color: #a8a8a8;
-$back-button-bg-color: #fff;
-$back-button-font-color: #a8a8a8;
-
-$next-button-border-color: #42bdd1;
-$next-button-bg-color: #42bdd1;
-$next-button-font-color: #fff;
-
-$progress-color: #d5d5d5;
-$progress-indicator-color: #42bdd1;
 
 /* Layout */
 $min-width: 320px;
