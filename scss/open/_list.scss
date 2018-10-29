@@ -32,3 +32,19 @@
     padding-left: 0.5em;
   }
 }
+
+.cf-open-list-answer--rtl {
+  .cf-open-list-answer {
+    &__input-prefix {
+      text-align: left;
+      padding-right: 0;
+      padding-left: 0.5em;
+    }
+
+    &__input-suffix {
+      text-align: right;
+      padding-left: 0;
+      padding-right: 0.5em;
+    }
+  }
+}

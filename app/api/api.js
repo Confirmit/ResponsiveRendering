@@ -63,9 +63,9 @@ export default class cfApi {
 
         this._page.questions.filter(question => question.changeEvent !== undefined).forEach(question => {
             if(this._debug) {
-                question.changeEvent.on(this._onQuestionChangeDebugHandler);
+                question.changeEvent.on(this._onQuestionChangeDebugHandler.bind(this));
             } else {
-                question.changeEvent.off(this._onQuestionChangeDebugHandler)
+                question.changeEvent.off(this._onQuestionChangeDebugHandler.bind(this))
             }
         });
     }
@@ -81,9 +81,10 @@ export default class cfApi {
             console.log(`Q(${model.id}) values:[${values}]; others:[${otherValues}];`);
         } else if(model.innerQuestions !== undefined) {
             model.innerQuestions.forEach(question => {
-                const innerValues = Object.entries(question.values).map(([key, value]) => `${key}:${value}`);
+                this._onQuestionChangeDebugHandler({ model: question });
+                //const innerValues = Object.entries(question.values).map(([key, value]) => `${key}:${value}`);
                 // eslint-disable-next-line no-console
-                console.log(`Q(${model.id}) inner(${question.id} values: [${innerValues}]`);
+                //console.log(`Q(${model.id}) inner(${question.id} values: [${innerValues}]`);
             });
             const otherValues = Object.entries(model.otherValues).map(([key, value]) => `${key}:${value}`);
             // eslint-disable-next-line no-console

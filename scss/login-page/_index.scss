@@ -1,11 +1,11 @@
 .cf-question--login {
   .cf-login {
-    max-width: 15em;
-
+    max-width: 15.6em;
     &__field {
       margin-bottom: 1em;
       display: flex;
       align-items: center;
+      justify-content: space-between;
 
       &--user-name .cf-login__field-icon {
         background-image: svg-url('<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle fill="#{$back-button-font-color}" stroke-width="0" cx="50" cy="50" r="49"></circle><path fill="#{$question-bg-color}" stroke-width="0" d="M 20.757 70.851 C 40.062 56.398 59.878 56.449 79.286 71.005 C 79.286 71.005 51.962 105.428 20.757 70.851 Z"></path><circle fill="#{$question-bg-color}" stroke-width="0" cx="50" cy="32" r="17"></circle></svg>');
@@ -16,10 +16,16 @@
       }
     }
 
+    &__field-input {
+      flex: 1 1 auto;
+      min-width: 0px;
+      margin-left: 0.6em;
+      margin-right: 0.6em;
+    }
+
     &__field-icon {
       height: $control-size;
       width: $control-size;
-      margin-right: 0.6em;
       background-size: cover;
       background-repeat: no-repeat;
       flex: 0 0 auto;

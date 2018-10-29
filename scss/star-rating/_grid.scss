@@ -98,7 +98,7 @@
     @include grid-layout-answer-content-indent(3em, 1.4em);
 
     margin-bottom: 0;
-    
+
     &-text {
       line-height: 1.2em;
     }
@@ -138,3 +138,35 @@
     }
   }
 }
+
+@media (max-width: $desktop-layout-delimiter) {
+  .cf-sr-grid-answer--rtl .cf-sr-grid-answer__na {
+    @include radio_list(1.4em, true);
+  }
+  .cf-sr-grid-answer--rtl {
+    .cf-sr-grid-answer {
+      &__scale-item {
+        margin-right: 0;
+        margin-left: $gb-item-indent/2;
+      }
+
+      &__scale-text {
+        margin-right: 0;
+        margin-left: $gb-item-indent/2;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-sr-grid--rtl .cf-sr-grid-answer__na {
+    margin-left: 0;
+    margin-right: 16px;
+  }
+  .cf-sr-grid-answer--rtl .cf-sr-grid-answer__na-item {
+    margin-right: 0;
+    margin-left: 4px;
+  }
+}
+
+

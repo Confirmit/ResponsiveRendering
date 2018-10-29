@@ -32,7 +32,9 @@
       -webkit-appearance: none;
       -moz-appearance: none;
     }
-    &::-ms-clear{display: none;}
+    &::-ms-clear {
+      display: none;
+    }
   }
 }
 
@@ -58,5 +60,27 @@
   }
   .cf-numeric-list-auto-sum {
     width: auto;
+  }
+}
+
+.cf-numeric-list-answer-rtl {
+  .cf-numeric-list-answer {
+    &__input-prefix {
+      text-align: left;
+      padding-right: 0;
+      padding-left: 0.5em;
+    }
+
+    &__input-suffix {
+      text-align: right;
+      padding-left: 0;
+      padding-right: 0.5em;
+    }
+  }
+}
+
+.cf-numeric-list-auto-sum--rtl {
+  .cf-numeric-list-auto-sum__value {
+    text-align: left;
   }
 }

@@ -61,3 +61,45 @@
     }
   }
 }
+
+
+.cf-grid-answer--rtl {
+  @media (max-width: $desktop-layout-delimiter) {
+    &.cf-grid-answer--multi {
+      .cf-grid-answer__scale {
+        @include checkbox_list($control-size, true);
+
+        &-item {
+          &--exclusive {
+            @include radio($control-size, false, true);
+
+            &.cf-grid-answer__scale-item--selected {
+              @include radio($control-size, true, true);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: $desktop-layout-delimiter + 1) {
+    &.cf-grid-answer--multi {
+      .cf-grid-answer__scale-item {
+        @include checkbox($control-size, false, true);
+      }
+
+      .cf-grid-answer__scale-item--selected {
+        @include checkbox($control-size, true, true);
+      }
+
+      .cf-grid-answer__scale-item--exclusive {
+        @include radio($control-size, false, true);
+
+        &.cf-grid-answer__scale-item--selected {
+          @include radio($control-size, true, true);
+        }
+      }
+    }
+  }
+}
+

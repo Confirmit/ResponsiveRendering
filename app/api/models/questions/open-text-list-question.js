@@ -14,10 +14,14 @@ export default class OpenTextListQuestion extends QuestionWithAnswers {
     constructor(model) {
         super(model);
 
+        this._maxLength = model.maxLength;
+        this._multiCount = model.multiCount || {};
+        this._layoutColumns = model.layoutColumns || 0;
+        this._layoutRows = model.layoutRows || 0;
+
         this._values = {};
 
         this._loadInitialState(model);
-        this._parseFeatures(model);
     }
 
     /**
@@ -54,6 +58,24 @@ export default class OpenTextListQuestion extends QuestionWithAnswers {
      */
     get multiCount(){
         return { ...this._multiCount };
+    }
+
+    /**
+     * Number of columns for answers placement.
+     * @type {number}
+     * @readonly
+     */
+    get layoutColumns() {
+        return this._layoutColumns;
+    }
+
+    /**
+     * Number of rows for answers placement.
+     * @type {number}
+     * @readonly
+     */
+    get layoutRows() {
+        return this._layoutRows;
     }
 
     /**
@@ -131,11 +153,6 @@ export default class OpenTextListQuestion extends QuestionWithAnswers {
     _loadInitialState({ values = {}, otherValues = {} }) {
         this._values = { ...values };
         this._otherValues = { ...otherValues };
-    }
-
-    _parseFeatures({ maxLength, multiCount = {} }){
-        this._maxLength = maxLength;
-        this._multiCount = { ...multiCount };
     }
 
     _validateRule(validationType) {

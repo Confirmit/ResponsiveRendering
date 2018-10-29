@@ -2,6 +2,7 @@ import QuestionFactory from 'api/question-factory.js'
 import PageValidationResult from 'api/models/validation/page-validation-result.js';
 import SurveyInfo from './survey-info.js';
 import Event from 'event.js'
+import AutoNextNavigator from './auto-next-navigation';
 import TestNavigator from './test-navigator'
 
 /**
@@ -17,6 +18,7 @@ export default class Page {
         this._surveyInfo = new SurveyInfo(rawSurveyInfo);
         this._questionFactory = new QuestionFactory(rawSurveyInfo.endpoints);
         this._questions = this._createQuestions(rawQuestionModels);
+        this._autoNextNavigator = new AutoNextNavigator(this);
 
         this._validationEvent = new Event("page:validation");
         this._validationCompleteEvent = new Event("page:validation-complete");
@@ -25,7 +27,7 @@ export default class Page {
         this._dynamicQuestionTriggerChangedEvent = new Event('page:dynamic question trigger changed');
         this._dynamicQuestionsChangeCompleteEvent = new Event('page:dynamic question change complete');
 
-       this._testNavigator = (rawSurveyInfo.testNavigator !== null && rawSurveyInfo.testNavigator !== undefined) ? new TestNavigator(rawSurveyInfo.testNavigator) : null;
+        this._testNavigator = (rawSurveyInfo.testNavigator !== null && rawSurveyInfo.testNavigator !== undefined) ? new TestNavigator(rawSurveyInfo.testNavigator) : null;
 
         this._attach();
     }
@@ -186,6 +188,9 @@ export default class Page {
      * @param {boolean} [validate=true] - Needs to validate.
      */
     next(validate = true) {
+        if (!this._surveyInfo.allowNextNavigation)
+            return;
+
         this._beforeNavigateEvent.trigger({ next: true });
 
         if (validate) {
@@ -203,6 +208,9 @@ export default class Page {
      * * @param {boolean} [validate=true] - Needs to validate.
      */
     back(validate = true) {
+        if (!this._surveyInfo.allowBackNavigation)
+            return;
+
         this._beforeNavigateEvent.trigger({ next: false });
 
         if (validate) {

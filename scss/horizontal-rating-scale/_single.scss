@@ -37,3 +37,24 @@ $hrs-item-indent: 4px;
     }
   }
 }
+
+.cf-hrs-single--rtl {
+  .cf-hrs-single {
+    &__scale-item {
+      @include scale_item(true);
+      flex: 1 0 0px;
+    }
+    &__na {
+      @include radio_list(1.4em, true);
+    }
+  }
+}
+
+@media (max-width: $desktop-layout-delimiter) {
+  .cf-hrs-single--rtl .cf-hrs-single__scale-item {
+    margin-right: 0;
+    margin-left: $hrs-item-indent/2;
+  }
+}
+
+

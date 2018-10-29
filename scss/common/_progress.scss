@@ -14,3 +14,9 @@ $progress_height: 0.5em;
     background: $progress-indicator-color;
   }
 }
+
+.cf-progress--rtl {
+  .cf-progress__indicator {
+    right: 0;
+  }
+}

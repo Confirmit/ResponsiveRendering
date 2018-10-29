@@ -252,6 +252,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "app/api/models/auto-next-navigation.js",
+    "file/app/api/models/auto-next-navigation.js.html",
+    "app/api/models/auto-next-navigation.js",
+    "file"
+  ],
+  [
     "app/api/models/base/answer.js",
     "file/app/api/models/base/answer.js.html",
     "app/api/models/base/answer.js",
@@ -858,6 +864,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/grid-question.js~gridquestion#layoutcolumns",
+    "class/app/api/models/questions/grid-question.js~GridQuestion.html#instance-get-layoutColumns",
+    "app/api/models/questions/grid-question.js~GridQuestion#layoutColumns",
+    "member"
+  ],
+  [
+    "app/api/models/questions/grid-question.js~gridquestion#layoutrows",
+    "class/app/api/models/questions/grid-question.js~GridQuestion.html#instance-get-layoutRows",
+    "app/api/models/questions/grid-question.js~GridQuestion#layoutRows",
+    "member"
+  ],
+  [
     "app/api/models/questions/grid-rating-question.js",
     "file/app/api/models/questions/grid-rating-question.js.html",
     "app/api/models/questions/grid-rating-question.js",
@@ -1026,6 +1044,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/multi-question.js~multiquestion#layoutcolumns",
+    "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-layoutColumns",
+    "app/api/models/questions/multi-question.js~MultiQuestion#layoutColumns",
+    "member"
+  ],
+  [
+    "app/api/models/questions/multi-question.js~multiquestion#layoutrows",
+    "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-layoutRows",
+    "app/api/models/questions/multi-question.js~MultiQuestion#layoutRows",
+    "member"
+  ],
+  [
     "app/api/models/questions/multi-question.js~multiquestion#multicount",
     "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-multiCount",
     "app/api/models/questions/multi-question.js~MultiQuestion#multiCount",
@@ -1083,6 +1113,18 @@ window.esdocSearchIndex = [
     "app/api/models/questions/numeric-list-question.js~numericlistquestion#formvalues",
     "class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html#instance-get-formValues",
     "app/api/models/questions/numeric-list-question.js~NumericListQuestion#formValues",
+    "member"
+  ],
+  [
+    "app/api/models/questions/numeric-list-question.js~numericlistquestion#layoutcolumns",
+    "class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html#instance-get-layoutColumns",
+    "app/api/models/questions/numeric-list-question.js~NumericListQuestion#layoutColumns",
+    "member"
+  ],
+  [
+    "app/api/models/questions/numeric-list-question.js~numericlistquestion#layoutrows",
+    "class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html#instance-get-layoutRows",
+    "app/api/models/questions/numeric-list-question.js~NumericListQuestion#layoutRows",
     "member"
   ],
   [
@@ -1182,6 +1224,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/open-text-list-question.js~opentextlistquestion#layoutcolumns",
+    "class/app/api/models/questions/open-text-list-question.js~OpenTextListQuestion.html#instance-get-layoutColumns",
+    "app/api/models/questions/open-text-list-question.js~OpenTextListQuestion#layoutColumns",
+    "member"
+  ],
+  [
+    "app/api/models/questions/open-text-list-question.js~opentextlistquestion#layoutrows",
+    "class/app/api/models/questions/open-text-list-question.js~OpenTextListQuestion.html#instance-get-layoutRows",
+    "app/api/models/questions/open-text-list-question.js~OpenTextListQuestion#layoutRows",
+    "member"
+  ],
+  [
     "app/api/models/questions/open-text-list-question.js~opentextlistquestion#maxlength",
     "class/app/api/models/questions/open-text-list-question.js~OpenTextListQuestion.html#instance-get-maxLength",
     "app/api/models/questions/open-text-list-question.js~OpenTextListQuestion#maxLength",
@@ -1272,6 +1326,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/ranking-question.js~rankingquestion#layoutcolumns",
+    "class/app/api/models/questions/ranking-question.js~RankingQuestion.html#instance-get-layoutColumns",
+    "app/api/models/questions/ranking-question.js~RankingQuestion#layoutColumns",
+    "member"
+  ],
+  [
+    "app/api/models/questions/ranking-question.js~rankingquestion#layoutrows",
+    "class/app/api/models/questions/ranking-question.js~RankingQuestion.html#instance-get-layoutRows",
+    "app/api/models/questions/ranking-question.js~RankingQuestion#layoutRows",
+    "member"
+  ],
+  [
     "app/api/models/questions/ranking-question.js~rankingquestion#multicount",
     "class/app/api/models/questions/ranking-question.js~RankingQuestion.html#instance-get-multiCount",
     "app/api/models/questions/ranking-question.js~RankingQuestion#multiCount",
@@ -1332,6 +1398,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/single-question.js~singlequestion#layoutcolumns",
+    "class/app/api/models/questions/single-question.js~SingleQuestion.html#instance-get-layoutColumns",
+    "app/api/models/questions/single-question.js~SingleQuestion#layoutColumns",
+    "member"
+  ],
+  [
+    "app/api/models/questions/single-question.js~singlequestion#layoutrows",
+    "class/app/api/models/questions/single-question.js~SingleQuestion.html#instance-get-layoutRows",
+    "app/api/models/questions/single-question.js~SingleQuestion#layoutRows",
+    "member"
+  ],
+  [
     "app/api/models/questions/single-question.js~singlequestion#othervalue",
     "class/app/api/models/questions/single-question.js~SingleQuestion.html#instance-get-otherValue",
     "app/api/models/questions/single-question.js~SingleQuestion#otherValue",
@@ -1366,6 +1444,24 @@ window.esdocSearchIndex = [
     "file/app/api/models/survey-info.js.html",
     "app/api/models/survey-info.js",
     "file"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#allowbacknavigation",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-allowBackNavigation",
+    "app/api/models/survey-info.js~SurveyInfo#allowBackNavigation",
+    "member"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#allownextnavigation",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-allowNextNavigation",
+    "app/api/models/survey-info.js~SurveyInfo#allowNextNavigation",
+    "member"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#autonext",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-autoNext",
+    "app/api/models/survey-info.js~SurveyInfo#autoNext",
+    "member"
   ],
   [
     "app/api/models/survey-info.js~surveyinfo#istest",

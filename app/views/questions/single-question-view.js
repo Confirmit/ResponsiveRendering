@@ -5,6 +5,8 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
     constructor(question) {
         super(question);
 
+        this._selectedAnswerClass = 'cf-single-answer--selected';
+
         this._attachHandlersToDOM();
     }
 
@@ -21,17 +23,15 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
     }
 
     _onModelValueChange({changes}) {
-        if(!this._question.value) {
-            this._container.find('.cf-single-answer').removeClass('cf-single-answer--selected');
-            return;
+        if (changes.value !== undefined) {
+            this._question.answers.forEach(answer => {
+                this._getAnswerNode(answer.code).removeClass(this._selectedAnswerClass);
+            });
+
+            this._getAnswerNode(this._question.value).addClass(this._selectedAnswerClass);
         }
 
-        if (changes.value) {
-            this._container.find('.cf-single-answer').removeClass('cf-single-answer--selected');
-            this._getAnswerNode(this._question.value).addClass('cf-single-answer--selected');
-        }
-
-        if (changes.otherValue) {
+        if (!Utils.isEmpty(this._question.value) && changes.otherValue) {
             this._setOtherNodeValue(this._question.value, this._question.otherValue);
         }
     }

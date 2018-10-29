@@ -28,3 +28,8 @@
     border-bottom: 1px solid $error-border-color;
   }
 }
+
+.cf-dropdown--rtl {
+  padding: 0 0.5em 0 2em;
+  background-position: left 0.5em center;
+}

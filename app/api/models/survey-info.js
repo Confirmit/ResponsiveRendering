@@ -4,10 +4,13 @@
 export default class SurveyInfo {
     constructor(rawSurveyInfo) {
         this._isTest = rawSurveyInfo.isTest;
+        this._autoNext = rawSurveyInfo.autoNext;
         this._progress = rawSurveyInfo.progress;
         this._language = rawSurveyInfo.language;
         this._mobileThreshold = rawSurveyInfo.mobileThreshold;
         this._messages = rawSurveyInfo.messages;
+        this._allowNextNavigation = rawSurveyInfo.allowNextNavigation;
+        this._allowBackNavigation = rawSurveyInfo.allowBackNavigation;
     }
 
     /**
@@ -17,6 +20,16 @@ export default class SurveyInfo {
      */
     get isTest() {
         return this._isTest;
+    }
+
+
+    /**
+     * Auto submit if all questions answered
+     * @type {bool}
+     * @readonly
+     */
+    get autoNext(){
+        return this._autoNext;
     }
 
     /**
@@ -52,5 +65,23 @@ export default class SurveyInfo {
      */
     get messages() {
         return {...this._messages};
+    }
+
+    /**
+     * Is next navigation allowed for the current page.
+     * @type {bool}
+     * @readonly
+     */
+    get allowNextNavigation() {
+        return this._allowNextNavigation;
+    }
+
+    /**
+     * Is back navigation allowed for the current page.
+     * @type {bool}
+     * @readonly
+     */
+    get allowBackNavigation() {
+        return this._allowBackNavigation;
     }
 }

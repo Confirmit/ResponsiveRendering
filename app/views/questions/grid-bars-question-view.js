@@ -12,7 +12,7 @@ export default class GridBarsQuestionView extends HorizontalRatingGridQuestionVi
     }
 
     _getScaleTextNode(answerCode, scaleCode) {
-        return $(`#${this.id}_${answerCode}_${scaleCode}__text`);
+        return $(`#${this.id}_${answerCode}_${scaleCode}_text`);
     }
 
     _updateAnswerScaleNodes({values = []}) {
@@ -28,7 +28,7 @@ export default class GridBarsQuestionView extends HorizontalRatingGridQuestionVi
     }
 
     _initFloatingLabels() {
-        const panel = this._container.find('.cf-gb-grid-answer--fake-for-panel .cf-label-panel');
+        const panel = this._container.find('.cf-gb-grid-answer--first .cf-label-panel');
         const lastItem = this._container.find('.cf-gb-grid-answer:last-child .cf-gb-grid-answer__scale').last();
         new FloatingLabels(panel, lastItem, this._settings.mobileThreshold);
     }

@@ -47,8 +47,11 @@
 .cf-navigation--disabled {
   pointer-events: none;
   user-select: none;
-  .cf-navigation__button {
-    background: $question-border-color;
-    border-color: $question-border-color;
+}
+
+.cf-navigation--rtl {
+  .cf-navigation__button:last-child {
+    margin-left: 0;
+    margin-right: auto;
   }
 }

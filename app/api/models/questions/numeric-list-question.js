@@ -14,10 +14,17 @@ export default class NumericListQuestion extends QuestionWithAnswers {
     constructor(model) {
         super(model);
 
+        this._numeric = { ...model.numeric };
+        this._multiCount = { ...model.multiCount };
+        this._multiSum = { ...model.multiSum };
+        this._autoSum = model.autoSum || false;
+        this._autoSumTotalLabel = model.autoSumTotalLabel || '';
+        this._layoutColumns = model.layoutColumns || 0;
+        this._layoutRows = model.layoutRows || 0;
+
         this._values = {};
 
         this._loadInitialState(model);
-        this._parseFeatures(model);
     }
 
     /**
@@ -81,6 +88,24 @@ export default class NumericListQuestion extends QuestionWithAnswers {
      */
     get autoSumTotalLabel() {
         return this._autoSumTotalLabel;
+    }
+
+    /**
+     * Number of columns for answers placement.
+     * @type {number}
+     * @readonly
+     */
+    get layoutColumns() {
+        return this._layoutColumns;
+    }
+
+    /**
+     * Number of rows for answers placement.
+     * @type {number}
+     * @readonly
+     */
+    get layoutRows() {
+        return this._layoutRows;
     }
 
     /**
@@ -156,15 +181,6 @@ export default class NumericListQuestion extends QuestionWithAnswers {
     {
         this._values = { ... values };
         this._otherValues = { ...otherValues };
-    }
-
-    _parseFeatures(model)
-    {
-        this._numeric = { ...model.numeric };
-        this._multiCount = { ...model.multiCount };
-        this._multiSum = { ...model.multiSum };
-        this._autoSum = model.autoSum || false;
-        this._autoSumTotalLabel = model.autoSumTotalLabel || '';
     }
 
     _validateRule(validationType) {

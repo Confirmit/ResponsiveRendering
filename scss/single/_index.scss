@@ -9,3 +9,16 @@
     @include radio($control-size, true);
   }
 }
+
+.cf-single-answer--rtl {
+  @include radio($control-size, false, true);
+  &.cf-single-answer {
+    &__other-input {
+      width: 15em;
+    }
+
+    &--selected {
+      @include radio($control-size, true, true);
+    }
+  }
+}

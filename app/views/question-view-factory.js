@@ -21,8 +21,9 @@ import DropdownGridQuestionView from './questions/dropdown-grid-question-view.js
 import AnswerButtonsSingleQuestionView from './questions/answer-buttons-single-question-view.js';
 import AnswerButtonsMultiQuestionView from './questions/answer-buttons-multi-question-view.js';
 import GeolocationQuestionView from './questions/geolocation-question-view.js';
-import ImageUploadQuestionView from "./questions/image-upload-question-view";
+import ImageUploadQuestionView from './questions/image-upload-question-view.js';
 import LoginPageQuestionView from './questions/login-page-question-view.js';
+import Grid3DQuestionView from './questions/grid-3d-question-view.js';
 
 /**
  * @desc Question view factory
@@ -62,7 +63,7 @@ export default class QuestionViewFactory {
             case 'Grid':
                 return this._createGridQuestionView(model);
             case 'Grid3d':
-                return new MultiGridQuestionView(model, this._questionViewSettings);
+                return this._createGrid3DQuestionView(model);
             case 'OpenText':
                 return new OpenTextQuestionView(model, this._questionViewSettings);
             case 'Numeric':
@@ -142,13 +143,11 @@ export default class QuestionViewFactory {
         return new MultiQuestionView(model, this._questionViewSettings);
     }
 
-    _createGrid3dQuestionView(model) {
-        return new MultiGridQuestionView(model, this._questionViewSettings);
+    _createGrid3DQuestionView(model) {
+        if (model.multiGrid) {
+            return new MultiGridQuestionView(model, this._questionViewSettings);
+        }
 
-        // if (model.MultiGrid) {
-        //     return new MultiGridQuestionView(model, this._questionViewSettings);
-        // }
-        //
-        // return new Grid3dQuestionView(model, this._questionViewSettings);
+        return new Grid3DQuestionView(model, this._questionViewSettings);
     }
 }

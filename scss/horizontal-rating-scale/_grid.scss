@@ -46,7 +46,7 @@ $hrs-item-indent: 4px;
     }
 
     &__scale-item {
-        margin-right: $hrs-item-indent/2;
+      margin-right: $hrs-item-indent/2;
     }
 
     &__na {
@@ -109,3 +109,32 @@ $hrs-item-indent: 4px;
     }
   }
 }
+
+.cf-hrs-grid--rtl .cf-hrs-grid-answer__scale-item {
+  @include scale_item(true);
+}
+
+@media (max-width: $desktop-layout-delimiter) {
+  .cf-hrs-grid--rtl {
+    .cf-hrs-grid-answer {
+      &__na {
+        @include na_scale(true);
+      }
+      &__scale-item {
+        margin-right: 0;
+        margin-left: $hrs-item-indent/2;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-hrs-grid--rtl {
+    .cf-hrs-grid-answer__na {
+      @include na_scale(true);
+      margin-left: 0;
+      margin-right: 16px;
+    }
+  }
+}
+

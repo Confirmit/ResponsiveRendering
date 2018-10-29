@@ -14,13 +14,13 @@ export default class SingleQuestion extends QuestionWithAnswers {
     constructor(model) {
         super(model);
 
-        this._value = null;
-        this._otherValues = {};
-
-        //Features
         this._answerButtons = model.answerButtons || false;
         this._slider = model.slider || false;
         this._dropdown = model.dropdown || false;
+        this._layoutColumns = model.layoutColumns || 0;
+        this._layoutRows = model.layoutRows || 0;
+
+        this._value = null;
 
         this._loadInitialState(model);
     }
@@ -42,7 +42,7 @@ export default class SingleQuestion extends QuestionWithAnswers {
     get slider() {
         return this._slider;
     }
-    
+
     /**
      * Is it dropdown.
      * @type {boolean}
@@ -50,6 +50,24 @@ export default class SingleQuestion extends QuestionWithAnswers {
      */
     get dropdown() {
         return this._dropdown;
+    }
+
+    /**
+     * Number of columns for answers placement.
+     * @type {number}
+     * @readonly
+     */
+    get layoutColumns() {
+        return this._layoutColumns;
+    }
+
+    /**
+     * Number of rows for answers placement.
+     * @type {number}
+     * @readonly
+     */
+    get layoutRows() {
+        return this._layoutRows;
     }
 
     /**

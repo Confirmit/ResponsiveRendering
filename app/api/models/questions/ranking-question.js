@@ -14,10 +14,31 @@ export default class RankingQuestion extends QuestionWithAnswers {
     constructor(model) {
         super(model);
 
+        this._multiCount = { ...model.multiCount };
+        this._layoutColumns = model.layoutColumns || 0;
+        this._layoutRows = model.layoutRows || 0;
+
         this._values = {};
 
         this._loadInitialState(model);
-        this._parseFeatures(model);
+    }
+
+    /**
+     * Number of columns for answers placement.
+     * @type {number}
+     * @readonly
+     */
+    get layoutColumns() {
+        return this._layoutColumns;
+    }
+
+    /**
+     * Number of rows for answers placement.
+     * @type {number}
+     * @readonly
+     */
+    get layoutRows() {
+        return this._layoutRows;
     }
 
     /**
@@ -123,14 +144,6 @@ export default class RankingQuestion extends QuestionWithAnswers {
 
         this._values = { ...values };
         this._otherValues = { ...otherValues };
-    }
-
-    _parseFeatures({ multiCount = {} }){
-        this._multiCount = {
-            equal: Utils.toNumber(multiCount.equal),
-            min: Utils.toNumber(multiCount.min),
-            max: Utils.toNumber(multiCount.max),
-        };
     }
 
     _validateRule(validationType) {

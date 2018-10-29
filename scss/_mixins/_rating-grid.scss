@@ -1,5 +1,19 @@
-@mixin scale_item() {
-  margin-right: 4px;
+@mixin scale_item($rtl: false) {
+  @if($rtl){
+    margin-right: 0;
+    margin-left: 4px;
+    &:first-child {
+      margin-left: 4px;
+    }
+    &:last-child {
+      margin-left: 0;
+    }
+  } @else {
+    margin-right: 4px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
   min-height: 2.4em;
   background: $control-primary-color;
   text-align: center;
@@ -9,21 +23,17 @@
   flex-direction: column;
   justify-content: center;
 
-  &:last-child {
-    margin-right: 0;
-  }
-
   &--selected {
     background: $control-active-color;
     color: $question-bg-color;
   }
 }
 
-@mixin na_scale {
+@mixin na_scale($rtl: false)  {
   display: flex;
 
   &-item {
-    @include scale_item();
+    @include scale_item($rtl);
 
     flex: 0 0 auto;
     padding: 0 1em;

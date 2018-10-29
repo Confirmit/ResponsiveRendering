@@ -25,3 +25,15 @@
     z-index: 10;
   }
 }
+
+.cf-label-panel--rtl {
+  .cf-label-panel__label {
+    &--max {
+      float: left;
+      text-align: left;
+    }
+    &--min {
+      float: right;
+    }
+  }
+}

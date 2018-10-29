@@ -150,7 +150,7 @@
       color: $control-head-color;
     }
 
-    &__scales, &__borders{
+    &__scales, &__borders {
       display: flex;
     }
 
@@ -208,3 +208,33 @@
     }
   }
 }
+
+@media (max-width: $desktop-layout-delimiter) {
+  .cf-grid-answer--rtl {
+    .cf-grid-answer__scale {
+      @include radio_list($control-size, true);
+    }
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-grid--rtl {
+    margin-right: -($padding-desktop + $answer-group-border-width);
+    padding-right: $padding-desktop + $answer-group-border-width;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .cf-grid-scale-group-panel--rtl {
+    .cf-grid-scale-group-panel__border--left-edge:after {
+      left: 0;
+      right: 0.25em;
+    }
+
+    .cf-grid-scale-group-panel__border--right-edge:after {
+      right: 0;
+      left: 0.25em;
+    }
+  }
+}
+
+

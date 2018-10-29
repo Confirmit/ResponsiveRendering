@@ -16,9 +16,9 @@
     display: flex;
     flex-direction: column;
     margin-left: 4px;
-    // Overridable variables cannot be in the same css statement with non overridable
-    border-left: $answer-group-border-width solid;
-    border-left-color: $control-head-color;
+    border-width: $answer-group-border-width;
+    border-color: $control-head-color;
+    border-left-style: solid;
     padding-left: ($padding-desktop - 4px);
   }
 }
@@ -56,6 +56,42 @@
     }
   }
 }
+
+.cf-group-heading--rtl {
+  margin-left: 0;
+  margin-right: -($padding-desktop + $answer-group-border-width);
+  .cf-group-heading__content {
+    margin-left: 0;
+    padding-left: 0;
+    margin-right: 4px;
+    border-left-style: none;
+    border-right-style: solid;
+    padding-right: ($padding-desktop - 4px);
+  }
+
+  @media (max-width: $delimiter-tablet) {
+    margin-left: 0;
+    margin-right: -($padding-tablet + $answer-group-border-width);
+
+    .cf-group-heading__content__content {
+      padding-left: 0;
+      padding-right: ($padding-tablet - $answer-group-border-width / 2);
+    }
+  }
+
+  @media (max-width: $delimiter-mobile) {
+
+    margin-left: 0;
+    margin-right: -($padding-mobile + $answer-group-border-width);
+
+    .cf-group-heading__content {
+      padding-left: 0;
+      padding-right: ($padding-mobile - $answer-group-border-width / 2);
+    }
+  }
+}
+
+
 
 
 

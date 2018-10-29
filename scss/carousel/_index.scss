@@ -162,3 +162,30 @@ $local_vertical_shift: 0.5em;
   }
 }
 
+.cf-carousel--rtl {
+  .cf-carousel {
+    &__navigation-button {
+      &--next {
+        background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" width="26" height="42" viewBox="0 0 26 42"><path fill="#{$control-secondary-color}" d="M 20.65,42 25,37.72 8.97,21.02 25.49,4.57 21.036,0.13 0.52,21.03 Z"/></svg>');
+      }
+
+      &--back {
+        background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" width="26" height="42" viewBox="0 0 26 42"><path fill="#{$control-secondary-color}" d="M 5.36,42 1.01,37.72 17.042,21.02 0.52,4.57 4.97,0.13 25.49,21.03 Z" /></svg>');
+      }
+    }
+
+    &__paging-item--current:before {
+      left: 4px;
+    }
+
+    &__text {
+      left: -100%;
+      &--current ~ .cf-carousel__text {
+        left: 100%;
+      }
+      &--current {
+        left: 0;
+      }
+    }
+  }
+}

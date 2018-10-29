@@ -66,3 +66,13 @@ $input_padding: 0.5em;
 
   resize: both;
 }
+
+.cf-text-box--rtl {
+  &.cf-text-box--text-aligned {
+    margin-right: -$input_padding;
+  }
+
+  &.cf-text-box--number {
+    text-align: left;
+  }
+}

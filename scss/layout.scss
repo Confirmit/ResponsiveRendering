@@ -9,6 +9,7 @@
 @import "common/_navigation";
 @import "common/_powered-by-confirmit";
 @import "common/_list-layout";
+@import "common/_table-layout";
 @import "common/_grid-layout";
 @import "common/_text-input";
 @import "common/_dropdown";
@@ -27,7 +28,7 @@
 @import "dropdown/_grid";
 @import "grid/_single";
 @import "grid/_multi";
-@import "grid/_3d";
+@import "grid-3d/_index";
 @import "horizontal-rating-scale/_single";
 @import "horizontal-rating-scale/_grid";
 @import "grid-bars/_grid";

@@ -17,3 +17,20 @@
     }
   }
 }
+
+.cf-multi-answer--rtl {
+  @include checkbox($control-size, false, true);
+  &.cf-multi-answer {
+    &--selected {
+      @include checkbox($control-size, true, true);
+    }
+
+    &--exclusive {
+      @include radio($control-size, false, true);
+
+      &.cf-multi-answer--selected {
+        @include radio($control-size, true, true);
+      }
+    }
+  }
+}

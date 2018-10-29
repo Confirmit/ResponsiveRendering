@@ -66,3 +66,47 @@
     flex-grow: 1;
   }
 }
+
+.cf-grid-layout--rtl .cf-grid-layout{
+  @media (max-width: $desktop-layout-delimiter) {
+    &__row-text {
+      margin-left: 0;
+    }
+  }
+
+  @media (min-width: $desktop-layout-delimiter + 1) {
+    &__row-text {
+      margin-right: 0;
+      margin-left: 2em;
+    }
+    &__row-text-other {
+      margin-left: 0;
+      margin-right: -0.5em;
+    }
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-grid-layout--multi-columns {
+    display: -ms-grid;
+    display: grid;
+
+    grid-auto-flow: column;
+    grid-column-gap: 5%;
+
+
+
+    .cf-grid-layout__row {
+      min-width: 0;
+    }
+
+    .cf-grid-layout__row-text {
+      margin-right: 0.5em;
+    }
+  }
+
+  // Ugly workaround for unsupported grid-gap property in IE/EDGE
+  _:-ms-lang(x), .cf-grid-layout__row {
+    margin-right: 10%;
+  }
+}

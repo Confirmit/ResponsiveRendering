@@ -14,11 +14,14 @@ export default class MultiQuestion extends QuestionWithAnswers {
     constructor(model) {
         super(model);
 
+        this._multiCount = { ...model.multiCount };
+        this._answerButtons = model.answerButtons || false;
+        this._layoutColumns = model.layoutColumns || 0;
+        this._layoutRows = model.layoutRows || 0;
+
         this._values = [];
 
-        this._answerButtons = model.answerButtons || false;
         this._loadInitialState(model);
-        this._parseFeatures(model);
     }
 
     /**
@@ -28,6 +31,24 @@ export default class MultiQuestion extends QuestionWithAnswers {
      */
     get answerButtons() {
         return this._answerButtons;
+    }
+
+    /**
+     * Number of columns for answers placement.
+     * @type {number}
+     * @readonly
+     */
+    get layoutColumns() {
+        return this._layoutColumns;
+    }
+
+    /**
+     * Number of rows for answers placement.
+     * @type {number}
+     * @readonly
+     */
+    get layoutRows() {
+        return this._layoutRows;
     }
 
     /**
@@ -160,10 +181,6 @@ export default class MultiQuestion extends QuestionWithAnswers {
     {
         this._values = [ ...values ];
         this._otherValues = { ...otherValues };
-    }
-
-    _parseFeatures({ multiCount = {} }){
-        this._multiCount = { ...multiCount };
     }
 
     _validateRule(validationType) {

@@ -17,6 +17,10 @@ export default class PageViewProxy {
         this._pageView.questionViewFactory = questionViewFactory;
     }
 
+    get initCompleteEvent(){
+        return this._pageView.initCompleteEvent;
+    }
+
     registerCustomQuestionView (questionId, createViewFn) {
         this._pageView.registerCustomQuestionView(questionId, createViewFn);
     }

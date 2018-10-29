@@ -73,3 +73,19 @@
     min-width: 111px;
   }
 }
+
+.cf-smartbanner--rtl {
+  .cf-smartbanner {
+    &__icon {
+      margin: 10px 0 10px 10px;
+    }
+
+    &__info {
+      margin-right: 0;
+      margin-left: 2px;
+    }
+    &__button {
+      margin: 4px 0 4px 10px;
+    }
+  }
+}

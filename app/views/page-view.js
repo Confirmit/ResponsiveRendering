@@ -6,6 +6,7 @@ import $ from 'jquery';
 import SmartBanner from './controls/smart-banner';
 import TestNavigatorView from './controls/test-navigator-view';
 import ProcessMonitor from '../process-monitor';
+import Event from 'event';
 
 export default class PageView {
     /**
@@ -28,12 +29,19 @@ export default class PageView {
         this._registeredCustomQuestionViews = {};
 
         this._pageForm = $('#page_form');
+
+        this._initCompleteEvent = new Event('page-view:init-complete');
     }
 
     init() {
         this._attachQuestionViews();
         this._attachModelHandlers();
         this._attachControlHandlers();
+        this._initCompleteEvent.trigger();
+    }
+
+    get initCompleteEvent(){
+        return this._initCompleteEvent;
     }
 
     get questionViewFactory() {
@@ -93,7 +101,7 @@ export default class PageView {
         }
         catch (error) {
             // eslint-disable-next-line no-console
-            console.error(`Custom view creation for ${model.questionId} failed: ` + error);
+            console.error(`Custom view creation for question(${model.id}) failed: ` + error);
         }
     }
 
@@ -103,7 +111,7 @@ export default class PageView {
         }
         catch (error) {
             // eslint-disable-next-line no-console
-            console.error(`Factory view creation for ${model.questionId} failed: ` + error);
+            console.error(`Factory view creation for question(${model.id}) failed: ` + error);
         }
     }
 

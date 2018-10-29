@@ -41,9 +41,19 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
      */
     get formValues(){
         let formValues = {};
+
         this._innerQuestions.forEach(question => {
             formValues = {...formValues, ...question.formValues };
         });
+
+        // TODO: Filling order is important, mb good idea to make empty fieldName of other answers in inner questions.
+        for(let[answerCode, otherValue] of Object.entries(this.otherValues)) {
+            const answer = this.getAnswer(answerCode);
+            if(answer && answer.isOther){
+                formValues[answer.otherFieldName] = otherValue;
+            }
+        }
+
         return formValues;
     }
 
@@ -63,7 +73,6 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
      */
     setOtherValue(answerCode, otherValue) {
         const old = { ...this._otherValues };
-
         const changed = this._setOtherValue(answerCode, otherValue);
         if (changed) {
             this._onChange({otherValues: this._diff(old, this._otherValues)});
@@ -121,7 +130,7 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
         const validationResult = new Grid3dQuestionValidationResult(this._id);
 
         this._innerQuestions.forEach(question => {
-            validationResult.questionValidationResults.push(question.validate(false, validationRuleFilter));
+            validationResult.questionValidationResults.push(question.validate(true, validationRuleFilter));
         });
 
         const questionValidationResult = super._validate(validationRuleFilter);
@@ -142,17 +151,31 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
     }
 
     _validateOther() {
-        let invalidAnswers = [];
-
+        const invalidAnswers = [];
         this.answers.filter(answer => answer.isOther).forEach(answer => {
-            let isNotEmpty = this._innerQuestions.some(question => question.values.includes(answer.code));
-            let otherIsEmpty = Utils.isEmpty(this.otherValues[answer.code]);
+            const isNotEmpty = this._innerQuestions.some(question => this._isAnswerInQuestionValue(question, answer.code));
+            const otherIsEmpty = Utils.isEmpty(this.otherValues[answer.code]);
             if (isNotEmpty && otherIsEmpty){
                 invalidAnswers.push(answer.code);
             }
         });
 
-        let isValid = invalidAnswers.length === 0;
+        const isValid = invalidAnswers.length === 0;
         return new RuleValidationResult(isValid, invalidAnswers);
+    }
+
+    _isAnswerInQuestionValue(question, answerCode) {
+        switch (question.type) {
+            case 'Single':
+                return question.value === answerCode;
+            case 'Multi':
+                return question.values.includes(answerCode);
+            case 'OpenTextList':
+            case 'NumericList':
+            case 'Ranking':
+            case 'Grid':
+            default:
+                return question.values[answerCode] !== undefined;
+        }
     }
 }

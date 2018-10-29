@@ -96,3 +96,15 @@
     //}
   }
 }
+
+.cf-ranking-answer--rtl {
+  .cf-ranking-answer__rank {
+    margin: 2px 2px 2px 6px;
+
+    &::after {
+      right: auto;
+      left: 0;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+}
