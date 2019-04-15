@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import QuestionTypes from 'api/question-types.js'
 import SingleQuestionView from './questions/single-question-view.js';
 import SingleSliderQuestionView from './questions/single-slider-question-view.js';
 import MultiQuestionView from './questions/multi-question-view.js';
@@ -13,9 +14,12 @@ import DateQuestionPolyfillView from './questions/date-question-polyfill-view.js
 import RankingQuestionView from './questions/ranking-question-view.js';
 import HorizontalRatingGridQuestionView from './questions/horizontal-rating-grid-question-view.js';
 import HorizontalRatingSingleQuestionView from './questions/horizontal-rating-single-question-view.js';
-import GridBarsQuestionView from './questions/grid-bars-question-view.js';
-import StarRatingQuestionView from './questions/star-rating-question-view.js';
+import GridBarsGridQuestionView from './questions/grid-bars-grid-question-view.js';
+import GridBarsSingeQuestionView from './questions/grid-bars-single-question-view';
+import StarRatingGridQuestionView from './questions/star-rating-grid-question-view.js';
+import StarRatingSingleQuestionView from './questions/star-rating-single-question-view.js';
 import CarouselGridQuestionView from './questions/carousel-grid-question-view.js';
+import AccordionGridQuestionView from './questions/accordion-grid-question-view.js';
 import DropdownSingleQuestionView from './questions/dropdown-single-question-view.js';
 import DropdownGridQuestionView from './questions/dropdown-grid-question-view.js';
 import AnswerButtonsSingleQuestionView from './questions/answer-buttons-single-question-view.js';
@@ -24,7 +28,9 @@ import GeolocationQuestionView from './questions/geolocation-question-view.js';
 import ImageUploadQuestionView from './questions/image-upload-question-view.js';
 import LoginPageQuestionView from './questions/login-page-question-view.js';
 import Grid3DQuestionView from './questions/grid-3d-question-view.js';
-
+import MaxDiffQuestionView from './questions/max-diff/max-diff-question-view.js';
+import CarouselMultiGridQuestionView from './questions/carousel-multi-grid-question-view.js';
+import DropdownHierarchyQuestionView from './questions/dropdown-hierarchy-question-view';
 /**
  * @desc Question view factory
  */
@@ -56,42 +62,48 @@ export default class QuestionViewFactory {
         }
 
         switch (model.type) {
-            case 'Single':
+            case QuestionTypes.Single:
                 return this._createSingleQuestionView(model);
-            case 'Multi':
+            case QuestionTypes.Multi:
                 return this._createMultiQuestionView(model);
-            case 'Grid':
+            case QuestionTypes.Grid:
                 return this._createGridQuestionView(model);
-            case 'Grid3d':
+            case QuestionTypes.Grid3d:
                 return this._createGrid3DQuestionView(model);
-            case 'OpenText':
+            case QuestionTypes.OpenText:
                 return new OpenTextQuestionView(model, this._questionViewSettings);
-            case 'Numeric':
+            case QuestionTypes.Numeric:
                 return new NumericQuestionView(model, this._questionViewSettings);
-            case 'OpenTextList':
+            case QuestionTypes.OpenTextList:
                 return new OpenTextListQuestionView(model, this._questionViewSettings);
-            case 'NumericList':
+            case QuestionTypes.NumericList:
                 return new NumericListQuestionView(model, this._questionViewSettings);
-            case 'Date':
+            case QuestionTypes.Date:
                 return this._createDateQuestionView(model);
-            case 'Ranking':
+            case QuestionTypes.Ranking:
                 return new RankingQuestionView(model, this._questionViewSettings);
-            case 'HorizontalRatingScaleSingle':
+            case QuestionTypes.HorizontalRatingScaleSingle:
                 return new HorizontalRatingSingleQuestionView(model, this._questionViewSettings);
-            case 'HorizontalRatingScaleGrid':
+            case QuestionTypes.HorizontalRatingScale:
                 return new HorizontalRatingGridQuestionView(model, this._questionViewSettings);
-            case 'GridBars':
-                return new GridBarsQuestionView(model, this._questionViewSettings);
-            case 'StarRating':
-                return new StarRatingQuestionView(model, this._questionViewSettings);
-            case 'GeoLocation':
+            case QuestionTypes.GridBars:
+                return new GridBarsGridQuestionView(model, this._questionViewSettings);
+            case QuestionTypes.GridBarsSingle:
+                return new GridBarsSingeQuestionView(model, this._questionViewSettings);
+            case QuestionTypes.StarRating:
+                return new StarRatingGridQuestionView(model, this._questionViewSettings);
+            case QuestionTypes.StarRatingSingle:
+                return new StarRatingSingleQuestionView(model, this._questionViewSettings);
+            case QuestionTypes.GeoLocation:
                 return new GeolocationQuestionView(model, this._questionViewSettings);
-            case 'ImageUploader':
+            case QuestionTypes.ImageUploader:
                 return new ImageUploadQuestionView(model);
-            case 'DynamicQuestionPlaceholder':
+            case QuestionTypes.DynamicQuestionPlaceholder:
                 return;
-            case 'Login':
+            case QuestionTypes.Login:
                 return new LoginPageQuestionView(model);
+            case QuestionTypes.Hierarchy:
+                return new DropdownHierarchyQuestionView(model, this._questionViewSettings);
             default:
                 return;
         }
@@ -131,7 +143,9 @@ export default class QuestionViewFactory {
         if(model.carousel) {
             return new CarouselGridQuestionView(model, this._questionViewSettings);
         }
-
+        if(model.accordion) {
+            return new AccordionGridQuestionView(model, this._questionViewSettings);
+        }
         return new GridQuestionView(model, this._questionViewSettings);
     }
 
@@ -145,8 +159,16 @@ export default class QuestionViewFactory {
 
     _createGrid3DQuestionView(model) {
         if (model.multiGrid) {
+            if(model.carousel){
+                return new CarouselMultiGridQuestionView(model, this._questionViewSettings);
+            }
             return new MultiGridQuestionView(model, this._questionViewSettings);
         }
+
+        if (model.maxDiff) {
+            return new MaxDiffQuestionView(model, this._questionViewSettings);
+        }
+
 
         return new Grid3DQuestionView(model, this._questionViewSettings);
     }

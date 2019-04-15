@@ -13,6 +13,11 @@ $progress_height: 0.5em;
 
     background: $progress-indicator-color;
   }
+
+  &__text-for-acc {
+    text-indent: -9999px;
+    height: 0;
+  }
 }
 
 .cf-progress--rtl {

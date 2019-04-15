@@ -1,6 +1,7 @@
 import QuestionViewBase from "../../base/question-view-base";
-import AnswerErrorManager from "../../../error/answer-error-manager";
 import QuestionErrorBlock from "../../../error/question-error-block";
+import QuestionTypes from 'api/question-types.js';
+import ErrorBlockManager from "../../../error/error-block-manager";
 import $ from "jquery";
 
 export default class Grid3DMobileInnerQuestionView extends QuestionViewBase {
@@ -8,18 +9,26 @@ export default class Grid3DMobileInnerQuestionView extends QuestionViewBase {
         super(question, settings);
         this._parentQuestion = parentQuestion;
 
-        this._parentContainer = $(`#${parentQuestion.id}`);
-        this._container = this._parentContainer.find(`#mobile_${question.id}`);
+        this._parentContainer = $(`#${this._parentQuestion.id}`);
+        this._container = this._parentContainer.find(`#mobile_${this._question.id}`);
 
-        this._errorBlock = new QuestionErrorBlock(this._container.find('.cf-error-block'));
+        this._questionErrorBlock = new QuestionErrorBlock(this._container.find('.cf-error-block'));
 
-        this._answerErrorManager = new AnswerErrorManager();
+        this._answerErrorBlockManager = new ErrorBlockManager();
 
         this._boundOnParentModelValueChange = this._onParentModelValueChange.bind(this);
         this._boundOnParentModelValidationComplete = this._onParentModelValidationComplete.bind(this);
 
         this._attachParentModelHandlers();
 
+    }
+
+    _getAnswerErrorBlockId(answerCode) {
+        return `mobile_${this._question.id}_${answerCode}_error`
+    }
+
+    _getAnswerOtherErrorBlockId(answerCode) {
+        return `mobile_${this._question.id}_${answerCode}_other_error`
     }
 
     _getAnswerNode(answerCode) {
@@ -72,34 +81,38 @@ export default class Grid3DMobileInnerQuestionView extends QuestionViewBase {
     }
 
     _showQuestionErrors(validationResult) {
-        this._errorBlock.showErrors(validationResult.errors.map(error => error.message));
+        this._questionErrorBlock.showErrors(validationResult.errors.map(error => error.message));
     }
 
     _showAnswerErrors(validationResult) {
-        validationResult.answerValidationResults.forEach(answerValidationResult => {
-            const answer = this._question.getAnswer(answerValidationResult.answerCode);
-            const target = answer.isOther
-                ? this._getAnswerOtherNode(answerValidationResult.answerCode)
-                : this._getAnswerTextNode(answerValidationResult.answerCode);
-            this._answerErrorManager.showErrors(answerValidationResult, target);
-        });
+        validationResult.answerValidationResults.filter(result => !result.isValid).forEach(result => this._showAnswerError(result));
+    }
+
+    _showAnswerError(validationResult) {
+        const answer = this._question.getAnswer(validationResult.answerCode);
+        const target = answer.isOther
+            ? this._getAnswerOtherNode(validationResult.answerCode)
+            : this._getAnswerTextNode(validationResult.answerCode);
+        const errorBlockId = this._getAnswerErrorBlockId(validationResult.answerCode);
+        const errors = validationResult.errors.map(error => error.message);
+        this._answerErrorBlockManager.showErrors(errorBlockId, target, errors);
     }
 
     _hideErrors() {
-        this._errorBlock.hideErrors();
-        this._answerErrorManager.removeAllErrors();
+        this._questionErrorBlock.hideErrors();
+        this._answerErrorBlockManager.removeAllErrors();
     }
 
     _isAnswerInQuestionValue(answerCode) {
         switch (this._question.type) {
-            case 'Single':
+            case QuestionTypes.Single:
                 return this._question.value === answerCode;
-            case 'Multi':
+            case QuestionTypes.Multi:
                 return this._question.values.includes(answerCode);
-            case 'OpenTextList':
-            case 'NumericList':
-            case 'Ranking':
-            case 'Grid':
+            case QuestionTypes.OpenTextList:
+            case QuestionTypes.NumericList:
+            case QuestionTypes.Ranking:
+            case QuestionTypes.Grid:
             default:
                 return this._question.values[answerCode] !== undefined;
         }
@@ -134,7 +147,9 @@ export default class Grid3DMobileInnerQuestionView extends QuestionViewBase {
             }
 
             const target = this._getAnswerOtherNode(answerValidationResult.answerCode);
-            this._answerErrorManager.showErrors(answerValidationResult, target);
+            const errorBlockId = this._getAnswerOtherErrorBlockId(answerValidationResult.answerCode);
+            const errors = answerValidationResult.errors.map(error => error.message);
+            this._answerErrorBlockManager.showErrors(errorBlockId, target, errors);
         });
     }
 }

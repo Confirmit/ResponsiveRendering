@@ -22,6 +22,16 @@ export default class NumericQuestionView extends QuestionView {
         this._input.val(value);
     }
 
+    _showErrors(validationResult) {
+        super._showErrors(validationResult);
+        this._input.attr('aria-invalid', true);
+    }
+
+    _hideErrors() {
+        super._hideErrors();
+        this._input.attr('aria-invalid', false);
+    }
+
     _attachControlHandlers() {
         this._input.on('input', this._onQuestionInputNodeValueChange.bind(this));
     }

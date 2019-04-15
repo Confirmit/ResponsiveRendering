@@ -56,6 +56,8 @@ export default class DynamicQuestionsTransport {
     _handleError(status, error){
         if (status === 'cancel pending dynamic update')
             return;
+
+        // TODO: find a way to show global error banner or another way of handling
         // eslint-disable-next-line no-console
         console.error("Dynamic question load failed: " + error);
     }

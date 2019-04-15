@@ -32,7 +32,7 @@ export default class ImageUploadQuestionView extends QuestionView {
     }
 
     _showError(error) {
-        this._errorBlock.showErrors([error]);
+        this._questionErrorBlock.showErrors([error]);
     }
 
     _hideError() {

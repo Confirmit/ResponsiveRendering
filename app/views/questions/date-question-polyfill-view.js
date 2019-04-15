@@ -50,7 +50,7 @@ export default class DateQuestionPolyfillView extends QuestionView {
             maxYear = 2100,
             years = Array.from(new Array(maxYear - minYear + 1), (val, idx) => minYear + idx),
             select = $('<select/>', {
-                id: `${this.id}__year`,
+                id: `${this._question.id}__year`,
                 class:  'cf-date-answer__year',
                 style: 'margin-right: 1em'
             });
@@ -67,7 +67,7 @@ export default class DateQuestionPolyfillView extends QuestionView {
     _renderMonth() {
         let { monthNames } = this._question.culture,
             select = $('<select/>', {
-                id: `${this.id}__month`,
+                id: `${this._question.id}__month`,
                 class:  'cf-date-answer__month',
                 style: 'margin-right: 1em'
             });
@@ -86,7 +86,7 @@ export default class DateQuestionPolyfillView extends QuestionView {
     _renderDay() {
         let days = Array.from(new Array(31), (val, idx) => ('0' + (idx + 1)).slice(-2)), //make it 1-base double-digit
             select = $('<select/>', {
-                id: `${this.id}__day`,
+                id: `${this._question.id}__day`,
                 class:  'cf-date-answer__day',
                 style: 'margin-right: 1em'
             });

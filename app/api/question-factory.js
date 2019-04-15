@@ -1,3 +1,4 @@
+import QuestionTypes from './question-types.js';
 import SingleQuestion from './models/questions/single-question.js';
 import MultiQuestion  from './models/questions/multi-question.js';
 import GridQuestion   from './models/questions/grid-question.js';
@@ -8,7 +9,7 @@ import NumericListQuestion from './models/questions/numeric-list-question.js';
 import InfoQuestion from './models/questions/info-question.js';
 import DateQuestion from './models/questions/date-question.js';
 import RankingQuestion from './models/questions/ranking-question.js';
-import HorizontalRatingSingleQuestion from './models/questions/horizontal-rating-single-question.js';
+import SingleRatingQuestion from './models/questions/single-rating-question.js';
 import GridRatingQuestion from './models/questions/grid-rating-question.js';
 import Grid3DQuestion from './models/questions/grid-3d-question.js';
 import GeolocationQuestion from './models/questions/geolocation-question.js';
@@ -16,50 +17,72 @@ import DynamicQuestionPlaceholder from './models/questions/dynamic-question-plac
 import ImageUploadQuestion from './models/questions/image-upload-question.js';
 import ImageUploader from "./image-uploader";
 import LoginPageQuestion from "./models/questions/login-page-question";
+import TelephoneQuestion from "./models/questions/telephone-question";
+import HierarchyQuestion from "./models/questions/hierarchy-question";
+import Question from "./models/base/question";
+import HierarchyService from "./hierarhy-service";
 
 export default class QuestionFactory {
-    constructor(endpoints) {
+    constructor(language, endpoints, isAccessible = true) {
+        this._language = language;
         this._endpoints = endpoints;
+        this._isAccessible = isAccessible;
     }
 
     create(rawModel) {
+        const model = this._create(rawModel);
+
+        if(this._isAccessible && model instanceof Question) {
+            model.allowValidateOnChange = false;
+        }
+
+        return model;
+    }
+
+    _create(rawModel) {
         switch (rawModel.nodeType) {
-            case 'Single':
+            case QuestionTypes.Single:
                 return new SingleQuestion(rawModel);
-            case 'Multi':
+            case QuestionTypes.Multi:
                 return new MultiQuestion(rawModel);
-            case 'Grid':
+            case QuestionTypes.Grid:
                 return new GridQuestion(rawModel);
-            case 'OpenText':
+            case QuestionTypes.OpenText:
                 return new OpenTextQuestion(rawModel);
-            case 'Numeric':
+            case QuestionTypes.Numeric:
                 return new NumericQuestion(rawModel);
-            case 'OpenTextList':
+            case QuestionTypes.OpenTextList:
                 return new OpenTextListQuestion(rawModel);
-            case 'NumericList':
+            case QuestionTypes.NumericList:
                 return new NumericListQuestion(rawModel);
-            case 'Info':
+            case QuestionTypes.Info:
                 return new InfoQuestion(rawModel);
-            case 'Date':
+            case QuestionTypes.Date:
                 return new DateQuestion(rawModel);
-            case 'Ranking':
+            case QuestionTypes.Ranking:
                 return new RankingQuestion(rawModel);
-            case 'HorizontalRatingScaleSingle':
-                return new HorizontalRatingSingleQuestion(rawModel);
-            case 'HorizontalRatingScaleGrid':
-            case 'GridBars':
-            case 'StarRating':
+            case QuestionTypes.HorizontalRatingScaleSingle:
+            case QuestionTypes.GridBarsSingle:
+            case QuestionTypes.StarRatingSingle:
+                return new SingleRatingQuestion(rawModel);
+            case QuestionTypes.HorizontalRatingScale:
+            case QuestionTypes.GridBars:
+            case QuestionTypes.StarRating:
                 return new GridRatingQuestion(rawModel);
-            case 'Grid3d':
+            case QuestionTypes.Grid3d:
                 return new Grid3DQuestion(rawModel, this);
-            case 'GeoLocation':
+            case QuestionTypes.GeoLocation:
                 return new GeolocationQuestion(rawModel);
-            case 'DynamicQuestionPlaceholder':
+            case QuestionTypes.DynamicQuestionPlaceholder:
                 return new DynamicQuestionPlaceholder(rawModel);
-            case 'ImageUploader':
+            case QuestionTypes.ImageUploader:
                 return new ImageUploadQuestion(rawModel, new ImageUploader(this._endpoints.imageUploadEndpoint));
-            case 'Login':
+            case QuestionTypes.Login:
                 return new LoginPageQuestion(rawModel);
+            case QuestionTypes.Telephone:
+                return new TelephoneQuestion(rawModel);
+            case QuestionTypes.Hierarchy:
+                return new HierarchyQuestion(rawModel,  new HierarchyService(this._endpoints.hierarchyApiEndpoint, this._language));
             default:
                 return;
         }

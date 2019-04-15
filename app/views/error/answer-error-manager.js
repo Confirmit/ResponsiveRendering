@@ -1,10 +1,13 @@
 import ValidationTypes from 'api/models/validation/validation-types.js';
 import AnswerErrorBlock from './answer-error-block';
 
+/**
+ * @Deprecated
+ */
 export default class AnswerErrorManager {
 
-    constructor(container) {
-        this._container = container;
+    constructor(questionId) {
+        this._questionId = questionId;
         this._answerErrorBlocks = [];
     }
 
@@ -19,8 +22,8 @@ export default class AnswerErrorManager {
             }
         });
 
-        this._showErrorBlock(answerErrors, answerTarget);
-        this._showErrorBlock(otherAnswerErrors, otherAnswerTarget);
+        this._showErrorBlock(this._getAnswerErrorBlockId(answerValidationResult.answerCode), answerTarget, answerErrors);
+        this._showErrorBlock(this._getAnswerOtherErrorBlockId(answerValidationResult.answerCode), otherAnswerTarget, otherAnswerErrors);
     }
 
     removeAllErrors() {
@@ -28,16 +31,24 @@ export default class AnswerErrorManager {
         this._answerErrorBlocks = [];
     }
 
-    _showErrorBlock(errors, target)  {
+    _getAnswerErrorBlockId(answerCode) {
+        return `${this._questionId}_${answerCode}_error`;
+    }
+
+    _getAnswerOtherErrorBlockId(answerCode) {
+        return `${this._questionId}_${answerCode}_other_error`;
+    }
+
+    _showErrorBlock(id, target, errors)  {
         if(errors.length === 0) {
             return;
         }
 
-        this._createBlock(target).showErrors(errors);
+        this._createBlock(id, target).showErrors(errors);
     }
 
-    _createBlock(target) {
-        const block = new AnswerErrorBlock(target);
+    _createBlock(id, target) {
+        const block = new AnswerErrorBlock(id, target);
         this._answerErrorBlocks.push(block);
         return block;
     }

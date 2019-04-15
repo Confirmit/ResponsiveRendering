@@ -1,4 +1,4 @@
-import QuestionViewBase from "./questions/base/question-view-base";
+import QuestionViewBase from './questions/base/question-view-base';
 import QuestionView from './questions/base/question-view.js';
 import QuestionWithAnswersView from './questions/base/question-with-answers-view.js';
 import SingleQuestionView from './questions/single-question-view.js';
@@ -15,8 +15,10 @@ import DateQuestionPolyfillView from './questions/date-question-polyfill-view.js
 import RankingQuestionView from './questions/ranking-question-view.js';
 import HorizontalRatingGridQuestionView from './questions/horizontal-rating-grid-question-view.js';
 import HorizontalRatingSingleQuestionView from './questions/horizontal-rating-single-question-view.js';
-import GridBarsQuestionView from './questions/grid-bars-question-view.js';
-import StarRatingQuestionView from './questions/star-rating-question-view.js';
+import GridBarsGridQuestionView from './questions/grid-bars-grid-question-view.js';
+import GridBarsSingleQuestionView from './questions/grid-bars-single-question-view.js';
+import StarRatingGridQuestionView from './questions/star-rating-grid-question-view.js';
+import StarRatingSingleQuestionView from './questions/star-rating-single-question-view.js';
 import CarouselGridQuestionView from './questions/carousel-grid-question-view.js';
 import DropdownSingleQuestionView from './questions/dropdown-single-question-view.js';
 import DropdownGridQuestionView from './questions/dropdown-grid-question-view.js';
@@ -25,21 +27,23 @@ import AnswerButtonsMultiQuestionView from './questions/answer-buttons-multi-que
 import GeolocationQuestionView from './questions/geolocation-question-view.js';
 import ImageUploadQuestionView from './questions/image-upload-question-view.js';
 import LoginPageQuestionView from './questions/login-page-question-view.js';
-import Grid3DQuestionView from "./questions/grid-3d-question-view";
-import Grid3DDesktopQuestionView from "./questions/grid-3d/desktop/grid-3d-desktop-question-view";
-import Grid3DDesktopInnerQuestionView from "./questions/grid-3d/desktop/grid-3d-desktop-inner-question-view";
-import Grid3DDesktopInnerSingleQuestionView from "./questions/grid-3d/desktop/grid-3d-desktop-inner-single-question-view";
-import Grid3DDesktopInnerMultiQuestionView from "./questions/grid-3d/desktop/grid-3d-desktop-inner-multi-question-view";
-import Grid3DDesktopInnerOpenListQuestionView from "./questions/grid-3d/desktop/grid-3d-desktop-inner-open-list-question-view";
-import Grid3DDesktopInnerNumericListQuestionView from "./questions/grid-3d/desktop/grid-3d-desktop-inner-numeric-list-question-view";
-import Grid3DDesktopInnerGridQuestionView from "./questions/grid-3d/desktop/grid-3d-desktop-inner-grid-question-view";
-import Grid3DMobileQuestionView from "./questions/grid-3d/mobile/grid-3d-mobile-question-view";
-import Grid3DMobileInnerQuestionView from "./questions/grid-3d/mobile/grid-3d-mobile-inner-question-view";
-import Grid3DMobileInnerSingleQuestionView from "./questions/grid-3d/mobile/grid-3d-mobile-inner-single-question-view";
-import Grid3DMobileInnerMultiQuestionView from "./questions/grid-3d/mobile/grid-3d-mobile-inner-multi-question-view";
-import Grid3DMobileInnerOpenListQuestionView from "./questions/grid-3d/mobile/grid-3d-mobile-inner-open-list-question-view";
-import Grid3DMobileInnerNumericListQuestionView from "./questions/grid-3d/mobile/grid-3d-mobile-inner-numeric-list-question-view";
-import Grid3DMobileInnerGridQuestionView from "./questions/grid-3d/mobile/grid-3d-mobile-inner-grid-question-view";
+import Grid3DQuestionView from './questions/grid-3d-question-view';
+import Grid3DDesktopQuestionView from './questions/grid-3d/desktop/grid-3d-desktop-question-view';
+import Grid3DDesktopInnerQuestionView from './questions/grid-3d/desktop/grid-3d-desktop-inner-question-view';
+import Grid3DDesktopInnerSingleQuestionView from './questions/grid-3d/desktop/grid-3d-desktop-inner-single-question-view';
+import Grid3DDesktopInnerMultiQuestionView from './questions/grid-3d/desktop/grid-3d-desktop-inner-multi-question-view';
+import Grid3DDesktopInnerOpenListQuestionView from './questions/grid-3d/desktop/grid-3d-desktop-inner-open-list-question-view';
+import Grid3DDesktopInnerNumericListQuestionView from './questions/grid-3d/desktop/grid-3d-desktop-inner-numeric-list-question-view';
+import Grid3DDesktopInnerGridQuestionView from './questions/grid-3d/desktop/grid-3d-desktop-inner-grid-question-view';
+import Grid3DMobileQuestionView from './questions/grid-3d/mobile/grid-3d-mobile-question-view';
+import Grid3DMobileInnerQuestionView from './questions/grid-3d/mobile/grid-3d-mobile-inner-question-view';
+import Grid3DMobileInnerSingleQuestionView from './questions/grid-3d/mobile/grid-3d-mobile-inner-single-question-view';
+import Grid3DMobileInnerMultiQuestionView from './questions/grid-3d/mobile/grid-3d-mobile-inner-multi-question-view';
+import Grid3DMobileInnerOpenListQuestionView from './questions/grid-3d/mobile/grid-3d-mobile-inner-open-list-question-view';
+import Grid3DMobileInnerNumericListQuestionView from './questions/grid-3d/mobile/grid-3d-mobile-inner-numeric-list-question-view';
+import Grid3DMobileInnerGridQuestionView from './questions/grid-3d/mobile/grid-3d-mobile-inner-grid-question-view';
+import MaxDiffQuestionView from './questions/max-diff/max-diff-question-view.js';
+import DropdownHierarchyQuestionView from "./questions/dropdown-hierarchy-question-view";
 
 
 export default Object.freeze({
@@ -60,16 +64,19 @@ export default Object.freeze({
     'RankingQuestionView': RankingQuestionView,
     'HorizontalRatingGridQuestionView': HorizontalRatingGridQuestionView,
     'HorizontalRatingSingleQuestionView': HorizontalRatingSingleQuestionView,
-    'GridBarsQuestionView': GridBarsQuestionView,
-    'StarRatingQuestionView': StarRatingQuestionView,
+    'GridBarsGridQuestionView': GridBarsGridQuestionView,
+    'GridBarsSingleQuestionView': GridBarsSingleQuestionView,
+    'StarRatingGridQuestionView': StarRatingGridQuestionView,
+    'StarRatingSingleQuestionView': StarRatingSingleQuestionView,
     'CarouselGridQuestionView': CarouselGridQuestionView,
     'DropdownSingleQuestionView': DropdownSingleQuestionView,
     'DropdownGridQuestionView': DropdownGridQuestionView,
     'AnswerButtonsSingleQuestionView': AnswerButtonsSingleQuestionView,
     'AnswerButtonsMultiQuestionView': AnswerButtonsMultiQuestionView,
-    'GeolocationQuestionView': GeolocationQuestionView,
-    'ImageUploadQuestionView': ImageUploadQuestionView,
+    'GeolocationQuestionView': GeolocationQuestionView,  // This ref used in mobile CAPI app overrides
+    'ImageUploadQuestionView': ImageUploadQuestionView, // This ref used in mobile CAPI app overrides
     'LoginPageQuestionView': LoginPageQuestionView,
+    'DropdownHierarchyQuestionView': DropdownHierarchyQuestionView,
 
     'Grid3DQuestionView': Grid3DQuestionView,
     'Grid3DDesktopQuestionView': Grid3DDesktopQuestionView,
@@ -85,5 +92,6 @@ export default Object.freeze({
     'Grid3DMobileInnerMultiQuestionView': Grid3DMobileInnerMultiQuestionView,
     'Grid3DMobileInnerOpenListQuestionView': Grid3DMobileInnerOpenListQuestionView,
     'Grid3DMobileInnerNumericListQuestionView': Grid3DMobileInnerNumericListQuestionView,
-    'Grid3DMobileInnerGridQuestionView': Grid3DMobileInnerGridQuestionView
+    'Grid3DMobileInnerGridQuestionView': Grid3DMobileInnerGridQuestionView,
+    'MaxDiffQuestionView': MaxDiffQuestionView
 });

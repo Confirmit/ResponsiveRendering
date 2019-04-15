@@ -14,6 +14,8 @@ export default class MultiQuestion extends QuestionWithAnswers {
     constructor(model) {
         super(model);
 
+        this._defaultValue = model.defaultValue;
+        this._refusedValue = model.refusedValue;
         this._multiCount = { ...model.multiCount };
         this._answerButtons = model.answerButtons || false;
         this._layoutColumns = model.layoutColumns || 0;
@@ -76,6 +78,26 @@ export default class MultiQuestion extends QuestionWithAnswers {
      */
     get multiCount(){
         return { ...this._multiCount };
+    }
+
+    /**
+     * The default answer code applied to a question.
+     * CATI or CAPI interviewer can use the Default button or keyboard shortcut to select the default answer.
+     * @type {string}
+     * @readonly
+     */
+    get defaultValue() {
+        return this._defaultValue;
+    }
+
+    /**
+     * The default answer code applied to a question.
+     * CATI or CAPI interviewer can use the Default button or keyboard shortcut to select the default answer.
+     * @type {string}
+     * @readonly
+     */
+    get refusedValue() {
+        return this._refusedValue;
     }
 
     /**
@@ -200,6 +222,10 @@ export default class MultiQuestion extends QuestionWithAnswers {
         if (!this.required)
             return new RuleValidationResult(true);
 
+        const {min, equal} = this.multiCount;
+        if (!Utils.isEmpty(min) || !Utils.isEmpty(equal)) // bypass if required and has multi count low boundary constraints (to be handled by multi count validation)
+            return new RuleValidationResult(true);
+
         let isValid = this.values.length > 0;
         return new RuleValidationResult(isValid);
     }
@@ -226,7 +252,7 @@ export default class MultiQuestion extends QuestionWithAnswers {
         let { equal, min, max } = this.multiCount;
         let count = this.values.length;
 
-        if (!this.required && count === 0) // bypass if not required and not answered
+        if (!this.required && count === 0) // bypass if not required and not answered (to be handled by required validation)
             return new RuleValidationResult(true);
 
         if (this._isCurrentValueExclusive()) // bypass is selected answer is exclusive

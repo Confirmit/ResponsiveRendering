@@ -9,9 +9,19 @@ export default class OpenTextQuestionView extends QuestionView {
 
     _onModelValueChange() {
         const value = this._question.value || '';
-        if (this._input.val() !== value){
+        if (this._input.val() !== value) {
             this._input.val(value);
         }
+    }
+
+    _showErrors(validationResult) {
+        super._showErrors(validationResult);
+        this._input.attr('aria-invalid', true);
+    }
+
+    _hideErrors() {
+        super._hideErrors();
+        this._input.attr('aria-invalid', false);
     }
 
     /* Control handlers */

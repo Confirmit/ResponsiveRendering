@@ -21,6 +21,7 @@ export default class Question extends QuestionBase {
         this._validationRules = model.validationRules || [];
         this._triggeredQuestions = model.triggeredQuestions || [];
 
+        this._allowValidateOnChange = true;
         this._validateOnChange = false;
 
         // Events
@@ -45,6 +46,22 @@ export default class Question extends QuestionBase {
      */
     get required() {
         return this._required;
+    }
+
+    /**
+     * Get allow auto re-validation on change value.
+     * @type {boolean}
+     */
+    get allowValidateOnChange() {
+        return this._allowValidateOnChange;
+    }
+
+    /**
+     * Set allow auto re-validation on change value.
+     * @param {boolean} value
+     */
+    set allowValidateOnChange(value) {
+        this._allowValidateOnChange = value;
     }
 
     /**
@@ -103,6 +120,8 @@ export default class Question extends QuestionBase {
         return validationResult;
     }
 
+
+    // TODO: could be good to keep fullness of answers picture
     _validate(validationRuleFilter = null) {
         let validationRules = this._validationRules;
         if(validationRuleFilter !== null) {
@@ -140,7 +159,7 @@ export default class Question extends QuestionBase {
     // Handlers
     _onChange(changes) {
         this._changeEvent.trigger({model: this, changes});
-        if (this._validateOnChange) {
+        if (this._allowValidateOnChange && this._validateOnChange) {
             this.validate();
         }
     } 

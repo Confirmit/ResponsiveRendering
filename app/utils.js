@@ -60,4 +60,13 @@ export default class Utils {
         let parsed = date.toISOString().slice(0, 10); // check for February 31 etc
         return parsed === value;
     }
+
+    static htmlEncode(str) {
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
 }

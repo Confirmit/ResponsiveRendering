@@ -5,9 +5,9 @@ export default class Answer {
     /**
      * Create instance.
      * @param {object} model - The instance of the model.
-     * @param {HeadGroup} group - Reference to a group, if the answer is inside one.
+     * @param {HeadGroup|null} group - Reference to a group, if the answer is inside one.
      */
-    constructor(model, group) {
+    constructor(model, group = null) {
         this._code = null;
         this._score = null;
         this._text = null;
@@ -16,7 +16,7 @@ export default class Answer {
         this._fieldName = null;
         this._otherFieldName = null;
 
-        this._group = group || null;
+        this._group = group;
 
         this._parseModel(model);
     }

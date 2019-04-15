@@ -4,6 +4,7 @@ import ValidationTypes from '../validation/validation-types.js';
 import RuleValidationResult from '../validation/rule-validation-result.js';
 import Grid3dQuestionValidationResult from "../validation/gird3d-question-validation-result";
 import Utils from 'utils.js';
+import QuestionTypes from 'api/question-types.js';
 
 /**
  * @class
@@ -20,7 +21,10 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
 
         this._questionFactory = questionFactory;
         this._innerQuestions = [];
+        this._carousel = model.carousel || false;
         this._multiGrid = model.multiGrid || false;
+        this._maxDiff = model.maxDiff || false;
+        this._validationMessagesForInnerQuestions = model.validationMessagesForInnerQuestions;
 
         this._parseQuestions(model);
         this._subscribeToQuestions();
@@ -34,6 +38,33 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
      */
     get multiGrid() {
         return this._multiGrid;
+    }
+
+    /**
+     * Is max diff question
+     * @type {boolean}
+     * @readonly
+     */
+    get maxDiff() {
+        return this._maxDiff;
+    }
+
+    /**
+     * Is carousel grid
+     * @type {boolean}
+     * @readonly
+     */
+    get carousel() {
+        return this._carousel;
+    }
+
+    /**
+     * Validation messages to show on Grid3D level if inner question validation fails
+     * @type {Array}
+     * @readonly
+     */
+    get validationMessagesForInnerQuestions(){
+        return this._validationMessagesForInnerQuestions;
     }
 
     /**
@@ -129,14 +160,11 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
     _validate(validationRuleFilter = null) {
         const validationResult = new Grid3dQuestionValidationResult(this._id);
 
-        this._innerQuestions.forEach(question => {
-            validationResult.questionValidationResults.push(question.validate(true, validationRuleFilter));
-        });
+        const innerQuestionValidationResults = this._innerQuestions.map(q => q.validate(true, validationRuleFilter));
+        validationResult.questionValidationResults.push(...innerQuestionValidationResults);
 
-        const questionValidationResult = super._validate(validationRuleFilter);
-        questionValidationResult.answerValidationResults.forEach(result => {
-            validationResult.answerValidationResults.push(result);
-        });
+        const ownValidationResult = super._validate(validationRuleFilter);
+        validationResult.answerValidationResults.push(...ownValidationResult.answerValidationResults);
 
         return validationResult;
     }
@@ -166,14 +194,14 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
 
     _isAnswerInQuestionValue(question, answerCode) {
         switch (question.type) {
-            case 'Single':
+            case QuestionTypes.Single:
                 return question.value === answerCode;
-            case 'Multi':
+            case QuestionTypes.Multi:
                 return question.values.includes(answerCode);
-            case 'OpenTextList':
-            case 'NumericList':
-            case 'Ranking':
-            case 'Grid':
+            case QuestionTypes.OpenTextList:
+            case QuestionTypes.NumericList:
+            case QuestionTypes.Ranking:
+            case QuestionTypes.Grid:
             default:
                 return question.values[answerCode] !== undefined;
         }

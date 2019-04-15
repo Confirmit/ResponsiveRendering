@@ -117,52 +117,83 @@ export default class TestNavigatorView {
     }
 
     _setInitialState() {
-        let x = (window.innerWidth - this._container.width() - 40);
-        let y = 40;
-        let scroll = 0;
-        let collapsed = false;
+        this._restoreCollapsed();
+        this._restorePosition();
 
-        const cookies = Cookies.getJSON('cf-test-navigator');
-        if (cookies !== undefined) {
-            if (cookies.x !== undefined) {
-                x = cookies.x;
-            }
-            if (cookies.y !== undefined) {
-                y = cookies.y;
-            }
-            if (cookies.scroll !== undefined) {
-                scroll = parseInt(cookies.scroll);
-            }
-            collapsed = cookies.collapsed === 1;
-        }
+        this._container.css('visibility', 'visible');
+    }
+
+    _restoreCollapsed() {
+        const collapsedFromCookies = this._getCookieProperty('collapsed');
+        this._collapse(collapsedFromCookies === 1);
+    }
+
+    _restorePosition() {
+        const x = parseInt(this._getCookieProperty('x')) || window.innerWidth - this._container.width() - 40;
+        const y = parseInt(this._getCookieProperty('y')) || 40;
 
         this._container.css({
             'position': 'fixed',
-            'top': y.toString() + 'px',
-            'left': x.toString() + 'px'
+            'left': x.toString() + 'px',
+            'top': y.toString() + 'px'
         });
+    }
 
-        this._collapse(collapsed);
+    _restoreScroll() {
+        const scrollFromCookies = parseInt(this._getCookieProperty('scroll')) || 0;
 
-        if (collapsed !== true) {
-            this._listNode.scrollTop(scroll);
+        let scroll = scrollFromCookies;
+
+        const activeItem = this._listNode.children('.cf-test-navigator__list-item--active');
+
+        if (activeItem.length === 1) {
+            const activeItemOffset = activeItem.offset().top - this._listNode.offset().top;
+
+            const minSuitableOffset = scrollFromCookies;
+            const maxSuitableOffset = scrollFromCookies + this._listNode.height() - activeItem.height();
+
+            if (activeItemOffset < minSuitableOffset || activeItemOffset >= maxSuitableOffset) {
+                scroll = activeItemOffset;
+            }
         }
-        this._container.css('visibility', 'visible');
+
+        this._scrollTop(scroll);
+    }
+
+    _collapse(shouldCollapse = null) {
+        if (shouldCollapse === null) {
+            this._container.toggleClass('cf-test-navigator--collapsed');
+        } else {
+            this._container.toggleClass('cf-test-navigator--collapsed', shouldCollapse);
+        }
+
+        const isCollapsed = this._container.hasClass('cf-test-navigator--collapsed') ? 1 : 0;
+
+        if (!isCollapsed) {
+            this._restoreScroll();
+        }
+
+        this._setCookieProperty('collapsed', isCollapsed);
+    }
+
+    _scrollTop(scroll) {
+        this._listNode.scrollTop(scroll);
+        // forced cookie update to ensure that the state is actual (when scrollTop is 0 onScroll event sometime doesn't fire up)
+        this._setCookieProperty('scroll', scroll);
     }
 
     _refreshQuestionList() {
         this._listNode.html(this._renderRows());
     }
 
-    _collapse(value) {
-        this._container.toggleClass('cf-test-navigator--collapsed', value);
-        const cookieValue = this._container.hasClass('cf-test-navigator--collapsed') ? 1 : 0;
-        this._setCookieProperty('collapsed', cookieValue);
+    _getCookieProperty(property) {
+        const cookie = Cookies.getJSON('cf-test-navigator-responsive') || {};
+        return cookie[property];
     }
 
     _setCookieProperty(property, value) {
-        const cookie = Cookies.getJSON('cf-test-navigator') || {};
-        Cookies.set('cf-test-navigator', {...cookie, [property]: value});
+        const cookie = Cookies.getJSON('cf-test-navigator-responsive') || {};
+        Cookies.set('cf-test-navigator-responsive', {...cookie, [property]: value});
     }
 
     _filterQuestionList(searchValue) {

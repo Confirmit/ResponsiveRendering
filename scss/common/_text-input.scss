@@ -13,8 +13,6 @@ $input_padding: 0.5em;
   font-size: inherit;
   text-overflow: ellipsis;
 
-  outline: none;
-
   &--error {
     border-color: $error-border-color;
   }

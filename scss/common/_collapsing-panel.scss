@@ -1,0 +1,47 @@
+.cf-collapsing-panel {
+  flex-direction: column;
+  align-items: flex-start;
+  &__title {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    &:before {
+      content: '';
+      display: flex;
+      flex-shrink: 0;
+      background: svg-url('<svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"><polyline points="1,0 6,5 1,10" fill="#{$question-border-color}" stroke="none"/></svg>') center center no-repeat;
+      width: 1.5em;
+      height: 1.5em;
+      background-size: .7em;
+      margin-right: .7em;
+    }
+  }
+
+  &__body {
+    overflow: hidden;
+    height: 0;
+    &--collapsing {
+      transition: height .6s ease;
+    }
+  }
+
+  &--open {
+    .cf-collapsing-panel__title:before {
+      background-image: svg-url('<svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"><polyline points="0,2 5,7 10,2" fill="#{$question-font-color}" stroke="none"/></svg>');
+    }
+
+    .cf-collapsing-panel__body {
+      height: auto;
+    }
+  }
+}
+
+.cf-collapsing-panel--rtl {
+  .cf-collapsing-panel__title:before {
+    transform: scale(-1, 1);
+    margin-right: 0;
+    margin-left: .7em;
+
+  }
+
+}

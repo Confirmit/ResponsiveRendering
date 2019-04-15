@@ -22,3 +22,13 @@
     }
   }
 }
+
+.cf-single-answer-other {
+  margin-top: 0.25em;
+  margin-left: $control-size + 0.8em;
+
+  &--rtl {
+    margin-left: 0;
+    margin-right: $control-size + 0.8em;
+  }
+}

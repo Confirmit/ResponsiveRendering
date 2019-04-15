@@ -1,11 +1,8 @@
-import AnswerErrorManager from "../../../error/answer-error-manager";
 import Grid3DDesktopInnerQuestionView from "./grid-3d-desktop-inner-question-view";
 
 export default class Grid3DDesktopInnerGridQuestionView extends Grid3DDesktopInnerQuestionView {
     constructor(parentQuestion, question, settings = null) {
         super(parentQuestion, question, settings);
-
-        this._answerErrorManager = new AnswerErrorManager();
 
         this._attachHandlersToDOM();
     }
@@ -38,24 +35,6 @@ export default class Grid3DDesktopInnerGridQuestionView extends Grid3DDesktopInn
     _onModelValueChange({changes}) {
         this._updateAnswerScaleNodes(changes);
     }
-
-    // TODO: do we want to mark answers only for grid?
-    // _onValidationComplete(validationResult) {
-    //     if(validationResult.valid) {
-    //         this._answerErrorManager.removeAllErrors();
-    //         return;
-    //     }
-    //
-    //     validationResult.answerValidationResults.forEach(answerValidationResult => {
-    //         const answer = this._question.getAnswer(answerValidationResult.answerCode);
-    //         if(answer.isOther) {
-    //             return;
-    //         }
-    //
-    //         const target = this._getAnswerTextNode(answerValidationResult.answerCode);
-    //         this._answerErrorManager.showErrors(answerValidationResult, target);
-    //     });
-    // }
 
     _onScaleItemClick(answer, scale) {
         this._question.setValue(answer.code, scale.code);

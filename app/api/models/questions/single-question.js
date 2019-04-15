@@ -14,6 +14,8 @@ export default class SingleQuestion extends QuestionWithAnswers {
     constructor(model) {
         super(model);
 
+        this._defaultValue = model.defaultValue;
+        this._refusedValue = model.refusedValue;
         this._answerButtons = model.answerButtons || false;
         this._slider = model.slider || false;
         this._dropdown = model.dropdown || false;
@@ -89,6 +91,26 @@ export default class SingleQuestion extends QuestionWithAnswers {
             return null;
 
         return this._otherValues[this._value] || null;
+    }
+
+    /**
+     * The default answer code applied to a question.
+     * CATI or CAPI interviewer can use the Default button or keyboard shortcut to select the default answer.
+     * @type {string}
+     * @readonly
+     */
+    get defaultValue() {
+        return this._defaultValue;
+    }
+
+    /**
+     * The default answer code applied to a question.
+     * CATI or CAPI interviewer can use the Default button or keyboard shortcut to select the default answer.
+     * @type {string}
+     * @readonly
+     */
+    get refusedValue() {
+        return this._refusedValue;
     }
 
     /**

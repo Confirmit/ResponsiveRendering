@@ -51,7 +51,7 @@ export default class QuestionWithAnswers extends Question {
             return null;
         }
         code = code.toString();
-        return this._answers.find(answer => answer.code === code);
+        return this.answers.find(answer => answer.code === code);
     }
 
     /**
@@ -61,7 +61,7 @@ export default class QuestionWithAnswers extends Question {
      */
     getAnswers(codes) {
         codes = codes.map(item => item.toString());
-        return this._answers.filter(answer => codes.includes(answer.code));
+        return this.answers.filter(answer => codes.includes(answer.code));
     }
 
     /**
@@ -119,11 +119,11 @@ export default class QuestionWithAnswers extends Question {
             delete this._otherValues[answerCode];
         }
         else {
-            let valueToSet = otherValue.toString();
+            const valueToSet = otherValue.toString();
             if (this._otherValues[answerCode] === valueToSet) {
                 return false;
             }
-            this._otherValues[answerCode] = otherValue.toString();
+            this._otherValues[answerCode] = valueToSet;
         }
 
         return true;

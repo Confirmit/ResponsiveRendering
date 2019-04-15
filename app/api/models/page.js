@@ -4,6 +4,7 @@ import SurveyInfo from './survey-info.js';
 import Event from 'event.js'
 import AutoNextNavigator from './auto-next-navigation';
 import TestNavigator from './test-navigator'
+import QuestionTypes from 'api/question-types.js';
 
 /**
  * @desc Represents the class for page.
@@ -16,7 +17,7 @@ export default class Page {
      */
     constructor(rawQuestionModels, rawSurveyInfo) {
         this._surveyInfo = new SurveyInfo(rawSurveyInfo);
-        this._questionFactory = new QuestionFactory(rawSurveyInfo.endpoints);
+        this._questionFactory = new QuestionFactory(rawSurveyInfo.language, rawSurveyInfo.endpoints, rawSurveyInfo.isAccessible);
         this._questions = this._createQuestions(rawQuestionModels);
         this._autoNextNavigator = new AutoNextNavigator(this);
 
@@ -155,7 +156,7 @@ export default class Page {
             const index = this._questions.indexOf(this.getQuestion(model.id));
             this._questions[index] = model;
 
-            if (model.type !== 'DynamicQuestionPlaceholder' ) {
+            if (model.type !== QuestionTypes.DynamicQuestionPlaceholder ) {
                 this._attachToTriggerQuestion(model);
             }
         });

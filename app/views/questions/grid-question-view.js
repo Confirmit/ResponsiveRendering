@@ -1,36 +1,130 @@
 import QuestionWithAnswerView from './base/question-with-answers-view.js';
+import KEYS from "../helpers/keyboard-keys";
+import ValidationTypes from "../../api/models/validation/validation-types";
 
 export default class GridQuestionView extends QuestionWithAnswerView {
-    constructor(question) {
-        super(question);
+    /**
+     * @param {GridQuestionBase} question
+     * @param {QuestionViewSettings} settings
+     */
+    constructor(question, settings) {
+        super(question, settings);
+
+        this._currentAnswerIndex = null;
+        this._currentScaleIndex = null;
+
+        this._scaleGroupClass = 'cf-grid-answer__scale';
+        this._selectedScaleClass = 'cf-grid-answer__scale-item--selected';
 
         this._attachHandlersToDOM();
     }
 
+    get _scales() {
+        return this._question.scales;
+    }
+
+    get _currentAnswer() {
+        return this._question.answers[this._currentAnswerIndex];
+    }
+
+    get _currentScale() {
+        return this._scales[this._currentScaleIndex];
+    }
+
     _attachHandlersToDOM() {
-        const itemClickHandler = (answer, scale) => {
-            this._getScaleNode(answer.code, scale.code).on('click', this._onSelectItem.bind(this, answer, scale));
-        };
+        this._question.answers.forEach((answer, answerIndex) => {
+            this._scales.forEach((scale, scaleIndex) => {
+                this._getScaleNode(answer.code, scale.code)
+                    .on('click', this._onSelectItem.bind(this, answer, scale))
+                    .on('focus', this._onScaleNodeFocus.bind(this, answerIndex, scaleIndex));
+            });
 
-        this._question.answers.forEach(answer => {
-            this._question.scales.forEach(scale => itemClickHandler(answer, scale));
-
-            if(answer.isOther) {
-                this._getAnswerOtherNode(answer.code).on('input', event => {
-                    this._onAnswerOtherValueChangedHandler(answer, event.target.value);
-                });
+            if (answer.isOther) {
+                this._getAnswerOtherNode(answer.code)
+                    .on('keydown', e => e.stopPropagation())
+                    .on('input', event => this._onAnswerOtherValueChangedHandler(answer, event.target.value));
             }
         });
+
+        if (!this._settings.disableKeyboardSupport) {
+            this._container.on('keydown', this._onKeyPress.bind(this));
+        }
     }
 
     _updateAnswerScaleNodes({values = []}) {
         if (values.length === 0)
             return;
 
-        this._container.find('.cf-grid-answer__scale-item').removeClass('cf-grid-answer__scale-item--selected');
-        Object.entries(this._question.values).forEach(([answerCode, scaleCode]) => {
-            this._getScaleNode(answerCode, scaleCode).addClass('cf-grid-answer__scale-item--selected');
+        values.forEach(answerCode => {
+            this._scales.forEach(scale => {
+                this._clearScaleNode(answerCode, scale.code);
+            });
+
+            const scaleCode = this._question.values[answerCode];
+            if (scaleCode === undefined) {
+                this._getScaleNode(answerCode, this._scales[0].code)
+                    .attr('tabindex', '0');
+            } else {
+                this._selectScaleNode(answerCode, scaleCode);
+            }
         });
+    }
+
+    _clearScaleNode(answerCode, scaleCode) {
+        this._getScaleNode(answerCode, scaleCode)
+            .removeClass(this._selectedScaleClass)
+            .attr('aria-checked', 'false')
+            .attr('tabindex', '-1');
+    }
+
+    _selectScaleNode(answerCode, scaleCode) {
+        this._getScaleNode(answerCode, scaleCode)
+            .addClass(this._selectedScaleClass)
+            .attr('aria-checked', 'true')
+            .attr('tabindex', '0');
+    }
+
+    _selectScale(answer, scale) {
+        this._question.setValue(answer.code, scale.code);
+    }
+
+    _showAnswerError(validationResult) {
+
+        //super._showAnswerError(result); TODO: is it possible to re-use?
+
+        const answer = this._question.getAnswer(validationResult.answerCode);
+        const targetNode = answer.isOther
+            ? this._getAnswerOtherNode(answer.code)
+            : this._getAnswerTextNode(answer.code);
+        const errorBlockId = this._getAnswerErrorBlockId(answer.code);
+        const errors = validationResult.errors.map(error => error.message);
+        this._answerErrorBlockManager.showErrors(errorBlockId, targetNode, errors);
+
+        const otherErrors = validationResult.errors.filter(error => error.type === ValidationTypes.OtherRequired);
+        if (otherErrors.length > 0) {
+            this._getAnswerOtherNode(validationResult.answerCode)
+                .attr('aria-errormessage', errorBlockId)
+                .attr('aria-invalid', 'true');
+        }
+
+        const answerHasNotOnlyOtherErrors = validationResult.errors.length > otherErrors.length;
+        if (answerHasNotOnlyOtherErrors) {
+            this._getAnswerNode(answer.code).find(`.${this._scaleGroupClass}`)
+                .attr("aria-invalid", "true")
+                .attr("aria-errormessage", errorBlockId);
+        }
+    }
+
+    _hideErrors() {
+        super._hideErrors();
+
+        this._container.find(`.${this._scaleGroupClass}`)
+            .removeAttr("aria-invalid")
+            .removeAttr("aria-errormessage");
+
+        this._container.find('.cf-text-box')
+            .removeAttr('aria-errormessage')
+            .removeAttr('aria-invalid');
     }
 
     _onModelValueChange({changes}) {
@@ -39,10 +133,68 @@ export default class GridQuestionView extends QuestionWithAnswerView {
     }
 
     _onSelectItem(answer, scale) {
-        this._question.setValue(answer.code, scale.code);
+        this._selectScale(answer, scale);
     }
 
     _onAnswerOtherValueChangedHandler(answer, value) {
         this._question.setOtherValue(answer.code, value);
+    }
+
+    _onScaleNodeFocus(answerIndex, scaleIndex) {
+        this._currentAnswerIndex = answerIndex;
+        this._currentScaleIndex = scaleIndex;
+    }
+
+    _onKeyPress(event) {
+        this._onArrowKeyPress(event);
+        this._onSelectKeyPress(event);
+    }
+
+    _onArrowKeyPress(event) {
+        if ([KEYS.ArrowUp, KEYS.ArrowLeft, KEYS.ArrowRight, KEYS.ArrowDown].includes(event.keyCode) === false) {
+            return;
+        }
+        if (this._currentAnswerIndex === null || this._currentScaleIndex === null) {
+            return;
+        }
+
+        event.preventDefault();
+
+        let nextScale = null;
+        switch (event.keyCode) {
+            case KEYS.ArrowUp:
+            case KEYS.ArrowLeft:
+                if (this._currentScaleIndex > 0) {
+                    nextScale = this._scales[this._currentScaleIndex - 1];
+                } else {
+                    nextScale = this._scales[this._scales.length - 1];
+                }
+
+                break;
+            case KEYS.ArrowRight:
+            case KEYS.ArrowDown:
+                if (this._currentScaleIndex < this._scales.length - 1) {
+                    nextScale = this._scales[this._currentScaleIndex + 1];
+                } else {
+                    nextScale = this._scales[0];
+                }
+                break;
+        }
+
+        this._selectScale(this._currentAnswer, nextScale);
+        this._getScaleNode(this._currentAnswer.code, nextScale.code).focus();
+    }
+
+    _onSelectKeyPress(event) {
+        if ([KEYS.SpaceBar, KEYS.Enter].includes(event.keyCode) === false) {
+            return;
+        }
+        if (this._currentAnswerIndex === null || this._currentScaleIndex === null) {
+            return;
+        }
+
+        event.preventDefault();
+
+        this._selectScale(this._currentAnswer, this._currentScale);
     }
 }

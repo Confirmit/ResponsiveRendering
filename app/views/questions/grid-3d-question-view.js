@@ -21,10 +21,10 @@ export default class Grid3DQuestionView extends QuestionView {
     }
 
     _showErrors() {
-        this._container.addClass('cf-question--error');
+        this._addQuestionErrorModifier();
     }
 
     _hideErrors() {
-        this._container.removeClass('cf-question--error');
+        this._removeQuestionErrorModifier();
     }
 }

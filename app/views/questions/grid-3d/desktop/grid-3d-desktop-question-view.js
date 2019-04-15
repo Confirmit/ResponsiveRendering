@@ -1,8 +1,9 @@
 import ViewFactory from "./grid-3d-desktop-inner-question-view-factory";
 import QuestionViewBase from "views/questions/base/question-view-base";
-import AnswerErrorManager from "views/error/answer-error-manager";
 import QuestionErrorBlock from "views/error/question-error-block";
 import $ from "jquery";
+import QuestionTypes from 'api/question-types.js';
+import ErrorBlockManager from "../../../error/error-block-manager";
 
 export default class Grid3DDesktopQuestionView extends QuestionViewBase {
     /**
@@ -15,10 +16,10 @@ export default class Grid3DDesktopQuestionView extends QuestionViewBase {
         this._viewFactory = new ViewFactory(question, settings);
         this._innerQuestionViews = [];
 
-        this._container = $(`#${question.id} .cf-grid-3d__desktop`);
-        this._errorBlock = new QuestionErrorBlock(this._container.find('.cf-grid-3d-desktop__error'));
+        this._container = $(`#${this._question.id} .cf-grid-3d__desktop`);
+        this._questionErrorBlock = new QuestionErrorBlock(this._container.find('.cf-grid-3d-desktop__error'));
 
-        this._answerErrorManager = new AnswerErrorManager();
+        this._answerErrorBlockManager = new ErrorBlockManager();
 
         this._createInnerQuestions();
         this._attachHandlersToDOM();
@@ -34,6 +35,10 @@ export default class Grid3DDesktopQuestionView extends QuestionViewBase {
 
     _getAnswerOtherNode(answerCode) {
         return $(`#desktop_${this._question.id}_${answerCode}_other`);
+    }
+
+    _getAnswerOtherErrorBlockId(answerCode) {
+        return `desktop_${this._question.id}_${answerCode}_other`;
     }
 
     _createInnerQuestions() {
@@ -64,14 +69,6 @@ export default class Grid3DDesktopQuestionView extends QuestionViewBase {
         }
     }
 
-    _areAnswerErrorsMoveToQuestionLevel(innerQuestion) {
-        if(innerQuestion.type === 'Grid' && !innerQuestion.dropdown) {
-            return true;
-        }
-
-        return false;
-    }
-
     _onModelValueChange({changes}) {
         if(changes.otherValues === undefined) {
             return;
@@ -84,30 +81,17 @@ export default class Grid3DDesktopQuestionView extends QuestionViewBase {
     }
 
     _onValidationComplete(validationResult) {
-        this._errorBlock.hideErrors();
-        this._answerErrorManager.removeAllErrors();
+        this._questionErrorBlock.hideErrors();
+        this._answerErrorBlockManager.removeAllErrors();
 
         const errors = validationResult.errors.map(error => error.message);
-        const innerQuestionErrors = validationResult.questionValidationResults.reduce((accumulator, currentResult) => {
-            const innerQuestion = this._question.getInnerQuestion(currentResult.questionId);
-            currentResult.errors.forEach(error => {
-                accumulator.push(innerQuestion.text + ': ' + error.message);
-            });
-
-            if(this._areAnswerErrorsMoveToQuestionLevel(innerQuestion)) {
-                currentResult.answerValidationResults.forEach(answerResult => {
-                    const answer = innerQuestion.getAnswer(answerResult.answerCode);
-                    answerResult.errors.forEach(error => {
-                        accumulator.push(`${innerQuestion.text} ${answer.text}: ${error.message}`);
-                    });
-                });
-            }
-
-            return accumulator;
+        const innerQuestionErrors = validationResult.questionValidationResults.reduce((acc, currentResult) => {
+            const questionErrors = this._getInnerQuestionErrors(currentResult);
+            const answerErrors = this._getInnerQuestionAnswerErrors(currentResult);
+            return acc.concat(questionErrors).concat(answerErrors);
         }, []);
 
-        this._errorBlock.showErrors(errors.concat(innerQuestionErrors));
-
+        this._questionErrorBlock.showErrors(errors.concat(innerQuestionErrors));
 
         validationResult.answerValidationResults.forEach(answerValidationResult => {
             const answer = this._question.getAnswer(answerValidationResult.answerCode);
@@ -116,11 +100,59 @@ export default class Grid3DDesktopQuestionView extends QuestionViewBase {
             }
 
             const target = this._getAnswerOtherNode(answerValidationResult.answerCode);
-            this._answerErrorManager.showErrors(answerValidationResult, target);
+            const errorBlockId = this._getAnswerOtherErrorBlockId(answerValidationResult.answerCode);
+            const errors = answerValidationResult.errors.map(error => error.message);
+            this._answerErrorBlockManager.showErrors(errorBlockId, target, errors);
         });
     }
 
+    _getInnerQuestionValidationMessage(questionId, type, messageType) {
+        return this._question.validationMessagesForInnerQuestions.find(x => x.questionId === questionId && x.validationType === type && x.messageType === messageType);
+    }
 
+    _getInnerQuestionErrors({questionId, errors}) {
+        return errors.reduce((acc, error) => {
+            const message = this._getInnerQuestionValidationMessage(questionId, error.type, 'General');
+            if (message !== undefined)
+                acc.push(message.text);
+            return acc;
+        }, []);
+    }
+
+    _getInnerQuestionAnswerErrors({questionId, answerValidationResults}) {
+        const innerQuestion = this._question.getInnerQuestion(questionId);
+        if (innerQuestion.type === QuestionTypes.Grid && innerQuestion.dropdown)
+            return [];
+
+        const flattened = answerValidationResults.reduce((acc, answerResult) => {
+          const items = answerResult.errors.map(error => ({type: error.type, code: answerResult.answerCode}));
+          return acc.concat(items);
+        }, []);
+
+        const groupedByType = flattened.reduce((acc, item) => {
+           let group = acc.find(x => x.type === item.type);
+           if (group === undefined) {
+               group = {type: item.type, codes: []};
+               acc.push(group);
+           }
+           group.codes.push(item.code);
+           return acc;
+        }, []);
+
+        return groupedByType.reduce((acc, error) => {
+            const messageType = error.codes.length === 1? 'Singular': 'Plural';
+            const message = this._getInnerQuestionValidationMessage(questionId, error.type, messageType);
+            if (message !== undefined) {
+                const {text, answerSubstitution: {placeholder, conjunction, separator, quoteBegin, quoteEnd} } = message;
+                const answerTexts = error.codes.map(code => `${quoteBegin}${innerQuestion.getAnswer(code).text}${quoteEnd}`);
+                const replacement = error.codes.length === 1
+                    ? answerTexts[0]
+                    : `${answerTexts.slice(0, -1).join(separator)}${conjunction}${answerTexts.slice(-1).pop()}`;
+                acc.push(text.split(placeholder).join(replacement));
+            }
+            return acc;
+        }, []);
+    }
 
     _onAnswerOtherNodeValueChange(answer, otherValue) {
         this._question.setOtherValue(answer.code, otherValue);

@@ -4,6 +4,8 @@
 export default class SurveyInfo {
     constructor(rawSurveyInfo) {
         this._isTest = rawSurveyInfo.isTest;
+        this._isAccessible = rawSurveyInfo.isAccessible;
+        this._surveyChannel = rawSurveyInfo.surveyChannel;
         this._autoNext = rawSurveyInfo.autoNext;
         this._progress = rawSurveyInfo.progress;
         this._language = rawSurveyInfo.language;
@@ -22,6 +24,23 @@ export default class SurveyInfo {
         return this._isTest;
     }
 
+    /**
+     * Is survey executing in accessibility mode.
+     * @type {bool}
+     * @readonly
+     */
+    get isAccessible() {
+        return this._isAccessible;
+    }
+
+    /**
+     * Which channel the interview was performed (Cawi|Cati|Capi).
+     * @type {string}
+     * @readonly
+     */
+    get surveyChannel() {
+        return this._surveyChannel;
+    }
 
     /**
      * Auto submit if all questions answered

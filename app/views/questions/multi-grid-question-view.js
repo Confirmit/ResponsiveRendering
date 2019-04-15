@@ -1,76 +1,111 @@
 import QuestionView from "./base/question-view";
-import $ from 'jquery';
-import AnswerErrorManager from "../error/answer-error-manager";
 import Utils from "../../utils";
+import KEYS from "../helpers/keyboard-keys";
+import ErrorBlockManager from "../error/error-block-manager";
+import ValidationTypes from "../../api/models/validation/validation-types";
+import $ from 'jquery';
 
 export default class MultiGridQuestionView extends QuestionView {
-    constructor(question) {
-        super(question);
+    /**
+     * @param {Grid3DQuestion} question
+     * @param {QuestionViewSettings} settings
+     */
+    constructor(question, settings) {
+        super(question, settings);
 
-        // console.log('multi grid init');
-        // setTimeout(() => { window.Confirmit.debug = true }, 0 );
+        this._currentQuestionIndex = null;
+        this._currentAnswerIndex = null;
 
-        this._answerErrorManager = new AnswerErrorManager();
-
+        this._answerErrorBlockManager = new ErrorBlockManager();
 
         this._attachHandlersToDOM();
     }
 
-    _getQuestionNode(questionCode) {
+    get _currentQuestion() {
+        return this._question.innerQuestions[this._currentQuestionIndex];
+    }
+
+    get _currentAnswer() {
+        return this._question.answers[this._currentAnswerIndex];
+    }
+
+    _getInnerQuestionErrorBlockId(questionCode) {
+        return `${questionCode}_error`;
+    }
+
+    _getAnswerOtherErrorBlockId(answerCode) {
+        return `${this._question.id}_${answerCode}_other_error`
+    }
+
+    _getInnerQuestionNode(questionCode) {
         return $(`#${questionCode}`);
+    }
+
+    _getInnerQuestionAnswerOtherNode(questionCode, answerCode) {
+        return $(`#${questionCode}_${answerCode}_other`);
     }
 
     _getAnswerNode(questionCode, answerCode) {
         return $(`#${questionCode}_${answerCode}`);
     }
 
-    _getQuestionAnswerOtherNode(questionCode, answerCode) {
-         return $(`#${questionCode}_${answerCode}_other`);
-    }
-
     _getAnswerOtherNode(answerCode) {
-        return $(`#${this.id}_${answerCode}_other`);
+        return $(`#${this._question.id}_${answerCode}_other`);
     }
 
     _getOtherNodes(answerCode) {
-        return $(`.cf-grid-answer__other[name=${this.id}_${answerCode}_other]`);
+        return $(`.cf-grid-answer__other[name=${this._question.id}_${answerCode}_other]`);
     }
 
     _attachHandlersToDOM() {
-        const attachItemClickHandler = (question, answer) => {
-            this._getAnswerNode(question.id, answer.code).on('click', this._onAnswerNodeClick.bind(this, question, answer));
-        };
-
-        this._question.innerQuestions.forEach(question => {
-            question.answers.forEach(answer => attachItemClickHandler(question, answer));
+        this._question.innerQuestions.forEach((question, questionIndex) => {
+            question.answers.forEach((answer, answerIndex) => {
+                this._getAnswerNode(question.id, answer.code).on('click', this._onAnswerNodeClick.bind(this, question, answer));
+                this._getAnswerNode(question.id, answer.code).on('focus', this._onAnswerNodeFocus.bind(this, questionIndex, answerIndex));
+            });
         });
 
         this._question.answers.filter(answer => answer.isOther).forEach(answer => {
-            this._getAnswerOtherNode(answer.code).on('input', event => { this._onAnswerOtherNodeValueChange(answer, event.target.value) });
+            this._getAnswerOtherNode(answer.code)
+                .on('keydown', e => e.stopPropagation())
+                .on('input', event => {
+                    this._onAnswerOtherNodeValueChange(answer, event.target.value)
+                });
 
             this._question.innerQuestions.forEach(question => {
-                this._getQuestionAnswerOtherNode(question.id, answer.code)
+                this._getInnerQuestionAnswerOtherNode(question.id, answer.code)
                     .on('click', e => e.stopPropagation())
-                    .on('input', event => { this._onQuestionAnswerOtherNodeValueChange(question, answer, event.target.value) });
+                    .on('keydown', e => e.stopPropagation())
+                    .on('input', event => {
+                        this._onQuestionAnswerOtherNodeValueChange(question, answer, event.target.value)
+                    });
             });
         });
+
+        if (!this._settings.disableKeyboardSupport) {
+            this._container.on('keydown', this._onKeyPress.bind(this));
+        }
     }
 
-    _updateQuestionAnswerNodes({ questions = {} }) {
-        Object.entries(questions).forEach(([questionId, { values = [] }]) => {
+    _updateQuestionAnswerNodes({questions = {}}) {
+        Object.entries(questions).forEach(([questionId, {values = []}]) => {
             if (values.length === 0) {
                 return;
             }
 
-            this._getQuestionNode(questionId).find('.cf-grid-answer__scale-item').removeClass('cf-grid-answer__scale-item--selected');
+            this._getInnerQuestionNode(questionId).find('.cf-grid-answer__scale-item')
+                .removeClass('cf-grid-answer__scale-item--selected')
+                .attr('aria-checked', 'false');
 
             this._question.getInnerQuestion(questionId).values.forEach(value => {
-                this._getAnswerNode(questionId, value).addClass('cf-grid-answer__scale-item--selected');
+                this._getAnswerNode(questionId, value)
+                    .addClass('cf-grid-answer__scale-item--selected')
+                    .attr('aria-checked', 'true');
             });
         });
     }
 
-    _updateAnswerOtherNodes({ otherValues = [] }) {
+    _updateAnswerOtherNodes({otherValues = []}) {
         otherValues.forEach(answerCode => {
             const otherValue = this._question.otherValues[answerCode];
             this._setOtherNodeValue(answerCode, otherValue);
@@ -84,42 +119,59 @@ export default class MultiGridQuestionView extends QuestionView {
         otherNodes.val(otherValue);
     }
 
-    _showErrors(validationResult)
-    {
+    _showErrors(validationResult) {
         super._showErrors(validationResult);
-        this._showAnswerOtherAnswer(validationResult);
+        this._showAnswerOtherError(validationResult);
         this._showInnerQuestionErrors(validationResult);
     }
 
-    _showAnswerOtherAnswer(validationResult) {
-        validationResult.answerValidationResults.forEach(answerValidationResult => {
-            const answer = this._question.getAnswer(answerValidationResult.answerCode);
-            if (!answer.isOther) {
+    _showAnswerOtherError(validationResult) {
+        validationResult.answerValidationResults.filter(result => !result.isValid).forEach(result => {
+            const otherErrors = result.errors.filter(error => error.type === ValidationTypes.OtherRequired);
+            if (otherErrors.length === 0) {
                 return;
             }
 
-            this._answerErrorManager.showErrors(answerValidationResult, this._getAnswerOtherNode(answer.code));
+            const errorBlockId = this._getAnswerOtherErrorBlockId(result.answerCode);
+            const otherNode = this._getAnswerOtherNode(result.answerCode);
+            otherNode
+                .attr('aria-errormessage', errorBlockId)
+                .attr('aria-invalid', 'true');
 
-            this._question.innerQuestions.forEach(question => {
-                if(!question.values.includes(answer.code)) {
-                    return;
-                }
-                const target = this._getQuestionAnswerOtherNode(question.id, answer.code);
-                this._answerErrorManager.showErrors(answerValidationResult, target);
-            });
+            this._answerErrorBlockManager.showErrors(errorBlockId, otherNode, otherErrors.map(error => error.message));
         });
     }
 
     _showInnerQuestionErrors(validationResult) {
-        validationResult.questionValidationResults.forEach(questionValidationResult => {
-            const target = this._getQuestionNode(questionValidationResult.questionId).find('.cf-grid-answer__text');
-            this._answerErrorManager.showErrors(questionValidationResult, target);
+        validationResult.questionValidationResults.filter(result => !result.isValid).forEach(validationResult => {
+            const questionNode = this._getInnerQuestionNode(validationResult.questionId);
+            const questionTextNode = questionNode.find('.cf-grid-answer__text');
+            const errorBlockId = this._getInnerQuestionErrorBlockId(validationResult.questionId);
+            const errors = validationResult.errors.map(error => error.message);
+            this._answerErrorBlockManager.showErrors(errorBlockId, questionTextNode, errors);
+            questionNode.find('.cf-grid-answer__scale')
+                .attr("aria-invalid", "true")
+                .attr("aria-errormessage", errorBlockId);
         });
     }
 
     _hideErrors() {
         super._hideErrors();
-        this._answerErrorManager.removeAllErrors();
+
+        this._answerErrorBlockManager.removeAllErrors();
+
+        this._container.find('.cf-text-box')
+            .removeAttr('aria-errormessage')
+            .removeAttr('aria-invalid');
+
+        this._container.find('.cf-grid-answer__scale')
+            .removeAttr("aria-invalid")
+            .removeAttr("aria-errormessage");
+    }
+
+    _toggleAnswer(question, answer) {
+        const currentState = this._question.getInnerQuestion(question.id).values.includes(answer.code);
+        this._question.getInnerQuestion(question.id).setValue(answer.code, !currentState);
     }
 
     _onModelValueChange({changes}) {
@@ -128,8 +180,7 @@ export default class MultiGridQuestionView extends QuestionView {
     }
 
     _onAnswerNodeClick(question, answer) {
-        const currentState = this._question.getInnerQuestion(question.id).values.includes(answer.code);
-        this._question.getInnerQuestion(question.id).setValue(answer.code, !currentState);
+        this._toggleAnswer(question, answer);
     }
 
     _onAnswerOtherNodeValueChange(answer, value) {
@@ -137,10 +188,32 @@ export default class MultiGridQuestionView extends QuestionView {
     }
 
     _onQuestionAnswerOtherNodeValueChange(question, answer, value) {
-        if(!Utils.isEmpty(value)) {
+        if (!Utils.isEmpty(value)) {
             this._question.getInnerQuestion(question.id).setValue(answer.code, true);
         }
 
         this._question.setOtherValue(answer.code, value);
+    }
+
+    _onAnswerNodeFocus(questionIndex, answerIndex) {
+        this._currentQuestionIndex = questionIndex;
+        this._currentAnswerIndex = answerIndex;
+    }
+
+    _onKeyPress(event) {
+        this._onSelectKeyPress(event);
+    }
+
+    _onSelectKeyPress(event) {
+        if ([KEYS.SpaceBar, KEYS.Enter].includes(event.keyCode) === false) {
+            return;
+        }
+        if (this._currentQuestion === null || this._currentAnswer === null) {
+            return;
+        }
+
+        event.preventDefault();
+
+        this._toggleAnswer(this._currentQuestion, this._currentAnswer);
     }
 }

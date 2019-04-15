@@ -7,6 +7,7 @@ import SmartBanner from './controls/smart-banner';
 import TestNavigatorView from './controls/test-navigator-view';
 import ProcessMonitor from '../process-monitor';
 import Event from 'event';
+import QuestionTypes from 'api/question-types.js';
 
 export default class PageView {
     /**
@@ -192,7 +193,7 @@ export default class PageView {
 
         this._detachQuestionView(model.id);
 
-        if (model.type === 'DynamicQuestionPlaceholder') {
+        if (model.type === QuestionTypes.DynamicQuestionPlaceholder) {
             return;
         }
 
@@ -252,7 +253,7 @@ export default class PageView {
         this._processMonitor.removeProcess('dynamic_manager');
 
         models.forEach(model => {
-            if(model.type === 'DynamicQuestionPlaceholder'){
+            if(model.type === QuestionTypes.DynamicQuestionPlaceholder){
                 this._processMonitor.removeProcess(`question_view_${model.id}`);
             }
         });

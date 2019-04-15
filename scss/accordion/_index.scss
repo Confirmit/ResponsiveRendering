@@ -1,0 +1,42 @@
+.cf-accordion-grid-answer {
+  margin-bottom: 1em;
+  &__other {
+    width: 15em;
+  }
+
+  &__selected-list{
+    color: $control-active-color;
+    font-size: .9em;
+    font-weight: bold;
+    padding: 0 2.5em;
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  &__scales{
+    margin-top: 1em;
+    padding: 0 2.2em;
+  }
+
+  &__scale-item {
+    @include radio($control-size);
+
+    &--selected {
+      @include radio($control-size, true);
+    }
+  }
+}
+
+.cf-accordion-grid-answer--rtl{
+  .cf-accordion-grid-answer{
+    &__scale-item {
+      @include radio($control-size, false, true);
+
+      &--selected {
+        @include radio($control-size, true, true);
+      }
+    }
+  }
+}

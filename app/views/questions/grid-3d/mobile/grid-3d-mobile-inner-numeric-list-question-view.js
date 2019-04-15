@@ -1,4 +1,5 @@
 import Grid3DMobileInnerQuestionView from "./grid-3d-mobile-inner-question-view";
+import ValidationTypes from "../../../../api/models/validation/validation-types";
 
 export default class Grid3DMobileInnerNumericListQuestionView extends Grid3DMobileInnerQuestionView {
     constructor(parentQuestion, question, settings = null) {
@@ -34,14 +35,28 @@ export default class Grid3DMobileInnerNumericListQuestionView extends Grid3DMobi
         });
     }
 
-    _showAnswerErrors(validationResult) {
-        validationResult.answerValidationResults.forEach(answerValidationResult => {
-            this._answerErrorManager.showErrors(
-                answerValidationResult,
-                this._getAnswerInputNode(answerValidationResult.answerCode),
-                this._getAnswerOtherNode(answerValidationResult.answerCode)
-            );
+    _showAnswerError(validationResult) {
+        const answerErrors = [];
+        const otherErrors = [];
+        validationResult.errors.forEach(error => {
+            if (error.type === ValidationTypes.OtherRequired) {
+                otherErrors.push(error.message);
+            } else {
+                answerErrors.push(error.message);
+            }
         });
+
+        if (answerErrors.length > 0) {
+            const answerNode = this._getAnswerInputNode(validationResult.answerCode);
+            const errorBlockId = this._getAnswerErrorBlockId(validationResult.answerCode);
+            this._answerErrorBlockManager.showErrors(errorBlockId, answerNode, answerErrors);
+        }
+
+        if (otherErrors.length > 0) {
+            const otherNode = this._getAnswerOtherNode(validationResult.answerCode);
+            const otherErrorBlockId = this._getAnswerOtherErrorBlockId(validationResult.answerCode);
+            this._answerErrorBlockManager.showErrors(otherErrorBlockId, otherNode, otherErrors);
+        }
     }
 
     _onModelValueChange({changes}) {

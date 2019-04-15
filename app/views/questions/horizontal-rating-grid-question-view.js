@@ -1,7 +1,7 @@
-import QuestionWithAnswersView from './base/question-with-answers-view.js';
 import FloatingLabels from '../controls/floating-labels.js';
+import GridQuestionView from "./grid-question-view";
 
-export default class HorizontalRatingGridQuestionView extends QuestionWithAnswersView {
+export default class HorizontalRatingGridQuestionView extends GridQuestionView {
     /**
      * @param {GridRatingQuestion} question
      * @param {QuestionViewSettings} settings
@@ -9,38 +9,15 @@ export default class HorizontalRatingGridQuestionView extends QuestionWithAnswer
     constructor(question, settings) {
         super(question, settings);
 
-        this._attachHandlersToDOM();
+        this._scaleGroupClass = 'cf-hrs-grid-answer__control';
+        this._selectedScaleItemClass = 'cf-hrs-grid-answer__scale-item--selected';
+        this._selectedNonScoredItemClass = 'cf-hrs-grid-answer__na-item--selected';
+
         this._initFloatingLabels();
     }
 
-    _attachHandlersToDOM() {
-        const itemClickHandler = (answer, scale) => {
-            this._getScaleNode(answer.code, scale.code).on('click', this._onSelectItem.bind(this, answer, scale));
-        };
-
-        this._question.answers.forEach(answer => {
-            this._question.scaleItems.forEach(scale => itemClickHandler(answer, scale));
-            this._question.nonScaleItems.forEach(scale => itemClickHandler(answer, scale));
-
-            if(answer.isOther) {
-                this._getAnswerOtherNode(answer.code).on('input', event => {
-                    this._onAnswerOtherValueChangedHandler(answer, event.target.value);
-                });
-            }
-        });
-    }
-
-    _updateAnswerScaleNodes({values = []}) {
-        if (values.length === 0)
-            return;
-
-        this._container.find('.cf-hrs-grid-answer__scale-item').removeClass('cf-hrs-grid-answer__scale-item--selected');
-        this._container.find('.cf-hrs-grid-answer__na-item').removeClass('cf-hrs-grid-answer__na-item--selected');
-        Object.entries(this._question.values).forEach(([answerCode, scaleCode]) => {
-            let itemInScale = this._question.scaleItems.find(item => item.code === scaleCode) !== undefined;
-            let itemNodeClass = itemInScale ? 'cf-hrs-grid-answer__scale-item--selected' : 'cf-hrs-grid-answer__na-item--selected';
-            this._getScaleNode(answerCode, scaleCode).addClass(itemNodeClass);
-        });
+    get _scales() {
+        return this._question.scaleItems.concat(this._question.nonScaleItems);
     }
 
     _initFloatingLabels() {
@@ -49,16 +26,20 @@ export default class HorizontalRatingGridQuestionView extends QuestionWithAnswer
         new FloatingLabels(panel, lastItem, this._settings.mobileThreshold);
     }
 
-    _onModelValueChange({changes}) {
-        this._updateAnswerScaleNodes(changes);
-        this._updateAnswerOtherNodes(changes);
+    _clearScaleNode(answerCode, scaleCode) {
+        this._getScaleNode(answerCode, scaleCode)
+            .removeClass(this._selectedScaleItemClass)
+            .removeClass(this._selectedNonScoredItemClass)
+            .attr('aria-checked', 'false')
+            .attr('tabindex', '-1');
     }
 
-    _onSelectItem(answer, scale) {
-        this._question.setValue(answer.code, scale.code);
-    }
-
-    _onAnswerOtherValueChangedHandler(answer, value) {
-        this._question.setOtherValue(answer.code, value);
+    _selectScaleNode(answerCode, scaleCode) {
+        const itemInScale = this._question.scaleItems.find(item => item.code === scaleCode) !== undefined;
+        const itemNodeClass = itemInScale ? this._selectedScaleItemClass : this._selectedNonScoredItemClass;
+        this._getScaleNode(answerCode, scaleCode)
+            .addClass(itemNodeClass)
+            .attr('aria-checked', 'true')
+            .attr('tabindex', '0');
     }
 }

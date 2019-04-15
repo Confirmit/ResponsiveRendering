@@ -4,6 +4,7 @@ import Grid3DDesktopInnerOpenListQuestionView from "./grid-3d-desktop-inner-open
 import Grid3DDesktopInnerNumericListQuestionView from "./grid-3d-desktop-inner-numeric-list-question-view.js";
 import Grid3DDesktopInnerGridQuestionView from "./grid-3d-desktop-inner-grid-question-view.js";
 import Grid3DDesktopInnerDropdownGridQuestionView from "./grid-3d-desktop-inner-dropdown-grid-question-view.js";
+import QuestionTypes from 'api/question-types.js';
 
 /**
  * @desc Question view factory
@@ -22,15 +23,15 @@ export default class Grid3DDesktopInnerQuestionViewFactory {
      */
     create(innerQuestion) {
         switch (innerQuestion.type) {
-            case 'Single':
+            case QuestionTypes.Single:
                 return new Grid3DDesktopInnerSingleQuestionView(this._question, innerQuestion, this._settings);
-            case 'Multi':
+            case QuestionTypes.Multi:
                 return new Grid3DDesktopInnerMultiQuestionView(this._question, innerQuestion, this._settings);
-            case 'OpenTextList':
+            case QuestionTypes.OpenTextList:
                 return new Grid3DDesktopInnerOpenListQuestionView(this._question, innerQuestion, this._settings);
-            case 'NumericList':
+            case QuestionTypes.NumericList:
                 return new Grid3DDesktopInnerNumericListQuestionView(this._question, innerQuestion, this._settings);
-            case 'Grid':
+            case QuestionTypes.Grid:
                 if(innerQuestion.dropdown)
                     return new Grid3DDesktopInnerDropdownGridQuestionView(this._question, innerQuestion, this._settings);
                 return new Grid3DDesktopInnerGridQuestionView(this._question, innerQuestion, this._settings);

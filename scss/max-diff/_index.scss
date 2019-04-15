@@ -1,0 +1,56 @@
+// todo: currently table-layout changes padding of a first cell, need to reconsider this (not happens in whitespace layout)
+.cf-max-diff-header {
+  &__text:first-child {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+
+.cf-max-diff-answer {
+  &__header {
+    &--center {
+      text-align: center;
+    }
+  }
+
+  &__text, &__other-input {
+    text-align: inherit;
+  }
+
+  &__header, &__content {
+    &:first-child {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+  }
+}
+
+.cf-max-diff-header--rtl {
+  .cf-max-diff-header {
+    &__text:first-child {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+  }
+}
+
+.cf-max-diff-answer--rtl {
+  .cf-max-diff-answer {
+    &__header {
+      &--center {
+        text-align: center;
+      }
+    }
+
+    &__text, &__other-input {
+      text-align: inherit;
+    }
+
+    &__header, &__content {
+      &:first-child {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+      }
+    }
+  }
+}

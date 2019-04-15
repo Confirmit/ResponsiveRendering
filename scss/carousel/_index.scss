@@ -160,6 +160,13 @@ $local_vertical_shift: 0.5em;
       flex: 1 1 auto;
     }
   }
+
+}
+
+@media (max-width: $desktop-layout-delimiter) {
+  .cf-carousel-grid-answer .cf-list--inline-two-columns::after { //fix for correct alignment two columns in ie 11
+    padding: 0 1em;
+  }
 }
 
 .cf-carousel--rtl {

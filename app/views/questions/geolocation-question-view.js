@@ -6,6 +6,7 @@ export default class GeolocationQuestionView extends QuestionView {
         this._getCurrentPosition();
     }
 
+    /* this method have to be implemented in view, due to native app override */
     _getCurrentPosition() {
         if (!window.navigator.geolocation) {
             return

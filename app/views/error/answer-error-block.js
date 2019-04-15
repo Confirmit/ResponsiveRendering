@@ -3,10 +3,11 @@ import $ from 'jquery';
 
 export default class AnswerErrorBlock {
 
-    constructor(target, { top = false, absolute = false } = {}) {
+    constructor(id, target, { top = false, absolute = false } = {}) {
         this._container = null;
         this._errorList = null;
 
+        this._id = id;
         this._target = target;
         this._targetIsInput = this._targetIsInput();
         this._positionTop = top;
@@ -29,7 +30,6 @@ export default class AnswerErrorBlock {
         this._container.remove();
         if(this._targetIsInput) {
             this._removeErrorClassFromTarget();
-
         }
     }
 
@@ -57,8 +57,8 @@ export default class AnswerErrorBlock {
 
     _prepareHtml() {
         let html = '';
-        html += `<div class="cf-error-block cf-error-block--hidden ${this._getPositionModifier()}">`;
-        html += '   <ul class="cf-error-list"></ul>';
+        html += `<div id="${this._id}" role="alert" aria-labelledby="${this._id}_list" class="cf-error-block cf-error-block--hidden ${this._getPositionModifier()}">`;
+        html += `   <ul class="cf-error-list" id="${this._id}_list"></ul>`;
         html += '</div>';
         return html;
     }

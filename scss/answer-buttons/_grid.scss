@@ -1,0 +1,129 @@
+$answer-button-item-indent: 8px;
+$border-gutter: $answer-button-item-indent /2;
+
+.cf-grid-answer--answer-buttons {
+  .cf-grid-answer {
+    &__scale-item {
+      background-image: none;
+      background-color: #eeeeee;
+      padding: 0 1em;
+      display: flex;
+      align-items: center;
+
+      &-text {
+        visibility: visible;
+        height: auto;
+        max-width: 100%;
+        cursor: pointer;
+      }
+
+      &--selected {
+        background-color: $control-active-color;
+        color: $question-bg-color;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-grid-answer--answer-buttons {
+    align-items: center;
+    height: 100%;
+
+    &:not(.cf-grid-answer--fake-for-panel) {
+      margin-bottom: $answer-button-item-indent;
+    }
+
+    .cf-grid-answer {
+      &__scale-item {
+        margin-right: $answer-button-item-indent;
+        height: auto;
+        min-height: 2.4em;
+      }
+
+      &__labels {
+        display: none;
+      }
+    }
+
+    .cf-grid-scale-group-panel {
+      &__border {
+        &:after {
+          left: -$border-gutter;
+          right: -$border-gutter;
+        }
+        &--left-edge:after {
+          left: 0;
+        }
+        &--right-edge:after {
+          right: 0;
+        }
+      }
+
+      &__scale, &__border, &__spacer {
+        flex: 1 1 auto;
+        min-width: auto;
+        margin-right: $answer-button-item-indent;
+      }
+    }
+  }
+}
+
+@media (max-width: $desktop-layout-delimiter) {
+  .cf-grid-answer--answer-buttons {
+    .cf-grid-answer {
+      &__scale {
+        max-width: 400px;
+
+        &-item {
+          min-height: 32px;
+          margin-bottom: 16px;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-grid-answer--rtl {
+    &.cf-grid-answer--answer-buttons {
+      .cf-grid-answer__scale-item {
+        margin-right: 0;
+        margin-left: $answer-button-item-indent;
+      }
+
+      .cf-grid-scale-group-panel--rtl {
+        .cf-grid-scale-group-panel {
+          &__border {
+            &--left-edge:after {
+              left: -$border-gutter;
+              right: 0;
+            }
+            &--right-edge:after {
+              right: -$border-gutter;
+              left: 0;
+            }
+          }
+
+          &__scale, &__border, &__spacer {
+            margin-right: 0;
+            margin-left: $answer-button-item-indent;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -66,9 +66,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "se.rendering.responsive/app/api/models/questions/horizontal-rating-single-question.js~horizontalratingscalesinglequestion",
-    "class/app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion.html",
-    "<span>HorizontalRatingScaleSingleQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/horizontal-rating-single-question.js</span>",
+    "se.rendering.responsive/app/api/models/base/hierarchy-node.js~hierarchynode",
+    "class/app/api/models/base/hierarchy-node.js~HierarchyNode.html",
+    "<span>HierarchyNode</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/base/hierarchy-node.js</span>",
     "class"
   ],
   [
@@ -168,9 +168,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "se.rendering.responsive/app/api/models/questions/single-rating-question.js~singleratingquestion",
+    "class/app/api/models/questions/single-rating-question.js~SingleRatingQuestion.html",
+    "<span>SingleRatingQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/single-rating-question.js</span>",
+    "class"
+  ],
+  [
     "se.rendering.responsive/app/api/models/survey-info.js~surveyinfo",
     "class/app/api/models/survey-info.js~SurveyInfo.html",
     "<span>SurveyInfo</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/survey-info.js</span>",
+    "class"
+  ],
+  [
+    "se.rendering.responsive/app/api/models/questions/telephone-question.js~telephonequestion",
+    "class/app/api/models/questions/telephone-question.js~TelephoneQuestion.html",
+    "<span>TelephoneQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/telephone-question.js</span>",
     "class"
   ],
   [
@@ -211,13 +223,13 @@ window.esdocSearchIndex = [
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-set-debug",
+    "class/app/api/api.js~cfApi.html#instance-get-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-get-debug",
+    "class/app/api/api.js~cfApi.html#instance-set-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
@@ -243,6 +255,12 @@ window.esdocSearchIndex = [
     "app/api/dynamic-questions-transport.js",
     "file/app/api/dynamic-questions-transport.js.html",
     "app/api/dynamic-questions-transport.js",
+    "file"
+  ],
+  [
+    "app/api/hierarhy-service.js",
+    "file/app/api/hierarhy-service.js.html",
+    "app/api/hierarhy-service.js",
     "file"
   ],
   [
@@ -340,6 +358,48 @@ window.esdocSearchIndex = [
     "file/app/api/models/base/head-group.js.html",
     "app/api/models/base/head-group.js",
     "file"
+  ],
+  [
+    "app/api/models/base/hierarchy-node.js",
+    "file/app/api/models/base/hierarchy-node.js.html",
+    "app/api/models/base/hierarchy-node.js",
+    "file"
+  ],
+  [
+    "app/api/models/base/hierarchy-node.js~hierarchynode#answer",
+    "class/app/api/models/base/hierarchy-node.js~HierarchyNode.html#instance-get-answer",
+    "app/api/models/base/hierarchy-node.js~HierarchyNode#answer",
+    "member"
+  ],
+  [
+    "app/api/models/base/hierarchy-node.js~hierarchynode#caption",
+    "class/app/api/models/base/hierarchy-node.js~HierarchyNode.html#instance-get-caption",
+    "app/api/models/base/hierarchy-node.js~HierarchyNode#caption",
+    "member"
+  ],
+  [
+    "app/api/models/base/hierarchy-node.js~hierarchynode#children",
+    "class/app/api/models/base/hierarchy-node.js~HierarchyNode.html#instance-get-children",
+    "app/api/models/base/hierarchy-node.js~HierarchyNode#children",
+    "member"
+  ],
+  [
+    "app/api/models/base/hierarchy-node.js~hierarchynode#haschildren",
+    "class/app/api/models/base/hierarchy-node.js~HierarchyNode.html#instance-get-hasChildren",
+    "app/api/models/base/hierarchy-node.js~HierarchyNode#hasChildren",
+    "member"
+  ],
+  [
+    "app/api/models/base/hierarchy-node.js~hierarchynode#isselectable",
+    "class/app/api/models/base/hierarchy-node.js~HierarchyNode.html#instance-get-isSelectable",
+    "app/api/models/base/hierarchy-node.js~HierarchyNode#isSelectable",
+    "member"
+  ],
+  [
+    "app/api/models/base/hierarchy-node.js~hierarchynode#parent",
+    "class/app/api/models/base/hierarchy-node.js~HierarchyNode.html#instance-get-parent",
+    "app/api/models/base/hierarchy-node.js~HierarchyNode#parent",
+    "member"
   ],
   [
     "app/api/models/base/question-base.js",
@@ -454,6 +514,18 @@ window.esdocSearchIndex = [
     "file/app/api/models/base/question.js.html",
     "app/api/models/base/question.js",
     "file"
+  ],
+  [
+    "app/api/models/base/question.js~question#allowvalidateonchange",
+    "class/app/api/models/base/question.js~Question.html#instance-get-allowValidateOnChange",
+    "app/api/models/base/question.js~Question#allowValidateOnChange",
+    "member"
+  ],
+  [
+    "app/api/models/base/question.js~question#allowvalidateonchange",
+    "class/app/api/models/base/question.js~Question.html#instance-set-allowValidateOnChange",
+    "app/api/models/base/question.js~Question#allowValidateOnChange",
+    "member"
   ],
   [
     "app/api/models/base/question.js~question#changeevent",
@@ -726,6 +798,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "app/api/models/questions/grid-3d-question.js~grid3dquestion#carousel",
+    "class/app/api/models/questions/grid-3d-question.js~Grid3DQuestion.html#instance-get-carousel",
+    "app/api/models/questions/grid-3d-question.js~Grid3DQuestion#carousel",
+    "member"
+  ],
+  [
     "app/api/models/questions/grid-3d-question.js~grid3dquestion#constructor",
     "class/app/api/models/questions/grid-3d-question.js~Grid3DQuestion.html#instance-constructor-constructor",
     "app/api/models/questions/grid-3d-question.js~Grid3DQuestion#constructor",
@@ -750,6 +828,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/grid-3d-question.js~grid3dquestion#maxdiff",
+    "class/app/api/models/questions/grid-3d-question.js~Grid3DQuestion.html#instance-get-maxDiff",
+    "app/api/models/questions/grid-3d-question.js~Grid3DQuestion#maxDiff",
+    "member"
+  ],
+  [
     "app/api/models/questions/grid-3d-question.js~grid3dquestion#multigrid",
     "class/app/api/models/questions/grid-3d-question.js~Grid3DQuestion.html#instance-get-multiGrid",
     "app/api/models/questions/grid-3d-question.js~Grid3DQuestion#multiGrid",
@@ -766,6 +850,12 @@ window.esdocSearchIndex = [
     "class/app/api/models/questions/grid-3d-question.js~Grid3DQuestion.html#instance-method-setOtherValue",
     "app/api/models/questions/grid-3d-question.js~Grid3DQuestion#setOtherValue",
     "method"
+  ],
+  [
+    "app/api/models/questions/grid-3d-question.js~grid3dquestion#validationmessagesforinnerquestions",
+    "class/app/api/models/questions/grid-3d-question.js~Grid3DQuestion.html#instance-get-validationMessagesForInnerQuestions",
+    "app/api/models/questions/grid-3d-question.js~Grid3DQuestion#validationMessagesForInnerQuestions",
+    "member"
   ],
   [
     "app/api/models/questions/grid-question-base.js",
@@ -846,6 +936,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "app/api/models/questions/grid-question.js~gridquestion#accordion",
+    "class/app/api/models/questions/grid-question.js~GridQuestion.html#instance-get-accordion",
+    "app/api/models/questions/grid-question.js~GridQuestion#accordion",
+    "member"
+  ],
+  [
     "app/api/models/questions/grid-question.js~gridquestion#carousel",
     "class/app/api/models/questions/grid-question.js~GridQuestion.html#instance-get-carousel",
     "app/api/models/questions/grid-question.js~GridQuestion#carousel",
@@ -900,46 +996,10 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "app/api/models/questions/horizontal-rating-single-question.js",
-    "file/app/api/models/questions/horizontal-rating-single-question.js.html",
-    "app/api/models/questions/horizontal-rating-single-question.js",
+    "app/api/models/questions/hierarchy-question.js",
+    "file/app/api/models/questions/hierarchy-question.js.html",
+    "app/api/models/questions/hierarchy-question.js",
     "file"
-  ],
-  [
-    "app/api/models/questions/horizontal-rating-single-question.js~horizontalratingscalesinglequestion#constructor",
-    "class/app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion.html#instance-constructor-constructor",
-    "app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion#constructor",
-    "method"
-  ],
-  [
-    "app/api/models/questions/horizontal-rating-single-question.js~horizontalratingscalesinglequestion#formvalues",
-    "class/app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion.html#instance-get-formValues",
-    "app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion#formValues",
-    "member"
-  ],
-  [
-    "app/api/models/questions/horizontal-rating-single-question.js~horizontalratingscalesinglequestion#nonscaleitems",
-    "class/app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion.html#instance-get-nonScaleItems",
-    "app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion#nonScaleItems",
-    "member"
-  ],
-  [
-    "app/api/models/questions/horizontal-rating-single-question.js~horizontalratingscalesinglequestion#scaleitems",
-    "class/app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion.html#instance-get-scaleItems",
-    "app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion#scaleItems",
-    "member"
-  ],
-  [
-    "app/api/models/questions/horizontal-rating-single-question.js~horizontalratingscalesinglequestion#setvalue",
-    "class/app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion.html#instance-method-setValue",
-    "app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion#setValue",
-    "method"
-  ],
-  [
-    "app/api/models/questions/horizontal-rating-single-question.js~horizontalratingscalesinglequestion#value",
-    "class/app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion.html#instance-get-value",
-    "app/api/models/questions/horizontal-rating-single-question.js~HorizontalRatingScaleSingleQuestion#value",
-    "member"
   ],
   [
     "app/api/models/questions/image-upload-question.js",
@@ -1038,6 +1098,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "app/api/models/questions/multi-question.js~multiquestion#defaultvalue",
+    "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-defaultValue",
+    "app/api/models/questions/multi-question.js~MultiQuestion#defaultValue",
+    "member"
+  ],
+  [
     "app/api/models/questions/multi-question.js~multiquestion#formvalues",
     "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-formValues",
     "app/api/models/questions/multi-question.js~MultiQuestion#formValues",
@@ -1065,6 +1131,12 @@ window.esdocSearchIndex = [
     "app/api/models/questions/multi-question.js~multiquestion#othervalues",
     "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-otherValues",
     "app/api/models/questions/multi-question.js~MultiQuestion#otherValues",
+    "member"
+  ],
+  [
+    "app/api/models/questions/multi-question.js~multiquestion#refusedvalue",
+    "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-refusedValue",
+    "app/api/models/questions/multi-question.js~MultiQuestion#refusedValue",
     "member"
   ],
   [
@@ -1386,6 +1458,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "app/api/models/questions/single-question.js~singlequestion#defaultvalue",
+    "class/app/api/models/questions/single-question.js~SingleQuestion.html#instance-get-defaultValue",
+    "app/api/models/questions/single-question.js~SingleQuestion#defaultValue",
+    "member"
+  ],
+  [
     "app/api/models/questions/single-question.js~singlequestion#dropdown",
     "class/app/api/models/questions/single-question.js~SingleQuestion.html#instance-get-dropdown",
     "app/api/models/questions/single-question.js~SingleQuestion#dropdown",
@@ -1416,6 +1494,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/single-question.js~singlequestion#refusedvalue",
+    "class/app/api/models/questions/single-question.js~SingleQuestion.html#instance-get-refusedValue",
+    "app/api/models/questions/single-question.js~SingleQuestion#refusedValue",
+    "member"
+  ],
+  [
     "app/api/models/questions/single-question.js~singlequestion#setothervalue",
     "class/app/api/models/questions/single-question.js~SingleQuestion.html#instance-method-setOtherValue",
     "app/api/models/questions/single-question.js~SingleQuestion#setOtherValue",
@@ -1440,6 +1524,60 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/single-rating-question.js",
+    "file/app/api/models/questions/single-rating-question.js.html",
+    "app/api/models/questions/single-rating-question.js",
+    "file"
+  ],
+  [
+    "app/api/models/questions/single-rating-question.js~singleratingquestion#constructor",
+    "class/app/api/models/questions/single-rating-question.js~SingleRatingQuestion.html#instance-constructor-constructor",
+    "app/api/models/questions/single-rating-question.js~SingleRatingQuestion#constructor",
+    "method"
+  ],
+  [
+    "app/api/models/questions/single-rating-question.js~singleratingquestion#formvalues",
+    "class/app/api/models/questions/single-rating-question.js~SingleRatingQuestion.html#instance-get-formValues",
+    "app/api/models/questions/single-rating-question.js~SingleRatingQuestion#formValues",
+    "member"
+  ],
+  [
+    "app/api/models/questions/single-rating-question.js~singleratingquestion#nonscaleitems",
+    "class/app/api/models/questions/single-rating-question.js~SingleRatingQuestion.html#instance-get-nonScaleItems",
+    "app/api/models/questions/single-rating-question.js~SingleRatingQuestion#nonScaleItems",
+    "member"
+  ],
+  [
+    "app/api/models/questions/single-rating-question.js~singleratingquestion#scaleitems",
+    "class/app/api/models/questions/single-rating-question.js~SingleRatingQuestion.html#instance-get-scaleItems",
+    "app/api/models/questions/single-rating-question.js~SingleRatingQuestion#scaleItems",
+    "member"
+  ],
+  [
+    "app/api/models/questions/single-rating-question.js~singleratingquestion#setvalue",
+    "class/app/api/models/questions/single-rating-question.js~SingleRatingQuestion.html#instance-method-setValue",
+    "app/api/models/questions/single-rating-question.js~SingleRatingQuestion#setValue",
+    "method"
+  ],
+  [
+    "app/api/models/questions/single-rating-question.js~singleratingquestion#value",
+    "class/app/api/models/questions/single-rating-question.js~SingleRatingQuestion.html#instance-get-value",
+    "app/api/models/questions/single-rating-question.js~SingleRatingQuestion#value",
+    "member"
+  ],
+  [
+    "app/api/models/questions/telephone-question.js",
+    "file/app/api/models/questions/telephone-question.js.html",
+    "app/api/models/questions/telephone-question.js",
+    "file"
+  ],
+  [
+    "app/api/models/questions/telephone-question.js~telephonequestion#constructor",
+    "class/app/api/models/questions/telephone-question.js~TelephoneQuestion.html#instance-constructor-constructor",
+    "app/api/models/questions/telephone-question.js~TelephoneQuestion#constructor",
+    "method"
+  ],
+  [
     "app/api/models/survey-info.js",
     "file/app/api/models/survey-info.js.html",
     "app/api/models/survey-info.js",
@@ -1461,6 +1599,12 @@ window.esdocSearchIndex = [
     "app/api/models/survey-info.js~surveyinfo#autonext",
     "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-autoNext",
     "app/api/models/survey-info.js~SurveyInfo#autoNext",
+    "member"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#isaccessible",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-isAccessible",
+    "app/api/models/survey-info.js~SurveyInfo#isAccessible",
     "member"
   ],
   [
@@ -1491,6 +1635,12 @@ window.esdocSearchIndex = [
     "app/api/models/survey-info.js~surveyinfo#progress",
     "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-progress",
     "app/api/models/survey-info.js~SurveyInfo#progress",
+    "member"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#surveychannel",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-surveyChannel",
+    "app/api/models/survey-info.js~SurveyInfo#surveyChannel",
     "member"
   ],
   [
@@ -1701,6 +1851,12 @@ window.esdocSearchIndex = [
     "app/api/question-factory.js",
     "file/app/api/question-factory.js.html",
     "app/api/question-factory.js",
+    "file"
+  ],
+  [
+    "app/api/question-types.js",
+    "file/app/api/question-types.js.html",
+    "app/api/question-types.js",
     "file"
   ],
   [

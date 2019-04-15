@@ -11,5 +11,6 @@ export default Object.freeze({
     Date: 'Date',
     Ranking: 'Ranking',
     RequiredIfOtherSpecified: 'RequiredIfOtherSpecified',
-    Geolocation: 'Geolocation'
+    Geolocation: 'Geolocation',
+    HierarchyForceLowestLevel: 'HierarchyForceLowestLevel'
 });
