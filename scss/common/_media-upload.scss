@@ -1,0 +1,79 @@
+@mixin upload_button_icon($color) {
+  background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><line y2="0" x2="11" y1="21" x1="11" stroke-width="3" stroke="#{$color}"/><line y2="11" x2="21" y1="11" x1="0" stroke-width="3" stroke="#{$color}"/></svg>');
+}
+
+.cf-media-upload {
+  position: relative;
+  overflow: hidden;
+  width: 30em;
+  max-width: 100%;
+  margin-bottom: 3em;
+  background: $control-primary-color;
+  &:after {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__preview {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &__controls {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 20%;
+    height: 20%;
+    transform: translate(0%, 0%);
+    transition: transform .4s ease, opacity .1s linear;
+  }
+
+  &__upload-button {
+    cursor: pointer;
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: $control-active-color;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    border-radius: 50%;
+    position: relative;
+  }
+
+  &--uploaded {
+    .cf-media-upload__preview {
+      display: flex;
+    }
+
+    .cf-media-upload__controls {
+      transform: translate(150%, 150%);
+      opacity: 0.8;
+    }
+  }
+
+  &--video {
+    .cf-media-upload__upload-button {
+      @include upload_button_icon($question-bg-color);
+    }
+  }
+
+  &--audio {
+    .cf-media-upload__upload-button {
+      @include upload_button_icon($question-bg-color);
+    }
+  }
+}

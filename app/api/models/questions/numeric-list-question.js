@@ -21,6 +21,7 @@ export default class NumericListQuestion extends QuestionWithAnswers {
         this._autoSumTotalLabel = model.autoSumTotalLabel || '';
         this._layoutColumns = model.layoutColumns || 0;
         this._layoutRows = model.layoutRows || 0;
+        this._answersHaveRightText = model.answersHaveRightText || false;
 
         this._values = {};
 
@@ -106,6 +107,15 @@ export default class NumericListQuestion extends QuestionWithAnswers {
      */
     get layoutRows() {
         return this._layoutRows;
+    }
+
+    /**
+     * Has right answer texts
+     * @type {boolean}
+     * @readonly
+     */
+    get answersHaveRightText() {
+        return this._answersHaveRightText;
     }
 
     /**

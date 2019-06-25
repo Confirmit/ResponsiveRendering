@@ -9,7 +9,7 @@ export default class HorizontalRatingGridQuestionView extends GridQuestionView {
     constructor(question, settings) {
         super(question, settings);
 
-        this._scaleGroupClass = 'cf-hrs-grid-answer__control';
+        this._scaleGroupCssClass = 'cf-hrs-grid-answer__control';
         this._selectedScaleItemClass = 'cf-hrs-grid-answer__scale-item--selected';
         this._selectedNonScoredItemClass = 'cf-hrs-grid-answer__na-item--selected';
 

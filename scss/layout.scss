@@ -12,15 +12,18 @@
 @import "common/_table-layout";
 @import "common/_grid-layout";
 @import "common/_text-input";
-@import "common/collapsing-panel";
+@import "common/_collapsing-panel";
 @import "common/_dropdown";
+@import "common/_carousel";
 @import "common/_group-heading";
 @import "common/_toast";
 @import "common/_error";
 @import "common/_label-panel";
 @import "common/_progress";
 @import "common/_smart-banner";
-
+@import "common/slider/_index";
+@import "common/_answer-images";
+@import "common/_media-upload";
 @import "single/_index";
 @import "multi/_index";
 @import "open/_list";
@@ -40,9 +43,15 @@
 @import "star-rating/_grid";
 @import "answer-buttons/_single";
 @import "answer-buttons/_grid";
-@import "carousel/_index";
+@import "carousel/_grid";
+@import "carousel/_rating";
 @import "geolocation/_index";
 @import "image-upload/_index";
 @import "login-page/_index";
 @import "test-navigator";
 @import "max-diff/_index";
+@import "slider/_single";
+@import "slider/_numeric";
+@import "slider/_grid";
+@import "video-upload/_index";
+@import "audio-upload/_index";

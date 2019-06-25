@@ -1,3 +1,4 @@
+import AnswerImagesSettings from "./answer-images-settings";
 /**
  * @desc A class for Answer
  */
@@ -11,10 +12,12 @@ export default class Answer {
         this._code = null;
         this._score = null;
         this._text = null;
+        this._rightText = null;
         this._isOther = false;
         this._isExclusive = false;
         this._fieldName = null;
         this._otherFieldName = null;
+        this._imagesSettings = null;
 
         this._group = group;
 
@@ -46,6 +49,15 @@ export default class Answer {
      */
     get text() {
         return this._text;
+    }
+
+    /**
+     * Answer right text
+     * @type {string}
+     * @readonly
+     */
+    get rightText(){
+        return this._rightText;
     }
 
     /**
@@ -85,15 +97,6 @@ export default class Answer {
     }
 
     /**
-     * Scales array.
-     * @type {Scale[]}
-     * @readonly
-     */
-    get scales () {
-        return this._scales;
-    }
-
-    /**
      * Reference to a group, if the answer is inside one.
      * @type {(HeadGroup)}
      * @readonly
@@ -103,27 +106,18 @@ export default class Answer {
     }
 
     /**
-     * Get scale by code.
-     * @param {string} code - Scale code.
-     * @return {Scale}
+     * Answer images settings
+     * @type {AnswerImagesSettings}
+     * @readonly
      */
-    getScale(code) {
-        return this._scales.find(scale => scale.code === code);
-    }
-
-    /**
-     * Get scales array by codes array.
-     * @param {string[]} codes - Array of scales codes.
-     * @return {Scale[]}
-     */
-    getScales(codes) {
-        codes = codes.map(item => item.toString());
-        return this._scales.filter(scale => codes.includes(scale.code));
+    get imagesSettings(){
+        return this._imagesSettings;
     }
 
     _parseModel(model)
     {
         this._text = model.text;
+        this._rightText = model.rightText;
         this._code = model.code;
         this._score = model.score;
         this._isExclusive = model.isExclusive;
@@ -131,6 +125,10 @@ export default class Answer {
         if(model.other){
             this._isOther = true;
             this._otherFieldName = model.other.fieldName;
+        }
+
+        if(model.imagesSettings){
+            this._imagesSettings = new AnswerImagesSettings(model.imagesSettings);
         }
     }
 }

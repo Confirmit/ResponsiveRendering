@@ -26,6 +26,12 @@
         max-width: none;
         margin-right: 0;
         margin-bottom: 1em;
+        &--right {
+          flex-shrink: 1;
+          margin-left: 0;
+          margin-bottom: 0;
+          margin-top: 1em;
+        }
       }
 
       &-control {
@@ -47,6 +53,11 @@
         width: 30%;
         max-width: 260px;
         margin-right: 2em;
+        &--right {
+          flex-shrink: 1;
+          margin-right: 0;
+          margin-left: 2em;
+        }
       }
 
       &-text-other {
@@ -57,6 +68,10 @@
         flex: 0 1 auto;
         min-width: 1px; // 1px instead of 0px due to fix ie11 bug
       }
+    }
+
+    &--right-text .cf-grid-layout__row-text {
+      width: 25%;
     }
   }
 }
@@ -71,6 +86,9 @@
   @media (max-width: $desktop-layout-delimiter) {
     &__row-text {
       margin-left: 0;
+      &--right {
+        margin-left: 0;
+      }
     }
   }
 
@@ -78,6 +96,10 @@
     &__row-text {
       margin-right: 0;
       margin-left: 2em;
+      &--right{
+        margin-right: 2em;
+        margin-left: 0;
+      }
     }
     &__row-text-other {
       margin-left: 0;

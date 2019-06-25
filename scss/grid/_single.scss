@@ -8,6 +8,11 @@
       justify-content: space-between;
     }
 
+    &__scale-image-item {
+      display: flex;
+      margin: 0 0 1em;
+    }
+
     &__labels {
       display: none;
     }
@@ -81,6 +86,7 @@
 
     &__scale {
       @include grid_cells();
+      align-items: center;
 
       &-item {
         @include radio($control-size);
@@ -97,6 +103,10 @@
           @include radio($control-size, true);
         }
       }
+    }
+
+    &__scale-image-item {
+      margin: .5em;
     }
 
     &__labels {
@@ -236,5 +246,3 @@
     }
   }
 }
-
-

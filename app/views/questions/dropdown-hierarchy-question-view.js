@@ -6,7 +6,7 @@ export default class DropdownHierarchyQuestionView extends QuestionWithAnswersVi
      * @param {HierarchyQuestion} question
      * @param {QuestionViewSettings} settings
      */
-    constructor(question, settings = null) {
+    constructor(question, settings) {
         super(question, settings);
         this._init();
     }
@@ -85,7 +85,7 @@ export default class DropdownHierarchyQuestionView extends QuestionWithAnswersVi
             contentHtml += `<label class="cf-dropdown-hierarchy__node-caption" id="${this._getSelectNodeCaptionId(currentNode)}" for="${this._getAnswerInputNodeId(currentNode.answer.code)}">${currentNode.caption}</label>`;
         }
 
-        contentHtml += `<select class="cf-dropdown" id="${this._getAnswerInputNodeId(currentNode.answer.code)}" ${this._getAriaLabelAttr(currentNode)} aria-required="${this._isSelectNodeRequired(currentNode)}" aria-errormessage="${this._getQuestionErrorNodeId()}" aria-invalid="false">`;
+        contentHtml += `<select class="cf-dropdown ${Utils.getRtlCSSClassModifier(this._question, 'cf-dropdown')}" id="${this._getAnswerInputNodeId(currentNode.answer.code)}" ${this._getAriaLabelAttr(currentNode)} aria-required="${this._isSelectNodeRequired(currentNode)}" aria-errormessage="${this._getQuestionErrorNodeId()}" aria-invalid="false">`;
         contentHtml += `   <option class="cf-dropdown__item" value="${currentNode.answer.code}">${this._getDefaultOptionText(currentNode)}</option>`;
 
         currentNode.children.forEach(node => {

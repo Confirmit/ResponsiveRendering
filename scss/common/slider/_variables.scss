@@ -1,0 +1,19 @@
+$cf-slider__track-no-value-margin: 3em;
+$cf-slider__track-size: .5em;
+$cf-slider__track-margin: 1em;
+$cf-slider__track-border: none;
+
+$cf-slider__tick-width: 4px;
+$cf-slider__tick-background: $question-bg-color;
+
+$cf-slider__handle-width: 1.5em;
+$cf-slider__handle-border-radius: 50%;
+$cf-slider__handle-height: $cf-slider__handle-width;
+$cf-slider__handle-border-width: .125em;
+$cf-slider__handle-border: $cf-slider__handle-border-width solid $control-active-color;
+$cf-slider__handle-background: $question-bg-color;
+
+$_z-cf-slider__track: 1;
+$_z-cf-slider__track-highlight: 2;
+$_z-cf-slider__track-ticks: 10;
+$_z-cf-slider__track-handle: 20;

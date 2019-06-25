@@ -19,7 +19,7 @@ export default class FloatingLabels {
         this._clone = this._panel
             .clone()
             .addClass('cf-label-panel--floating')
-            .hide()
+            .css('visibility', 'hidden')
             .insertAfter(this._panel);
 
         $(window).on('resize', ()=> this._adjust());
@@ -43,14 +43,14 @@ export default class FloatingLabels {
 
     _float() {
         this._panelOffset = this._panel.offset().top;
-        this._maxOffset = this._lastItem.offset().top - this._clone.outerHeight();
+        this._maxOffset = this._lastItem.offset().top - this._clone.outerHeight(true);
 
         $(window).on('scroll', this._onScroll);
         this._onScroll();
     }
 
     _hide() {
-        this._clone.hide();
+        this._clone.css('visibility', 'hidden');
         $(window).off('scroll', this._onScroll);
     }
 
@@ -58,16 +58,17 @@ export default class FloatingLabels {
         const scrollValue = $(window).scrollTop();
 
         if(scrollValue < this._panelOffset) { // above the topmost panel
-            this._clone.hide();
-        }else if( scrollValue > this._maxOffset + this._clone.outerHeight()) { // below last item
-            this._clone.hide();
+            this._clone.css('visibility', 'hidden');
+        }else if( scrollValue > this._maxOffset + this._clone.outerHeight(true)) { // below last item
+            this._clone.css('visibility', 'hidden');
         } else {
             const fixedTop = scrollValue > this._maxOffset
                 ? this._maxOffset - scrollValue
                 : 0;
             this._clone.css({
-                top: fixedTop + 'px'
-            }).show();
+                top: fixedTop + 'px',
+                visibility: 'visible'
+            });
         }
     }
 }

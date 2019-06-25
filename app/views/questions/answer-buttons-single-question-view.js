@@ -8,7 +8,7 @@ export default class AnswerButtonsSingleQuestionView extends SingleQuestionView 
     constructor(question, settings) {
         super(question, settings);
 
-        this._selectedAnswerClass = 'cf-answer-button--selected';
+        this._selectedAnswerCssClass = 'cf-answer-button--selected';
     }
 
     _showAnswerError(validationResult) {

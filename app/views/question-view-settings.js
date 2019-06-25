@@ -9,6 +9,9 @@ export default class QuestionViewSettings {
         this._mobileThreshold = this._convertCssValueToPixelValue(surveyInfo.mobileThreshold);
         this._disableKeyboardSupport = surveyInfo.surveyChannel === 'Cati';
         this._isAccessible = surveyInfo.isAccessible;
+        this._messages = {
+            noResponse: surveyInfo.messages.noResponseMessage,
+        }
     }
 
     /**
@@ -38,11 +41,19 @@ export default class QuestionViewSettings {
 
     /**
      * Is survey executing in accessibility mode.
-     * @type {bool}
+     * @type {boolean}
      * @readonly
      */
     get isAccessible() {
         return this._isAccessible;
+    }
+
+    /**
+     * Resource messages.
+     * @return {object} Messages dictionary.
+     */
+    get messages() {
+        return this._messages;
     }
 
     _convertCssValueToPixelValue(cssValue) {
@@ -50,7 +61,7 @@ export default class QuestionViewSettings {
         node.style.boxSizing = 'border-box';
         node.style.width = cssValue;
         node.style.height = '0px';
-        document.body.appendChild(node);		
+        document.body.appendChild(node);
         const pixelValue = node.offsetWidth;
         document.body.removeChild(node);
         return pixelValue;

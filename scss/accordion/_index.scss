@@ -27,6 +27,11 @@
       @include radio($control-size, true);
     }
   }
+
+  &__right-text {
+    margin-top: 1em;
+    margin-left: 2.2em;
+  }
 }
 
 .cf-accordion-grid-answer--rtl{
@@ -38,5 +43,10 @@
         @include radio($control-size, true, true);
       }
     }
+  }
+
+  .cf-accordion-grid-answer__right-text {
+    margin-left: 0;
+    margin-right: 2.2em;
   }
 }

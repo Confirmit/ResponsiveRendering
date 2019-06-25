@@ -101,7 +101,6 @@ export default class Question extends QuestionBase {
         return this._triggeredQuestions;
     }
 
-    // TODO: incompatible override
     /**
      * Perform question validation.
      * @param {boolean} [raiseValidationCompleteEvent=true] - Raise validationComplete event if true.

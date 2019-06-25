@@ -173,7 +173,8 @@ export default class HierarchyQuestion extends QuestionWithAnswers {
         let tableId = null;
 
         if(extendedAnswerCode != null) {
-            [originalAnswerCode, tableId] = extendedAnswerCode.split("_");
+            originalAnswerCode = extendedAnswerCode.substring(0, extendedAnswerCode.lastIndexOf("_"));
+            tableId = extendedAnswerCode.substring(extendedAnswerCode.lastIndexOf("_") + 1, extendedAnswerCode.length);
         }
 
         return { originalAnswerCode, tableId };

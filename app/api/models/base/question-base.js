@@ -15,6 +15,7 @@ export default class QuestionBase {
         this._text = model.text;
         this._instruction = model.instruction;
         this._customRendering = model.customRendering;
+        this._isRtl = model.isRtl;
     }
 
     /**
@@ -81,15 +82,6 @@ export default class QuestionBase {
         return {};
     }
 
-    // TODO: should move to Question class?
-    /**
-     * Perform question validation
-     * @return {QuestionValidationResult} - Result of question validation
-     */
-    validate() {
-        return new QuestionValidationResult(this._id);
-    }
-
     /**
      * Array of triggered questions.
      * @type {Array}
@@ -97,5 +89,26 @@ export default class QuestionBase {
      */
     get triggeredQuestions() {
         return [];
+    }
+
+    /**
+     * Is right to left language
+     * @type {bool}
+     * @readonly
+     */
+    get isRtl() {
+        return this._isRtl;
+    }
+
+    // TODO: should move to Question class?
+    /**
+     * Perform question validation
+     * @param {boolean} [raiseValidationCompleteEvent=true] - Raise validationComplete event if true.
+     * @param {function} [validationRuleFilter=null] - Custom filter function to apply specific validation rules only.
+     * @return {QuestionValidationResult} - Result of question validation
+     */
+    // eslint-disable-next-line no-unused-vars
+    validate(raiseValidationCompleteEvent = true, validationRuleFilter = null) {
+        return new QuestionValidationResult(this._id);
     }
 }

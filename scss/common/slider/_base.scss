@@ -1,0 +1,64 @@
+/**
+ * Base style for slider
+ */
+.cf-slider__track-area {
+  cursor: pointer;
+}
+
+.cf-slider__track {
+  background: $control-primary-color;
+  z-index: $_z-cf-slider__track;
+  position: relative;
+  cursor: pointer;
+  border-radius: $cf-slider__track-size / 2;
+}
+
+.cf-slider__track-highlight {
+  background: $control-active-color;
+  z-index: $_z-cf-slider__track-highlight;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: $cf-slider__track-size / 2;
+  transition: width 0.2s ease-in, height 0.2s ease-in;
+}
+
+.cf-slider__no-value {
+  position: absolute;
+  width: $cf-slider__handle-width;
+  height: $cf-slider__handle-height;
+  border-radius: $cf-slider__handle-border-radius;
+  border: 1px dashed $control-active-color;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in;
+}
+
+.cf-slider__handle {
+  transition: left 0.2s ease-in, top 0.2s ease-in, right 0.2s ease-in;
+  width: $cf-slider__handle-width;
+  height: $cf-slider__handle-height;
+  border: $cf-slider__handle-border;
+  border-radius: $cf-slider__handle-border-radius;
+  background: $cf-slider__handle-background;
+  background-image: none;
+  z-index: $_z-cf-slider__track-handle;
+  position: absolute;
+  cursor: pointer;
+  touch-action: none;
+
+  &--no-value {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: $cf-slider__handle-width/2;
+  }
+}
+
+.cf-slider--sliding {
+  .cf-slider__handle {
+    transition: none;
+  }
+
+  .cf-slider__track-highlight {
+    transition: none;
+  }
+}

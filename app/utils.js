@@ -8,7 +8,7 @@ export default class Utils {
      * @param {string} value The value to be tested.
      * @return {boolean}
      */
-    static isEmpty(value){
+    static isEmpty(value) {
         return value === undefined || value === null || value === '';
     }
 
@@ -17,7 +17,7 @@ export default class Utils {
      * @param {string} value The value to be tested.
      * @return {boolean} true if the given value is NotNumber; otherwise, false.
      */
-    static isNotANumber(value){
+    static isNotANumber(value) {
         return this.isEmpty(value) || isNaN(value);
     }
 
@@ -26,8 +26,8 @@ export default class Utils {
      * @param {string} value The value to be converted to number.
      * @return {(Number|null)}
      */
-    static toNumber(value){
-        return this.isNotANumber(value)? null: Number(value);
+    static toNumber(value) {
+        return this.isNotANumber(value) ? null : Number(value);
     }
 
     /**
@@ -40,9 +40,9 @@ export default class Utils {
         return {fractionalDigits, decimalDigits, totalDigits: fractionalDigits + decimalDigits};
     }
 
-	/**
-	 * Check that value is a valid date.
-	 * @param {string} value The value to be tested.
+    /**
+     * Check that value is a valid date.
+     * @param {string} value The value to be tested.
      * @returns {boolean}  true if the given value is Date; otherwise, false.
      */
     static isDate(value) {
@@ -54,7 +54,7 @@ export default class Utils {
             return false;
 
         let date = new Date(value);
-        if(isNaN(date))
+        if (isNaN(date))
             return false;
 
         let parsed = date.toISOString().slice(0, 10); // check for February 31 etc
@@ -68,5 +68,19 @@ export default class Utils {
             .replace(/'/g, '&#39;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
+    }
+    
+    static getRtlCSSClassModifier(question, className) {
+        return question.isRtl ? className + '--rtl' : '';
+    }
+
+    static floor(value, precision) {
+        const multiplier = Math.pow(10, precision);
+        return Math.floor(value * multiplier) / multiplier;
+    }
+
+    static round(value, precision) {
+        const multiplier = Math.pow(10, precision);
+        return Math.round(value * multiplier) / multiplier;
     }
 }

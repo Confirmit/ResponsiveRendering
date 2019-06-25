@@ -10,8 +10,8 @@ export default class HorizontalRatingSingleQuestionView extends QuestionWithAnsw
         super(question, settings);
 
         this._groupNode = this._container.find('.cf-hrs-single');
-        this._selectedScaleItemClass = 'cf-hrs-single__scale-item--selected';
-        this._selectedNonScoredItemClass = 'cf-hrs-single__na-item--selected';
+        this._selectedScaleCssClass = 'cf-hrs-single__scale-item--selected';
+        this._selectedNonScoredItemCssClass = 'cf-hrs-single__na-item--selected';
         this._currentAnswerIndex = null;
         this._sortedAnswers = this._question.scaleItems.concat(this._question.nonScaleItems);
 
@@ -48,8 +48,8 @@ export default class HorizontalRatingSingleQuestionView extends QuestionWithAnsw
     _updateAnswerNodes() {
         this._question.answers.forEach(answer => {
             this._getAnswerNode(answer.code)
-                .removeClass(this._selectedScaleItemClass)
-                .removeClass(this._selectedNonScoredItemClass)
+                .removeClass(this._selectedScaleCssClass)
+                .removeClass(this._selectedNonScoredItemCssClass)
                 .attr('aria-checked', 'false')
                 .attr('tabindex', '-1');
         });
@@ -60,7 +60,7 @@ export default class HorizontalRatingSingleQuestionView extends QuestionWithAnsw
             return;
         }
 
-        const itemNodeClass = this._isItemInScale(this._question.value) ? this._selectedScaleItemClass : this._selectedNonScoredItemClass;
+        const itemNodeClass = this._isItemInScale(this._question.value) ? this._selectedScaleCssClass : this._selectedNonScoredItemCssClass;
         this._getAnswerNode(this._question.value)
             .addClass(itemNodeClass)
             .attr('aria-checked', 'true')

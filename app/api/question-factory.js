@@ -20,7 +20,9 @@ import LoginPageQuestion from "./models/questions/login-page-question";
 import TelephoneQuestion from "./models/questions/telephone-question";
 import HierarchyQuestion from "./models/questions/hierarchy-question";
 import Question from "./models/base/question";
-import HierarchyService from "./hierarhy-service";
+import HierarchyService from "./hierarchy-service";
+import VideoUploadQuestion from './models/questions/video-upload-question';
+import AudioUploadQuestion from './models/questions/audio-upload-question';
 
 export default class QuestionFactory {
     constructor(language, endpoints, isAccessible = true) {
@@ -77,6 +79,10 @@ export default class QuestionFactory {
                 return new DynamicQuestionPlaceholder(rawModel);
             case QuestionTypes.ImageUploader:
                 return new ImageUploadQuestion(rawModel, new ImageUploader(this._endpoints.imageUploadEndpoint));
+            case QuestionTypes.VideoCapture:
+                return new VideoUploadQuestion(rawModel);
+            case QuestionTypes.AudioCapture:
+                return new AudioUploadQuestion(rawModel);
             case QuestionTypes.Login:
                 return new LoginPageQuestion(rawModel);
             case QuestionTypes.Telephone:

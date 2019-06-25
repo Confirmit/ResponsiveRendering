@@ -67,18 +67,6 @@ export default class CarouselGridQuestionView extends QuestionWithAnswersView {
         }
     }
 
-    _onModelValueChange({changes}) {
-        let currentItemIsCompleteBefore = this._carousel.currentItem.isComplete;
-
-        this._updateAnswerNodes(changes);
-        this._updateAnswerOtherNodes(changes);
-        this._updateCarouselComplete();
-
-        if(this._carousel.currentItem.isComplete === true && this._carousel.currentItem.isComplete !== currentItemIsCompleteBefore){
-            this._carousel.moveNext();
-        }
-    }
-
     _updateAnswerNodes({values = []}) {
         if (values.length === 0)
             return;
@@ -99,6 +87,20 @@ export default class CarouselGridQuestionView extends QuestionWithAnswersView {
                 carouselItem.isComplete = this._question.values[answerCode] !== undefined;
             }
         });
+    }
+
+    _onModelValueChange({changes}) {
+        const currentItemIsCompleteBefore = this._carousel.currentItem.isComplete;
+
+        this._updateAnswerNodes(changes);
+        this._updateAnswerOtherNodes(changes);
+        this._updateCarouselComplete();
+
+        const otherIsChanged = changes.otherValues !== undefined;
+        const answerCompleteStatusChanged = this._carousel.currentItem.isComplete === true && this._carousel.currentItem.isComplete !== currentItemIsCompleteBefore;
+        if(answerCompleteStatusChanged && !otherIsChanged){
+            this._carousel.moveNext();
+        }
     }
 
     _onScaleNodeClickHandler(answer, scale) {

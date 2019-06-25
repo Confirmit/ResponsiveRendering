@@ -6,9 +6,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "se.rendering.responsive/app/api/models/base/answer-images-settings.js~answerimagessetting",
+    "class/app/api/models/base/answer-images-settings.js~AnswerImagesSetting.html",
+    "<span>AnswerImagesSetting</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/base/answer-images-settings.js</span>",
+    "class"
+  ],
+  [
     "se.rendering.responsive/app/api/models/validation/answer-validation-result.js~answervalidationresult",
     "class/app/api/models/validation/answer-validation-result.js~AnswerValidationResult.html",
     "<span>AnswerValidationResult</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/validation/answer-validation-result.js</span>",
+    "class"
+  ],
+  [
+    "se.rendering.responsive/app/api/models/questions/audio-upload-question.js~audiouploadquestion",
+    "class/app/api/models/questions/audio-upload-question.js~AudioUploadQuestion.html",
+    "<span>AudioUploadQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/audio-upload-question.js</span>",
     "class"
   ],
   [
@@ -204,6 +216,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "se.rendering.responsive/app/api/models/questions/video-upload-question.js~videouploadquestion",
+    "class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html",
+    "<span>VideoUploadQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/video-upload-question.js</span>",
+    "class"
+  ],
+  [
     "se.rendering.responsive~cfapi",
     "class/app/api/api.js~cfApi.html",
     "<span>cfApi</span> <span class=\"search-result-import-path\">se.rendering.responsive</span>",
@@ -223,13 +241,13 @@ window.esdocSearchIndex = [
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-get-debug",
+    "class/app/api/api.js~cfApi.html#instance-set-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-set-debug",
+    "class/app/api/api.js~cfApi.html#instance-get-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
@@ -258,9 +276,9 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "app/api/hierarhy-service.js",
-    "file/app/api/hierarhy-service.js.html",
-    "app/api/hierarhy-service.js",
+    "app/api/hierarchy-service.js",
+    "file/app/api/hierarchy-service.js.html",
+    "app/api/hierarchy-service.js",
     "file"
   ],
   [
@@ -274,6 +292,48 @@ window.esdocSearchIndex = [
     "file/app/api/models/auto-next-navigation.js.html",
     "app/api/models/auto-next-navigation.js",
     "file"
+  ],
+  [
+    "app/api/models/base/answer-images-settings.js",
+    "file/app/api/models/base/answer-images-settings.js.html",
+    "app/api/models/base/answer-images-settings.js",
+    "file"
+  ],
+  [
+    "app/api/models/base/answer-images-settings.js~answerimagessetting#appearance",
+    "class/app/api/models/base/answer-images-settings.js~AnswerImagesSetting.html#instance-get-appearance",
+    "app/api/models/base/answer-images-settings.js~AnswerImagesSetting#appearance",
+    "member"
+  ],
+  [
+    "app/api/models/base/answer-images-settings.js~answerimagessetting#defaultimageurl",
+    "class/app/api/models/base/answer-images-settings.js~AnswerImagesSetting.html#instance-get-defaultImageUrl",
+    "app/api/models/base/answer-images-settings.js~AnswerImagesSetting#defaultImageUrl",
+    "member"
+  ],
+  [
+    "app/api/models/base/answer-images-settings.js~answerimagessetting#height",
+    "class/app/api/models/base/answer-images-settings.js~AnswerImagesSetting.html#instance-get-height",
+    "app/api/models/base/answer-images-settings.js~AnswerImagesSetting#height",
+    "member"
+  ],
+  [
+    "app/api/models/base/answer-images-settings.js~answerimagessetting#hoverimageurl",
+    "class/app/api/models/base/answer-images-settings.js~AnswerImagesSetting.html#instance-get-hoverImageUrl",
+    "app/api/models/base/answer-images-settings.js~AnswerImagesSetting#hoverImageUrl",
+    "member"
+  ],
+  [
+    "app/api/models/base/answer-images-settings.js~answerimagessetting#selectimageurl",
+    "class/app/api/models/base/answer-images-settings.js~AnswerImagesSetting.html#instance-get-selectImageUrl",
+    "app/api/models/base/answer-images-settings.js~AnswerImagesSetting#selectImageUrl",
+    "member"
+  ],
+  [
+    "app/api/models/base/answer-images-settings.js~answerimagessetting#width",
+    "class/app/api/models/base/answer-images-settings.js~AnswerImagesSetting.html#instance-get-width",
+    "app/api/models/base/answer-images-settings.js~AnswerImagesSetting#width",
+    "member"
   ],
   [
     "app/api/models/base/answer.js",
@@ -300,21 +360,15 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "app/api/models/base/answer.js~answer#getscale",
-    "class/app/api/models/base/answer.js~Answer.html#instance-method-getScale",
-    "app/api/models/base/answer.js~Answer#getScale",
-    "method"
-  ],
-  [
-    "app/api/models/base/answer.js~answer#getscales",
-    "class/app/api/models/base/answer.js~Answer.html#instance-method-getScales",
-    "app/api/models/base/answer.js~Answer#getScales",
-    "method"
-  ],
-  [
     "app/api/models/base/answer.js~answer#group",
     "class/app/api/models/base/answer.js~Answer.html#instance-get-group",
     "app/api/models/base/answer.js~Answer#group",
+    "member"
+  ],
+  [
+    "app/api/models/base/answer.js~answer#imagessettings",
+    "class/app/api/models/base/answer.js~Answer.html#instance-get-imagesSettings",
+    "app/api/models/base/answer.js~Answer#imagesSettings",
     "member"
   ],
   [
@@ -336,9 +390,9 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "app/api/models/base/answer.js~answer#scales",
-    "class/app/api/models/base/answer.js~Answer.html#instance-get-scales",
-    "app/api/models/base/answer.js~Answer#scales",
+    "app/api/models/base/answer.js~answer#righttext",
+    "class/app/api/models/base/answer.js~Answer.html#instance-get-rightText",
+    "app/api/models/base/answer.js~Answer#rightText",
     "member"
   ],
   [
@@ -435,6 +489,12 @@ window.esdocSearchIndex = [
     "app/api/models/base/question-base.js~questionbase#instruction",
     "class/app/api/models/base/question-base.js~QuestionBase.html#instance-get-instruction",
     "app/api/models/base/question-base.js~QuestionBase#instruction",
+    "member"
+  ],
+  [
+    "app/api/models/base/question-base.js~questionbase#isrtl",
+    "class/app/api/models/base/question-base.js~QuestionBase.html#instance-get-isRtl",
+    "app/api/models/base/question-base.js~QuestionBase#isRtl",
     "member"
   ],
   [
@@ -600,6 +660,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/base/scale.js~scale#imagessettings",
+    "class/app/api/models/base/scale.js~Scale.html#instance-get-imagesSettings",
+    "app/api/models/base/scale.js~Scale#imagesSettings",
+    "member"
+  ],
+  [
     "app/api/models/base/scale.js~scale#text",
     "class/app/api/models/base/scale.js~Scale.html#instance-get-text",
     "app/api/models/base/scale.js~Scale#text",
@@ -705,6 +771,48 @@ window.esdocSearchIndex = [
     "app/api/models/page.js~page#validationevent",
     "class/app/api/models/page.js~Page.html#instance-get-validationEvent",
     "app/api/models/page.js~Page#validationEvent",
+    "member"
+  ],
+  [
+    "app/api/models/questions/audio-upload-question.js",
+    "file/app/api/models/questions/audio-upload-question.js.html",
+    "app/api/models/questions/audio-upload-question.js",
+    "file"
+  ],
+  [
+    "app/api/models/questions/audio-upload-question.js~audiouploadquestion#constructor",
+    "class/app/api/models/questions/audio-upload-question.js~AudioUploadQuestion.html#instance-constructor-constructor",
+    "app/api/models/questions/audio-upload-question.js~AudioUploadQuestion#constructor",
+    "method"
+  ],
+  [
+    "app/api/models/questions/audio-upload-question.js~audiouploadquestion#formvalues",
+    "class/app/api/models/questions/audio-upload-question.js~AudioUploadQuestion.html#instance-get-formValues",
+    "app/api/models/questions/audio-upload-question.js~AudioUploadQuestion#formValues",
+    "member"
+  ],
+  [
+    "app/api/models/questions/audio-upload-question.js~audiouploadquestion#maxdurationinseconds",
+    "class/app/api/models/questions/audio-upload-question.js~AudioUploadQuestion.html#instance-get-maxDurationInSeconds",
+    "app/api/models/questions/audio-upload-question.js~AudioUploadQuestion#maxDurationInSeconds",
+    "member"
+  ],
+  [
+    "app/api/models/questions/audio-upload-question.js~audiouploadquestion#mindurationinseconds",
+    "class/app/api/models/questions/audio-upload-question.js~AudioUploadQuestion.html#instance-get-minDurationInSeconds",
+    "app/api/models/questions/audio-upload-question.js~AudioUploadQuestion#minDurationInSeconds",
+    "member"
+  ],
+  [
+    "app/api/models/questions/audio-upload-question.js~audiouploadquestion#setvalue",
+    "class/app/api/models/questions/audio-upload-question.js~AudioUploadQuestion.html#instance-method-setValue",
+    "app/api/models/questions/audio-upload-question.js~AudioUploadQuestion#setValue",
+    "method"
+  ],
+  [
+    "app/api/models/questions/audio-upload-question.js~audiouploadquestion#value",
+    "class/app/api/models/questions/audio-upload-question.js~AudioUploadQuestion.html#instance-get-value",
+    "app/api/models/questions/audio-upload-question.js~AudioUploadQuestion#value",
     "member"
   ],
   [
@@ -942,6 +1050,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/grid-question.js~gridquestion#answershaverighttext",
+    "class/app/api/models/questions/grid-question.js~GridQuestion.html#instance-get-answersHaveRightText",
+    "app/api/models/questions/grid-question.js~GridQuestion#answersHaveRightText",
+    "member"
+  ],
+  [
     "app/api/models/questions/grid-question.js~gridquestion#carousel",
     "class/app/api/models/questions/grid-question.js~GridQuestion.html#instance-get-carousel",
     "app/api/models/questions/grid-question.js~GridQuestion#carousel",
@@ -972,10 +1086,28 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/grid-question.js~gridquestion#slider",
+    "class/app/api/models/questions/grid-question.js~GridQuestion.html#instance-get-slider",
+    "app/api/models/questions/grid-question.js~GridQuestion#slider",
+    "member"
+  ],
+  [
+    "app/api/models/questions/grid-question.js~gridquestion#sliderisvertical",
+    "class/app/api/models/questions/grid-question.js~GridQuestion.html#instance-get-sliderIsVertical",
+    "app/api/models/questions/grid-question.js~GridQuestion#sliderIsVertical",
+    "member"
+  ],
+  [
     "app/api/models/questions/grid-rating-question.js",
     "file/app/api/models/questions/grid-rating-question.js.html",
     "app/api/models/questions/grid-rating-question.js",
     "file"
+  ],
+  [
+    "app/api/models/questions/grid-rating-question.js~gridratingquestion#carousel",
+    "class/app/api/models/questions/grid-rating-question.js~GridRatingQuestion.html#instance-get-carousel",
+    "app/api/models/questions/grid-rating-question.js~GridRatingQuestion#carousel",
+    "member"
   ],
   [
     "app/api/models/questions/grid-rating-question.js~gridratingquestion#constructor",
@@ -1164,6 +1296,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "app/api/models/questions/numeric-list-question.js~numericlistquestion#answershaverighttext",
+    "class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html#instance-get-answersHaveRightText",
+    "app/api/models/questions/numeric-list-question.js~NumericListQuestion#answersHaveRightText",
+    "member"
+  ],
+  [
     "app/api/models/questions/numeric-list-question.js~numericlistquestion#autosum",
     "class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html#instance-get-autoSum",
     "app/api/models/questions/numeric-list-question.js~NumericListQuestion#autoSum",
@@ -1272,6 +1410,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "app/api/models/questions/numeric-question.js~numericquestion#slider",
+    "class/app/api/models/questions/numeric-question.js~NumericQuestion.html#instance-get-slider",
+    "app/api/models/questions/numeric-question.js~NumericQuestion#slider",
+    "member"
+  ],
+  [
+    "app/api/models/questions/numeric-question.js~numericquestion#sliderisvertical",
+    "class/app/api/models/questions/numeric-question.js~NumericQuestion.html#instance-get-sliderIsVertical",
+    "app/api/models/questions/numeric-question.js~NumericQuestion#sliderIsVertical",
+    "member"
+  ],
+  [
     "app/api/models/questions/numeric-question.js~numericquestion#value",
     "class/app/api/models/questions/numeric-question.js~NumericQuestion.html#instance-get-value",
     "app/api/models/questions/numeric-question.js~NumericQuestion#value",
@@ -1282,6 +1432,12 @@ window.esdocSearchIndex = [
     "file/app/api/models/questions/open-text-list-question.js.html",
     "app/api/models/questions/open-text-list-question.js",
     "file"
+  ],
+  [
+    "app/api/models/questions/open-text-list-question.js~opentextlistquestion#answershaverighttext",
+    "class/app/api/models/questions/open-text-list-question.js~OpenTextListQuestion.html#instance-get-answersHaveRightText",
+    "app/api/models/questions/open-text-list-question.js~OpenTextListQuestion#answersHaveRightText",
+    "member"
   ],
   [
     "app/api/models/questions/open-text-list-question.js~opentextlistquestion#constructor",
@@ -1518,6 +1674,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/single-question.js~singlequestion#sliderisvertical",
+    "class/app/api/models/questions/single-question.js~SingleQuestion.html#instance-get-sliderIsVertical",
+    "app/api/models/questions/single-question.js~SingleQuestion#sliderIsVertical",
+    "member"
+  ],
+  [
     "app/api/models/questions/single-question.js~singlequestion#value",
     "class/app/api/models/questions/single-question.js~SingleQuestion.html#instance-get-value",
     "app/api/models/questions/single-question.js~SingleQuestion#value",
@@ -1576,6 +1738,48 @@ window.esdocSearchIndex = [
     "class/app/api/models/questions/telephone-question.js~TelephoneQuestion.html#instance-constructor-constructor",
     "app/api/models/questions/telephone-question.js~TelephoneQuestion#constructor",
     "method"
+  ],
+  [
+    "app/api/models/questions/video-upload-question.js",
+    "file/app/api/models/questions/video-upload-question.js.html",
+    "app/api/models/questions/video-upload-question.js",
+    "file"
+  ],
+  [
+    "app/api/models/questions/video-upload-question.js~videouploadquestion#constructor",
+    "class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-constructor-constructor",
+    "app/api/models/questions/video-upload-question.js~VideoUploadQuestion#constructor",
+    "method"
+  ],
+  [
+    "app/api/models/questions/video-upload-question.js~videouploadquestion#formvalues",
+    "class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-formValues",
+    "app/api/models/questions/video-upload-question.js~VideoUploadQuestion#formValues",
+    "member"
+  ],
+  [
+    "app/api/models/questions/video-upload-question.js~videouploadquestion#maxdurationinseconds",
+    "class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-maxDurationInSeconds",
+    "app/api/models/questions/video-upload-question.js~VideoUploadQuestion#maxDurationInSeconds",
+    "member"
+  ],
+  [
+    "app/api/models/questions/video-upload-question.js~videouploadquestion#mindurationinseconds",
+    "class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-minDurationInSeconds",
+    "app/api/models/questions/video-upload-question.js~VideoUploadQuestion#minDurationInSeconds",
+    "member"
+  ],
+  [
+    "app/api/models/questions/video-upload-question.js~videouploadquestion#setvalue",
+    "class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-method-setValue",
+    "app/api/models/questions/video-upload-question.js~VideoUploadQuestion#setValue",
+    "method"
+  ],
+  [
+    "app/api/models/questions/video-upload-question.js~videouploadquestion#value",
+    "class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-value",
+    "app/api/models/questions/video-upload-question.js~VideoUploadQuestion#value",
+    "member"
   ],
   [
     "app/api/models/survey-info.js",

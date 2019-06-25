@@ -14,8 +14,11 @@ export default class NumericQuestion extends Question {
     constructor(model) {
         super(model);
 
-        this._loadInitialState(model);
-        this._parseFeatures(model);
+        this._numeric = { ...model.numeric };
+        this._slider = model.slider || false;
+        this._sliderIsVertical = model.sliderIsVertical || false;
+
+        this._value = model.value;
     }
 
     /**
@@ -48,6 +51,24 @@ export default class NumericQuestion extends Question {
     }
 
     /**
+     * Is it slider.
+     * @type {boolean}
+     * @readonly
+     */
+    get slider() {
+        return this._slider;
+    }
+
+    /**
+     * Is slider vertical.
+     * @type {boolean}
+     * @readonly
+     */
+    get sliderIsVertical() {
+        return this._sliderIsVertical;
+    }
+
+    /**
      * Select answer for numeric.
      * @param {number|string} value - Question value.
      */
@@ -57,15 +78,6 @@ export default class NumericQuestion extends Question {
         if (changed) {
             this._onChange({value: this.value});
         }
-
-    }
-
-    _loadInitialState(model) {
-        this._value = model.value;
-    }
-
-    _parseFeatures({ numeric = {} }) {
-        this._numeric = { ...numeric };
     }
 
     _setValue(value) {

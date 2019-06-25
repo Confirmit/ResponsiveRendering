@@ -1,0 +1,54 @@
+/**
+ * Vertical style for slider
+ */
+.cf-slider--vertical {
+  display: flex;
+
+  .cf-slider__no-value {
+    top: -$cf-slider__track-no-value-margin;
+    margin-left: calc(#{$cf-slider__track-size / 2} - #{$cf-slider__handle-width / 2})
+  }
+
+  .cf-slider__track-area {
+    order: -1;
+    flex: none;
+    padding: 0 $cf-slider__track-margin;
+    margin-top: $cf-slider__track-no-value-margin;
+  }
+
+  .cf-slider__track {
+    width: $cf-slider__track-size;
+    height: 100%;
+    border: $cf-slider__track-border;
+  }
+
+  .cf-slider__track-highlight {
+    width: $cf-slider__track-size;
+  }
+
+  .cf-slider__handle {
+    margin-top: -#{$cf-slider__handle-width / 2};
+    margin-left: calc(#{$cf-slider__track-size / 2} - #{$cf-slider__handle-width / 2});
+
+    &--no-value {
+      background-image: svg-url('<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polyline points="4,6 10,14 16,6" fill="none" stroke="#{$control-active-color}" stroke-width="2" /></svg>');
+    }
+  }
+}
+
+.cf-slider--vertical-rtl {
+  @extend .cf-slider--vertical;
+  .cf-slider__no-value {
+    margin-left: 0;
+    margin-right: calc(#{$cf-slider__track-size / 2} - #{$cf-slider__handle-width / 2})
+  }
+
+  .cf-slider__handle {
+      margin-left: 0;
+      margin-right: calc(#{$cf-slider__track-size / 2} - #{$cf-slider__handle-width / 2});
+
+      &--no-value {
+        background-image: svg-url('<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polyline points="4,6 10,14 16,6" fill="none" stroke="#{$control-active-color}" stroke-width="2" /></svg>');
+      }
+    }
+}

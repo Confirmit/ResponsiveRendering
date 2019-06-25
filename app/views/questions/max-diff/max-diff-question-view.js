@@ -74,7 +74,7 @@ export default class MaxDiffQuestionView extends QuestionView {
             const questionErrors = this._getInnerQuestionErrors(currentResult);
             return acc.concat(questionErrors);
         }, []);
-        this._errorBlock.showErrors(errors.concat(innerQuestionErrors));
+        this._questionErrorBlock.showErrors(errors.concat(innerQuestionErrors));
 
 
         validationResult.answerValidationResults.forEach(answerValidationResult => {

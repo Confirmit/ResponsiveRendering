@@ -16,6 +16,9 @@ export default class MultiGridQuestionView extends QuestionView {
         this._currentQuestionIndex = null;
         this._currentAnswerIndex = null;
 
+        this._selectedAnswerCssClass = "cf-grid-answer__scale-item--selected";
+        this._selectedImageAnswerCssClass = 'cf-answer-image--selected';
+
         this._answerErrorBlockManager = new ErrorBlockManager();
 
         this._attachHandlersToDOM();
@@ -87,20 +90,22 @@ export default class MultiGridQuestionView extends QuestionView {
         }
     }
 
+    _getSelectedAnswerClass(answer){
+        return answer.imagesSettings !== null ? this._selectedImageAnswerCssClass : this._selectedAnswerCssClass;
+    }
+
     _updateQuestionAnswerNodes({questions = {}}) {
         Object.entries(questions).forEach(([questionId, {values = []}]) => {
             if (values.length === 0) {
                 return;
             }
 
-            this._getInnerQuestionNode(questionId).find('.cf-grid-answer__scale-item')
-                .removeClass('cf-grid-answer__scale-item--selected')
-                .attr('aria-checked', 'false');
+            values.forEach(value => {
+                const answer = this._question.getAnswer(value);
+                const isSelected = this._question.getInnerQuestion(questionId).values.includes(value);
 
-            this._question.getInnerQuestion(questionId).values.forEach(value => {
-                this._getAnswerNode(questionId, value)
-                    .addClass('cf-grid-answer__scale-item--selected')
-                    .attr('aria-checked', 'true');
+                this._getAnswerNode(questionId, value).toggleClass(this._getSelectedAnswerClass(answer), isSelected)
+                    .attr( 'aria-checked', ()=> isSelected ? 'true' : 'false');
             });
         });
     }

@@ -10,8 +10,8 @@ export default class GridBarsGridQuestionView extends GridQuestionView {
     constructor(question, settings) {
         super(question, settings);
 
-        this._scaleGroupClass = 'cf-gb-grid-answer__control';
-        this._selectedScaleClass = 'cf-gb-grid-answer__scale-item--selected';
+        this._scaleGroupCssClass = 'cf-gb-grid-answer__control';
+        this._selectedScaleCssClass = 'cf-gb-grid-answer__scale-item--selected';
         this._selectedNonScoredItemClass = 'cf-gb-grid-answer__na-item--selected';
 
         this._initFloatingLabels();
@@ -89,7 +89,7 @@ export default class GridBarsGridQuestionView extends GridQuestionView {
         if (itemInScale) {
             const scaleIndex = this._question.scaleItems.findIndex(item => item.code === scaleCode);
             if (scaleIndex !== -1) {
-                this._setBarItemStyles(answerCode, scaleIndex, this._selectedScaleClass, 'cf-gb-grid-answer__scale-text--selected');
+                this._setBarItemStyles(answerCode, scaleIndex, this._selectedScaleCssClass, 'cf-gb-grid-answer__scale-text--selected');
             }
         }
     }
@@ -117,7 +117,7 @@ export default class GridBarsGridQuestionView extends GridQuestionView {
         const answerNode = this._getAnswerNode(answerCode);
 
         answerNode.find('.cf-gb-grid-answer__scale-item')
-            .removeClass(this._selectedScaleClass)
+            .removeClass(this._selectedScaleCssClass)
             .removeClass('cf-gb-grid-answer__scale-item--hover')
             .css('opacity', '');
 

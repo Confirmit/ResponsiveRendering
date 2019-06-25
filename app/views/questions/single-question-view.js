@@ -12,8 +12,10 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
         super(question, settings);
 
         this._groupNode = this._container.find('.cf-list');
-        this._selectedAnswerClass = 'cf-single-answer--selected';
         this._currentAnswerIndex = null;
+
+        this._selectedAnswerCssClass = 'cf-single-answer--selected';
+        this._selectedImageAnswerCssClass = 'cf-answer-image--selected';
 
         this._attachHandlersToDOM();
     }
@@ -59,7 +61,7 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
 
         this._question.answers.forEach(answer => {
             this._getAnswerNode(answer.code)
-                .removeClass(this._selectedAnswerClass)
+                .removeClass(this._getSelectedAnswerClass(answer))
                 .attr('aria-checked', 'false')
                 .attr('tabindex', '-1');
         });
@@ -71,9 +73,13 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
         }
 
         this._getAnswerNode(this._question.value)
-            .addClass(this._selectedAnswerClass)
+            .addClass(this._getSelectedAnswerClass(this._question.getAnswer(this._question.value)))
             .attr('aria-checked', 'true')
             .attr('tabindex', '0');
+    }
+
+    _getSelectedAnswerClass(answer){
+        return answer.imagesSettings !== null ? this._selectedImageAnswerCssClass : this._selectedAnswerCssClass;
     }
 
     _updateAnswerOtherNodes({otherValue = null}) {

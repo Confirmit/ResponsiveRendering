@@ -18,6 +18,7 @@ export default class SingleQuestion extends QuestionWithAnswers {
         this._refusedValue = model.refusedValue;
         this._answerButtons = model.answerButtons || false;
         this._slider = model.slider || false;
+        this._sliderIsVertical = model.sliderIsVertical || false;
         this._dropdown = model.dropdown || false;
         this._layoutColumns = model.layoutColumns || 0;
         this._layoutRows = model.layoutRows || 0;
@@ -43,6 +44,15 @@ export default class SingleQuestion extends QuestionWithAnswers {
      */
     get slider() {
         return this._slider;
+    }
+
+    /**
+     * Is slider vertical.
+     * @type {boolean}
+     * @readonly
+     */
+    get sliderIsVertical() {
+        return this._sliderIsVertical;
     }
 
     /**

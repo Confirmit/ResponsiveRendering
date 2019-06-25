@@ -11,8 +11,10 @@ export default class MultiQuestionView extends QuestionWithAnswersView {
     constructor(question, settings) {
         super(question, settings);
 
-        this._selectedAnswerClass = 'cf-multi-answer--selected';
         this._currentAnswerIndex = null;
+
+        this._selectedAnswerCssClass = 'cf-multi-answer--selected';
+        this._selectedImageAnswerCssClass = 'cf-answer-image--selected';
 
         this._attachHandlersToDOM();
     }
@@ -39,19 +41,23 @@ export default class MultiQuestionView extends QuestionWithAnswersView {
         }
     }
 
+    _getSelectedAnswerClass(answer){
+        return answer.imagesSettings !== null ? this._selectedImageAnswerCssClass : this._selectedAnswerCssClass;
+    }
+
     _updateAnswerNodes({values = []}) {
         if (values.length === 0)
             return;
 
         this._question.answers.forEach(answer => {
             this._getAnswerNode(answer.code)
-                .removeClass(this._selectedAnswerClass)
+                .removeClass(this._getSelectedAnswerClass(answer))
                 .attr('aria-checked', false);
         });
 
         this._question.values.forEach(answerCode => {
             this._getAnswerNode(answerCode)
-                .addClass(this._selectedAnswerClass)
+                .addClass(this._getSelectedAnswerClass(this._question.getAnswer(answerCode)))
                 .attr('aria-checked', true);
         });
     }

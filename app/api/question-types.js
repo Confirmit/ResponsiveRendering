@@ -19,6 +19,8 @@ export default Object.freeze({
     GeoLocation: 'GeoLocation',
     DynamicQuestionPlaceholder: 'DynamicQuestionPlaceholder',
     ImageUploader: 'ImageUploader',
+    VideoCapture: 'VideoCapture',
+    AudioCapture: 'AudioCapture',
     Login: 'Login',
     Telephone: 'Telephone',
     Hierarchy: 'Hierarchy',

@@ -13,8 +13,9 @@ export default class GridQuestionView extends QuestionWithAnswerView {
         this._currentAnswerIndex = null;
         this._currentScaleIndex = null;
 
-        this._scaleGroupClass = 'cf-grid-answer__scale';
-        this._selectedScaleClass = 'cf-grid-answer__scale-item--selected';
+        this._selectedScaleCssClass = 'cf-grid-answer__scale-item--selected';
+        this._selectedImageScaleCssClass = 'cf-answer-image--selected';
+        this._scaleGroupCssClass = 'cf-grid-answer__scale';
 
         this._attachHandlersToDOM();
     }
@@ -31,17 +32,21 @@ export default class GridQuestionView extends QuestionWithAnswerView {
         return this._scales[this._currentScaleIndex];
     }
 
+    _getSelectedScaleClass(scale){
+        return scale.imagesSettings !== null ? this._selectedImageScaleCssClass : this._selectedScaleCssClass;
+    }
+
     _attachHandlersToDOM() {
         this._question.answers.forEach((answer, answerIndex) => {
             this._scales.forEach((scale, scaleIndex) => {
                 this._getScaleNode(answer.code, scale.code)
-                    .on('click', this._onSelectItem.bind(this, answer, scale))
+                    .on('click', event => this._onScaleNodeClick(event, answer, scale))
                     .on('focus', this._onScaleNodeFocus.bind(this, answerIndex, scaleIndex));
             });
 
             if (answer.isOther) {
                 this._getAnswerOtherNode(answer.code)
-                    .on('keydown', e => e.stopPropagation())
+                    .on('keydown', event => this._onAnswerOtherValueKeyPress(event, answer))
                     .on('input', event => this._onAnswerOtherValueChangedHandler(answer, event.target.value));
             }
         });
@@ -72,14 +77,14 @@ export default class GridQuestionView extends QuestionWithAnswerView {
 
     _clearScaleNode(answerCode, scaleCode) {
         this._getScaleNode(answerCode, scaleCode)
-            .removeClass(this._selectedScaleClass)
+            .removeClass(this._getSelectedScaleClass(this._question.getScale(scaleCode)))
             .attr('aria-checked', 'false')
             .attr('tabindex', '-1');
     }
 
     _selectScaleNode(answerCode, scaleCode) {
         this._getScaleNode(answerCode, scaleCode)
-            .addClass(this._selectedScaleClass)
+            .addClass(this._getSelectedScaleClass(this._question.getScale(scaleCode)))
             .attr('aria-checked', 'true')
             .attr('tabindex', '0');
     }
@@ -109,7 +114,7 @@ export default class GridQuestionView extends QuestionWithAnswerView {
 
         const answerHasNotOnlyOtherErrors = validationResult.errors.length > otherErrors.length;
         if (answerHasNotOnlyOtherErrors) {
-            this._getAnswerNode(answer.code).find(`.${this._scaleGroupClass}`)
+            this._getAnswerNode(answer.code).find(`.${this._scaleGroupCssClass}`)
                 .attr("aria-invalid", "true")
                 .attr("aria-errormessage", errorBlockId);
         }
@@ -118,7 +123,7 @@ export default class GridQuestionView extends QuestionWithAnswerView {
     _hideErrors() {
         super._hideErrors();
 
-        this._container.find(`.${this._scaleGroupClass}`)
+        this._container.find(`.${this._scaleGroupCssClass}`)
             .removeAttr("aria-invalid")
             .removeAttr("aria-errormessage");
 
@@ -132,12 +137,17 @@ export default class GridQuestionView extends QuestionWithAnswerView {
         this._updateAnswerOtherNodes(changes);
     }
 
-    _onSelectItem(answer, scale) {
+    _onScaleNodeClick(event, answer, scale) {
         this._selectScale(answer, scale);
     }
 
     _onAnswerOtherValueChangedHandler(answer, value) {
         this._question.setOtherValue(answer.code, value);
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    _onAnswerOtherValueKeyPress(event, answer) {
+        event.stopPropagation();
     }
 
     _onScaleNodeFocus(answerIndex, scaleIndex) {

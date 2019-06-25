@@ -1,0 +1,75 @@
+.cf-slider-grid-answer {
+  &__labels-area {
+    margin-left: $cf-slider__track-no-value-margin;
+  }
+
+  &__labels {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    border-bottom: 1px solid $control-primary-color;
+    padding: .5em 0.125em;
+    margin-bottom: .5em;
+
+    /* fix for label panel alignment; remove after extracting float panel control. */
+    &::after {
+      display: none;
+    }
+  }
+
+  &__label {
+    flex: 1 1 1em;
+    padding: 0 .25em;
+  }
+}
+
+.cf-slider-grid-answer--rtl {
+  .cf-slider-grid-answer__labels-area {
+    margin-left: 0;
+    margin-right: $cf-slider__track-no-value-margin;
+  }
+}
+
+
+@media (max-width: $desktop-layout-delimiter) {
+  .cf-slider-grid-answer {
+    &__labels-area {
+      display: none;
+    }
+
+    &--fake-for-panel {
+      margin-bottom: .5em;
+
+      .cf-slider-grid-answer__row-text {
+        display: none;
+      }
+
+      .cf-slider-grid-answer__labels-area {
+       display: block;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-layout-delimiter + 1) {
+  .cf-slider-grid-answer {
+    @include grid-layout-answer-content-indent(3em, 1.2em);
+
+    &__control {
+      flex: 1 1 auto;
+    }
+
+    &__labels-area {
+      display: none;
+    }
+
+    &--fake-for-panel {
+      margin-bottom: .5em;
+
+      .cf-slider-grid-answer__labels-area {
+        display: block;
+      }
+    }
+  }
+}

@@ -5,8 +5,8 @@ export default class StarRatingSingleQuestionView extends HorizontalRatingSingle
         super(question, settings);
 
         this._groupNode = this._container.find('.cf-sr-single');
-        this._selectedScaleItemClass = 'cf-sr-single__scale-item--selected';
-        this._selectedNonScoredItemClass = 'cf-sr-single__na-item--selected';
+        this._selectedScaleCssClass = 'cf-sr-single__scale-item--selected';
+        this._selectedNonScoredItemCssClass = 'cf-sr-single__na-item--selected';
     }
 
     _updateAnswerNodes() {
@@ -16,7 +16,7 @@ export default class StarRatingSingleQuestionView extends HorizontalRatingSingle
         if (answerIndex !== -1) {
             this._question.scaleItems.forEach((item, index) => {
                 if (index < answerIndex) {
-                    this._getAnswerNode(item.code).addClass(this._selectedScaleItemClass);
+                    this._getAnswerNode(item.code).addClass(this._selectedScaleCssClass);
                 }
             });
         }

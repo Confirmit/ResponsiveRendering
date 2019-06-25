@@ -11,10 +11,20 @@ export default class GridRatingQuestion extends GridQuestionBase {
     constructor(model) {
         super(model);
 
+        this._carousel = model.carousel || false;
         this._scaleItems = [];
         this._nonScaleItems = [];
 
         this._loadScales(model);
+    }
+
+    /**
+     * Is it carousel.
+     * @type {boolean}
+     * @readonly
+     */
+    get carousel() {
+        return this._carousel;
     }
 
     /**

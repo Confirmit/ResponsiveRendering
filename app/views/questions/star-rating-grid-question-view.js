@@ -9,9 +9,9 @@ export default class StarRatingGridQuestionView extends GridQuestionView {
     constructor(question, settings) {
         super(question, settings);
 
-        this._scaleGroupClass = 'cf-sr-grid-answer__control';
-        this._selectedScaleItemClass = 'cf-sr-grid-answer__scale-item--selected';
-        this._selectedNonScoredItemClass = 'cf-sr-grid-answer__na-item--selected';
+        this._scaleGroupCssClass = 'cf-sr-grid-answer__control';
+        this._selectedScaleCssClass = 'cf-sr-grid-answer__scale-item--selected';
+        this._selectedNonScoredItemCssClass = 'cf-sr-grid-answer__na-item--selected';
 
         this._initFloatingLabels();
     }
@@ -22,15 +22,15 @@ export default class StarRatingGridQuestionView extends GridQuestionView {
 
     _clearScaleNode(answerCode, scaleCode) {
         this._getScaleNode(answerCode, scaleCode)
-            .removeClass(this._selectedScaleItemClass)
-            .removeClass(this._selectedNonScoredItemClass)
+            .removeClass(this._selectedScaleCssClass)
+            .removeClass(this._selectedNonScoredItemCssClass)
             .attr('aria-checked', 'false')
             .attr('tabindex', '-1');
     }
 
     _selectScaleNode(answerCode, scaleCode) {
         const itemInScale = this._question.scaleItems.find(item => item.code === scaleCode) !== undefined;
-        const itemNodeClass = itemInScale ? this._selectedScaleItemClass : this._selectedNonScoredItemClass;
+        const itemNodeClass = itemInScale ? this._selectedScaleCssClass : this._selectedNonScoredItemCssClass;
         this._getScaleNode(answerCode, scaleCode)
             .addClass(itemNodeClass)
             .attr('aria-checked', 'true')
@@ -41,7 +41,7 @@ export default class StarRatingGridQuestionView extends GridQuestionView {
             if (scaleIndex !== -1) {
                 this._question.scaleItems.forEach((item, index) => {
                     if (index <= scaleIndex) {
-                        this._getScaleNode(answerCode, item.code).addClass(this._selectedScaleItemClass);
+                        this._getScaleNode(answerCode, item.code).addClass(this._selectedScaleCssClass);
                     }
                 });
             }

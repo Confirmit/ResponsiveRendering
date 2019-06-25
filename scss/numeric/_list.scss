@@ -56,7 +56,7 @@
 
 @media (min-width: $desktop-layout-delimiter + 1) {
   .cf-numeric-list-answer {
-    @include grid-layout-answer-content-indent(1.8em, 1.4em);
+    @include grid-layout-answer-content-indent(2em, 1.4em);
   }
   .cf-numeric-list-auto-sum {
     width: auto;
