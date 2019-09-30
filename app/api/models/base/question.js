@@ -93,8 +93,8 @@ export default class Question extends QuestionBase {
     get validationCompleteEvent() {
         return this._validationCompleteEvent;
     }
-    
-	/**
+
+    /**
      * @inheritDoc
      */
     get triggeredQuestions() {
@@ -112,7 +112,7 @@ export default class Question extends QuestionBase {
 
         this._onValidation(validationResult);
 
-        if (raiseValidationCompleteEvent){
+        if (raiseValidationCompleteEvent) {
             this._onValidationComplete(validationResult);
         }
 
@@ -123,25 +123,25 @@ export default class Question extends QuestionBase {
     // TODO: could be good to keep fullness of answers picture
     _validate(validationRuleFilter = null) {
         let validationRules = this._validationRules;
-        if(validationRuleFilter !== null) {
+        if (validationRuleFilter !== null) {
             validationRules = this._validationRules.filter(validationRuleFilter);
         }
 
         const questionValidationResult = new QuestionValidationResult(this._id);
         validationRules.forEach(rule => {
             const ruleValidationResult = this._validateRule(rule.type);
-            if(ruleValidationResult.isValid) {
+            if (ruleValidationResult.isValid) {
                 return;
             }
 
             const validationError = new ValidationError(rule.type, rule.message, ruleValidationResult.data);
 
-            if(ruleValidationResult.answers.length === 0) {
+            if (ruleValidationResult.answers.length === 0) {
                 questionValidationResult.errors.push(validationError);
             } else {
                 ruleValidationResult.answers.forEach(answerCode => {
                     let answerValidationResult = questionValidationResult.answerValidationResults.find(answerResult => answerResult.answerCode === answerCode);
-                    if(answerValidationResult === undefined) {
+                    if (answerValidationResult === undefined) {
                         answerValidationResult = new AnswerValidationResult(answerCode);
                         questionValidationResult.answerValidationResults.push(answerValidationResult);
                     }
@@ -153,7 +153,49 @@ export default class Question extends QuestionBase {
         return questionValidationResult;
     }
 
-    _validateRule() {}
+    // eslint-disable-next-line no-unused-vars
+    _validateRule(validationType) {
+    }
+
+    _diffPrimitives(oldValue, newValue) {
+        return oldValue !== newValue;
+    }
+
+    _diffArrays(oldValue, newValue) {
+        const added = newValue.filter(newVal => !oldValue.includes(newVal));
+        const removed = oldValue.filter(oldVal => !newValue.includes(oldVal));
+        return [...added, ...removed];
+    }
+
+    _diffObjects(oldValue, newValue) {
+        const oldKeys = Object.keys(oldValue);
+        const newKeys = Object.keys(newValue);
+        const added = newKeys.filter(newKey => !oldKeys.includes(newKey));
+        const removed = oldKeys.filter(oldKey => !newKeys.includes(oldKey));
+        const modified = oldKeys.filter(oldKey => newKeys.includes(oldKey)).filter(key => oldValue[key] !== newValue[key]);
+        return [...added, ...removed, ...modified];
+    }
+
+    /**
+     * Set value common algorithm.
+     * @protected
+     * @param {string} valuePropertyName - property name where changing value is store in question object.
+     * @param {function(): boolean} setValue - set value delegate, return true if value is changed
+     * @param {function(*, *): object} diffValues - diff values delegate, return object with info about changes.
+     */
+    _setValueInternal(valuePropertyName, setValue, diffValues = this._diffObjects) {
+        if (this.readOnly) {
+            return;
+        }
+
+        const oldValue = this[valuePropertyName];
+
+        const changed = setValue();
+        if (changed) {
+            const diff = diffValues(oldValue, this[valuePropertyName]);
+            this._onChange({[valuePropertyName]: diff});
+        }
+    }
 
     // Handlers
     _onChange(changes) {
@@ -161,7 +203,7 @@ export default class Question extends QuestionBase {
         if (this._allowValidateOnChange && this._validateOnChange) {
             this.validate();
         }
-    } 
+    }
 
     _onValidation(validationResult) {
         this._validationEvent.trigger(validationResult);
@@ -170,7 +212,7 @@ export default class Question extends QuestionBase {
     _onValidationComplete(validationResult) {
         this._validationCompleteEvent.trigger(validationResult);
 
-        if(validationResult.isValid === false){
+        if (validationResult.isValid === false) {
             this._validateOnChange = true; // if there were errors, force re-validate on change
         }
     }

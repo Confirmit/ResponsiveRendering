@@ -13,14 +13,12 @@ export default class VideoUploadQuestion extends Question {
     constructor(model) {
         super(model);
 
-        this._videoId = null;
-        this._previewUrl = null;
+        this._videoId = model.videoId;
+        this._previewUrl = model.previewUrl;
         this._duration = null;
 
-        this._minDurationInSeconds = null;
-        this._maxDurationInSeconds = null;
-
-        this._loadInitialState(model);
+        this._minDurationInSeconds = model.minDurationInSeconds;
+        this._maxDurationInSeconds = model.maxDurationInSeconds;
     }
 
     /**
@@ -56,7 +54,7 @@ export default class VideoUploadQuestion extends Question {
 
     /**
      * Video upload value.
-     * @type {{videoId: string, previewUrl: string, duration: number}}
+     * @type {{videoId: ?string, previewUrl: ?string, duration: ?number}}
      * @readonly
      */
     get value() {
@@ -70,10 +68,11 @@ export default class VideoUploadQuestion extends Question {
      * @param {number} duration - Video file duration in seconds.
      */
     setValue(videoId, previewUrl, duration) {
-        const changed = this._setValue(videoId, previewUrl, duration);
-        if (changed) {
-            this._onChange({value: {videoId, previewUrl, duration}});
-        }
+        this._setValueInternal(
+            'value',
+            () => this._setValue(videoId, previewUrl, duration),
+            this._diffPrimitives,
+        );
     }
 
     _setValue(videoId, previewUrl, duration) {
@@ -95,13 +94,5 @@ export default class VideoUploadQuestion extends Question {
         this._duration = duration;
 
         return true;
-    }
-
-    _loadInitialState(model) {
-        this._videoId = model.videoId;
-        this._previewUrl = model.previewUrl;
-
-        this._minDurationInSeconds = model.minDurationInSeconds;
-        this._maxDurationInSeconds = model.maxDurationInSeconds;
     }
 }

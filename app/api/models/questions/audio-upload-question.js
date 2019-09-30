@@ -7,20 +7,17 @@ import Utils from 'utils.js';
  */
 export default class AudioUploadQuestion extends Question {
     /**
-     *
      * @param {object} model - Raw question model.
      */
     constructor(model) {
         super(model);
 
-        this._audioId = null;
-        this._previewUrl = null;
+        this._audioId = model.audioId;
+        this._previewUrl = model.previewUrl;
         this._duration = null;
 
-        this._minDurationInSeconds = null;
-        this._maxDurationInSeconds = null;
-
-        this._loadInitialState(model);
+        this._minDurationInSeconds = model.minDurationInSeconds;
+        this._maxDurationInSeconds = model.maxDurationInSeconds;
     }
 
     /**
@@ -56,7 +53,7 @@ export default class AudioUploadQuestion extends Question {
 
     /**
      * Audio upload value.
-     * @type {{audioId: string, previewUrl: string, duration: number}}
+     * @type {{audioId: ?string, previewUrl: ?string, duration: ?number}}
      * @readonly
      */
     get value() {
@@ -70,10 +67,11 @@ export default class AudioUploadQuestion extends Question {
      * @param {number} duration - Audio file duration in seconds.
      */
     setValue(audioId, previewUrl, duration) {
-        const changed = this._setValue(audioId, previewUrl, duration);
-        if (changed) {
-            this._onChange({value: {audioId, previewUrl, duration}});
-        }
+        this._setValueInternal(
+            'value',
+            () => this._setValue(audioId, previewUrl, duration),
+            this._diffPrimitives,
+        );
     }
 
     _setValue(audioId, previewUrl, duration) {
@@ -95,13 +93,5 @@ export default class AudioUploadQuestion extends Question {
         this._duration = duration;
 
         return true;
-    }
-
-    _loadInitialState(model) {
-        this._audioId = model.audioId;
-        this._previewUrl = model.previewUrl;
-
-        this._minDurationInSeconds = model.minDurationInSeconds;
-        this._maxDurationInSeconds = model.maxDurationInSeconds;
     }
 }

@@ -31,8 +31,8 @@ export default class DropdownGridQuestionView extends QuestionWithAnswersView {
         if (values.length === 0)
             return;
 
-        this._container.find('.cf-dropdown').val('');
-        Object.entries(this._question.values).forEach(([answerCode, scaleCode]) => {
+        values.forEach(answerCode => {
+            const scaleCode = this._question.values[answerCode];
             this._getAnswerInputNode(answerCode).val(scaleCode);
         });
     }

@@ -26,9 +26,11 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
         this._maxDiff = model.maxDiff || false;
         this._validationMessagesForInnerQuestions = model.validationMessagesForInnerQuestions;
 
+        this._otherValues = { ...model.otherValues };
+
+
         this._parseQuestions(model);
         this._subscribeToQuestions();
-        this._loadInitialState(model);
     }
 
     /**
@@ -103,11 +105,10 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
      * @param {string} otherValue - Other value.
      */
     setOtherValue(answerCode, otherValue) {
-        const old = { ...this._otherValues };
-        const changed = this._setOtherValue(answerCode, otherValue);
-        if (changed) {
-            this._onChange({otherValues: this._diff(old, this._otherValues)});
-        }
+        this._setValueInternal(
+            'otherValues',
+            () => this._setOtherValue(answerCode, otherValue),
+        );
     }
 
     /**
@@ -130,10 +131,6 @@ export default class Grid3DQuestion extends QuestionWithAnswers {
         }
         id = id.toString();
         return this._innerQuestions.find(question => question.id === id);
-    }
-
-    _loadInitialState({ otherValues = {} }) {
-        this._otherValues = { ...otherValues };
     }
 
     _parseQuestions({ questions }) {

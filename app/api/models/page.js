@@ -2,7 +2,6 @@ import QuestionFactory from 'api/question-factory.js'
 import PageValidationResult from 'api/models/validation/page-validation-result.js';
 import SurveyInfo from './survey-info.js';
 import Event from 'event.js'
-import AutoNextNavigator from './auto-next-navigation';
 import TestNavigator from './test-navigator'
 import QuestionTypes from 'api/question-types.js';
 
@@ -10,7 +9,7 @@ import QuestionTypes from 'api/question-types.js';
  * @desc Represents the class for page.
  */
 export default class Page {
-	/**
+    /**
      * @constructor
      * @param {object[]} rawQuestionModels - Models of current page questions.
      * @param {object} rawSurveyInfo - Survey level information.
@@ -19,7 +18,6 @@ export default class Page {
         this._surveyInfo = new SurveyInfo(rawSurveyInfo);
         this._questionFactory = new QuestionFactory(rawSurveyInfo.language, rawSurveyInfo.endpoints, rawSurveyInfo.isAccessible);
         this._questions = this._createQuestions(rawQuestionModels);
-        this._autoNextNavigator = new AutoNextNavigator(this);
 
         this._validationEvent = new Event("page:validation");
         this._validationCompleteEvent = new Event("page:validation-complete");
@@ -67,7 +65,7 @@ export default class Page {
      * @type {Event}
      * @memberOf Page
      */
-    get validationCompleteEvent(){
+    get validationCompleteEvent() {
         return this._validationCompleteEvent;
     }
 
@@ -116,8 +114,7 @@ export default class Page {
      * @type {Array}
      * @readonly
      */
-    get questions()
-    {
+    get questions() {
         return this._questions;
     }
 
@@ -130,7 +127,7 @@ export default class Page {
         let form = [];
         this._questions.forEach(question =>
             Object.entries(question.formValues).forEach(([name, value]) => {
-                form.push({name:name, value:value})
+                form.push({name: name, value: value})
             }));
 
         return form;
@@ -141,8 +138,7 @@ export default class Page {
      * @param {string} id - Question id.
      * @return {Question} - Corresponding question object.
      */
-    getQuestion(id)
-    {
+    getQuestion(id) {
         return this.questions.find(question => question.id === id)
     }
 
@@ -156,7 +152,7 @@ export default class Page {
             const index = this._questions.indexOf(this.getQuestion(model.id));
             this._questions[index] = model;
 
-            if (model.type !== QuestionTypes.DynamicQuestionPlaceholder ) {
+            if (model.type !== QuestionTypes.DynamicQuestionPlaceholder) {
                 this._attachToTriggerQuestion(model);
             }
         });
@@ -164,6 +160,7 @@ export default class Page {
         this._dynamicQuestionsChangeCompleteEvent.trigger(models);
         return models;
     }
+
     /**
      * Execute validation
      * @param {boolean} [raiseValidationCompleteEvent=true] - Raise error if true.
@@ -177,7 +174,7 @@ export default class Page {
         });
 
         this._onValidation(validationResult);
-        if(raiseValidationCompleteEvent) {
+        if (raiseValidationCompleteEvent) {
             this._onValidationComplete(validationResult);
         }
 
@@ -192,7 +189,7 @@ export default class Page {
         if (!this._surveyInfo.allowNextNavigation)
             return;
 
-        this._beforeNavigateEvent.trigger({ next: true });
+        this._beforeNavigateEvent.trigger({next: true});
 
         if (validate) {
             const validationResult = this.validate();
@@ -201,7 +198,7 @@ export default class Page {
             }
         }
 
-        this._navigateEvent.trigger({ next: true });
+        this._navigateEvent.trigger({next: true});
     }
 
     /**
@@ -212,7 +209,7 @@ export default class Page {
         if (!this._surveyInfo.allowBackNavigation)
             return;
 
-        this._beforeNavigateEvent.trigger({ next: false });
+        this._beforeNavigateEvent.trigger({next: false});
 
         if (validate) {
             const validationRuleFilter = (rule) => rule.validateOnBackwardNavigation;
@@ -222,7 +219,7 @@ export default class Page {
             }
         }
 
-        this._navigateEvent.trigger({ next: false });
+        this._navigateEvent.trigger({next: false});
     }
 
     _attach() {
@@ -247,7 +244,7 @@ export default class Page {
         const questions = [];
         rawModels.forEach(rawModel => {
             const model = this._questionFactory.create(rawModel);
-            if(model) {
+            if (model) {
                 questions.push(model);
             }
 

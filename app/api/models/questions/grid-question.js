@@ -13,6 +13,7 @@ export default class GridQuestion extends GridQuestionBase {
         super(model);
 
         //Features
+        this._answerButtons = model.answerButtons || false;
         this._accordion = model.accordion || false;
         this._carousel = model.carousel || false;
         this._dropdown = model.dropdown || false;
@@ -93,5 +94,14 @@ export default class GridQuestion extends GridQuestionBase {
      */
     get answersHaveRightText() {
         return this._answersHaveRightText;
+    }
+
+    /**
+     * Is it answer buttons
+     * @type {boolean}
+     * @readonly
+     */
+    get answerButtons() {
+        return this._answerButtons;
     }
 }

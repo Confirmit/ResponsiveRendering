@@ -1,14 +1,14 @@
 export default class HeadGroup {
     /**
      * Create instance.
-     * @param {string} code - Group code
-     * @param {string} title - Group title.
-     * @param {Array} items - Array of the group answers or scales codes.
+     * @param {Object} group - Group
+     * @param {answer[] | scale[]} items - Array of the group answers or scales codes.
      */
-    constructor(code, title, items) {
-        this._code = code;
-        this._title = title;
-        this._items = items || [];
+    constructor(group, items = []) {
+        this._code = group.code;
+        this._title = group.title;
+        this._type = group.type;
+        this._items = items;
     }
 
     /**
@@ -27,6 +27,15 @@ export default class HeadGroup {
      */
     get title() {
         return this._title;
+    }
+
+    /**
+     * Group type.
+     * @type {string}
+     * @readonly
+     */
+    get type() {
+        return this._type;
     }
 
     /**

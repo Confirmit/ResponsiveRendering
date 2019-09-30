@@ -3,7 +3,6 @@ import ValidationTypes from 'api/models/validation/validation-types.js';
 import RuleValidationResult from '../validation/rule-validation-result.js';
 import Utils from 'utils.js';
 
-
 /**
  * @extends {QuestionWithAnswers}
  */
@@ -17,9 +16,10 @@ export default class SingleRatingQuestion extends QuestionWithAnswers {
 
         this._scaleItems = [];
         this._nonScaleItems = [];
-        this._value = null;
 
-        this._loadInitialState(model);
+        this._value = model.value || null;
+
+        this._loadScales(model);
     }
 
     /**
@@ -54,21 +54,21 @@ export default class SingleRatingQuestion extends QuestionWithAnswers {
      * @param {string} value - Answer code.
      */
     setValue(value) {
-        let changed = this._setValue(value);
-
-        if (changed) {
-            this._onChange({value: true});
-        }
+        this._setValueInternal(
+            'value',
+            () => this._setValue(value),
+            this._diffPrimitives,
+        );
     }
 
     /**
      * @inheritDoc
      */
-    get formValues(){
+    get formValues() {
         const form = {};
         const answer = this.getAnswer(this.value);
 
-        if(answer){
+        if (answer) {
             form[answer.fieldName] = this.value;
         }
 
@@ -93,18 +93,13 @@ export default class SingleRatingQuestion extends QuestionWithAnswers {
         return true;
     }
 
-    _loadInitialState({
-        scaleItems =[],
-        nonScaleItems = [],
-        value
-    }) {
+    _loadScales({scaleItems = [], nonScaleItems = []}) {
         this._scaleItems = this.getAnswers(scaleItems);
         this._nonScaleItems = this.getAnswers(nonScaleItems);
-        this._value = value;
     }
 
     _validateRule(validationType) {
-        switch(validationType) {
+        switch (validationType) {
             case ValidationTypes.Required:
                 return this._validateRequired();
         }

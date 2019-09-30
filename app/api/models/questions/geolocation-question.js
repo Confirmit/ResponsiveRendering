@@ -14,7 +14,7 @@ export default class GeolocationQuestion extends Question {
     constructor(model){
         super(model);
 
-        this._loadInitialState(model);
+        this._value = model.value || null;
     }
 
     /**
@@ -33,7 +33,11 @@ export default class GeolocationQuestion extends Question {
      * @example model.setValue(37.3229978, -122.0321823);
      */
     setValue(lat, long) {
-        this._value = lat + " " + long;
+        this._setValueInternal(
+            'value',
+            () => this._setValue(lat, long),
+            this._diffPrimitives,
+        );
     }
 
     /**
@@ -48,15 +52,16 @@ export default class GeolocationQuestion extends Question {
         return form;
     }
 
+    _setValue(lat, long) {
+        this._value = lat + " " + long;
+        return true;
+    }
+
     _validateRule(validationType) {
         switch(validationType) {
             case ValidationTypes.Geolocation:
                 return this._validateCoordinates();
         }
-    }
-
-    _loadInitialState(model) {
-        this._value = model.value;
     }
 
     _validateCoordinates() {

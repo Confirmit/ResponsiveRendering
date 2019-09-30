@@ -11,6 +11,8 @@ import NumericListQuestionView from './questions/numeric-list-question-view.js';
 import DateQuestionView from './questions/date-question-view.js';
 import DateQuestionPolyfillView from './questions/date-question-polyfill-view.js';
 import RankingQuestionView from './questions/ranking-question-view.js';
+import CaptureOrderMultiQuestionView from './questions/capture-order-multi-question-view';
+import AnswerButtonsCaptureOrderMultiQuestionView from './questions/answer-buttons-capture-order-multi-question-view';
 import HorizontalRatingGridQuestionView from './questions/horizontal-rating-grid-question-view.js';
 import HorizontalRatingSingleQuestionView from './questions/horizontal-rating-single-question-view.js';
 import GridBarsGridQuestionView from './questions/grid-bars-grid-question-view.js';
@@ -36,8 +38,12 @@ import MaxDiffQuestionView from './questions/max-diff/max-diff-question-view.js'
 import SliderSingleQuestionView from './questions/slider-single-question-view.js';
 import SliderGridQuestionView from './questions/slider-grid-question-view.js';
 import SliderNumericQuestionView from './questions/slider-numeric-question-view.js';
+import SliderNumericListQuestionView from "./questions/slider-numeric-list-question-view";
 import VideoUploadQuestionView from './questions/video-upload-question-view';
 import AudioUploadQuestionView from './questions/audio-upload-question-view';
+import CodeCaptureQuestionView from "./questions/code-capture-question-view";
+import SearchableMultiQuestionView from "./questions/searchable-multi-question-view";
+import SearchableSingleQuestionView from "./questions/searchable-single-question-view";
 
 /**
  * @desc Question view factory
@@ -85,11 +91,11 @@ export default class QuestionViewFactory {
             case QuestionTypes.OpenTextList:
                 return new OpenTextListQuestionView(model, this._questionViewSettings);
             case QuestionTypes.NumericList:
-                return new NumericListQuestionView(model, this._questionViewSettings);
+                return this._createNumericListQuestionView(model);
             case QuestionTypes.Date:
                 return this._createDateQuestionView(model);
             case QuestionTypes.Ranking:
-                return new RankingQuestionView(model, this._questionViewSettings);
+                return this._createRankingQuestionView(model);
             case QuestionTypes.HorizontalRatingScaleSingle:
                 return new HorizontalRatingSingleQuestionView(model, this._questionViewSettings);
             case QuestionTypes.HorizontalRatingScale:
@@ -110,12 +116,18 @@ export default class QuestionViewFactory {
                 return new VideoUploadQuestionView(model, this._questionViewSettings);
             case QuestionTypes.AudioCapture:
                 return new AudioUploadQuestionView(model, this._questionViewSettings);
+            case QuestionTypes.CodeCapture:
+                return new CodeCaptureQuestionView(model, this._questionViewSettings);
             case QuestionTypes.DynamicQuestionPlaceholder:
                 return;
             case QuestionTypes.Login:
                 return new LoginPageQuestionView(model);
             case QuestionTypes.Hierarchy:
                 return new DropdownHierarchyQuestionView(model, this._questionViewSettings);
+            case  QuestionTypes.SearchableMulti:
+                return new SearchableMultiQuestionView(model, this._questionViewSettings);
+            case QuestionTypes.SearchableSingle:
+                return new SearchableSingleQuestionView(model, this._questionViewSettings);
             default:
                 return;
         }
@@ -198,6 +210,13 @@ export default class QuestionViewFactory {
 
         return new NumericQuestionView(model, this._questionViewSettings);
     }
+    _createNumericListQuestionView(model) {
+        if (model.slider) {
+            return new SliderNumericListQuestionView(model, this._questionViewSettings);
+        }
+
+        return new NumericListQuestionView(model, this._questionViewSettings);
+    }
 
     _createHorizontalRatingGridQuestionView(model) {
         if (model.carousel) {
@@ -221,5 +240,17 @@ export default class QuestionViewFactory {
         }
 
         return new StarRatingGridQuestionView(model, this._questionViewSettings);
+    }
+
+    _createRankingQuestionView(model) {
+        if (model.captureOrder) {
+            if (model.answerButtons) {
+                return new AnswerButtonsCaptureOrderMultiQuestionView(model, this._questionViewSettings);
+            }
+
+            return new CaptureOrderMultiQuestionView(model, this._questionViewSettings);
+        }
+
+        return new RankingQuestionView(model, this._questionViewSettings);
     }
 }

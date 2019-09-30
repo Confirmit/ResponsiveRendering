@@ -24,6 +24,11 @@
 @import "common/slider/_index";
 @import "common/_answer-images";
 @import "common/_media-upload";
+@import "common/_collapsible-groups";
+@import "common/_answer-button";
+@import "common/_affix-input-decorator";
+@import "common/_searchable-question";
+@import "common/_loader";
 @import "single/_index";
 @import "multi/_index";
 @import "open/_list";
@@ -41,7 +46,6 @@
 @import "grid-bars/_grid";
 @import "star-rating/_single";
 @import "star-rating/_grid";
-@import "answer-buttons/_single";
 @import "answer-buttons/_grid";
 @import "carousel/_grid";
 @import "carousel/_rating";
@@ -52,6 +56,9 @@
 @import "max-diff/_index";
 @import "slider/_single";
 @import "slider/_numeric";
+@import "slider/_numeric_list";
 @import "slider/_grid";
 @import "video-upload/_index";
 @import "audio-upload/_index";
+@import "code-capture/_index";
+@import "_test-navigator";

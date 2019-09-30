@@ -20,9 +20,8 @@ export default class OpenTextListQuestion extends QuestionWithAnswers {
         this._layoutRows = model.layoutRows || 0;
         this._answersHaveRightText = model.answersHaveRightText || false;
 
-        this._values = {};
-
-        this._loadInitialState(model);
+        this._values = { ...model.values };
+        this._otherValues = { ...model.otherValues };
     }
 
     /**
@@ -108,17 +107,15 @@ export default class OpenTextListQuestion extends QuestionWithAnswers {
     }
 
     /**
-     * Select answer for opentextlist.
+     * Select answer for open text list.
      * @param {string} answerCode - Answer code.
      * @param {string} answerValue - Answer value.
      */
     setValue(answerCode, answerValue) {
-        const old = { ...this._values };
-
-        const changed = this._setValue(answerCode, answerValue);
-        if(changed) {
-            this._onChange({values: this._diff(old, this._values)})
-        }
+        this._setValueInternal(
+            'values',
+            () => this._setValue(answerCode, answerValue),
+        );
     }
 
     /**
@@ -127,12 +124,10 @@ export default class OpenTextListQuestion extends QuestionWithAnswers {
      * @param {string} otherValue -Other value.
      */
     setOtherValue(answerCode, otherValue) {
-        const old = { ...this._otherValues };
-
-        const changed = this._setOtherValue(answerCode, otherValue);
-        if(changed) {
-            this._onChange({otherValues: this._diff(old, this._otherValues)});
-        }
+        this._setValueInternal(
+            'otherValues',
+            () => this._setOtherValue(answerCode, otherValue),
+        );
     }
 
     _setValue(answerCode, answerValue) {
@@ -158,11 +153,6 @@ export default class OpenTextListQuestion extends QuestionWithAnswers {
         }
 
         return true;
-    }
-
-    _loadInitialState({ values = {}, otherValues = {} }) {
-        this._values = { ...values };
-        this._otherValues = { ...otherValues };
     }
 
     _validateRule(validationType) {

@@ -6,6 +6,7 @@ import SliderSingleQuestionView from './questions/slider-single-question-view.js
 import SliderNumericQuestionView from './questions/slider-numeric-question-view.js';
 import SliderGridQuestionView from './questions/slider-grid-question-view.js';
 import MultiQuestionView from './questions/multi-question-view.js';
+import CaptureOrderMultiQuestionView from './questions/capture-order-multi-question-view';
 import GridQuestionView from './questions/grid-question-view.js';
 import MultiGridQuestionView from './questions/multi-grid-question-view.js';
 import OpenTextListQuestionView from './questions/open-text-list-question-view.js';
@@ -14,6 +15,7 @@ import NumericQuestionView from './questions/numeric-question-view.js';
 import NumericListQuestionView from './questions/numeric-list-question-view.js';
 import DateQuestionView from './questions/date-question-view.js';
 import DateQuestionPolyfillView from './questions/date-question-polyfill-view.js';
+import CodeCaptureQuestionView from './questions/code-capture-question-view';
 import RankingQuestionView from './questions/ranking-question-view.js';
 import HorizontalRatingGridQuestionView from './questions/horizontal-rating-grid-question-view.js';
 import HorizontalRatingSingleQuestionView from './questions/horizontal-rating-single-question-view.js';
@@ -29,6 +31,7 @@ import DropdownSingleQuestionView from './questions/dropdown-single-question-vie
 import DropdownGridQuestionView from './questions/dropdown-grid-question-view.js';
 import AnswerButtonsSingleQuestionView from './questions/answer-buttons-single-question-view.js';
 import AnswerButtonsMultiQuestionView from './questions/answer-buttons-multi-question-view.js';
+import AnswerButtonsCaptureOrderMultiQuestionView from './questions/answer-buttons-capture-order-multi-question-view';
 import GeolocationQuestionView from './questions/geolocation-question-view.js';
 import ImageUploadQuestionView from './questions/image-upload-question-view.js';
 import LoginPageQuestionView from './questions/login-page-question-view.js';
@@ -62,6 +65,7 @@ export default Object.freeze({
     'SliderNumericQuestionView' : SliderNumericQuestionView,
     'SliderGridQuestionView' : SliderGridQuestionView,
     'MultiQuestionView': MultiQuestionView,
+    'CaptureOrderMultiQuestionView': CaptureOrderMultiQuestionView,
     'GridQuestionView': GridQuestionView,
     'MultiGridQuestionView': MultiGridQuestionView,
     'OpenTextListQuestionView': OpenTextListQuestionView,
@@ -85,10 +89,12 @@ export default Object.freeze({
     'DropdownGridQuestionView': DropdownGridQuestionView,
     'AnswerButtonsSingleQuestionView': AnswerButtonsSingleQuestionView,
     'AnswerButtonsMultiQuestionView': AnswerButtonsMultiQuestionView,
+    'AnswerButtonsCaptureOrderMultiQuestionView': AnswerButtonsCaptureOrderMultiQuestionView,
     'GeolocationQuestionView': GeolocationQuestionView,  // This ref used in mobile CAPI app overrides
     'ImageUploadQuestionView': ImageUploadQuestionView, // This ref used in mobile CAPI app overrides
-    'AudioUploadQuestionView': AudioUploadQuestionView, // This ref used in mobile CAPI app overrides
     'VideoUploadQuestionView': VideoUploadQuestionView, // This ref used in mobile CAPI app overrides
+    'AudioUploadQuestionView': AudioUploadQuestionView, // This ref used in mobile CAPI app overrides
+    'CodeCaptureQuestionView': CodeCaptureQuestionView, // This ref used in mobile CAPI app overrides
     'LoginPageQuestionView': LoginPageQuestionView,
     'DropdownHierarchyQuestionView': DropdownHierarchyQuestionView,
     'MaxDiffQuestionView': MaxDiffQuestionView,

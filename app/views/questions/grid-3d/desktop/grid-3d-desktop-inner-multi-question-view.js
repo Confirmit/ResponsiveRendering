@@ -4,6 +4,7 @@ export default class Grid3DDesktopInnerMultiQuestionView extends Grid3DDesktopIn
     constructor(parentQuestion, question, settings = null) {
         super(parentQuestion, question, settings);
 
+        this._selectedAnswerCssClass = 'cf-grid-multi-answer--selected';
         this._attachHandlersToDOM();
     }
 
@@ -28,11 +29,11 @@ export default class Grid3DDesktopInnerMultiQuestionView extends Grid3DDesktopIn
         }
 
         this._question.answers.forEach(answer => {
-            this._getAnswerNode(answer.code).removeClass('cf-grid-multi-answer--selected');
+            this._getAnswerNode(answer.code).removeClass(this._selectedAnswerCssClass);
         });
 
         this._question.values.forEach(answerCode => {
-            this._getAnswerNode(answerCode).addClass('cf-grid-multi-answer--selected');
+            this._getAnswerNode(answerCode).addClass(this._selectedAnswerCssClass);
         });
     }
 }

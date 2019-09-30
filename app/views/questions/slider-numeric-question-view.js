@@ -40,18 +40,19 @@ export default class SliderNumericQuestionView extends QuestionView {
         const sliderNode = this._getQuestionInputNodeId() + '_slider';
         const sliderValues = this._sliderValues;
         const sliderValue = this._question.value;
+        const readOnly = this._question.readOnly;
         const sliderTextValueHandler = (sliderValue) => {
             return sliderValue === null ? this._settings.messages.noResponse : sliderValue;
         };
 
         let slider = null;
         if(this._question.sliderIsVertical) {
-            slider = new VerticalSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler, true);
+            slider = new VerticalSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler, true, readOnly);
         } else {
             if(this._question.isRtl) {
-                slider = new HorizontalRtlSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler, true);
+                slider = new HorizontalRtlSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler, true, readOnly);
             } else {
-                slider = new HorizontalSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler, true);
+                slider = new HorizontalSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler, true, readOnly);
             }
         }
         return slider;

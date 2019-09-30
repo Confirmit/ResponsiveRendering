@@ -12,8 +12,6 @@ export default class QuestionView extends QuestionViewBase {
 
         this._container = $(`#${this._question.id}`);
         this._questionErrorBlock = new QuestionErrorBlock(this._container.find('.cf-question__error'));
-
-        this._attachModelHandlers();
     }
 
     _getQuestionErrorNodeId() {

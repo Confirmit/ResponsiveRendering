@@ -11,14 +11,16 @@ export default class SliderBase {
      * @param value {Object} - current slider value
      * @param textValueHandler {function} - (sliderValue) => { return "text representation of slider value" }
      * @param isProgressSlider {boolean} is slider have progress indication on track
+     * @param readOnly {boolean} is slider has to be in read only mode
      */
-    constructor(sliderNodeId, values = [], value = null, textValueHandler = null, isProgressSlider = false) {
+    constructor(sliderNodeId, values = [], value = null, textValueHandler = null, isProgressSlider = false, readOnly = false) {
         this._values = values;
         this._valueIndex = -1;
         this._trackIntervals = [];
         this._trackPageUpPageDownStep = 1;
         this._isSliding = false;
         this._isProgressSlider = isProgressSlider;
+        this._readOnly = readOnly;
 
         this._textValueHandler = textValueHandler;
 
@@ -168,7 +170,7 @@ export default class SliderBase {
     }
 
     _setValueIndex(value, isSilent = false) {
-        if (this._valueIndex === value) {
+        if (this._valueIndex === value || this._readOnly) {
             return;
         }
 

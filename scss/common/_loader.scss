@@ -1,0 +1,43 @@
+.cf-loader {
+  display: flex;
+  justify-content: center;
+
+  &--hidden {
+    display: none;
+  }
+
+  &__element {
+    animation: loader 1.8s infinite;
+    border-radius: 50%;
+    opacity: 0;
+    background: $question-border-color;
+    width: 1em;
+    height: 1em;
+
+    &:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 0.3s;
+      margin-left: 0.3em;
+      margin-right: 0.3em;;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+  }
+
+  @keyframes loader {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

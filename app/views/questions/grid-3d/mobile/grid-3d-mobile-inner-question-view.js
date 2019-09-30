@@ -51,6 +51,10 @@ export default class Grid3DMobileInnerQuestionView extends QuestionViewBase {
         return $(`#mobile_${this._question.id}_${answerCode}_${scaleCode}`);
     }
 
+    _getTargetNodeForAnswerError(answerCode){
+        return this._getAnswerOtherNode(answerCode);
+    }
+
     detachModelHandlers() {
         super.detachModelHandlers();
         this._detachParentModelHandlers();
@@ -146,7 +150,7 @@ export default class Grid3DMobileInnerQuestionView extends QuestionViewBase {
                 return;
             }
 
-            const target = this._getAnswerOtherNode(answerValidationResult.answerCode);
+            const target = this._getTargetNodeForAnswerError(answerValidationResult.answerCode);
             const errorBlockId = this._getAnswerOtherErrorBlockId(answerValidationResult.answerCode);
             const errors = answerValidationResult.errors.map(error => error.message);
             this._answerErrorBlockManager.showErrors(errorBlockId, target, errors);

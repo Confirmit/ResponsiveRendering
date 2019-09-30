@@ -8,8 +8,8 @@ export default class Carousel {
      */
     constructor(container, items) {
         this._items = items;
-        this._currentItemIndex = 0;
 
+        this._currentItemIndex = this._getInitialCurrentIndex();
         this._container = container;
         this._backNavigationButton = this._container.find('.cf-carousel__navigation-button--back');
         this._nextNavigationButton = this._container.find('.cf-carousel__navigation-button--next');
@@ -53,6 +53,11 @@ export default class Carousel {
     moveToItemById(itemId){
         const index = this._items.findIndex(item => item.id === itemId);
         this.moveToItemByIndex(index);
+    }
+
+    _getInitialCurrentIndex(){
+        const index = this._items.findIndex(item => !item.isComplete);
+        return index !== -1 ? index :  this._items.length - 1;
     }
 
     _getPagingNode(item) {

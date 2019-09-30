@@ -14,16 +14,14 @@ export default class ImageUploadQuestion extends Question {
     constructor(model, uploader) {
         super(model);
 
-        this._imageId = null;
-        this._imagePreviewUrl = null;
+        this._imageId = model.imageId;
+        this._imagePreviewUrl = model.imagePreviewUrl;
 
-        this._cameraOnly = false;
-        this._maxImageWidth = null;
-        this._maxImageHeight = null;
+        this._cameraOnly = model.cameraOnly;
+        this._maxImageWidth = model.maxImageWidth;
+        this._maxImageHeight = model.maxImageHeight;
 
         this._uploader = uploader;
-
-        this._loadInitialState(model);
     }
 
     /**
@@ -88,10 +86,11 @@ export default class ImageUploadQuestion extends Question {
      * @param {string} imagePreviewUrl - Image preview URL.
      */
     setValue(imageId, imagePreviewUrl) {
-        const changed = this._setValue(imageId, imagePreviewUrl);
-        if (changed) {
-            this._onChange({value: {imageId, imagePreviewUrl}});
-        }
+        this._setValueInternal(
+            'value',
+            () => this._setValue(imageId, imagePreviewUrl),
+            this._diffPrimitives,
+        );
     }
 
     _setValue(imageId, imagePreviewUrl) {
@@ -111,13 +110,5 @@ export default class ImageUploadQuestion extends Question {
         this._imageId = newImageId;
         this._imagePreviewUrl = newImagePreviewUrl;
         return true;
-    }
-
-    _loadInitialState(model) {
-        this._imageId = model.imageId;
-        this._imagePreviewUrl = model.imagePreviewUrl;
-        this._cameraOnly = model.cameraOnly;
-        this._maxImageWidth = model.maxImageWidth;
-        this._maxImageHeight = model.maxImageHeight;
     }
 }

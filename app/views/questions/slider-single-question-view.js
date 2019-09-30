@@ -25,19 +25,20 @@ export default class SliderSingleQuestionView extends QuestionWithAnswersView {
         const sliderNode = this._getQuestionInputNodeId();
         const sliderValues = this._question.answers.map(answer => answer.code);
         const sliderValue = this._question.value;
+        const readOnly = this._question.readOnly;
         const sliderTextValueHandler = (sliderValue) => {
             return sliderValue === null ? this._settings.messages.noResponse : this._question.getAnswer(sliderValue).text;
         };
 
         if(this._question.sliderIsVertical) {
-            return new VerticalSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler);
+            return new VerticalSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler, false, readOnly);
         }
 
         if(this._question.isRtl) {
-            return new HorizontalRtlSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler);
+            return new HorizontalRtlSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler, false, readOnly);
         }
 
-        return new HorizontalSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler);
+        return new HorizontalSlider(sliderNode, sliderValues, sliderValue, sliderTextValueHandler, false, readOnly);
     }
 
     _onModelValueChange() {

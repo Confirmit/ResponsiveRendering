@@ -3,10 +3,11 @@ import QuestionViewSettings from './question-view-settings.js';
 import HiddenQuestionView from './questions/hidden-question-view.js';
 import PageErrorBlock from './error/page-error-block.js';
 import $ from 'jquery';
-import SmartBanner from './controls/smart-banner';
-import TestNavigatorView from './controls/test-navigator-view';
-import ProcessMonitor from '../process-monitor';
-import Event from 'event';
+import SmartBanner from './controls/smart-banner.js';
+import AutoNextNavigator from './controls/auto-next-navigator.js';
+import TestNavigatorView from './controls/test-navigator-view.js';
+import ProcessMonitor from '../process-monitor.js';
+import Event from 'event.js';
 import QuestionTypes from 'api/question-types.js';
 
 export default class PageView {
@@ -25,6 +26,7 @@ export default class PageView {
         this._processMonitor.changeStateEvent.on(this._onProcessMonitorStateChange.bind(this));
 
         this._testNavigatorView = this._page.testNavigator !== null ? new TestNavigatorView(this._page.testNavigator) : null;
+        this._autoNextNavigator = null;
 
         this._questionViewFactory = new QuestionViewFactory(this._questionViewSettings);
         this._registeredCustomQuestionViews = {};
@@ -38,10 +40,12 @@ export default class PageView {
         this._attachQuestionViews();
         this._attachModelHandlers();
         this._attachControlHandlers();
+        this._attachExtensions();
+
         this._initCompleteEvent.trigger();
     }
 
-    get initCompleteEvent(){
+    get initCompleteEvent() {
         return this._initCompleteEvent;
     }
 
@@ -99,8 +103,7 @@ export default class PageView {
     _customTryCreateView(model, createCustomQuestionViewFn) {
         try {
             return createCustomQuestionViewFn(model, this._questionViewSettings);
-        }
-        catch (error) {
+        } catch (error) {
             // eslint-disable-next-line no-console
             console.error(`Custom view creation for question(${model.id}) failed: ` + error);
         }
@@ -109,8 +112,7 @@ export default class PageView {
     _factoryTryCreateView(model) {
         try {
             return this._questionViewFactory.create(model);
-        }
-        catch (error) {
+        } catch (error) {
             // eslint-disable-next-line no-console
             console.error(`Factory view creation for question(${model.id}) failed: ` + error);
         }
@@ -141,11 +143,23 @@ export default class PageView {
         this._preventFormSubmitOnEnter();
     }
 
+    _attachExtensions() {
+        this._autoNextNavigator = new AutoNextNavigator(this._page);
+    }
+
     _showErrors(errors = []) {
+        if(this._page.surveyInfo.disableValidationBanner){
+            return;
+        }
+
         this._pageErrorBlock.showErrors(errors);
     }
 
     _hideErrors() {
+        if(this._page.surveyInfo.disableValidationBanner){
+            return;
+        }
+
         this._pageErrorBlock.hideErrors();
     }
 
@@ -206,8 +220,7 @@ export default class PageView {
     _runDynamicQuestionStartupScript(script) {
         try {
             $.globalEval(script);
-        }
-        catch (error) {
+        } catch (error) {
             // eslint-disable-next-line no-console
             console.error(error);
         }
@@ -220,19 +233,17 @@ export default class PageView {
 
         if (next) {
             this._page.next();
-        }
-        else {
+        } else {
             this._page.back();
         }
     }
 
     _onOkButtonClick() {
         try {
-            if (window.parent && typeof(window.parent.postMessage) === 'function') {
+            if (window.parent && typeof (window.parent.postMessage) === 'function') {
                 window.parent.postMessage({type: 'cf-survey-end'}, '*');
             }
-        }
-        catch (error) {
+        } catch (error) {
             // eslint-disable-next-line no-console
             console.error(error);
         }
@@ -249,25 +260,25 @@ export default class PageView {
         }
     }
 
-    _onDynamicQuestionChangeComplete(models){
+    _onDynamicQuestionChangeComplete(models) {
         this._processMonitor.removeProcess('dynamic_manager');
 
         models.forEach(model => {
-            if(model.type === QuestionTypes.DynamicQuestionPlaceholder){
+            if (model.type === QuestionTypes.DynamicQuestionPlaceholder) {
                 this._processMonitor.removeProcess(`question_view_${model.id}`);
             }
         });
     }
 
     _onQuestionPendingChange({id, pending}) {
-        if(pending){
+        if (pending) {
             this._processMonitor.addProcess(`question_view_${id}`);
         } else {
             this._processMonitor.removeProcess(`question_view_${id}`);
         }
     }
 
-    _onProcessMonitorStateChange(){
+    _onProcessMonitorStateChange() {
         $('.cf-page__navigation').toggleClass('cf-navigation--disabled', !this._processMonitor.idle);
     }
 }

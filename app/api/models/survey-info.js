@@ -13,6 +13,7 @@ export default class SurveyInfo {
         this._messages = rawSurveyInfo.messages;
         this._allowNextNavigation = rawSurveyInfo.allowNextNavigation;
         this._allowBackNavigation = rawSurveyInfo.allowBackNavigation;
+        this._disableValidationBanner = rawSurveyInfo.disableValidationBanner;
     }
 
     /**
@@ -102,5 +103,13 @@ export default class SurveyInfo {
      */
     get allowBackNavigation() {
         return this._allowBackNavigation;
+    }
+    /**
+     * is disable toaster
+     * @type {bool}
+     * @readonly
+     */
+    get disableValidationBanner() {
+        return this._disableValidationBanner;
     }
 }

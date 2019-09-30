@@ -9,7 +9,7 @@ export default class CarouselMultiGridQuestionView extends QuestionView {
     constructor(question) {
         super(question);
 
-        this._carouselItems = this._question.innerQuestions.map(question => new CarouselItem(question.id));
+        this._carouselItems = this._question.innerQuestions.map(question => new CarouselItem(question.id, question.values.length > 0));
         this._carousel = new Carousel(this._container.find('.cf-carousel'), this._carouselItems);
         this._moveToFirstError = true;
         this._answerErrorBlockManager = new ErrorBlockManager();

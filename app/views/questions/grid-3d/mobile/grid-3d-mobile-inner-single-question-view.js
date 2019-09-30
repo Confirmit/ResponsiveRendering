@@ -5,6 +5,7 @@ export default class Grid3DMobileInnerSingleQuestionView extends Grid3DMobileInn
     constructor(parentQuestion, question, settings = null) {
         super(parentQuestion, question, settings);
 
+        this._selectedAnswerCssClass = 'cf-single-answer--selected';
         this._attachHandlersToDOM();
     }
 
@@ -27,10 +28,10 @@ export default class Grid3DMobileInnerSingleQuestionView extends Grid3DMobileInn
         }
 
         this._question.answers.forEach(answer => {
-            this._getAnswerNode(answer.code).removeClass('cf-single-answer--selected');
+            this._getAnswerNode(answer.code).removeClass(this._selectedAnswerCssClass);
         });
 
-        this._getAnswerNode(this._question.value).addClass('cf-single-answer--selected');
+        this._getAnswerNode(this._question.value).addClass(this._selectedAnswerCssClass);
     }
 
 

@@ -67,7 +67,8 @@
   cursor: pointer;
   width: $control-size;
   height: $control-size;
-  display: inline-block;
+  display: block;
+  margin: 0 auto;
 
   &--selected {
     @include radio_bg($control-size, true);
@@ -80,7 +81,8 @@
   cursor: pointer;
   width: $control-size;
   height: $control-size;
-  display: inline-block;
+  display: block;
+  margin: 0 auto;
 
   &--selected {
     @include checkbox_bg($control-size, true);

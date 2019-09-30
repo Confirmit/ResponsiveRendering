@@ -23,9 +23,8 @@ export default class SingleQuestion extends QuestionWithAnswers {
         this._layoutColumns = model.layoutColumns || 0;
         this._layoutRows = model.layoutRows || 0;
 
-        this._value = null;
-
-        this._loadInitialState(model);
+        this._value = model.value || null;
+        this._otherValues = { ...model.otherValues };
     }
 
     /**
@@ -93,7 +92,7 @@ export default class SingleQuestion extends QuestionWithAnswers {
 
     /**
      * Other value.
-     * @type {string}
+     * @type {?string}
      * @readonly
      */
     get otherValue() {
@@ -145,12 +144,11 @@ export default class SingleQuestion extends QuestionWithAnswers {
      * @param {string} value - Answer code.
      */
     setValue(value) {
-        const answerCode = value;
-
-        const changed = this._setValue(answerCode);
-        if (changed) {
-            this._onChange({value: answerCode});
-        }
+        this._setValueInternal(
+            'value',
+            () => this._setValue(value),
+            this._diffPrimitives,
+        );
     }
 
     /**
@@ -158,12 +156,11 @@ export default class SingleQuestion extends QuestionWithAnswers {
      * @param {string} otherValue - other value.
      */
     setOtherValue(otherValue) {
-        const answerCode = this._value;
-        
-        const changed = this._setOtherValue(answerCode, otherValue);
-        if (changed) {
-            this._onChange({otherValue: answerCode});
-        }
+        this._setValueInternal(
+            'otherValue',
+            () => this._setOtherValue(this._value, otherValue),
+            this._diffPrimitives,
+        );
     }
 
     _setValue(value) {
@@ -182,11 +179,6 @@ export default class SingleQuestion extends QuestionWithAnswers {
         this._value = value;
 
         return true;
-    }
-
-    _loadInitialState({value = null, otherValues = []}) {
-        this._value = value;
-        this._otherValues = { ...otherValues };
     }
 
     _validateRule(validationType) {

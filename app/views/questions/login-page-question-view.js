@@ -10,9 +10,13 @@ export default class LoginPageQuestionView extends QuestionView {
         this._attachControlHandlers();
     }
 
-    _onModelValueChange(changes) {
-        this._userNameInputNode.val(changes.changes.value.userName);
-        this._passwordInputNode.val(changes.changes.value.password);
+    _onModelValueChange() {
+        if(this._question.value === null) {
+            return;
+        }
+
+        this._userNameInputNode.val(this._question.value.userName);
+        this._passwordInputNode.val(this._question.value.password);
     }
 
     /* Control handlers */

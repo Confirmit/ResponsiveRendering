@@ -19,10 +19,8 @@ export default class HierarchyQuestion extends QuestionWithAnswers {
         this._mandatoryLevelText = model.mandatoryLevelText;
         this._optionalLevelText = model.optionalLevelText;
 
-        this._value = null;
-        this._hierarchy = [];
-
-        this._loadInitialState(model);
+        this._value = model.value || null;
+        this._hierarchy = new HierarchyNode(model.hierarchy);
     }
 
     /**
@@ -127,11 +125,15 @@ export default class HierarchyQuestion extends QuestionWithAnswers {
      * @param {string} value - Extended Answer code.
      */
     setValue(value) {
-        const answerCode = value;
-        const changed = this._setValue(answerCode);
+        if (this.readOnly) {
+            return;
+        }
+
+        const oldValue = this.value;
+        const changed = this._setValue(value);
         if (changed) {
             this._updateHierarchy()
-                .then(() => this._onChange({value: answerCode}));
+                .then(() => this._onChange({ value: this._diffPrimitives(oldValue, this.value) }));
         }
     }
 
@@ -161,11 +163,6 @@ export default class HierarchyQuestion extends QuestionWithAnswers {
             yield currentNode;
             currentNode.children.forEach(childNode => queue.push(childNode));
         }
-    }
-
-    _loadInitialState({value = null, hierarchy = null}) {
-        this._value = value;
-        this._hierarchy = new HierarchyNode(hierarchy);
     }
 
     _revealAnswerCode(extendedAnswerCode) {

@@ -49,11 +49,13 @@ export default class SliderGridQuestionView extends QuestionWithAnswersView {
     }
 
     _createSlider(sliderNode, sliderValues, sliderValue, textValueHandler) {
+        const readOnly = this._question.readOnly;
+
         if (this._question.isRtl) {
-            return new HorizontalRtlSlider(sliderNode, sliderValues, sliderValue, textValueHandler);
+            return new HorizontalRtlSlider(sliderNode, sliderValues, sliderValue, textValueHandler, false, readOnly);
         }
 
-        return new HorizontalSlider(sliderNode, sliderValues, sliderValue, textValueHandler);
+        return new HorizontalSlider(sliderNode, sliderValues, sliderValue, textValueHandler, false, readOnly);
     }
 
     _updateSliders({values = []}) {

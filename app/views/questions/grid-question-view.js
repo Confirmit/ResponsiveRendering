@@ -94,7 +94,6 @@ export default class GridQuestionView extends QuestionWithAnswerView {
     }
 
     _showAnswerError(validationResult) {
-
         //super._showAnswerError(result); TODO: is it possible to re-use?
 
         const answer = this._question.getAnswer(validationResult.answerCode);

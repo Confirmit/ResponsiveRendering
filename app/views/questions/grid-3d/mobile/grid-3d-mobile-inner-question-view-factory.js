@@ -1,5 +1,7 @@
 import Grid3DMobileInnerSingleQuestionView from "./grid-3d-mobile-inner-single-question-view.js";
+import Grid3DMobileInnerSingleAnswerButtonsQuestionView from "./grid-3d-mobile-inner-single-answer-buttons-question-view";
 import Grid3DMobileInnerMultiQuestionView from "./grid-3d-mobile-inner-multi-question-view.js";
+import Grid3DMobileInnerMultiAnswerButtonsQuestionView from "./grid-3d-mobile-inner-multi-answer-buttons-question-view";
 import Grid3DMobileInnerOpenListQuestionView from "./grid-3d-mobile-inner-open-list-question-view";
 import Grid3DMobileInnerNumericListQuestionView from "./grid-3d-mobile-inner-numeric-list-question-view";
 import Grid3DMobileInnerGridQuestionView from "./grid-3d-mobile-inner-grid-question-view";
@@ -24,8 +26,12 @@ export default class Grid3DMobileInnerQuestionViewFactory {
     create(innerQuestion) {
         switch (innerQuestion.type) {
             case QuestionTypes.Single:
+                if(innerQuestion.answerButtons)
+                    return new Grid3DMobileInnerSingleAnswerButtonsQuestionView(this._question, innerQuestion, this._settings);
                 return new Grid3DMobileInnerSingleQuestionView(this._question, innerQuestion, this._settings);
             case QuestionTypes.Multi:
+                if(innerQuestion.answerButtons)
+                    return new Grid3DMobileInnerMultiAnswerButtonsQuestionView(this._question, innerQuestion, this._settings);
                 return new Grid3DMobileInnerMultiQuestionView(this._question, innerQuestion, this._settings);
             case QuestionTypes.OpenTextList:
                 return new Grid3DMobileInnerOpenListQuestionView(this._question, innerQuestion, this._settings);

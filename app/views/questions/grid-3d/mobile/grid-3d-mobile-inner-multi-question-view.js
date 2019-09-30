@@ -5,6 +5,7 @@ export default class Grid3DMobileInnerMultiQuestionView extends Grid3DMobileInne
     constructor(parentQuestion, question, settings = null) {
         super(parentQuestion, question, settings);
 
+        this._selectedAnswerCssClass = 'cf-multi-answer--selected';
         this._attachHandlersToDOM();
     }
 
@@ -30,11 +31,11 @@ export default class Grid3DMobileInnerMultiQuestionView extends Grid3DMobileInne
         }
 
         this._question.answers.forEach(answer => {
-            this._getAnswerNode(answer.code).removeClass('cf-multi-answer--selected');
+            this._getAnswerNode(answer.code).removeClass(this._selectedAnswerCssClass);
         });
 
         this._question.values.forEach(answerCode => {
-            this._getAnswerNode(answerCode).addClass('cf-multi-answer--selected');
+            this._getAnswerNode(answerCode).addClass(this._selectedAnswerCssClass);
         });
     }
 

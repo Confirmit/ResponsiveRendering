@@ -14,8 +14,9 @@ export default class OpenTextQuestion extends Question {
     constructor(model) {
         super(model);
 
-        this._loadInitialState(model);
-        this._parseFeatures(model);
+        this._maxLength = model.maxLength;
+
+        this._value = model.value || null;
     }
 
     /**
@@ -50,22 +51,24 @@ export default class OpenTextQuestion extends Question {
 
     /**
      * Set answer value.
-     * @param {string} answerValue - Answer value.
+     * @param {string} value - Answer text value.
      */
-    setValue(answerValue) {
-        let valueToSet = Utils.isEmpty(answerValue) ? null : answerValue.toString();
-        if (this._value !== valueToSet) {
-            this._value = valueToSet;
-            this._onChange({value: true});
+    setValue(value) {
+        this._setValueInternal(
+            'value',
+            () => this._setValue(value),
+            this._diffPrimitives,
+        );
+    }
+
+    _setValue(value) {
+        value = Utils.isEmpty(value) ? null : value.toString();
+        if (this._value === value) {
+            return false;
         }
-    }
 
-    _loadInitialState({ value }) {
         this._value = value;
-    }
-
-    _parseFeatures({ maxLength }){
-        this._maxLength = maxLength;
+        return true;
     }
 
     _validateRule(validationType) {

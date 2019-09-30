@@ -13,7 +13,9 @@ export default class CarouselGridBarsGridQuestionView extends GridQuestionView {
     constructor(question, settings) {
         super(question, settings);
 
-        this._carouselItems = this._question.answers.map(answer => new CarouselItem(this._getCarouselItemId(answer.code)));
+        this._carouselItems = this._question.answers.map(answer =>
+            new CarouselItem(this._getCarouselItemId(answer.code),  !Utils.isEmpty(this._question.values[answer.code])));
+
         this._carousel = new Carousel(this._container.find('.cf-carousel'), this._carouselItems);
         this._moveToFirstError = true;
 

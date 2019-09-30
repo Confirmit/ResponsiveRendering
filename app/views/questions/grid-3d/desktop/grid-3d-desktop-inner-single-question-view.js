@@ -4,6 +4,7 @@ export default class Grid3DDesktopInnerSingleQuestionView extends Grid3DDesktopI
     constructor(parentQuestion, question, settings = null) {
         super(parentQuestion, question, settings);
 
+        this._selectedAnswerCssClass = 'cf-grid-single-answer--selected';
         this._attachHandlersToDOM();
     }
 
@@ -22,9 +23,9 @@ export default class Grid3DDesktopInnerSingleQuestionView extends Grid3DDesktopI
             return;
         }
         this._question.answers.forEach(answer => {
-            this._getAnswerNode(answer.code).removeClass('cf-grid-single-answer--selected');
+            this._getAnswerNode(answer.code).removeClass(this._selectedAnswerCssClass);
         });
 
-        this._getAnswerNode(this._question.value).addClass('cf-grid-single-answer--selected');
+        this._getAnswerNode(this._question.value).addClass(this._selectedAnswerCssClass);
     }
 }

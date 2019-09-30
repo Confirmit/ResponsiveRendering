@@ -18,7 +18,7 @@ export default class NumericQuestion extends Question {
         this._slider = model.slider || false;
         this._sliderIsVertical = model.sliderIsVertical || false;
 
-        this._value = model.value;
+        this._value = model.value || null;
     }
 
     /**
@@ -73,11 +73,11 @@ export default class NumericQuestion extends Question {
      * @param {number|string} value - Question value.
      */
     setValue(value) {
-        const changed = this._setValue(value);
-
-        if (changed) {
-            this._onChange({value: this.value});
-        }
+        this._setValueInternal(
+            'value',
+            () => this._setValue(value),
+            this._diffPrimitives,
+        );
     }
 
     _setValue(value) {

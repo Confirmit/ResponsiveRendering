@@ -6,12 +6,10 @@ import RuleValidationResult from '../validation/rule-validation-result.js';
 import Utils from 'utils.js';
 
 /**
- * @desc Extends QuestionWithAnswers
  * @extends {QuestionWithAnswers}
  */
 export default class GridQuestionBase extends QuestionWithAnswers {
     /**
-     * Create instance.
      * @param {object} model - The instance of the model.
      */
     constructor(model) {
@@ -20,12 +18,11 @@ export default class GridQuestionBase extends QuestionWithAnswers {
         this._scales = [];
         this._scaleGroups = [];
         
-        this._values = {};
+        this._values = { ...model.values };
+        this._otherValues = { ...model.otherValues };
         
         this._parseScaleGroups(model);
         this._parseScales(model);
-
-        this._loadInitialState(model);
     }
 
     /**
@@ -71,12 +68,10 @@ export default class GridQuestionBase extends QuestionWithAnswers {
      * @param {string} scaleCode - Scale code.
      */
     setValue(answerCode, scaleCode) {
-        const old = { ...this._values };
-
-        const changed = this._setValue(answerCode, scaleCode);
-        if(changed) {
-            this._onChange({values: this._diff(old, this._values)});
-        }
+        this._setValueInternal(
+            'values',
+            () => this._setValue(answerCode, scaleCode)
+        );
     }
     
 	/**
@@ -85,12 +80,10 @@ export default class GridQuestionBase extends QuestionWithAnswers {
      * @param {string} otherValue - Other value.
      */
     setOtherValue(answerCode, otherValue) {
-        const old = { ...this._otherValues };
-
-        const changed = this._setOtherValue(answerCode, otherValue);
-        if (changed) {
-            this._onChange({otherValues: this._diff(old, this._otherValues)});
-        }
+        this._setValueInternal(
+            'otherValues',
+            () => this._setOtherValue(answerCode, otherValue),
+        );
     }
 
     /**
@@ -152,7 +145,7 @@ export default class GridQuestionBase extends QuestionWithAnswers {
             return;
         }
         // create empty groups to populate them in _parseScales method
-        this._scaleGroups = scaleGroups.map(group=> new HeadGroup(group.code, group.title));
+        this._scaleGroups = scaleGroups.map(group=> new HeadGroup(group));
     }
 
     _parseScales({scales}) {
@@ -200,11 +193,6 @@ export default class GridQuestionBase extends QuestionWithAnswers {
         }
 
         return true;
-    }
-
-    _loadInitialState({values = {}, otherValues = {}}) {
-        this._values = { ...values };
-        this._otherValues = { ...otherValues };
     }
 
     _validateRule(validationType) {

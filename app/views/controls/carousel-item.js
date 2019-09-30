@@ -1,9 +1,9 @@
 import Event from "../../event";
 
 export default class CarouselItem {
-    constructor(itemId) {
+    constructor(itemId, isComplete = false) {
         this._id = itemId;
-        this._isComplete = false;
+        this._isComplete = isComplete;
         this._isError = false;
         this._changeEvent = new Event('carousel-item:changed');
     }

@@ -17,10 +17,11 @@ export default class RankingQuestion extends QuestionWithAnswers {
         this._multiCount = { ...model.multiCount };
         this._layoutColumns = model.layoutColumns || 0;
         this._layoutRows = model.layoutRows || 0;
+        this._captureOrder = model.captureOrder || false;
+        this._answerButtons = model.answerButtons || false;
 
-        this._values = {};
-
-        this._loadInitialState(model);
+        this._values = { ...model.values };
+        this._otherValues = { ...model.otherValues };
     }
 
     /**
@@ -69,6 +70,24 @@ export default class RankingQuestion extends QuestionWithAnswers {
     }
 
     /**
+     * Display the question as capture order multi.
+     * @type {boolean}
+     * @readonly
+     */
+    get captureOrder() {
+        return this._captureOrder;
+    }
+
+    /**
+     * Use buttons for answers.
+     * @type {boolean}
+     * @readonly
+     */
+    get answerButtons() {
+        return this._answerButtons;
+    }
+
+    /**
      * @inheritDoc
      */
     get formValues(){
@@ -93,26 +112,22 @@ export default class RankingQuestion extends QuestionWithAnswers {
      * @param {string} answerValue - Answer value.
      */
     setValue(answerCode, answerValue) {
-        const old = { ...this._values };
-
-        const changed = this._setValue(answerCode, answerValue);
-        if (changed) {
-            this._onChange({values: this._diff(old, this._values)});
-        }
+        this._setValueInternal(
+            'values',
+            () => this._setValue(answerCode, answerValue)
+        );
     }
 
     /**
      * Set other answer value.
      * @param {string} answerCode - Answer code.
-     * @param {string} otherValue -Other value.
+     * @param {string} otherValue - Other value.
      */
     setOtherValue(answerCode, otherValue) {
-        const old = { ...this._otherValues };
-
-        const changed = this._setOtherValue(answerCode, otherValue);
-        if(changed) {
-            this._onChange({otherValues: this._diff(old, this._otherValues)});
-        }
+        this._setValueInternal(
+            'otherValues',
+            () => this._setOtherValue(answerCode, otherValue)
+        );
     }
 
     _setValue(answerCode, answerValue) {
@@ -121,6 +136,11 @@ export default class RankingQuestion extends QuestionWithAnswers {
         const answer = this.getAnswer(answerCode);
         if (!answer) {
             return false;
+        }
+
+        if (this._captureOrder && (answer.isExclusive || this._isCurrentValueExclusive())) {
+            this._clearValues();
+            answerValue = 1;
         }
 
         if (Utils.isNotANumber(answerValue)) {
@@ -140,10 +160,13 @@ export default class RankingQuestion extends QuestionWithAnswers {
         return true;
     }
 
-    _loadInitialState({values = {}, otherValues = {}}) {
+    _isCurrentValueExclusive() {
+        const values = Object.keys(this._values);
+        return values.length === 1 && this.getAnswer(values[0]).isExclusive;
+    }
 
-        this._values = { ...values };
-        this._otherValues = { ...otherValues };
+    _clearValues() {
+        this._values = {};
     }
 
     _validateRule(validationType) {
@@ -170,6 +193,11 @@ export default class RankingQuestion extends QuestionWithAnswers {
         let {equal, min, max} = this.multiCount;
         if (!Utils.isEmpty(equal) || !Utils.isEmpty(min) || !Utils.isEmpty(max))
             return new RuleValidationResult(true);
+
+        if (this._captureOrder) {
+            const isValid = Object.keys(this.values).length > 0;
+            return new RuleValidationResult(isValid);
+        }
 
         let invalidAnswers = [];
 
@@ -206,6 +234,9 @@ export default class RankingQuestion extends QuestionWithAnswers {
         let count = Object.values(this.values).length;
 
         if (!this.required && count === 0) // bypass if not required and not answered
+            return new RuleValidationResult(true);
+
+        if (this._captureOrder && this._isCurrentValueExclusive()) // bypass if exclusive answers is supported and selected answer is exclusive
             return new RuleValidationResult(true);
 
         if(!Utils.isEmpty(equal) && count !== equal)

@@ -19,10 +19,14 @@ import ImageUploader from "./image-uploader";
 import LoginPageQuestion from "./models/questions/login-page-question";
 import TelephoneQuestion from "./models/questions/telephone-question";
 import HierarchyQuestion from "./models/questions/hierarchy-question";
-import Question from "./models/base/question";
 import HierarchyService from "./hierarchy-service";
+import Question from "./models/base/question";
 import VideoUploadQuestion from './models/questions/video-upload-question';
 import AudioUploadQuestion from './models/questions/audio-upload-question';
+import CodeCaptureQuestion from './models/questions/code-capture-question';
+import SearchableSingleQuestion  from './models/questions/searchable-single-question.js';
+import SearchableMultiQuestion  from './models/questions/searchable-multi-question.js';
+import SearchableAnswerListService  from './searchable-answer-list-service.js';
 
 export default class QuestionFactory {
     constructor(language, endpoints, isAccessible = true) {
@@ -83,12 +87,18 @@ export default class QuestionFactory {
                 return new VideoUploadQuestion(rawModel);
             case QuestionTypes.AudioCapture:
                 return new AudioUploadQuestion(rawModel);
+            case QuestionTypes.CodeCapture:
+                return new CodeCaptureQuestion(rawModel);
             case QuestionTypes.Login:
                 return new LoginPageQuestion(rawModel);
             case QuestionTypes.Telephone:
                 return new TelephoneQuestion(rawModel);
             case QuestionTypes.Hierarchy:
-                return new HierarchyQuestion(rawModel,  new HierarchyService(this._endpoints.hierarchyApiEndpoint, this._language));
+                return new HierarchyQuestion(rawModel, new HierarchyService(this._endpoints.hierarchyApiEndpoint, this._language));
+            case QuestionTypes.SearchableSingle:
+                return new SearchableSingleQuestion(rawModel, new SearchableAnswerListService(this._endpoints.searchableAnswerListEndpoint));
+            case QuestionTypes.SearchableMulti:
+                return new SearchableMultiQuestion(rawModel, new SearchableAnswerListService(this._endpoints.searchableAnswerListEndpoint));
             default:
                 return;
         }

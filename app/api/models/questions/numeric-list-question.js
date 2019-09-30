@@ -22,10 +22,11 @@ export default class NumericListQuestion extends QuestionWithAnswers {
         this._layoutColumns = model.layoutColumns || 0;
         this._layoutRows = model.layoutRows || 0;
         this._answersHaveRightText = model.answersHaveRightText || false;
+        this._slider = model.slider || false;
+        this._sliderIsVertical = model.sliderIsVertical || false;
 
-        this._values = {};
-
-        this._loadInitialState(model);
+        this._values = { ...model.values };
+        this._otherValues = { ...model.otherValues };
     }
 
     /**
@@ -138,17 +139,33 @@ export default class NumericListQuestion extends QuestionWithAnswers {
     }
 
     /**
-     * Select answer for numericlist.
+     * Is it slider.
+     * @type {boolean}
+     * @readonly
+     */
+    get slider() {
+        return this._slider;
+    }
+
+    /**
+     * Is slider vertical.
+     * @type {boolean}
+     * @readonly
+     */
+    get sliderIsVertical() {
+        return this._sliderIsVertical;
+    }
+
+    /**
+     * Select answer for numeric list.
      * @param {string} answerCode - Answer code.
      * @param {numeric|string} answerValue - Answer value.
      */
     setValue(answerCode, answerValue) {
-        const old = { ...this._values };
-
-        const changed = this._setValue(answerCode, answerValue);
-        if (changed){
-            this._onChange({values: this._diff(old, this._values)});
-        }
+        this._setValueInternal(
+            'values',
+            () => this._setValue(answerCode, answerValue)
+        );
     }
 
     /**
@@ -157,12 +174,10 @@ export default class NumericListQuestion extends QuestionWithAnswers {
      * @param {string} otherValue -Other value.
      */
     setOtherValue(answerCode, otherValue) {
-        const old = { ...this._otherValues };
-
-        const changed = this._setOtherValue(answerCode, otherValue);
-        if(changed) {
-            this._onChange({otherValues: this._diff(old, this._otherValues)});
-        }
+        this._setValueInternal(
+            'otherValues',
+            () => this._setOtherValue(answerCode, otherValue),
+        );
     }
 
     _setValue(answerCode, answerValue) {
@@ -185,12 +200,6 @@ export default class NumericListQuestion extends QuestionWithAnswers {
         }
 
         return true;
-    }
-
-    _loadInitialState({values = {}, otherValues= {}})
-    {
-        this._values = { ... values };
-        this._otherValues = { ...otherValues };
     }
 
     _validateRule(validationType) {

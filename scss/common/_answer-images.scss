@@ -5,7 +5,7 @@ $border-width: .3em;
   display: flex;
 
   &__element {
-    min-width: 0;
+    min-width: 1px;
   }
 
   &__element--hovered,
@@ -64,12 +64,24 @@ $border-width: .3em;
       }
     }
   }
+
+  &--flexible {
+    align-items: flex-start;
+
+    .cf-answer-image__element {
+      max-width: 100%;
+    }
+  }
 }
 
 
 .cf-inline-answer-image-wrapper{
   display: flex;
   align-items: center;
+
+  &__content {
+    display: flex;
+  }
 
   &__other {
     height: $control-size + 0.2; // aligned with cf-text-box

@@ -9,10 +9,19 @@ export default class CarouselGridQuestionView extends QuestionWithAnswersView {
     constructor(question) {
         super(question);
 
+        this._selectedImageScaleCssClass = 'cf-answer-image--selected';
+        this._selectedScaleCssClass = 'cf-answer-button--selected';
+
         this._moveToFirstError = true;
-        this._carouselItems = this._question.answers.map(answer => new CarouselItem(this._getCarouselItemId(answer.code)));
+        this._carouselItems = this._question.answers.map(answer =>
+            new CarouselItem(this._getCarouselItemId(answer.code), !Utils.isEmpty(this._question.values[answer.code])));
         this._carousel = new Carousel(this._container.find('.cf-carousel'), this._carouselItems);
+
         this._attachControlHandlers();
+    }
+
+    _getSelectedScaleClass(scale) {
+        return scale.imagesSettings !== null ? this._selectedImageScaleCssClass : this._selectedScaleCssClass;
     }
 
     _attachControlHandlers() {
@@ -71,9 +80,12 @@ export default class CarouselGridQuestionView extends QuestionWithAnswersView {
         if (values.length === 0)
             return;
 
-        this._container.find('.cf-answer-button').removeClass('cf-answer-button--selected');
         Object.entries(this._question.values).forEach(([answerCode, scaleCode]) => {
-            this._getScaleNode(answerCode, scaleCode).addClass('cf-answer-button--selected');
+            this._question.scales.forEach(scale => {
+                this._getScaleNode(answerCode, scale.code).removeClass(this._getSelectedScaleClass(this._question.getScale(scale.code)));
+            });
+
+            this._getScaleNode(answerCode, scaleCode).addClass(this._getSelectedScaleClass(this._question.getScale(scaleCode)));
         });
     }
 
@@ -81,7 +93,7 @@ export default class CarouselGridQuestionView extends QuestionWithAnswersView {
         Object.keys(this._question.values).forEach(answerCode => {
             const carouselItem = this._carouselItems.find(item => item.id === this._getCarouselItemId(answerCode));
             const answer = this._question.answers.find(answer => answer.code === answerCode);
-            if(answer.isOther){
+            if (answer.isOther) {
                 carouselItem.isComplete = this._question.values[answerCode] !== undefined && this._question.otherValues[answerCode] !== undefined;
             } else {
                 carouselItem.isComplete = this._question.values[answerCode] !== undefined;
@@ -98,7 +110,7 @@ export default class CarouselGridQuestionView extends QuestionWithAnswersView {
 
         const otherIsChanged = changes.otherValues !== undefined;
         const answerCompleteStatusChanged = this._carousel.currentItem.isComplete === true && this._carousel.currentItem.isComplete !== currentItemIsCompleteBefore;
-        if(answerCompleteStatusChanged && !otherIsChanged){
+        if (answerCompleteStatusChanged && !otherIsChanged) {
             this._carousel.moveNext();
         }
     }

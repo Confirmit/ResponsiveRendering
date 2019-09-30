@@ -82,7 +82,7 @@ export default class QuestionWithAnswers extends Question {
             return;
         }
         // create empty groups to populate them in _parseAnswers method
-        this._answerGroups = answerGroups.map(group=> new HeadGroup(group.code, group.title));
+        this._answerGroups = answerGroups.map(group=> new HeadGroup(group));
     }
 
     _parseAnswers({answers}) {
@@ -129,24 +129,6 @@ export default class QuestionWithAnswers extends Question {
         return true;
     }
 
-
-    _diff(oldValues, newValues) {
-        // check if it's an array
-        if (Array.isArray(oldValues)) {
-            const added = newValues.filter(newVal => !oldValues.includes(newVal));
-            const removed = oldValues.filter(oldVal => !newValues.includes(oldVal));
-            return [...added, ...removed];
-        }
-
-        // otherwise assume it's an object
-        const oldKeys = Object.keys(oldValues);
-        const newKeys = Object.keys(newValues);
-        const added = newKeys.filter(newKey => !oldKeys.includes(newKey));
-        const removed = oldKeys.filter(oldKey => !newKeys.includes(oldKey));
-        const modified = oldKeys.filter(oldKey => newKeys.includes(oldKey)).filter(key => oldValues[key] !== newValues[key]);
-        return [...added, ...removed, ...modified];
-    }
-    
     _validateRequiredIfOtherSpecified() {
         let invalidAnswers = [];
         

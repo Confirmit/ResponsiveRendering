@@ -4,7 +4,14 @@ import RuleValidationResult from '../validation/rule-validation-result.js';
 import Utils from 'utils.js';
 
 /**
- * @desc Extends Question
+ * @typedef {Object} CultureInfo
+ * @property {string} dateFormat Required format, e.g. "M/d/yyyy".
+ * @property {string[]} Names of months in current respondent language.
+ * @property {string} name Culture name, e.g. "en-US".
+ */
+
+/**
+ * @desc Date question model.
  * @extends {Question}
  */
 export default class DateQuestion extends Question {
@@ -15,8 +22,10 @@ export default class DateQuestion extends Question {
     constructor(model) {
         super(model);
 
-        this._loadInitialState(model);
-        this._parseFeatures(model);
+        this._minValue = model.minValue;
+        this._culture = model.culture;
+
+        this._value = model.value || null;
     }
 
     /**
@@ -64,19 +73,21 @@ export default class DateQuestion extends Question {
      * @example model.setValue('2017-12-31');
      */
     setValue(value) {
-        if (this._value !== value) {
-            this._value = value;
-            this._onChange({value: true});
+        this._setValueInternal(
+            'value',
+            () => this._setValue(value),
+            this._diffPrimitives,
+        );
+    }
+
+    _setValue(value) {
+        value = Utils.isEmpty(value) ? null : value.toString();
+        if(this._value === value) {
+            return false;
         }
-    }
 
-    _loadInitialState(model) {
-        this._value = model.value;
-    }
-
-    _parseFeatures({minValue, culture}){
-        this._minValue = minValue;
-        this._culture = culture;
+        this._value = value;
+        return true;
     }
 
     _validateRule(validationType) {

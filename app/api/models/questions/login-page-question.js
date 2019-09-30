@@ -17,7 +17,7 @@ export default class LoginPageQuestion extends Question {
 
     /**
      * Login page value.
-     * @type {{userName: string, password: string}}
+     * @type {{userName: ?string, password: ?string}}
      * @readonly
      */
     get value() {
@@ -42,9 +42,16 @@ export default class LoginPageQuestion extends Question {
      * @param {string} password - password.
      */
     setValue(userName, password) {
+        this._setValueInternal(
+            'value',
+            () => this._setValue(userName, password),
+            this._diffPrimitives,
+        );
+    }
+
+    _setValue(userName, password) {
         this._userName = Utils.isEmpty(userName) ? null : userName.toString();
         this._password = Utils.isEmpty(password) ? null : password.toString();
-
-        this._onChange({value: this.value});
+        return true;
     }
 }

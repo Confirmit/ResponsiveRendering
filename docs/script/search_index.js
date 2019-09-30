@@ -24,6 +24,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "se.rendering.responsive/app/api/models/questions/code-capture-question.js~codecapturequestion",
+    "class/app/api/models/questions/code-capture-question.js~CodeCaptureQuestion.html",
+    "<span>CodeCaptureQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/code-capture-question.js</span>",
+    "class"
+  ],
+  [
     "se.rendering.responsive/app/api/models/questions/date-question.js~datequestion",
     "class/app/api/models/questions/date-question.js~DateQuestion.html",
     "<span>DateQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/date-question.js</span>",
@@ -102,6 +108,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "se.rendering.responsive/app/api/models/questions/multi-question-base.js~multiquestionbase",
+    "class/app/api/models/questions/multi-question-base.js~MultiQuestionBase.html",
+    "<span>MultiQuestionBase</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/multi-question-base.js</span>",
+    "class"
+  ],
+  [
     "se.rendering.responsive/app/api/models/questions/numeric-list-question.js~numericlistquestion",
     "class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html",
     "<span>NumericListQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/numeric-list-question.js</span>",
@@ -174,6 +186,24 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "se.rendering.responsive/app/api/models/questions/searchable-multi-question.js~searchablemultiquestion",
+    "class/app/api/models/questions/searchable-multi-question.js~SearchableMultiQuestion.html",
+    "<span>SearchableMultiQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/searchable-multi-question.js</span>",
+    "class"
+  ],
+  [
+    "se.rendering.responsive/app/api/models/questions/searchable-question-mixin.js~searchablequestionmixin",
+    "function/index.html#static-function-SearchableQuestionMixin",
+    "<span>SearchableQuestionMixin</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/searchable-question-mixin.js</span>",
+    "function"
+  ],
+  [
+    "se.rendering.responsive/app/api/models/questions/searchable-single-question.js~searchablesinglequestion",
+    "class/app/api/models/questions/searchable-single-question.js~SearchableSingleQuestion.html",
+    "<span>SearchableSingleQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/searchable-single-question.js</span>",
+    "class"
+  ],
+  [
     "se.rendering.responsive/app/api/models/questions/single-question.js~singlequestion",
     "class/app/api/models/questions/single-question.js~SingleQuestion.html",
     "<span>SingleQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/single-question.js</span>",
@@ -241,13 +271,13 @@ window.esdocSearchIndex = [
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-set-debug",
+    "class/app/api/api.js~cfApi.html#instance-get-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-get-debug",
+    "class/app/api/api.js~cfApi.html#instance-set-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
@@ -276,6 +306,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "app/api/group-types.js",
+    "file/app/api/group-types.js.html",
+    "app/api/group-types.js",
+    "file"
+  ],
+  [
     "app/api/hierarchy-service.js",
     "file/app/api/hierarchy-service.js.html",
     "app/api/hierarchy-service.js",
@@ -285,12 +321,6 @@ window.esdocSearchIndex = [
     "app/api/image-uploader.js",
     "file/app/api/image-uploader.js.html",
     "app/api/image-uploader.js",
-    "file"
-  ],
-  [
-    "app/api/models/auto-next-navigation.js",
-    "file/app/api/models/auto-next-navigation.js.html",
-    "app/api/models/auto-next-navigation.js",
     "file"
   ],
   [
@@ -577,13 +607,13 @@ window.esdocSearchIndex = [
   ],
   [
     "app/api/models/base/question.js~question#allowvalidateonchange",
-    "class/app/api/models/base/question.js~Question.html#instance-get-allowValidateOnChange",
+    "class/app/api/models/base/question.js~Question.html#instance-set-allowValidateOnChange",
     "app/api/models/base/question.js~Question#allowValidateOnChange",
     "member"
   ],
   [
     "app/api/models/base/question.js~question#allowvalidateonchange",
-    "class/app/api/models/base/question.js~Question.html#instance-set-allowValidateOnChange",
+    "class/app/api/models/base/question.js~Question.html#instance-get-allowValidateOnChange",
     "app/api/models/base/question.js~Question#allowValidateOnChange",
     "member"
   ],
@@ -816,10 +846,52 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/code-capture-question.js",
+    "file/app/api/models/questions/code-capture-question.js.html",
+    "app/api/models/questions/code-capture-question.js",
+    "file"
+  ],
+  [
+    "app/api/models/questions/code-capture-question.js~codecapturequestion#cameraonly",
+    "class/app/api/models/questions/code-capture-question.js~CodeCaptureQuestion.html#instance-get-cameraOnly",
+    "app/api/models/questions/code-capture-question.js~CodeCaptureQuestion#cameraOnly",
+    "member"
+  ],
+  [
+    "app/api/models/questions/code-capture-question.js~codecapturequestion#constructor",
+    "class/app/api/models/questions/code-capture-question.js~CodeCaptureQuestion.html#instance-constructor-constructor",
+    "app/api/models/questions/code-capture-question.js~CodeCaptureQuestion#constructor",
+    "method"
+  ],
+  [
+    "app/api/models/questions/code-capture-question.js~codecapturequestion#formvalues",
+    "class/app/api/models/questions/code-capture-question.js~CodeCaptureQuestion.html#instance-get-formValues",
+    "app/api/models/questions/code-capture-question.js~CodeCaptureQuestion#formValues",
+    "member"
+  ],
+  [
+    "app/api/models/questions/code-capture-question.js~codecapturequestion#setvalue",
+    "class/app/api/models/questions/code-capture-question.js~CodeCaptureQuestion.html#instance-method-setValue",
+    "app/api/models/questions/code-capture-question.js~CodeCaptureQuestion#setValue",
+    "method"
+  ],
+  [
+    "app/api/models/questions/code-capture-question.js~codecapturequestion#value",
+    "class/app/api/models/questions/code-capture-question.js~CodeCaptureQuestion.html#instance-get-value",
+    "app/api/models/questions/code-capture-question.js~CodeCaptureQuestion#value",
+    "member"
+  ],
+  [
     "app/api/models/questions/date-question.js",
     "file/app/api/models/questions/date-question.js.html",
     "app/api/models/questions/date-question.js",
     "file"
+  ],
+  [
+    "app/api/models/questions/date-question.js~cultureinfo",
+    "typedef/index.html#static-typedef-CultureInfo",
+    "app/api/models/questions/date-question.js~CultureInfo",
+    "typedef"
   ],
   [
     "app/api/models/questions/date-question.js~datequestion#constructor",
@@ -1050,6 +1122,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/grid-question.js~gridquestion#answerbuttons",
+    "class/app/api/models/questions/grid-question.js~GridQuestion.html#instance-get-answerButtons",
+    "app/api/models/questions/grid-question.js~GridQuestion#answerButtons",
+    "member"
+  ],
+  [
     "app/api/models/questions/grid-question.js~gridquestion#answershaverighttext",
     "class/app/api/models/questions/grid-question.js~GridQuestion.html#instance-get-answersHaveRightText",
     "app/api/models/questions/grid-question.js~GridQuestion#answersHaveRightText",
@@ -1206,6 +1284,60 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "app/api/models/questions/multi-question-base.js",
+    "file/app/api/models/questions/multi-question-base.js.html",
+    "app/api/models/questions/multi-question-base.js",
+    "file"
+  ],
+  [
+    "app/api/models/questions/multi-question-base.js~multiquestionbase#clearvalues",
+    "class/app/api/models/questions/multi-question-base.js~MultiQuestionBase.html#instance-method-clearValues",
+    "app/api/models/questions/multi-question-base.js~MultiQuestionBase#clearValues",
+    "method"
+  ],
+  [
+    "app/api/models/questions/multi-question-base.js~multiquestionbase#constructor",
+    "class/app/api/models/questions/multi-question-base.js~MultiQuestionBase.html#instance-constructor-constructor",
+    "app/api/models/questions/multi-question-base.js~MultiQuestionBase#constructor",
+    "method"
+  ],
+  [
+    "app/api/models/questions/multi-question-base.js~multiquestionbase#formvalues",
+    "class/app/api/models/questions/multi-question-base.js~MultiQuestionBase.html#instance-get-formValues",
+    "app/api/models/questions/multi-question-base.js~MultiQuestionBase#formValues",
+    "member"
+  ],
+  [
+    "app/api/models/questions/multi-question-base.js~multiquestionbase#multicount",
+    "class/app/api/models/questions/multi-question-base.js~MultiQuestionBase.html#instance-get-multiCount",
+    "app/api/models/questions/multi-question-base.js~MultiQuestionBase#multiCount",
+    "member"
+  ],
+  [
+    "app/api/models/questions/multi-question-base.js~multiquestionbase#othervalues",
+    "class/app/api/models/questions/multi-question-base.js~MultiQuestionBase.html#instance-get-otherValues",
+    "app/api/models/questions/multi-question-base.js~MultiQuestionBase#otherValues",
+    "member"
+  ],
+  [
+    "app/api/models/questions/multi-question-base.js~multiquestionbase#setothervalue",
+    "class/app/api/models/questions/multi-question-base.js~MultiQuestionBase.html#instance-method-setOtherValue",
+    "app/api/models/questions/multi-question-base.js~MultiQuestionBase#setOtherValue",
+    "method"
+  ],
+  [
+    "app/api/models/questions/multi-question-base.js~multiquestionbase#setvalue",
+    "class/app/api/models/questions/multi-question-base.js~MultiQuestionBase.html#instance-method-setValue",
+    "app/api/models/questions/multi-question-base.js~MultiQuestionBase#setValue",
+    "method"
+  ],
+  [
+    "app/api/models/questions/multi-question-base.js~multiquestionbase#values",
+    "class/app/api/models/questions/multi-question-base.js~MultiQuestionBase.html#instance-get-values",
+    "app/api/models/questions/multi-question-base.js~MultiQuestionBase#values",
+    "member"
+  ],
+  [
     "app/api/models/questions/multi-question.js",
     "file/app/api/models/questions/multi-question.js.html",
     "app/api/models/questions/multi-question.js",
@@ -1218,12 +1350,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "app/api/models/questions/multi-question.js~multiquestion#clearvalues",
-    "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-method-clearValues",
-    "app/api/models/questions/multi-question.js~MultiQuestion#clearValues",
-    "method"
-  ],
-  [
     "app/api/models/questions/multi-question.js~multiquestion#constructor",
     "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-constructor-constructor",
     "app/api/models/questions/multi-question.js~MultiQuestion#constructor",
@@ -1233,12 +1359,6 @@ window.esdocSearchIndex = [
     "app/api/models/questions/multi-question.js~multiquestion#defaultvalue",
     "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-defaultValue",
     "app/api/models/questions/multi-question.js~MultiQuestion#defaultValue",
-    "member"
-  ],
-  [
-    "app/api/models/questions/multi-question.js~multiquestion#formvalues",
-    "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-formValues",
-    "app/api/models/questions/multi-question.js~MultiQuestion#formValues",
     "member"
   ],
   [
@@ -1254,39 +1374,9 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "app/api/models/questions/multi-question.js~multiquestion#multicount",
-    "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-multiCount",
-    "app/api/models/questions/multi-question.js~MultiQuestion#multiCount",
-    "member"
-  ],
-  [
-    "app/api/models/questions/multi-question.js~multiquestion#othervalues",
-    "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-otherValues",
-    "app/api/models/questions/multi-question.js~MultiQuestion#otherValues",
-    "member"
-  ],
-  [
     "app/api/models/questions/multi-question.js~multiquestion#refusedvalue",
     "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-refusedValue",
     "app/api/models/questions/multi-question.js~MultiQuestion#refusedValue",
-    "member"
-  ],
-  [
-    "app/api/models/questions/multi-question.js~multiquestion#setothervalue",
-    "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-method-setOtherValue",
-    "app/api/models/questions/multi-question.js~MultiQuestion#setOtherValue",
-    "method"
-  ],
-  [
-    "app/api/models/questions/multi-question.js~multiquestion#setvalue",
-    "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-method-setValue",
-    "app/api/models/questions/multi-question.js~MultiQuestion#setValue",
-    "method"
-  ],
-  [
-    "app/api/models/questions/multi-question.js~multiquestion#values",
-    "class/app/api/models/questions/multi-question.js~MultiQuestion.html#instance-get-values",
-    "app/api/models/questions/multi-question.js~MultiQuestion#values",
     "member"
   ],
   [
@@ -1372,6 +1462,18 @@ window.esdocSearchIndex = [
     "class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html#instance-method-setValue",
     "app/api/models/questions/numeric-list-question.js~NumericListQuestion#setValue",
     "method"
+  ],
+  [
+    "app/api/models/questions/numeric-list-question.js~numericlistquestion#slider",
+    "class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html#instance-get-slider",
+    "app/api/models/questions/numeric-list-question.js~NumericListQuestion#slider",
+    "member"
+  ],
+  [
+    "app/api/models/questions/numeric-list-question.js~numericlistquestion#sliderisvertical",
+    "class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html#instance-get-sliderIsVertical",
+    "app/api/models/questions/numeric-list-question.js~NumericListQuestion#sliderIsVertical",
+    "member"
   ],
   [
     "app/api/models/questions/numeric-list-question.js~numericlistquestion#values",
@@ -1542,6 +1644,18 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "app/api/models/questions/ranking-question.js~rankingquestion#answerbuttons",
+    "class/app/api/models/questions/ranking-question.js~RankingQuestion.html#instance-get-answerButtons",
+    "app/api/models/questions/ranking-question.js~RankingQuestion#answerButtons",
+    "member"
+  ],
+  [
+    "app/api/models/questions/ranking-question.js~rankingquestion#captureorder",
+    "class/app/api/models/questions/ranking-question.js~RankingQuestion.html#instance-get-captureOrder",
+    "app/api/models/questions/ranking-question.js~RankingQuestion#captureOrder",
+    "member"
+  ],
+  [
     "app/api/models/questions/ranking-question.js~rankingquestion#constructor",
     "class/app/api/models/questions/ranking-question.js~RankingQuestion.html#instance-constructor-constructor",
     "app/api/models/questions/ranking-question.js~RankingQuestion#constructor",
@@ -1594,6 +1708,42 @@ window.esdocSearchIndex = [
     "class/app/api/models/questions/ranking-question.js~RankingQuestion.html#instance-get-values",
     "app/api/models/questions/ranking-question.js~RankingQuestion#values",
     "member"
+  ],
+  [
+    "app/api/models/questions/searchable-multi-question.js",
+    "file/app/api/models/questions/searchable-multi-question.js.html",
+    "app/api/models/questions/searchable-multi-question.js",
+    "file"
+  ],
+  [
+    "app/api/models/questions/searchable-multi-question.js~searchablemultiquestion#constructor",
+    "class/app/api/models/questions/searchable-multi-question.js~SearchableMultiQuestion.html#instance-constructor-constructor",
+    "app/api/models/questions/searchable-multi-question.js~SearchableMultiQuestion#constructor",
+    "method"
+  ],
+  [
+    "app/api/models/questions/searchable-question-mixin.js",
+    "file/app/api/models/questions/searchable-question-mixin.js.html",
+    "app/api/models/questions/searchable-question-mixin.js",
+    "file"
+  ],
+  [
+    "app/api/models/questions/searchable-question-mixin.js~searchablequestion",
+    "typedef/index.html#static-typedef-SearchableQuestion",
+    "app/api/models/questions/searchable-question-mixin.js~SearchableQuestion",
+    "typedef"
+  ],
+  [
+    "app/api/models/questions/searchable-single-question.js",
+    "file/app/api/models/questions/searchable-single-question.js.html",
+    "app/api/models/questions/searchable-single-question.js",
+    "file"
+  ],
+  [
+    "app/api/models/questions/searchable-single-question.js~searchablesinglequestion#constructor",
+    "class/app/api/models/questions/searchable-single-question.js~SearchableSingleQuestion.html#instance-constructor-constructor",
+    "app/api/models/questions/searchable-single-question.js~SearchableSingleQuestion#constructor",
+    "method"
   ],
   [
     "app/api/models/questions/single-question.js",
@@ -1803,6 +1953,12 @@ window.esdocSearchIndex = [
     "app/api/models/survey-info.js~surveyinfo#autonext",
     "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-autoNext",
     "app/api/models/survey-info.js~SurveyInfo#autoNext",
+    "member"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#disablevalidationbanner",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-disableValidationBanner",
+    "app/api/models/survey-info.js~SurveyInfo#disableValidationBanner",
     "member"
   ],
   [
@@ -2064,16 +2220,10 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "app/api/types.js",
-    "file/app/api/types.js.html",
-    "app/api/types.js",
+    "app/api/searchable-answer-list-service.js",
+    "file/app/api/searchable-answer-list-service.js.html",
+    "app/api/searchable-answer-list-service.js",
     "file"
-  ],
-  [
-    "app/api/types.js~cultureinfo",
-    "typedef/index.html#static-typedef-CultureInfo",
-    "app/api/types.js~CultureInfo",
-    "typedef"
   ],
   [
     "app/event.js",

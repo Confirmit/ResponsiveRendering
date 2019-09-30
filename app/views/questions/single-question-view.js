@@ -2,6 +2,8 @@ import QuestionWithAnswersView from './base/question-with-answers-view.js';
 import KEYS from 'views/helpers/keyboard-keys.js';
 import Utils from './../../utils.js';
 import ValidationTypes from "../../api/models/validation/validation-types";
+import CollapsibleGroup from "../controls/collapsible-group";
+import GroupTypes from "../../api/group-types";
 
 export default class SingleQuestionView extends QuestionWithAnswersView {
     /**
@@ -13,6 +15,7 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
 
         this._groupNode = this._container.find('.cf-list');
         this._currentAnswerIndex = null;
+        this._collapsibleGroups = this._createCollapsibleGroups();
 
         this._selectedAnswerCssClass = 'cf-single-answer--selected';
         this._selectedImageAnswerCssClass = 'cf-answer-image--selected';
@@ -22,6 +25,17 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
 
     get _currentAnswer() {
         return this.answers[this._currentAnswerIndex];
+    }
+
+    _createCollapsibleGroups() {
+        const prepareCollapsibleGroupShortInfo = (question, group) => {
+            const answer = question.getAnswer(question.value);
+            return group.items.includes(answer) ? [answer.isOther ? question.otherValue : answer.text] : [];
+        };
+
+        return this._question.answerGroups
+            .filter(group => group.type === GroupTypes.Collapsible)
+            .map(group => new CollapsibleGroup(this._question, group, prepareCollapsibleGroupShortInfo));
     }
 
     _attachHandlersToDOM() {
@@ -78,7 +92,7 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
             .attr('tabindex', '0');
     }
 
-    _getSelectedAnswerClass(answer){
+    _getSelectedAnswerClass(answer) {
         return answer.imagesSettings !== null ? this._selectedImageAnswerCssClass : this._selectedAnswerCssClass;
     }
 

@@ -21,7 +21,10 @@ export default Object.freeze({
     ImageUploader: 'ImageUploader',
     VideoCapture: 'VideoCapture',
     AudioCapture: 'AudioCapture',
+    CodeCapture: 'CodeCapture',
     Login: 'Login',
     Telephone: 'Telephone',
     Hierarchy: 'Hierarchy',
+    SearchableSingle: 'SearchableSingle',
+    SearchableMulti: 'SearchableMulti',
 });

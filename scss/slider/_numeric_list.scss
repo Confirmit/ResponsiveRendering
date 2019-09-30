@@ -1,0 +1,12 @@
+.cf-numeric-list-slider-answer {
+  @include grid-layout-answer-content-indent(2.5em + 2 * 1.4em, 1.4em);
+}
+
+.cf-numeric-list-slider-answer--vertical {
+  .cf-numeric-list-slider-answer {
+    &__text,
+    &__other {
+      margin-top: 0;
+    }
+  }
+}
