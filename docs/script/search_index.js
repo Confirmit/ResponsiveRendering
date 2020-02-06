@@ -271,13 +271,13 @@ window.esdocSearchIndex = [
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-get-debug",
+    "class/app/api/api.js~cfApi.html#instance-set-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-set-debug",
+    "class/app/api/api.js~cfApi.html#instance-get-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
@@ -607,13 +607,13 @@ window.esdocSearchIndex = [
   ],
   [
     "app/api/models/base/question.js~question#allowvalidateonchange",
-    "class/app/api/models/base/question.js~Question.html#instance-set-allowValidateOnChange",
+    "class/app/api/models/base/question.js~Question.html#instance-get-allowValidateOnChange",
     "app/api/models/base/question.js~Question#allowValidateOnChange",
     "member"
   ],
   [
     "app/api/models/base/question.js~question#allowvalidateonchange",
-    "class/app/api/models/base/question.js~Question.html#instance-get-allowValidateOnChange",
+    "class/app/api/models/base/question.js~Question.html#instance-set-allowValidateOnChange",
     "app/api/models/base/question.js~Question#allowValidateOnChange",
     "member"
   ],
@@ -1473,6 +1473,12 @@ window.esdocSearchIndex = [
     "app/api/models/questions/numeric-list-question.js~numericlistquestion#sliderisvertical",
     "class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html#instance-get-sliderIsVertical",
     "app/api/models/questions/numeric-list-question.js~NumericListQuestion#sliderIsVertical",
+    "member"
+  ],
+  [
+    "app/api/models/questions/numeric-list-question.js~numericlistquestion#totalsum",
+    "class/app/api/models/questions/numeric-list-question.js~NumericListQuestion.html#instance-get-totalSum",
+    "app/api/models/questions/numeric-list-question.js~NumericListQuestion#totalSum",
     "member"
   ],
   [

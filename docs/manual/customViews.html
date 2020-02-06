@@ -191,7 +191,7 @@ Confirmit.pageView.registerCustomQuestionView(currentQuestion.id, createFn);</co
 // grab default view type currently in use
 var SingleView = Confirmit.pageView.questionViewTypes.SingleQuestionView;
 // hijack it to make all instances to behave in a different way
-SingleView.prototype._showErrors = function () { ... };</code>
+SingleView.prototype._showErrors = function () { ... };  </code>
 </code></pre>
 <h3 id="side-by-side-views">Side by side views</h3><p>Use custom view types side by side with default ones (common use: fully custom behavior for a bunch of questions, default behavior for the rest - could be controlled by a question skin etc)</p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">// define custom view (typically in a theme script)

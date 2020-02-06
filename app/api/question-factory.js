@@ -96,11 +96,15 @@ export default class QuestionFactory {
             case QuestionTypes.Hierarchy:
                 return new HierarchyQuestion(rawModel, new HierarchyService(this._endpoints.hierarchyApiEndpoint, this._language));
             case QuestionTypes.SearchableSingle:
-                return new SearchableSingleQuestion(rawModel, new SearchableAnswerListService(this._endpoints.searchableAnswerListEndpoint));
+                return new SearchableSingleQuestion(rawModel, this._createSearchableAnswerListService());
             case QuestionTypes.SearchableMulti:
-                return new SearchableMultiQuestion(rawModel, new SearchableAnswerListService(this._endpoints.searchableAnswerListEndpoint));
+                return new SearchableMultiQuestion(rawModel, this._createSearchableAnswerListService());
             default:
                 return;
         }
+    }
+
+    _createSearchableAnswerListService() {
+        return new SearchableAnswerListService(this._endpoints.searchableAnswerListEndpoint, this._language);
     }
 }

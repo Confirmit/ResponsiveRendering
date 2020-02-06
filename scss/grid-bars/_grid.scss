@@ -41,6 +41,7 @@ $gb-item-indent: 4px;
 
   &__scale-text {
     flex: 1 1 0px;
+    min-width: 1px;
 
     text-align: center;
     transition-delay: 0.1s;

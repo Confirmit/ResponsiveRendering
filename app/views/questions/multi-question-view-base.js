@@ -19,6 +19,8 @@ export default class MultiQuestionViewBase extends QuestionWithAnswersView {
         this._selectedAnswerCssClass = 'cf-multi-answer--selected';
         this._selectedImageAnswerCssClass = 'cf-answer-image--selected';
 
+        this._storedOtherValues = this._question.otherValues;
+
         this._attachHandlersToDOM();
     }
 
@@ -70,24 +72,21 @@ export default class MultiQuestionViewBase extends QuestionWithAnswersView {
 
     _attachHandlersToDOM() {
         this.answers.forEach((answer, index) => {
-            this._attachClickHandlerToAnswerNode(answer, this._getAnswerNode(answer.code), index);
+            this._getAnswerNode(answer.code).on('click', () => this._onAnswerNodeClick(answer));
+            this._getAnswerNode(answer.code).on('focus', this._onAnswerNodeFocus.bind(this, index));
 
             if (answer.isOther) {
                 const otherInput = this._getAnswerOtherNode(answer.code);
                 otherInput.on('click', e => e.stopPropagation());
                 otherInput.on('keydown', e => e.stopPropagation());
                 otherInput.on('input', e => this._onAnswerOtherNodeValueChange(answer, e.target.value));
+                otherInput.on('focus', () => this._onAnswerOtherNodeFocus(answer));
             }
         });
 
         if (!this._settings.disableKeyboardSupport) {
             this._container.on('keydown', this._onKeyPress.bind(this));
         }
-    }
-
-    _attachClickHandlerToAnswerNode(answer, node, index = null){
-        node.on('click', () => this._onAnswerNodeClick(answer));
-        node.on('focus', this._onAnswerNodeFocus.bind(this, index));
     }
 
     _getSelectedAnswerClass(answer) {
@@ -129,6 +128,22 @@ export default class MultiQuestionViewBase extends QuestionWithAnswersView {
         }
 
         super._updateAnswerOtherNodes({otherValues});
+    }
+
+    _updateStoredOtherValues({values = []}) {
+        values.forEach(answerCode => {
+            const checked = this._getSelectedAnswerCodes().includes(answerCode);
+
+            if (checked) {
+                if (Utils.isEmpty(this._storedOtherValues[answerCode])) {
+                    return;
+                }
+                this._question.setOtherValue(answerCode, this._storedOtherValues[answerCode]);
+            } else {
+                this._storedOtherValues[answerCode] = this._question.otherValues[answerCode];
+                this._question.setOtherValue(answerCode, null);
+            }
+        });
     }
 
     _isSelected(answer) {
@@ -224,6 +239,7 @@ export default class MultiQuestionViewBase extends QuestionWithAnswersView {
     _onModelValueChange({changes}) {
         this._updateAnswerNodes(changes);
         this._updateAnswerOtherNodes(changes);
+        this._updateStoredOtherValues(changes);
     }
 
     _onAnswerNodeClick(answer) {
@@ -236,6 +252,14 @@ export default class MultiQuestionViewBase extends QuestionWithAnswersView {
 
     _onAnswerNodeFocus(answerIndex) {
         this._currentAnswerIndex = answerIndex;
+    }
+
+    _onAnswerOtherNodeFocus(answer) {
+        if (Utils.isEmpty(this._storedOtherValues[answer.code])) {
+           return;
+        }
+
+        this._selectAnswer(answer);
     }
 
     _onKeyPress(event) {

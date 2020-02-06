@@ -61,6 +61,10 @@ export default class Grid3DMobileInnerNumericListQuestionView extends Grid3DMobi
 
     _onModelValueChange({changes}) {
         this._updateAnswerNodes(changes);
+
+        if(this._question.autoSum){
+            this._container.find(`#mobile_${this._question.id}_autosum`).text(this._question.totalSum);
+        }
     }
 
     _onAnswerValueChange(answerCode, answerValue) {

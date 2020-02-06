@@ -18,6 +18,7 @@ export default class Answer {
         this._fieldName = null;
         this._otherFieldName = null;
         this._imagesSettings = null;
+        this._styleName = null;
 
         this._group = group;
 
@@ -114,6 +115,15 @@ export default class Answer {
         return this._imagesSettings;
     }
 
+    /**
+     * Custom CSS style class names.
+     * @type {string}
+     * @readonly
+     */
+    get styleName() {
+        return this._styleName;
+    }
+
     _parseModel(model)
     {
         this._text = model.text;
@@ -122,6 +132,8 @@ export default class Answer {
         this._score = model.score;
         this._isExclusive = model.isExclusive;
         this._fieldName = model.fieldName;
+        this._styleName = model.styleName;
+
         if(model.other){
             this._isOther = true;
             this._otherFieldName = model.other.fieldName;

@@ -8,6 +8,7 @@ export default class ImageProcessor {
 
         const scaleRatio = this._getScaleRatio(canvas.height, canvas.width, maxImageHeight, maxImageWidth);
         if (scaleRatio < 1) {
+            /* eslint-disable-next-line require-atomic-updates */
             canvas = await this._downScaleCanvas(canvas, scaleRatio);
         }
 

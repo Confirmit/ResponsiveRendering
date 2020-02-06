@@ -31,6 +31,6 @@ export default class SearchableAnswerListService {
     }
 
     _buildUrl(questionId, search, skip) {
-        return `${this._endpoint}&q=${questionId}&search=${encodeURIComponent(search)}&skip=${skip}`;
+        return `${this._endpoint}&q=${questionId}&search=${encodeURIComponent(search)}&skip=${skip}&l=${this._languageId}`;
     }
 }

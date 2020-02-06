@@ -52,6 +52,11 @@ $input_padding: 0.5em;
     width: auto;
     min-width: 8em;
   }
+
+  &--rank-by-number {
+    width: 2.7em;
+    text-align: right;
+  }
 }
 
 .cf-text-area {

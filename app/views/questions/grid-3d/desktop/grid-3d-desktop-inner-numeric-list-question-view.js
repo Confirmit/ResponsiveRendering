@@ -18,19 +18,6 @@ export default class Grid3DDesktopInnerNumericListQuestionView extends Grid3DDes
         });
     }
 
-    _updateAnswerNodes({values = []}) {
-        if(values.length === 0)
-            return;
-
-        this._question.answers.forEach(answer => {
-            const answerInput = this._getAnswerNode(answer.code);
-            const value = this._question.values[answer.code] || '';
-            if (answerInput.val() !== value) {
-                answerInput.val(value);
-            }
-        });
-    }
-
     _showErrors(validationResult) {
         validationResult.answerValidationResults.forEach(answerValidationResult => {
             const target = this._getAnswerNode(answerValidationResult.answerCode);
@@ -44,12 +31,29 @@ export default class Grid3DDesktopInnerNumericListQuestionView extends Grid3DDes
         this._answerErrorBlockManager.removeAllErrors();
     }
 
+    _updateAnswerNodes({values = []}) {
+        if(values.length === 0)
+            return;
+
+        this._question.answers.forEach(answer => {
+            const answerInput = this._getAnswerNode(answer.code);
+            const value = this._question.values[answer.code] || '';
+            if (answerInput.val() !== value) {
+                answerInput.val(value);
+            }
+        });
+    }
+
     _onAnswerValueChangedHandler(answerCode, answerValue) {
         this._question.setValue(answerCode, answerValue);
     }
 
     _onModelValueChange({changes}) {
         this._updateAnswerNodes(changes);
+
+        if(this._question.autoSum){
+            this._container.find(`#desktop_${this._question.id}_autosum`).text(this._question.totalSum);
+        }
     }
 
     _onValidationComplete(validationResult) {

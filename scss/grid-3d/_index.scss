@@ -110,10 +110,18 @@
   }
 }
 
-.cf-grid-numeric-answer {
+.cf-grid-numeric-answer, .cf-grid-rank-by-number-answer {
   min-width: 2em;
   max-width: 4em;
   width: 100%;
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  &::-ms-clear {
+    display: none;
+  }
 }
 
 @media (max-width: $delimiter-tablet) {

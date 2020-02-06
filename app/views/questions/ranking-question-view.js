@@ -16,6 +16,8 @@ export default class RankingQuestionView extends QuestionWithAnswersView {
 
         this._rankingStatusNode = this._container.find('.cf-ranking-status');
 
+        this._storedOtherValues = this._question.otherValues;
+
         this._attachHandlersToDOM();
     }
 
@@ -125,6 +127,22 @@ export default class RankingQuestionView extends QuestionWithAnswersView {
         super._updateAnswerOtherNodes({otherValues});
     }
 
+    _updateStoredOtherValues({values = []}){
+        values.forEach(answerCode => {
+            const checked = Object.keys(this._question.values).includes(answerCode);
+
+            if(checked){
+                if(Utils.isEmpty(this._storedOtherValues[answerCode])){
+                    return;
+                }
+                this._question.setOtherValue(answerCode, this._storedOtherValues[answerCode]);
+            } else {
+                this._storedOtherValues[answerCode] = this._question.otherValues[answerCode];
+                this._question.setOtherValue(answerCode, null);
+            }
+        });
+    }
+
     _attachHandlersToDOM() {
         this.answers.forEach((answer, index) => {
             this._getAnswerNode(answer.code).on('click', () => this._onAnswerClick(answer));
@@ -134,6 +152,7 @@ export default class RankingQuestionView extends QuestionWithAnswersView {
                 const otherInput = this._getAnswerOtherNode(answer.code);
                 otherInput.on('click', e => e.stopPropagation());
                 otherInput.on('keydown', e => e.stopPropagation());
+                otherInput.on('focus', () => this._onAnswerOtherNodeFocus(answer));
                 otherInput.on('input', e => this._onOtherInputValueChanged(answer, e.target.value));
             }
         });
@@ -202,6 +221,7 @@ export default class RankingQuestionView extends QuestionWithAnswersView {
         this._updateAnswerNodes(changes);
         this._updateAnswerOtherNodes(changes);
         this._updateRankingStatus(changes);
+        this._updateStoredOtherValues(changes);
     }
 
     _onAnswerClick(answer) {
@@ -210,6 +230,14 @@ export default class RankingQuestionView extends QuestionWithAnswersView {
 
     _onAnswerNodeFocus(answerIndex) {
         this._currentAnswerIndex = answerIndex;
+    }
+
+    _onAnswerOtherNodeFocus(answer){
+        if (Utils.isEmpty(this._storedOtherValues[answer.code]) || !Utils.isEmpty(this._question.values[answer.code])) {
+            return;
+        }
+        
+        this._selectAnswer(answer);
     }
 
     _onOtherInputValueChanged(answer, otherValue) {

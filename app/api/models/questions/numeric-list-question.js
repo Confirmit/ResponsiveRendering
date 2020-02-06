@@ -84,6 +84,15 @@ export default class NumericListQuestion extends QuestionWithAnswers {
     }
 
     /**
+     * Sum of all question values.
+     * @type {string}
+     * @readonly
+     */
+    get totalSum(){
+        return Object.values(this._values).reduce((prev, current) => prev + Utils.toNumber(current), 0).toFixed(this._numeric.scale);
+    }
+
+    /**
      * Label of auto sum total value.
      * @type {string}
      * @readonly
@@ -157,7 +166,7 @@ export default class NumericListQuestion extends QuestionWithAnswers {
     }
 
     /**
-     * Select answer for numeric list.
+     * Set numeric list answer value.
      * @param {string} answerCode - Answer code.
      * @param {numeric|string} answerValue - Answer value.
      */

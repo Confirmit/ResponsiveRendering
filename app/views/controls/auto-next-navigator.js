@@ -1,5 +1,6 @@
 import Utils from 'utils.js';
 import QuestionTypes from 'api/question-types.js';
+import Question from '../../api/models/base/question';
 
 export default class AutoNextNavigator {
     constructor(page) {
@@ -8,6 +9,19 @@ export default class AutoNextNavigator {
     }
 
     _init() {
+        this._initAutoNextByInterval();
+        this._initAutoNextByComplete();
+    }
+
+    _initAutoNextByInterval() {
+        if(Utils.isEmpty(this._page.surveyInfo.autoNextInterval)) {
+            return;
+        }
+
+        setTimeout(() => this._page.next(), this._page.surveyInfo.autoNextInterval * 1000)
+    }
+
+    _initAutoNextByComplete() {
         const {surveyInfo, questions} = this._page;
         if (!surveyInfo.autoNext) {
             return;
@@ -16,14 +30,28 @@ export default class AutoNextNavigator {
         if (!questions.every(x => this._supportsAutoNext(x)))
             return;
 
-        questions.forEach(x => x.changeEvent.on(() => this._onQuestionChange()));
+        if (questions.every(x => this._isInfo(x)))
+            return;
+
+        questions.forEach(question => {
+            if (question instanceof Question) {
+                question.changeEvent.on(() => this._onQuestionChange());
+            }
+        });
     }
 
     _supportsAutoNext(question) {
+        if (this._isInfo(question))
+            return true;
+
         if (!question.answers || !question.answers.every(x => !x.isOther))
             return false;
 
         return this._isSingle(question) || this._isGrid(question) || this._isGrid3D(question);
+    }
+
+    _isInfo(question) {
+        return question.type === QuestionTypes.Info;
     }
 
     _isSingle(question) {
@@ -58,6 +86,9 @@ export default class AutoNextNavigator {
     }
 
     _isAnswered(question) {
+        if (this._isInfo(question))
+            return true;
+
         if (this._isSingle(question))
             return !Utils.isEmpty(question.value);
 
@@ -69,6 +100,4 @@ export default class AutoNextNavigator {
 
         return false;
     }
-
 }
-

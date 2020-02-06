@@ -107,7 +107,7 @@ export default class OpenTextListQuestion extends QuestionWithAnswers {
     }
 
     /**
-     * Select answer for open text list.
+     * Set open text list answer value.
      * @param {string} answerCode - Answer code.
      * @param {string} answerValue - Answer value.
      */

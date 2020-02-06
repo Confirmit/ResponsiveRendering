@@ -7,6 +7,7 @@ export default class SurveyInfo {
         this._isAccessible = rawSurveyInfo.isAccessible;
         this._surveyChannel = rawSurveyInfo.surveyChannel;
         this._autoNext = rawSurveyInfo.autoNext;
+        this._autoNextInterval = rawSurveyInfo.autoNextInterval;
         this._progress = rawSurveyInfo.progress;
         this._language = rawSurveyInfo.language;
         this._mobileThreshold = rawSurveyInfo.mobileThreshold;
@@ -50,6 +51,15 @@ export default class SurveyInfo {
      */
     get autoNext(){
         return this._autoNext;
+    }
+
+    /**
+     * Auto submit if all questions answered
+     * @type {?number}
+     * @readonly
+     */
+    get autoNextInterval(){
+        return this._autoNextInterval;
     }
 
     /**

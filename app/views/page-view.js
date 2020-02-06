@@ -148,7 +148,7 @@ export default class PageView {
     }
 
     _showErrors(errors = []) {
-        if(this._page.surveyInfo.disableValidationBanner){
+        if (this._page.surveyInfo.disableValidationBanner) {
             return;
         }
 
@@ -156,7 +156,7 @@ export default class PageView {
     }
 
     _hideErrors() {
-        if(this._page.surveyInfo.disableValidationBanner){
+        if (this._page.surveyInfo.disableValidationBanner) {
             return;
         }
 
@@ -173,6 +173,12 @@ export default class PageView {
     }
 
     _navigate(next) {
+        if (!this._processMonitor.idle) {
+            return;
+        }
+
+        this._processMonitor.addProcess('navigation');
+
         this._hiddenViews.forEach(view => view.render());
         this._renderNavigationHiddenView(next);
 

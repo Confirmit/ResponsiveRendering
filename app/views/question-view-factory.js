@@ -11,6 +11,7 @@ import NumericListQuestionView from './questions/numeric-list-question-view.js';
 import DateQuestionView from './questions/date-question-view.js';
 import DateQuestionPolyfillView from './questions/date-question-polyfill-view.js';
 import RankingQuestionView from './questions/ranking-question-view.js';
+import RankByNumberQuestionView from './questions/rank-by-number-question-view';
 import CaptureOrderMultiQuestionView from './questions/capture-order-multi-question-view';
 import AnswerButtonsCaptureOrderMultiQuestionView from './questions/answer-buttons-capture-order-multi-question-view';
 import HorizontalRatingGridQuestionView from './questions/horizontal-rating-grid-question-view.js';
@@ -243,12 +244,16 @@ export default class QuestionViewFactory {
     }
 
     _createRankingQuestionView(model) {
-        if (model.captureOrder) {
-            if (model.answerButtons) {
-                return new AnswerButtonsCaptureOrderMultiQuestionView(model, this._questionViewSettings);
-            }
+        if (model.captureOrder && model.answerButtons) {
+            return new AnswerButtonsCaptureOrderMultiQuestionView(model, this._questionViewSettings);
+        }
 
+        if (model.captureOrder) {
             return new CaptureOrderMultiQuestionView(model, this._questionViewSettings);
+        }
+
+        if(model.rankByNumber){
+            return new RankByNumberQuestionView(model, this._questionViewSettings);
         }
 
         return new RankingQuestionView(model, this._questionViewSettings);

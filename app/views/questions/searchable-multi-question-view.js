@@ -6,6 +6,7 @@ export default class SearchableMultiQuestionView extends SearchableQuestionViewB
         super(question, settings);
 
         this._selectedAnswerCssClass = 'cf-multi-answer--selected';
+        this._storedOtherValues = this._question.otherValues;
     }
 
     _getSelectedAnswerText(answer) {
@@ -36,6 +37,7 @@ export default class SearchableMultiQuestionView extends SearchableQuestionViewB
             if (answer.isOther) {
                 const otherInput = this._getAnswerOtherNode(answer.code);
                 otherInput.on('click', e => e.stopPropagation());
+                otherInput.on('focus', () => this._onAnswerOtherNodeFocus(answer));
                 otherInput.on('input', e => this._onAnswerOtherNodeValueChange(answer, e.target.value));
             }
         });
@@ -51,6 +53,22 @@ export default class SearchableMultiQuestionView extends SearchableQuestionViewB
 
         this._question.values.forEach(answerCode => {
             this._getAnswerNode(answerCode).addClass(this._selectedAnswerCssClass)
+        });
+    }
+
+    _updateStoredOtherValues({values = []}){
+        values.forEach(answerCode => {
+            const checked = this._question.values.includes(answerCode);
+
+            if(checked){
+                if(Utils.isEmpty(this._storedOtherValues[answerCode])){
+                    return;
+                }
+                this._question.setOtherValue(answerCode, this._storedOtherValues[answerCode]);
+            } else {
+                this._storedOtherValues[answerCode] = this._question.otherValues[answerCode];
+                this._question.setOtherValue(answerCode, null);
+            }
         });
     }
 
@@ -75,10 +93,19 @@ export default class SearchableMultiQuestionView extends SearchableQuestionViewB
 
         this._updateAnswerNodes(data.changes);
         this._updateAnswerOtherNodes(data.changes);
+        this._updateStoredOtherValues(data.changes);
     }
 
     _onAnswerNodeClick(answer) {
         this._toggleAnswer(answer);
+    }
+
+    _onAnswerOtherNodeFocus(answer){
+        if (Utils.isEmpty(this._storedOtherValues[answer.code])) {
+            return;
+        }
+
+        this._question.setValue(answer.code, true);
     }
 
     _onAnswerOtherNodeValueChange(answer, otherValue) {

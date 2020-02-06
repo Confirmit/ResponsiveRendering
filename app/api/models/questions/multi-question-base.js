@@ -69,12 +69,12 @@ export default class MultiQuestionBase extends QuestionWithAnswers {
     /**
      * Select answer for multi.
      * @param {string} answerCode - Answer code.
-     * @param {string} check - Check or uncheck.
+     * @param {bool} selected - if true the answer will be selected, else unselected.
      */
-    setValue(answerCode, check) {
+    setValue(answerCode, selected) {
         this._setValueInternal(
             'values',
-            () => this._setValue(answerCode, check),
+            () => this._setValue(answerCode, selected),
             this._diffArrays,
         );
     }
@@ -103,8 +103,8 @@ export default class MultiQuestionBase extends QuestionWithAnswers {
         );
     }
 
-    _setValue(answerCode, check) {
-        const changed = check
+    _setValue(answerCode, selected) {
+        const changed = selected
             ? this._addValue(answerCode)
             : this._removeValue(answerCode);
         return changed;

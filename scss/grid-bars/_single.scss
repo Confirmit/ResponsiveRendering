@@ -43,6 +43,7 @@ $gb-item-indent: 4px;
     text-align: center;
     transition-delay: 0.1s;
     margin-right: $gb-item-indent;
+    min-width: 1px;
 
     &:last-child {
       margin-right: 0;

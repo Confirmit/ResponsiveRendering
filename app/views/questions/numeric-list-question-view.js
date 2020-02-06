@@ -1,5 +1,4 @@
 import QuestionWithAnswersView from './base/question-with-answers-view.js';
-import Utils from 'utils.js';
 import ValidationTypes from "../../api/models/validation/validation-types";
 
 export default class NumericListQuestionView extends QuestionWithAnswersView {
@@ -27,11 +26,6 @@ export default class NumericListQuestionView extends QuestionWithAnswersView {
             }
             answerInput.val(value);
         });
-    }
-
-    _updateTotalSum() {
-        const sum = Object.values(this._question.values).reduce((prev, current) => prev + Utils.toNumber(current), 0);
-        this._container.find('.cf-numeric-list-auto-sum__value').text(sum.toFixed(this._question.numeric.scale));
     }
 
     _attachControlHandlers() {
@@ -91,7 +85,7 @@ export default class NumericListQuestionView extends QuestionWithAnswersView {
         this._updateAnswerOtherNodes(changes);
 
         if (this._question.autoSum) {
-            this._updateTotalSum();
+            this._container.find('.cf-numeric-list-auto-sum__value').text(this._question.totalSum);
         }
     }
 

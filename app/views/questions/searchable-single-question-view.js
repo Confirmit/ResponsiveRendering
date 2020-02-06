@@ -6,6 +6,9 @@ export default class SearchableSingleQuestionView extends SearchableQuestionView
         super(question, settings);
 
         this._selectedAnswerCssClass = 'cf-single-answer--selected';
+
+        this._storedOtherValues = {};
+        this._fillStoredOtherValues();
     }
 
     _attachHandlersToDOM() {
@@ -17,9 +20,16 @@ export default class SearchableSingleQuestionView extends SearchableQuestionView
             if (answer.isOther) {
                 const otherInput = this._getAnswerOtherNode(answer.code);
                 otherInput.on('click', e => e.stopPropagation());
+                otherInput.on('focus', () => this._onAnswerOtherNodeFocus(answer));
                 otherInput.on('input', e => this._onAnswerOtherNodeValueChange(answer, e.target.value));
             }
         });
+    }
+
+    _fillStoredOtherValues(){
+        if(this._question.value !== null){
+            this._storedOtherValues[this._question.value] = this._question.otherValue;
+        }
     }
 
     _getSelectedAnswerText(answer) {
@@ -58,14 +68,22 @@ export default class SearchableSingleQuestionView extends SearchableQuestionView
         this._getAnswerNode(this._question.value).addClass(this._selectedAnswerCssClass)
     }
 
-    _updateAnswerOtherNodes({otherValue = null}) {
+    _updateAnswerOtherNodes() {
         if (this._question.value === null) {
             return;
         }
 
-        if (otherValue) {
-            this._setOtherNodeValue(this._question.value, this._question.otherValue);
+        this._question.answers.forEach(answer => this._setOtherNodeValue(answer.code, null));
+
+        this._setOtherNodeValue(this._question.value, this._question.otherValue);
+    }
+
+    _updateStoredOtherValues({otherValue = null}){
+        if (!otherValue) {
+            return;
         }
+
+        this._storedOtherValues[this._question.value] = this._question.otherValue;
     }
 
     _selectAnswer(answer) {
@@ -85,10 +103,19 @@ export default class SearchableSingleQuestionView extends SearchableQuestionView
 
         this._updateAnswerNodes(data.changes);
         this._updateAnswerOtherNodes(data.changes);
+        this._updateStoredOtherValues(data.changes);
     }
 
     _onAnswerNodeClick(answer) {
         this._selectAnswer(answer);
+    }
+
+    _onAnswerOtherNodeFocus(answer) {
+        if (Utils.isEmpty(this._storedOtherValues[answer.code])) {
+            return;
+        }
+
+        this._question.setValue(answer.code);
     }
 
     _onAnswerOtherNodeValueChange(answer, otherValue) {

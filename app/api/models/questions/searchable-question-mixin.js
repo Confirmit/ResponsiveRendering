@@ -8,6 +8,7 @@ import Answer from "../base/answer";
  * @property {Answer[]} selectedAnswers Selected answers.
  * @property {Answer[]} otherAnswers Other answers.
  * @property {Answer[]} exclusiveAnswers Exclusive answers.
+ * @property {Answer[]} lockedAnswers answers with lock position.
  * @property {boolean} hasMoreAnswers Is it available more answers?
  * @property {Event} loadMoreAnswersCompleteEvent Fired on loading more answers is complete.
  * @property {Event} filterAnswersCompleteEvent Fired on filtering answers is complete.
@@ -34,6 +35,7 @@ const SearchableQuestionMixin = base => class extends base {
         this._selectedAnswers = model.selectedAnswers.map(answerModel => new Answer(answerModel));
         this._otherAnswers = model.otherAnswers.map(answerModel => new Answer(answerModel));
         this._exclusiveAnswers = model.exclusiveAnswers.map(answerModel => new Answer(answerModel));
+        this._lockedAnswers = model.lockedAnswers.map(answerModel => new Answer(answerModel));
 
         this._searchPattern = '';
         this._hasMoreAnswers = model.hasMoreAnswers;
@@ -78,6 +80,15 @@ const SearchableQuestionMixin = base => class extends base {
      */
     get exclusiveAnswers() {
         return this._exclusiveAnswers;
+    }
+
+    /**
+     * The array of answers with lock position.
+     * @type {Answer[]}
+     * @readonly
+     */
+    get lockedAnswers(){
+        return this._lockedAnswers;
     }
 
     /**
@@ -164,7 +175,7 @@ const SearchableQuestionMixin = base => class extends base {
     }
 
     _updateAnswers() {
-        const answers = [...this.filteredAnswers, ...this.otherAnswers, ...this.exclusiveAnswers];
+        const answers = [...this.filteredAnswers, ...this.otherAnswers, ...this.exclusiveAnswers, ...this.lockedAnswers];
         this._answers = answers.concat(this._selectedAnswers.filter(selectedAnswer =>
             !answers.some(answer => answer.code === selectedAnswer.code)));
     }

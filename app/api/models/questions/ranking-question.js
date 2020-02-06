@@ -19,6 +19,7 @@ export default class RankingQuestion extends QuestionWithAnswers {
         this._layoutRows = model.layoutRows || 0;
         this._captureOrder = model.captureOrder || false;
         this._answerButtons = model.answerButtons || false;
+        this._rankByNumber = model.rankByNumber || false;
 
         this._values = { ...model.values };
         this._otherValues = { ...model.otherValues };
@@ -86,6 +87,16 @@ export default class RankingQuestion extends QuestionWithAnswers {
     get answerButtons() {
         return this._answerButtons;
     }
+
+    /**
+     * Use number inputs for answers.
+     * @type {boolean}
+     * @readonly
+     */
+    get rankByNumber() {
+        return this._rankByNumber;
+    }
+
 
     /**
      * @inheritDoc

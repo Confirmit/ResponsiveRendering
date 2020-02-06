@@ -1,9 +1,9 @@
 import QuestionWithAnswersView from './base/question-with-answers-view.js';
 import KEYS from 'views/helpers/keyboard-keys.js';
 import Utils from './../../utils.js';
-import ValidationTypes from "../../api/models/validation/validation-types";
-import CollapsibleGroup from "../controls/collapsible-group";
-import GroupTypes from "../../api/group-types";
+import ValidationTypes from '../../api/models/validation/validation-types';
+import CollapsibleGroup from '../controls/collapsible-group';
+import GroupTypes from '../../api/group-types';
 
 export default class SingleQuestionView extends QuestionWithAnswersView {
     /**
@@ -20,7 +20,10 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
         this._selectedAnswerCssClass = 'cf-single-answer--selected';
         this._selectedImageAnswerCssClass = 'cf-answer-image--selected';
 
+        this._storedOtherValues = {};
+
         this._attachHandlersToDOM();
+        this._fillStoredOtherValues()
     }
 
     get _currentAnswer() {
@@ -38,6 +41,12 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
             .map(group => new CollapsibleGroup(this._question, group, prepareCollapsibleGroupShortInfo));
     }
 
+    _fillStoredOtherValues(){
+        if(this._question.value !== null){
+            this._storedOtherValues[this._question.value] = this._question.otherValue;
+        }
+    }
+
     _attachHandlersToDOM() {
         this.answers.forEach((answer, index) => {
             this._getAnswerNode(answer.code).on('click', this._onAnswerNodeClick.bind(this, answer));
@@ -47,6 +56,7 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
                 const otherInput = this._getAnswerOtherNode(answer.code);
                 otherInput.on('click', e => e.stopPropagation());
                 otherInput.on('keydown', e => e.stopPropagation());
+                otherInput.on('focus', () => this._onAnswerOtherNodeFocus(answer));
                 otherInput.on('input', e => this._onAnswerOtherNodeValueChange(answer, e.target.value));
             }
         });
@@ -92,12 +102,24 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
             .attr('tabindex', '0');
     }
 
+    _updateStoredOtherValues({otherValue = null}){
+        if (!otherValue) {
+            return;
+        }
+
+        this._storedOtherValues[this._question.value] = this._question.otherValue;
+    }
+
     _getSelectedAnswerClass(answer) {
         return answer.imagesSettings !== null ? this._selectedImageAnswerCssClass : this._selectedAnswerCssClass;
     }
 
-    _updateAnswerOtherNodes({otherValue = null}) {
+    _updateAnswerOtherNodes() {
         this._question.answers.filter(answer => answer.isOther).forEach(answer => {
+            if(this._question.value !== answer.code) {
+                this._setOtherNodeValue(answer.code, null);
+            }
+            
             this._getAnswerOtherNode(answer.code)
                 .attr('tabindex', '-1')
                 .attr('aria-hidden', 'true');
@@ -113,9 +135,7 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
                 .attr('aria-hidden', 'false');
         }
 
-        if (otherValue) {
-            this._setOtherNodeValue(this._question.value, this._question.otherValue);
-        }
+        this._setOtherNodeValue(this._question.value, this._question.otherValue);
     }
 
     /**
@@ -161,13 +181,13 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
             return;
         }
 
-        this._groupNode.attr("aria-invalid", "true");
+        this._groupNode.attr('aria-invalid', 'true');
     }
 
     _hideErrors() {
         super._hideErrors();
 
-        this._groupNode.attr("aria-invalid", "false");
+        this._groupNode.attr('aria-invalid', 'false');
 
         this._question.answers.filter(answer => answer.isOther).forEach(answer => {
             this._getAnswerOtherNode(answer.code)
@@ -179,6 +199,7 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
     _onModelValueChange({changes}) {
         this._updateAnswerNodes(changes);
         this._updateAnswerOtherNodes(changes);
+        this._updateStoredOtherValues(changes);
     }
 
     _onAnswerNodeClick(answer) {
@@ -241,6 +262,14 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
         this._currentAnswerIndex = answerIndex;
     }
 
+    _onAnswerOtherNodeFocus(answer) {
+        if (Utils.isEmpty(this._storedOtherValues[answer.code])) {
+            return;
+        }
+
+        this._question.setValue(answer.code);
+    }
+
     _onAnswerOtherNodeValueChange(answer, otherValue) {
         if (!Utils.isEmpty(otherValue)) { // select answer
             this._question.setValue(answer.code);
@@ -251,3 +280,4 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
         }
     }
 }
+
