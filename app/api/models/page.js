@@ -4,6 +4,7 @@ import SurveyInfo from './survey-info.js';
 import Event from 'event.js'
 import TestNavigator from './test-navigator'
 import QuestionTypes from 'api/question-types.js';
+import ServerVariables from './server-variables';
 
 /**
  * @desc Represents the class for page.
@@ -27,6 +28,7 @@ export default class Page {
         this._dynamicQuestionsChangeCompleteEvent = new Event('page:dynamic question change complete');
 
         this._testNavigator = (rawSurveyInfo.testNavigator !== null && rawSurveyInfo.testNavigator !== undefined) ? new TestNavigator(rawSurveyInfo.testNavigator) : null;
+        this._serverVariables = new ServerVariables();
 
         this._attach();
     }
@@ -38,6 +40,15 @@ export default class Page {
      * */
     get testNavigator() {
         return this._testNavigator;
+    }
+
+    /**
+     * server variables collection.
+     * @type {ServerVariables}
+     * @readonly
+     * */
+    get serverVariables(){
+        return this._serverVariables;
     }
 
     /**
@@ -220,6 +231,28 @@ export default class Page {
         }
 
         this._navigateEvent.trigger({next: false});
+    }
+
+    /**
+     * Change language on the next page
+     * * @param {int} [languageCode=''] - language code.
+     */
+    changeLanguageOnTheNextPage(languageCode = ''){
+        this._serverVariables.edit('l', languageCode);
+    }
+
+    /**
+     * Forward to the last interview question for cati and capi.
+     */
+    fastForward(){
+        if(this._surveyInfo.surveyChannel !== 'cati' && this._surveyInfo.surveyChannel !== 'capi'){
+            // eslint-disable-next-line no-console
+            console.warn('Confirmit: this method forbidden for current survey channel');
+            return;
+        }
+        this._serverVariables.add('__fafwd');
+
+        this.next(false);
     }
 
     _attach() {

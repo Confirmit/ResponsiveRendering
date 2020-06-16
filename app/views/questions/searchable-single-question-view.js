@@ -1,5 +1,5 @@
-import Utils from "../../utils";
-import SearchableQuestionViewBase from "./base/searchable-question-view-base";
+import Utils from '../../utils';
+import SearchableQuestionViewBase from './base/searchable-question-view-base';
 
 export default class SearchableSingleQuestionView extends SearchableQuestionViewBase {
     constructor(question, settings = null) {
@@ -7,8 +7,7 @@ export default class SearchableSingleQuestionView extends SearchableQuestionView
 
         this._selectedAnswerCssClass = 'cf-single-answer--selected';
 
-        this._storedOtherValues = {};
-        this._fillStoredOtherValues();
+        this._storedOtherValues =  this._question.value !== null ? {[this._question.value]: this._question.otherValue} : {};
     }
 
     _attachHandlersToDOM() {
@@ -24,12 +23,6 @@ export default class SearchableSingleQuestionView extends SearchableQuestionView
                 otherInput.on('input', e => this._onAnswerOtherNodeValueChange(answer, e.target.value));
             }
         });
-    }
-
-    _fillStoredOtherValues(){
-        if(this._question.value !== null){
-            this._storedOtherValues[this._question.value] = this._question.otherValue;
-        }
     }
 
     _getSelectedAnswerText(answer) {
@@ -68,22 +61,32 @@ export default class SearchableSingleQuestionView extends SearchableQuestionView
         this._getAnswerNode(this._question.value).addClass(this._selectedAnswerCssClass)
     }
 
-    _updateAnswerOtherNodes() {
-        if (this._question.value === null) {
+    _updateAnswerOtherNodes(changes) {
+        if (changes.otherValue) {
+            this._setOtherNodeValue(this._question.value, this._question.otherValue);
             return;
         }
 
-        this._question.answers.forEach(answer => this._setOtherNodeValue(answer.code, null));
+        this._question.otherAnswers.forEach(answer => {
+            if (this._question.value !== answer.code) {
+                this._setOtherNodeValue(answer.code, null)
+            }
+        });
 
-        this._setOtherNodeValue(this._question.value, this._question.otherValue);
+        const cached = !Utils.isEmpty(this._storedOtherValues[this._question.value]);
+        const checked = changes.value && this._question.value !== null;
+
+        if (checked && cached) {
+            this._question.setOtherValue(this._storedOtherValues[this._question.value]);
+            delete this._storedOtherValues[this._question.value];
+        }
     }
 
-    _updateStoredOtherValues({otherValue = null}){
-        if (!otherValue) {
-            return;
+    // eslint-disable-next-line no-unused-vars
+    _updateStoredOtherValues(changes) {
+        if(!Utils.isEmpty(this._question.otherValue)) {
+            this._storedOtherValues[this._question.value] = this._question.otherValue;
         }
-
-        this._storedOtherValues[this._question.value] = this._question.otherValue;
     }
 
     _selectAnswer(answer) {

@@ -14,7 +14,7 @@ export default class Utils {
 
     /**
      * isEmpty or isNaN.
-     * @param {string} value The value to be tested.
+     * @param {string, number} value The value to be tested.
      * @return {boolean} true if the given value is NotNumber; otherwise, false.
      */
     static isNotANumber(value) {
@@ -59,6 +59,21 @@ export default class Utils {
 
         let parsed = date.toISOString().slice(0, 10); // check for February 31 etc
         return parsed === value;
+    }
+
+    /**
+     * Check that value is a valid email.
+     * @param {string} value The value to be tested.
+     * @returns {boolean} true if the given value is a valid email; otherwise, false.
+     */
+    static isEmail(value) {
+        if (this.isEmpty(value)) {
+            return false;
+        }
+
+        const validEmail = new RegExp('^\\S+@\\S+$');
+
+        return validEmail.test(value);
     }
 
     static htmlEncode(str) {

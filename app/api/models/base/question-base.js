@@ -1,4 +1,6 @@
-import QuestionValidationResult from "./../validation/question-validation-result";
+import QuestionValidationResult from './../validation/question-validation-result';
+import CustomQuestion from './custom-question';
+import Utils from 'utils.js';
 
 /**
  * @desc A base class for Question
@@ -16,6 +18,7 @@ export default class QuestionBase {
         this._instruction = model.instruction;
         this._customRendering = model.customRendering;
         this._isRtl = model.isRtl;
+        this._customQuestion = Utils.isEmpty(model.customQuestion) ? null : new CustomQuestion(model.customQuestion);
     }
 
     /**
@@ -68,7 +71,7 @@ export default class QuestionBase {
      * @type {boolean}
      * @readonly
      */
-    get customRendering(){
+    get customRendering() {
         return this._customRendering;
     }
 
@@ -98,6 +101,15 @@ export default class QuestionBase {
      */
     get isRtl() {
         return this._isRtl;
+    }
+
+    /**
+     * Custom question settings
+     * @type {CustomQuestion}
+     * @readonly
+     */
+    get customQuestion() {
+        return this._customQuestion;
     }
 
     // TODO: should move to Question class?

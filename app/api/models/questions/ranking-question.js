@@ -20,6 +20,7 @@ export default class RankingQuestion extends QuestionWithAnswers {
         this._captureOrder = model.captureOrder || false;
         this._answerButtons = model.answerButtons || false;
         this._rankByNumber = model.rankByNumber || false;
+        this._rankByDrag = model.rankByDrag || false;
 
         this._values = { ...model.values };
         this._otherValues = { ...model.otherValues };
@@ -97,6 +98,14 @@ export default class RankingQuestion extends QuestionWithAnswers {
         return this._rankByNumber;
     }
 
+    /**
+     * Use drag and drop for answers.
+     * @type {boolean}
+     * @readonly
+     */
+    get rankByDrag() {
+        return this._rankByDrag;
+    }
 
     /**
      * @inheritDoc

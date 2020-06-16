@@ -5,6 +5,10 @@ $hrs-item-indent: 4px;
   flex-direction: column;
   align-items: stretch;
 
+  &__scale-label-panel {
+    overflow: auto;
+  }
+
   &__scale {
     flex: 1 1 auto;
     display: flex;
@@ -44,6 +48,7 @@ $hrs-item-indent: 4px;
       @include scale_item(true);
       flex: 1 0 0px;
     }
+
     &__na {
       @include radio_list(1.4em, true);
     }

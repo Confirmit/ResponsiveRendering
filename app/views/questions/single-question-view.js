@@ -20,10 +20,9 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
         this._selectedAnswerCssClass = 'cf-single-answer--selected';
         this._selectedImageAnswerCssClass = 'cf-answer-image--selected';
 
-        this._storedOtherValues = {};
+        this._storedOtherValues = this._question.value !== null ? {[this._question.value]: this._question.otherValue} : {};
 
         this._attachHandlersToDOM();
-        this._fillStoredOtherValues()
     }
 
     get _currentAnswer() {
@@ -39,12 +38,6 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
         return this._question.answerGroups
             .filter(group => group.type === GroupTypes.Collapsible)
             .map(group => new CollapsibleGroup(this._question, group, prepareCollapsibleGroupShortInfo));
-    }
-
-    _fillStoredOtherValues(){
-        if(this._question.value !== null){
-            this._storedOtherValues[this._question.value] = this._question.otherValue;
-        }
     }
 
     _attachHandlersToDOM() {
@@ -102,24 +95,23 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
             .attr('tabindex', '0');
     }
 
-    _updateStoredOtherValues({otherValue = null}){
-        if (!otherValue) {
-            return;
+    // eslint-disable-next-line no-unused-vars
+    _updateStoredOtherValues(changes) {
+        if(!Utils.isEmpty(this._question.otherValue)) {
+            this._storedOtherValues[this._question.value] = this._question.otherValue;
         }
-
-        this._storedOtherValues[this._question.value] = this._question.otherValue;
     }
 
     _getSelectedAnswerClass(answer) {
         return answer.imagesSettings !== null ? this._selectedImageAnswerCssClass : this._selectedAnswerCssClass;
     }
 
-    _updateAnswerOtherNodes() {
+    _updateAnswerOtherNodes(changes) {
         this._question.answers.filter(answer => answer.isOther).forEach(answer => {
-            if(this._question.value !== answer.code) {
+            if (this._question.value !== answer.code) {
                 this._setOtherNodeValue(answer.code, null);
             }
-            
+
             this._getAnswerOtherNode(answer.code)
                 .attr('tabindex', '-1')
                 .attr('aria-hidden', 'true');
@@ -135,7 +127,18 @@ export default class SingleQuestionView extends QuestionWithAnswersView {
                 .attr('aria-hidden', 'false');
         }
 
-        this._setOtherNodeValue(this._question.value, this._question.otherValue);
+        if (changes.otherValue) {
+            this._setOtherNodeValue(this._question.value, this._question.otherValue);
+            return;
+        }
+
+        const checked = changes.value && this._question.value !== null;
+        const cached = !Utils.isEmpty(this._storedOtherValues[this._question.value]);
+
+        if (checked && cached) {
+            this._question.setOtherValue(this._storedOtherValues[this._question.value]);
+            delete this._storedOtherValues[this._question.value];
+        }
     }
 
     /**

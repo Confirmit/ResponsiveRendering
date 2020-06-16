@@ -3,6 +3,7 @@ import questionHelper from 'views/helpers/question-helper.js';
 import Carousel from "../controls/carousel";
 import CarouselItem from '../controls/carousel-item.js';
 import Utils from '../../utils.js';
+import KEYS from "../helpers/keyboard-keys";
 import $ from "jquery";
 
 export default class CarouselGridBarsGridQuestionView extends GridQuestionView {
@@ -15,11 +16,13 @@ export default class CarouselGridBarsGridQuestionView extends GridQuestionView {
 
         this._carouselItems = this._question.answers.map(answer =>
             new CarouselItem(this._getCarouselItemId(answer.code),  !Utils.isEmpty(this._question.values[answer.code])));
-
         this._carousel = new Carousel(this._container.find('.cf-carousel'), this._carouselItems);
+        this._carousel.moveEvent.on(() => this._onCarouselMove());
         this._moveToFirstError = true;
 
-        this._scaleGroupClass = 'cf-gb-single';
+        /** @override **/
+        this._currentAnswerIndex = this._carousel.currentItemIndex;
+
         this._scaleClass = 'cf-gb-single__scale-item';
         this._scaleTextClass = 'cf-gb-single__scale-text';
         this._nonScoredScaleClass = 'cf-gb-single__na-item';
@@ -63,6 +66,10 @@ export default class CarouselGridBarsGridQuestionView extends GridQuestionView {
                     .on('mouseout', () => mouseOut(answer.code));
             });
         });
+
+        if (!this._settings.disableKeyboardSupport) {
+            this._container.on('keydown', this._onQuestionContainerKeyDown.bind(this));
+        }
     }
 
     _clearScaleNode(answerCode, scaleCode) {
@@ -156,15 +163,26 @@ export default class CarouselGridBarsGridQuestionView extends GridQuestionView {
     }
 
     _updateCarouselComplete() {
-        Object.keys(this._question.values).forEach(answerCode => {
-            const carouselItem = this._carouselItems.find(item => item.id === this._getCarouselItemId(answerCode));
-            const answer = this._question.answers.find(answer => answer.code === answerCode);
+        this._question.answers.forEach((answer, answerIndex) => {
+            const carouselItem = this._carouselItems[answerIndex];
             if (answer.isOther) {
-                carouselItem.isComplete = this._question.values[answerCode] !== undefined && this._question.otherValues[answerCode] !== undefined;
+                carouselItem.isComplete = this._question.values[answer.code] !== undefined && this._question.otherValues[answer.code] !== undefined;
             } else {
-                carouselItem.isComplete = this._question.values[answerCode] !== undefined;
+                carouselItem.isComplete = this._question.values[answer.code] !== undefined;
             }
         });
+    }
+
+    _autoMoveNext(changes, currentItemIsCompleteBefore) {
+        if (this._settings.isAccessible) {
+            return;
+        }
+
+        const otherIsChanged = changes.otherValues !== undefined;
+        const answerCompleteStatusIsChangedToComplete = this._carousel.currentItem.isComplete === true && this._carousel.currentItem.isComplete !== currentItemIsCompleteBefore;
+        if (answerCompleteStatusIsChangedToComplete && !otherIsChanged) {
+            this._carousel.moveNext();
+        }
     }
 
     _selectScale(answer, scale) {
@@ -176,14 +194,25 @@ export default class CarouselGridBarsGridQuestionView extends GridQuestionView {
     }
 
     _showErrors(validationResult) {
+        // update carousel paging state
+        if (validationResult.answerValidationResults.length > 0) {
+            const answersWithError = validationResult.answerValidationResults.map(result => this._getCarouselItemId(result.answerCode));
+            this._carouselItems.forEach(item => item.isError = answersWithError.includes(item.id));
+        }
+
+        // accessible flow
+        if(this._settings.isAccessible) {
+            this._accessibleShowErrors(validationResult);
+            return;
+        }
+
+        //standard flow
         super._showErrors(validationResult);
 
         if (validationResult.answerValidationResults.length > 0) {
             let currentPageValidationResult = validationResult.answerValidationResults.find(result => this._getCarouselItemId(result.answerCode) === this._carousel.currentItem.id);
-            const answersWithError = validationResult.answerValidationResults.map(result => this._getCarouselItemId(result.answerCode));
-            this._carouselItems.forEach(item => item.isError = answersWithError.includes(item.id));
             if (!currentPageValidationResult && this._moveToFirstError) {
-                let index = this._carouselItems.findIndex(item => item.isError);
+                const index = this._carouselItems.findIndex(item => item.isError);
                 if (index !== -1) {
                     this._carousel.moveToItemByIndex(index);
                 }
@@ -203,6 +232,23 @@ export default class CarouselGridBarsGridQuestionView extends GridQuestionView {
         }
     }
 
+    _accessibleShowErrors(validationResult) {
+        if (validationResult.answerValidationResults.length === 0) {
+            return;
+        }
+
+        const currentPageValidationResult = validationResult.answerValidationResults.find(result => this._getCarouselItemId(result.answerCode) === this._carousel.currentItem.id);
+        if (!currentPageValidationResult) {
+            const index = this._carouselItems.findIndex(item => item.isError);
+            if (index !== -1) {
+                this._carousel.moveToItemByIndex(index);
+                setTimeout(() => super._showErrors(validationResult), 500);
+            }
+        } else {
+            super._showErrors(validationResult);
+        }
+    }
+
     _hideErrors() {
         super._hideErrors();
         this._carouselItems.forEach(item => item.isError = false);
@@ -211,23 +257,61 @@ export default class CarouselGridBarsGridQuestionView extends GridQuestionView {
     _onModelValueChange({changes}) {
         super._onModelValueChange({changes});
 
-        const currentItemIsCompleteBefore = this._carousel.currentItem.isComplete;
+        const currentCarouselItemIsCompleteBefore = this._carousel.currentItem.isComplete;
         this._updateCarouselComplete();
-        const otherIsChanged = changes.otherValues !== undefined;
-        const answerCompleteStatusChanged = this._carousel.currentItem.isComplete === true && this._carousel.currentItem.isComplete !== currentItemIsCompleteBefore;
-        if (answerCompleteStatusChanged && !otherIsChanged) {
-            this._carousel.moveNext();
-        }
+        this._autoMoveNext(changes, currentCarouselItemIsCompleteBefore);
     }
 
     _onScaleNodeClick(event, answer, scale) {
         this._selectScale(answer, scale);
     }
 
-    _onAnswerOtherValueKeyPress(event, answer) {
-        super._onAnswerOtherValueKeyPress(event, answer);
-        if (event.keyCode === 13 && questionHelper.isAnswerComplete(this._question, answer)) {
-            this._carousel.moveNext();
+    _onQuestionContainerKeyDown(event) {
+        if (event.shiftKey || event.keyCode !== KEYS.Tab) {
+            return;
         }
+        const activeElement = window.document.activeElement;
+        if (activeElement === undefined) {
+            return;
+        }
+
+        const isLastAnswer = this._currentAnswerIndex === this._answers.length - 1;
+        const nextButtonIsFocused = activeElement.classList.contains('cf-carousel__navigation-button--next');
+        const scaleItemIsFocused = activeElement.classList.contains(this._scaleClass) || activeElement.classList.contains(this._nonScoredScaleClass);
+
+        if (isLastAnswer && nextButtonIsFocused && this._currentAnswer.isOther) {
+            event.preventDefault();
+            event.stopPropagation();
+            this._getAnswerOtherNode(this._currentAnswer.code).focus();
+            return;
+        }
+
+        if (!isLastAnswer && scaleItemIsFocused) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (this._currentAnswer.isOther) {
+                this._getAnswerOtherNode(this._currentAnswer.code).focus();
+            } else {
+                this._container.find('.cf-carousel__navigation-button--next').focus();
+            }
+            return;
+        }
+    }
+
+    _onAnswerOtherNodeKeyDown(event, answer) {
+        if (event.keyCode === KEYS.Tab) {
+            return;
+        }
+
+        event.stopPropagation();
+
+        if (event.keyCode === KEYS.Enter && questionHelper.isAnswerComplete(this._question, answer)) {
+            this._carousel.moveNext();
+            event.preventDefault();
+        }
+    }
+
+    _onCarouselMove() {
+        this._currentAnswerIndex = this._carousel.currentItemIndex;
     }
 }

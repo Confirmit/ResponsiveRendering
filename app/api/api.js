@@ -3,6 +3,8 @@ import PageView from './../views/page-view.js'
 import PageViewProxy from '../views/page-view-proxy';
 import DynamicQuestionsManager from "./dynamic-questions-manager";
 import DynamicQuestionsTransport from "./dynamic-questions-transport";
+import Cati from '../cati';
+import Capi from '../capi';
 
 /**
  * @desc Root api object.
@@ -21,6 +23,9 @@ export default class cfApi {
 
         const transport = new DynamicQuestionsTransport();
         this._dynamicQuestionsManager = new DynamicQuestionsManager(this._page, this._pageView, transport);
+
+        this._cati = this._page.surveyInfo.surveyChannel === 'cati' ? new Cati(this._page) : null;
+        this._capi = this._page.surveyInfo.surveyChannel === 'capi' ? new Capi(this._page) : null;
     }
 
     /**
@@ -41,6 +46,19 @@ export default class cfApi {
         return this._pageViewProxy;
     }
 
+    /**
+     * Cati specific actions
+     */
+    get Cati(){
+        return this._cati;
+    }
+
+    /**
+     * Capi specific actions
+     */
+    get Capi(){
+        return this._capi
+    }
     /**
      * Get debug state.
      * @type {boolean}

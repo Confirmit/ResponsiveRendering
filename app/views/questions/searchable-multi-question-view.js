@@ -1,12 +1,13 @@
-import SearchableQuestionViewBase from "./base/searchable-question-view-base";
-import Utils from "../../utils";
+import SearchableQuestionViewBase from './base/searchable-question-view-base';
+import Utils from '../../utils';
 
 export default class SearchableMultiQuestionView extends SearchableQuestionViewBase {
     constructor(question, settings = null) {
         super(question, settings);
 
         this._selectedAnswerCssClass = 'cf-multi-answer--selected';
-        this._storedOtherValues = this._question.otherValues;
+
+        this._storedOtherValues = {...this._question.otherValues};
     }
 
     _getSelectedAnswerText(answer) {
@@ -43,6 +44,7 @@ export default class SearchableMultiQuestionView extends SearchableQuestionViewB
         });
     }
 
+
     _updateAnswerNodes({values = []}) {
         if (values.length === 0)
             return;
@@ -56,16 +58,26 @@ export default class SearchableMultiQuestionView extends SearchableQuestionViewB
         });
     }
 
-    _updateStoredOtherValues({values = []}){
+    _updateAnswerOtherNodes(changes) {
+        super._updateAnswerOtherNodes(changes);
+
+        const {values = []} = changes;
+
         values.forEach(answerCode => {
             const checked = this._question.values.includes(answerCode);
+            const cached = !Utils.isEmpty(this._storedOtherValues[answerCode]);
 
-            if(checked){
-                if(Utils.isEmpty(this._storedOtherValues[answerCode])){
-                    return;
-                }
+            if (checked && cached) {
                 this._question.setOtherValue(answerCode, this._storedOtherValues[answerCode]);
-            } else {
+                delete this._storedOtherValues[answerCode];
+            }
+        });
+    }
+
+    _updateStoredOtherValues({values = []}) {
+        values.forEach(answerCode => {
+            const checked = this._question.values.includes(answerCode);
+            if (!checked) {
                 this._storedOtherValues[answerCode] = this._question.otherValues[answerCode];
                 this._question.setOtherValue(answerCode, null);
             }
@@ -100,7 +112,7 @@ export default class SearchableMultiQuestionView extends SearchableQuestionViewB
         this._toggleAnswer(answer);
     }
 
-    _onAnswerOtherNodeFocus(answer){
+    _onAnswerOtherNodeFocus(answer) {
         if (Utils.isEmpty(this._storedOtherValues[answer.code])) {
             return;
         }

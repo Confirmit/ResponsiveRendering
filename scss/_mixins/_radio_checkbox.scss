@@ -1,3 +1,5 @@
+//TODO: V2 should get rid of background-position and paddings for more flexible rtl css styles
+
 @mixin radio_bg($size, $selected: false) {
   @if ($selected) {
     background-image: svg-url('<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" fill="#{$control-active-color}" /><circle cx="16" cy="16" r="5" fill="#{$question-bg-color}" /></svg>');

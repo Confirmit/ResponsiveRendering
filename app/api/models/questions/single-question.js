@@ -176,6 +176,8 @@ export default class SingleQuestion extends QuestionWithAnswers {
             }
         }
 
+        delete this._otherValues[this._value];
+
         this._value = value;
 
         return true;
@@ -186,7 +188,7 @@ export default class SingleQuestion extends QuestionWithAnswers {
             case ValidationTypes.Required:
                 return this._validateRequired();
             case ValidationTypes.OtherRequired:
-                return this._validateOther(); 
+                return this._validateOther();
             case ValidationTypes.RequiredIfOtherSpecified:
                 return this._validateRequiredIfOtherSpecified();
         }
@@ -208,11 +210,11 @@ export default class SingleQuestion extends QuestionWithAnswers {
         let isValid = !answer.isOther || !Utils.isEmpty(this.otherValue);
         return new RuleValidationResult(isValid, [this.value]);
     }
-    
+
     _validateRequiredIfOtherSpecified(){
         if(!Utils.isEmpty(this.value))
             return new RuleValidationResult(true);
-        
+
         let invalidAnswers = Object.keys(this._otherValues);
 
         let isValid = invalidAnswers.length === 0;

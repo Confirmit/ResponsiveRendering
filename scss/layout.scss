@@ -33,8 +33,9 @@
 @import "multi/_index";
 @import "open/_list";
 @import "numeric/_list";
-@import "rank-by-number/_list";
-@import "ranking/_list";
+@import "ranking/_number";
+@import "ranking/_click";
+@import "ranking/_dnd";
 @import "dropdown/_grid";
 @import "hierarchy/_index";
 @import "accordion/_index";
@@ -48,6 +49,7 @@
 @import "star-rating/_single";
 @import "star-rating/_grid";
 @import "answer-buttons/_grid";
+@import "answer-buttons/_multi-grid";
 @import "carousel/_grid";
 @import "carousel/_rating";
 @import "geolocation/_index";

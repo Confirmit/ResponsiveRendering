@@ -27,8 +27,6 @@
   .cf-grid-answer--multi {
     .cf-grid-answer__scale-item {
       @include checkbox($control-size);
-      padding: 0 1em;
-      background-position: center;
     }
 
     .cf-grid-answer__scale-item--selected {
@@ -37,12 +35,16 @@
 
     .cf-grid-answer__scale-item--exclusive {
       @include radio($control-size);
-      padding: 0 1em;
-      background-position: center;
 
       &.cf-grid-answer__scale-item--selected {
         @include radio($control-size, true);
       }
+    }
+
+    //after scale-item and all its modifiers for overriding mixin styles
+    .cf-grid-answer__scale-item {
+      padding: 0 1em;
+      background-position: center;
     }
 
     .cf-grid-answer__other {
@@ -85,19 +87,25 @@
   @media (min-width: $desktop-layout-delimiter + 1) {
     &.cf-grid-answer--multi {
       .cf-grid-answer__scale-item {
-        @include checkbox($control-size, false, true);
+        @include checkbox($control-size, false);
       }
 
       .cf-grid-answer__scale-item--selected {
-        @include checkbox($control-size, true, true);
+        @include checkbox($control-size, true);
       }
 
       .cf-grid-answer__scale-item--exclusive {
-        @include radio($control-size, false, true);
+        @include radio($control-size, false);
 
         &.cf-grid-answer__scale-item--selected {
-          @include radio($control-size, true, true);
+          @include radio($control-size, true);
         }
+      }
+
+      //after scale-item and all its modifiers for overriding mixin styles
+      .cf-grid-answer__scale-item {
+        padding: 0 1em;
+        background-position: center;
       }
     }
   }

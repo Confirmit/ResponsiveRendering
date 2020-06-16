@@ -271,13 +271,13 @@ window.esdocSearchIndex = [
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-set-debug",
+    "class/app/api/api.js~cfApi.html#instance-get-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
   [
     "app/api/api.js~cfapi#debug",
-    "class/app/api/api.js~cfApi.html#instance-get-debug",
+    "class/app/api/api.js~cfApi.html#instance-set-debug",
     "app/api/api.js~cfApi#debug",
     "member"
   ],
@@ -429,6 +429,12 @@ window.esdocSearchIndex = [
     "app/api/models/base/answer.js~answer#score",
     "class/app/api/models/base/answer.js~Answer.html#instance-get-score",
     "app/api/models/base/answer.js~Answer#score",
+    "member"
+  ],
+  [
+    "app/api/models/base/answer.js~answer#stylename",
+    "class/app/api/models/base/answer.js~Answer.html#instance-get-styleName",
+    "app/api/models/base/answer.js~Answer#styleName",
     "member"
   ],
   [
@@ -1698,6 +1704,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/questions/ranking-question.js~rankingquestion#rankbydrag",
+    "class/app/api/models/questions/ranking-question.js~RankingQuestion.html#instance-get-rankByDrag",
+    "app/api/models/questions/ranking-question.js~RankingQuestion#rankByDrag",
+    "member"
+  ],
+  [
+    "app/api/models/questions/ranking-question.js~rankingquestion#rankbynumber",
+    "class/app/api/models/questions/ranking-question.js~RankingQuestion.html#instance-get-rankByNumber",
+    "app/api/models/questions/ranking-question.js~RankingQuestion#rankByNumber",
+    "member"
+  ],
+  [
     "app/api/models/questions/ranking-question.js~rankingquestion#setothervalue",
     "class/app/api/models/questions/ranking-question.js~RankingQuestion.html#instance-method-setOtherValue",
     "app/api/models/questions/ranking-question.js~RankingQuestion#setOtherValue",
@@ -1959,6 +1977,12 @@ window.esdocSearchIndex = [
     "app/api/models/survey-info.js~surveyinfo#autonext",
     "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-autoNext",
     "app/api/models/survey-info.js~SurveyInfo#autoNext",
+    "member"
+  ],
+  [
+    "app/api/models/survey-info.js~surveyinfo#autonextinterval",
+    "class/app/api/models/survey-info.js~SurveyInfo.html#instance-get-autoNextInterval",
+    "app/api/models/survey-info.js~SurveyInfo#autoNextInterval",
     "member"
   ],
   [

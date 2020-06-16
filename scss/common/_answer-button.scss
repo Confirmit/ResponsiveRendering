@@ -21,17 +21,9 @@
     cursor: pointer;
   }
 
-  //&__other-edit {
-  //  flex: 0 0 auto;
-  //  width: 3em;
-  //  height: 3em;
-  //  margin-right: -1em;
-  //
-  //  background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><path d="M13,0.9c-1.2-1.2-3-1.2-4.2,0L8.4,1.3l4.2,4.2L13,5.1C14.2,3.9,14.2,2,13,0.9z" fill="#{$control-secondary-color}"/><polygon points="0,9.7 0,13.9 4.2,13.9 11.6,6.5 7.4,2.3" fill="#{$control-secondary-color}"/></svg>');
-  //  background-position: center;
-  //  background-repeat: no-repeat;
-  //  background-size: 1em;
-  //}
+  & + .cf-error-block {
+    margin-top: -.5em;
+  }
 }
 
 .cf-answer-button--selected {
@@ -42,11 +34,11 @@
     color: $question-bg-color;
     background: $answer-button-text-input-color;
     border-bottom: 1px solid $question-bg-color;
-  }
 
-  //.cf-answer-button__other-edit {
-  //  background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><path d="M13,0.9c-1.2-1.2-3-1.2-4.2,0L8.4,1.3l4.2,4.2L13,5.1C14.2,3.9,14.2,2,13,0.9z" fill="#{$question-bg-color}"/><polygon points="0,9.7 0,13.9 4.2,13.9 11.6,6.5 7.4,2.3" fill="#{$question-bg-color}"/></svg>');
-  //}
+    &--error{
+      border-bottom: 1px solid $error-border-color;
+    }
+  }
 }
 
 .cf-answer-button-other {

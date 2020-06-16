@@ -1,0 +1,223 @@
+.cf-dnd-ranking {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  user-select: none;
+  -ms-user-select: none;
+
+  &__unranked-list,
+  &__ranked-list {
+    min-width: 1px;
+    flex: 0 1 50%;
+  }
+}
+
+.cf-dnd-ranking-list {
+  &__item-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 1em;
+    min-height: 5em;
+  }
+
+  &__item {
+    margin: .5em 0;
+  }
+
+  &__counter {
+    color: $control-active-color;
+    margin: -.5em 1em .5em;
+    text-align: right;
+  }
+
+  &--unranked {
+    border: 1px dashed $control-secondary-color;
+  }
+
+  &--ranked {
+    margin: 0 1em;
+    border: 1px dashed $control-active-color;
+    background: rgba($control-active-color, 0.1);
+  }
+
+  &--limit-exceeded {
+    border-color: $error-text-color;
+
+    .cf-dnd-ranking-list__counter {
+      color: $error-text-color;
+    }
+  }
+}
+
+.cf-dnd-ranking-answer {
+  display: flex;
+  min-height: 3em;
+  justify-content: space-between;
+  align-items: center;
+  background: $control-primary-color;
+  cursor: grab;
+
+
+  &__text {
+    flex: 1 1 auto;
+  }
+
+  &__rank {
+    flex: 0 0 auto;
+    min-width: .5em;
+    margin-right: 1em;
+    display: none;
+    color: $question-bg-color;
+  }
+
+  &__handle {
+    flex: 0 0 1.5em;
+    height: .5em;
+    margin: .7em 0 .7em 1em;
+    display: block;
+    content: "";
+    border-top: 3px solid $question-bg-color;
+    border-bottom: 3px solid $question-bg-color;
+  }
+
+  &__other {
+    margin-right: auto;
+    flex: 0 1 auto;
+    max-width: 80%;
+    min-width: 1px;
+
+    &:focus {
+      background-color: $question-bg-color;
+      border-color: $control-active-color;
+    }
+  }
+
+  &--dragging {
+    background: $control-active-color;
+    color: $question-bg-color;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    cursor: grabbing;
+    margin: 0;
+
+    .cf-dnd-ranking-answer__other {
+      color: #fff;
+      background: #6bcbdb;
+      border-bottom: 1px solid #fff;
+    }
+  }
+
+  &--ranked {
+    background: $control-active-color;
+    color: $question-bg-color;
+
+    .cf-dnd-ranking-answer__rank {
+      display: block;
+    }
+
+    .cf-dnd-ranking-answer__other {
+      color: #fff;
+      background: #6bcbdb;
+      border-bottom: 1px solid #fff;
+    }
+  }
+}
+
+.cf-dnd-ranking-answer-placeholder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 3em;
+
+  &__rank {
+    display: none;
+    color: $question-bg-color;
+    flex: 0 1 auto;
+    min-width: .5em;
+  }
+
+  &--unranked {
+    background: $control-secondary-color;
+  }
+
+  &--ranked {
+    background: rgba($control-active-color, 0.5);
+
+    .cf-dnd-ranking-answer-placeholder__rank {
+      display: block;
+
+    }
+  }
+}
+
+.cf-dnd-ranking-answer-placeholder,
+.cf-dnd-ranking-answer {
+  padding: .5em 1em;
+
+  & + .cf-error-block {
+    margin-top: -.5rem;
+  }
+}
+
+
+@media(max-width: $desktop-layout-delimiter) {
+  .cf-dnd-ranking {
+    max-width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+
+    &__unranked-list,
+    &__ranked-list {
+      min-width: auto;
+      flex: 0 1 auto;
+    }
+
+    &__ranked-list {
+      order: 1;
+    }
+
+    &__unranked-list {
+      order: 2;
+    }
+  }
+
+  .cf-dnd-ranking-list {
+    &__item {
+      flex-shrink: 0;
+    }
+
+    &--ranked {
+      margin: 0 0 2em 0
+    }
+  }
+}
+
+
+.cf-dnd-ranking-list--rtl .cf-dnd-ranking-list {
+  &__counter {
+    margin-right: 0;
+    margin-left: 1em;
+    text-align: left;
+  }
+}
+
+.cf-dnd-ranking-answer--rtl .cf-dnd-ranking-answer {
+  &__other {
+    margin-left: auto;
+  }
+
+  &__handle {
+    margin-left: 0;
+    margin-right: 1em;
+  }
+
+  &__rank {
+    margin-right: 0;
+    margin-left: 1em;
+  }
+}

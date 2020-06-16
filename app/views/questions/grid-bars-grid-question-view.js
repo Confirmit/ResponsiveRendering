@@ -10,7 +10,6 @@ export default class GridBarsGridQuestionView extends GridQuestionView {
     constructor(question, settings) {
         super(question, settings);
 
-        this._scaleGroupCssClass = 'cf-gb-grid-answer__control';
         this._selectedScaleCssClass = 'cf-gb-grid-answer__scale-item--selected';
         this._selectedNonScoredItemClass = 'cf-gb-grid-answer__na-item--selected';
 

@@ -1,0 +1,21 @@
+.cf-grid-answer {
+  @media (min-width: $desktop-layout-delimiter + 1) {
+    &__scale-button-item {
+      margin-right: .5em;
+    }
+  }
+
+  @media (max-width: $desktop-layout-delimiter) {
+    &__scale-button-item {
+      min-height: 2em;
+      margin-bottom: 1em;
+    }
+  }
+}
+
+.cf-grid-answer--rtl {
+  .cf-grid-answer__scale-button-item{
+    margin-right: 0;
+    margin-left: .5em;
+  }
+}

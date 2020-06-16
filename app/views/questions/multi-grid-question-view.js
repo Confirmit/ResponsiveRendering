@@ -1,8 +1,8 @@
-import QuestionView from "./base/question-view";
-import Utils from "../../utils";
-import KEYS from "../helpers/keyboard-keys";
-import ErrorBlockManager from "../error/error-block-manager";
-import ValidationTypes from "../../api/models/validation/validation-types";
+import QuestionView from './base/question-view';
+import Utils from '../../utils';
+import KEYS from '../helpers/keyboard-keys';
+import ErrorBlockManager from '../error/error-block-manager';
+import ValidationTypes from '../../api/models/validation/validation-types';
 import $ from 'jquery';
 
 export default class MultiGridQuestionView extends QuestionView {
@@ -16,7 +16,7 @@ export default class MultiGridQuestionView extends QuestionView {
         this._currentQuestionIndex = null;
         this._currentAnswerIndex = null;
 
-        this._selectedAnswerCssClass = "cf-grid-answer__scale-item--selected";
+        this._selectedAnswerCssClass = 'cf-grid-answer__scale-item--selected';
         this._selectedImageAnswerCssClass = 'cf-answer-image--selected';
 
         this._answerErrorBlockManager = new ErrorBlockManager();
@@ -40,6 +40,10 @@ export default class MultiGridQuestionView extends QuestionView {
         return `${this._question.id}_${answerCode}_other_error`
     }
 
+    _getInnerQuestionAnswerErrorBlockId(innerQuestionId, answerCode) {
+        return `${innerQuestionId}_${answerCode}_other_error`
+    }
+
     _getInnerQuestionNode(questionCode) {
         return $(`#${questionCode}`);
     }
@@ -57,7 +61,7 @@ export default class MultiGridQuestionView extends QuestionView {
     }
 
     _getOtherNodes(answerCode) {
-        return $(`.cf-grid-answer__other[name=${this._question.id}_${answerCode}_other]`);
+        return $(`[name=${this._question.id}_${answerCode}_other]`);
     }
 
     _attachHandlersToDOM() {
@@ -104,7 +108,8 @@ export default class MultiGridQuestionView extends QuestionView {
                 const answer = this._question.getAnswer(value);
                 const isSelected = this._question.getInnerQuestion(questionId).values.includes(value);
 
-                this._getAnswerNode(questionId, value).toggleClass(this._getSelectedAnswerClass(answer), isSelected)
+                this._getAnswerNode(questionId, value)
+                    .toggleClass(this._getSelectedAnswerClass(answer), isSelected)
                     .attr( 'aria-checked', ()=> isSelected ? 'true' : 'false');
             });
         });
@@ -132,8 +137,11 @@ export default class MultiGridQuestionView extends QuestionView {
 
     _showAnswerOtherError(validationResult) {
         validationResult.answerValidationResults.filter(result => !result.isValid).forEach(result => {
-            const otherErrors = result.errors.filter(error => error.type === ValidationTypes.OtherRequired);
-            if (otherErrors.length === 0) {
+            const otherErrorsMessages = result.errors
+                .filter(error => error.type === ValidationTypes.OtherRequired)
+                .map(error => error.message);
+
+            if (otherErrorsMessages.length === 0) {
                 return;
             }
 
@@ -143,7 +151,20 @@ export default class MultiGridQuestionView extends QuestionView {
                 .attr('aria-errormessage', errorBlockId)
                 .attr('aria-invalid', 'true');
 
-            this._answerErrorBlockManager.showErrors(errorBlockId, otherNode, otherErrors.map(error => error.message));
+            this._answerErrorBlockManager.showErrors(errorBlockId, otherNode, otherErrorsMessages);
+
+            this._question.innerQuestions.forEach(question => {
+                if (!question.values.includes(result.answerCode)) {
+                    return;
+                }
+
+                const errorBlockId = this._getInnerQuestionAnswerErrorBlockId(question.id, result.answerCode);
+                const otherNode = this._getInnerQuestionAnswerOtherNode(question.id, result.answerCode);
+                otherNode
+                    .attr('aria-errormessage', errorBlockId)
+                    .attr('aria-invalid', 'true');
+                this._answerErrorBlockManager.showErrors(errorBlockId, otherNode, otherErrorsMessages);
+            });
         });
     }
 
@@ -155,8 +176,8 @@ export default class MultiGridQuestionView extends QuestionView {
             const errors = validationResult.errors.map(error => error.message);
             this._answerErrorBlockManager.showErrors(errorBlockId, questionTextNode, errors);
             questionNode.find('.cf-grid-answer__scale')
-                .attr("aria-invalid", "true")
-                .attr("aria-errormessage", errorBlockId);
+                .attr('aria-invalid', 'true')
+                .attr('aria-errormessage', errorBlockId);
         });
     }
 
@@ -170,8 +191,8 @@ export default class MultiGridQuestionView extends QuestionView {
             .removeAttr('aria-invalid');
 
         this._container.find('.cf-grid-answer__scale')
-            .removeAttr("aria-invalid")
-            .removeAttr("aria-errormessage");
+            .removeAttr('aria-invalid')
+            .removeAttr('aria-errormessage');
     }
 
     _toggleAnswer(question, answer) {

@@ -8,6 +8,7 @@ export default Object.freeze({
     NumericList: 'NumericList',
     Info: 'Info',
     Date: 'Date',
+    EmailOpen: 'EmailOpen',
     Ranking: 'Ranking',
     HorizontalRatingScaleSingle: 'HorizontalRatingScaleSingle',
     GridBarsSingle: 'GridBarsSingle',

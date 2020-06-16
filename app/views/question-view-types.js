@@ -15,6 +15,7 @@ import NumericQuestionView from './questions/numeric-question-view.js';
 import NumericListQuestionView from './questions/numeric-list-question-view.js';
 import DateQuestionView from './questions/date-question-view.js';
 import DateQuestionPolyfillView from './questions/date-question-polyfill-view.js';
+import EmailQuestionView from './questions/email-question-view';
 import CodeCaptureQuestionView from './questions/code-capture-question-view';
 import RankingQuestionView from './questions/ranking-question-view.js';
 import HorizontalRatingGridQuestionView from './questions/horizontal-rating-grid-question-view.js';
@@ -74,6 +75,7 @@ export default Object.freeze({
     'NumericListQuestionView': NumericListQuestionView,
     'DateQuestionView': DateQuestionView,
     'DateQuestionPolyfillView': DateQuestionPolyfillView,
+    'EmailQuestionView': EmailQuestionView,
     'RankingQuestionView': RankingQuestionView,
     'HorizontalRatingGridQuestionView': HorizontalRatingGridQuestionView,
     'HorizontalRatingSingleQuestionView': HorizontalRatingSingleQuestionView,

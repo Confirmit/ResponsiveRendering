@@ -15,7 +15,7 @@ export default class ImageProcessor {
         return new Promise(resolve => {
             canvas.toBlob(blob => {
                 resolve(blob);
-            }, file.type, 0.8);
+            }, 'image/jpeg', 0.8);
         });
     }
 

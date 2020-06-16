@@ -19,7 +19,7 @@ export default class MultiQuestionViewBase extends QuestionWithAnswersView {
         this._selectedAnswerCssClass = 'cf-multi-answer--selected';
         this._selectedImageAnswerCssClass = 'cf-answer-image--selected';
 
-        this._storedOtherValues = this._question.otherValues;
+        this._storedOtherValues = {...this._question.otherValues};
 
         this._attachHandlersToDOM();
     }
@@ -125,6 +125,16 @@ export default class MultiQuestionViewBase extends QuestionWithAnswersView {
                         .attr('tabindex', '0')
                         .attr('aria-hidden', 'false');
                 });
+
+            values.forEach(answerCode => {
+                const checked = this._getSelectedAnswerCodes().includes(answerCode);
+                const cached = !Utils.isEmpty(this._storedOtherValues[answerCode]);
+
+                if (checked && cached) {
+                    this._question.setOtherValue(answerCode, this._storedOtherValues[answerCode]);
+                    delete this._storedOtherValues[answerCode];
+                }
+            });
         }
 
         super._updateAnswerOtherNodes({otherValues});
@@ -133,13 +143,7 @@ export default class MultiQuestionViewBase extends QuestionWithAnswersView {
     _updateStoredOtherValues({values = []}) {
         values.forEach(answerCode => {
             const checked = this._getSelectedAnswerCodes().includes(answerCode);
-
-            if (checked) {
-                if (Utils.isEmpty(this._storedOtherValues[answerCode])) {
-                    return;
-                }
-                this._question.setOtherValue(answerCode, this._storedOtherValues[answerCode]);
-            } else {
+            if (!checked) {
                 this._storedOtherValues[answerCode] = this._question.otherValues[answerCode];
                 this._question.setOtherValue(answerCode, null);
             }
@@ -256,7 +260,7 @@ export default class MultiQuestionViewBase extends QuestionWithAnswersView {
 
     _onAnswerOtherNodeFocus(answer) {
         if (Utils.isEmpty(this._storedOtherValues[answer.code])) {
-           return;
+            return;
         }
 
         this._selectAnswer(answer);

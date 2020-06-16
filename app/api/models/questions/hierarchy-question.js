@@ -87,6 +87,10 @@ export default class HierarchyQuestion extends QuestionWithAnswers {
     get formValues() {
         let form = {};
 
+        if (!this.currentHierarchyNode.isSelectable) {
+           return form;
+        }
+
         let answer = this.getAnswer(this.value);
         if (answer) {
             let {originalAnswerCode} = this._revealAnswerCode(this.value);

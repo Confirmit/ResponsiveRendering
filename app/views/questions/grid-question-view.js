@@ -15,9 +15,12 @@ export default class GridQuestionView extends QuestionWithAnswerView {
 
         this._selectedScaleCssClass = 'cf-grid-answer__scale-item--selected';
         this._selectedImageScaleCssClass = 'cf-answer-image--selected';
-        this._scaleGroupCssClass = 'cf-grid-answer__scale';
 
         this._attachHandlersToDOM();
+    }
+
+    get _answers() {
+        return this._question.answers;
     }
 
     get _scales() {
@@ -25,19 +28,23 @@ export default class GridQuestionView extends QuestionWithAnswerView {
     }
 
     get _currentAnswer() {
-        return this._question.answers[this._currentAnswerIndex];
+        return this._question.answers[this._currentAnswerIndex] || null;
     }
 
     get _currentScale() {
-        return this._scales[this._currentScaleIndex];
+        return this._scales[this._currentScaleIndex] || null;
     }
 
     _getSelectedScaleClass(scale){
         return scale.imagesSettings !== null ? this._selectedImageScaleCssClass : this._selectedScaleCssClass;
     }
 
+    _getScaleGroupNode(answerCode) {
+        return this._getAnswerNode(answerCode).find('[role="radiogroup"]');
+    }
+
     _attachHandlersToDOM() {
-        this._question.answers.forEach((answer, answerIndex) => {
+        this._answers.forEach((answer, answerIndex) => {
             this._scales.forEach((scale, scaleIndex) => {
                 this._getScaleNode(answer.code, scale.code)
                     .on('click', event => this._onScaleNodeClick(event, answer, scale))
@@ -46,13 +53,25 @@ export default class GridQuestionView extends QuestionWithAnswerView {
 
             if (answer.isOther) {
                 this._getAnswerOtherNode(answer.code)
-                    .on('keydown', event => this._onAnswerOtherValueKeyPress(event, answer))
                     .on('input', event => this._onAnswerOtherValueChangedHandler(answer, event.target.value));
             }
         });
 
         if (!this._settings.disableKeyboardSupport) {
-            this._container.on('keydown', this._onKeyPress.bind(this));
+            this._answers.forEach(answer => {
+                this._getScaleGroupNode(answer.code)
+                    .on('keydown', this._onGroupNodeKeyDown.bind(this));
+
+                if (answer.isOther) {
+                    this._getAnswerOtherNode(answer.code).on('keydown', event =>
+                        this._onAnswerOtherNodeKeyDown(event, answer));
+                }
+
+                this._scales.forEach(scale => {
+                    this._getScaleNode(answer.code, scale.code)
+                        .on('keydown', this._onScaleNodeKeyDown.bind(this));
+                });
+            });
         }
     }
 
@@ -113,7 +132,7 @@ export default class GridQuestionView extends QuestionWithAnswerView {
 
         const answerHasNotOnlyOtherErrors = validationResult.errors.length > otherErrors.length;
         if (answerHasNotOnlyOtherErrors) {
-            this._getAnswerNode(answer.code).find(`.${this._scaleGroupCssClass}`)
+            this._getScaleGroupNode(answer.code)
                 .attr("aria-invalid", "true")
                 .attr("aria-errormessage", errorBlockId);
         }
@@ -122,9 +141,12 @@ export default class GridQuestionView extends QuestionWithAnswerView {
     _hideErrors() {
         super._hideErrors();
 
-        this._container.find(`.${this._scaleGroupCssClass}`)
-            .removeAttr("aria-invalid")
-            .removeAttr("aria-errormessage");
+        this._answers.forEach(answer => {
+            this._getScaleGroupNode(answer.code)
+                .removeAttr("aria-invalid")
+                .removeAttr("aria-errormessage");
+        });
+
 
         this._container.find('.cf-text-box')
             .removeAttr('aria-errormessage')
@@ -145,7 +167,10 @@ export default class GridQuestionView extends QuestionWithAnswerView {
     }
 
     // eslint-disable-next-line no-unused-vars
-    _onAnswerOtherValueKeyPress(event, answer) {
+    _onAnswerOtherNodeKeyDown(event, answer) {
+        if (event.keyCode === KEYS.Tab) {
+            return;
+        }
         event.stopPropagation();
     }
 
@@ -154,12 +179,7 @@ export default class GridQuestionView extends QuestionWithAnswerView {
         this._currentScaleIndex = scaleIndex;
     }
 
-    _onKeyPress(event) {
-        this._onArrowKeyPress(event);
-        this._onSelectKeyPress(event);
-    }
-
-    _onArrowKeyPress(event) {
+    _onGroupNodeKeyDown(event) {
         if ([KEYS.ArrowUp, KEYS.ArrowLeft, KEYS.ArrowRight, KEYS.ArrowDown].includes(event.keyCode) === false) {
             return;
         }
@@ -168,6 +188,7 @@ export default class GridQuestionView extends QuestionWithAnswerView {
         }
 
         event.preventDefault();
+        event.stopPropagation();
 
         let nextScale = null;
         switch (event.keyCode) {
@@ -194,7 +215,7 @@ export default class GridQuestionView extends QuestionWithAnswerView {
         this._getScaleNode(this._currentAnswer.code, nextScale.code).focus();
     }
 
-    _onSelectKeyPress(event) {
+    _onScaleNodeKeyDown(event) {
         if ([KEYS.SpaceBar, KEYS.Enter].includes(event.keyCode) === false) {
             return;
         }
@@ -203,6 +224,7 @@ export default class GridQuestionView extends QuestionWithAnswerView {
         }
 
         event.preventDefault();
+        event.stopPropagation();
 
         this._selectScale(this._currentAnswer, this._currentScale);
     }

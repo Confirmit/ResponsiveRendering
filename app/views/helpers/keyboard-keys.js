@@ -9,4 +9,5 @@ export default {
     PageDown: 34,
     Home: 36,
     End: 35,
+    Tab: 9,
 };

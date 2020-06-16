@@ -4,14 +4,17 @@ import SingleQuestionView from './questions/single-question-view.js';
 import MultiQuestionView from './questions/multi-question-view.js';
 import GridQuestionView from './questions/grid-question-view.js';
 import MultiGridQuestionView from './questions/multi-grid-question-view.js';
+import AnswerButtonsMultiGridQuestionView from './questions/answer-buttons-multi-grid-question-view';
 import OpenTextListQuestionView from './questions/open-text-list-question-view.js';
 import OpenTextQuestionView from './questions/open-text-question-view.js';
 import NumericQuestionView from './questions/numeric-question-view.js';
 import NumericListQuestionView from './questions/numeric-list-question-view.js';
 import DateQuestionView from './questions/date-question-view.js';
 import DateQuestionPolyfillView from './questions/date-question-polyfill-view.js';
+import EmailQuestionView from './questions/email-question-view';
 import RankingQuestionView from './questions/ranking-question-view.js';
 import RankByNumberQuestionView from './questions/rank-by-number-question-view';
+import RankByDragQuestionView from './questions/rank-by-drag-question-view';
 import CaptureOrderMultiQuestionView from './questions/capture-order-multi-question-view';
 import AnswerButtonsCaptureOrderMultiQuestionView from './questions/answer-buttons-capture-order-multi-question-view';
 import HorizontalRatingGridQuestionView from './questions/horizontal-rating-grid-question-view.js';
@@ -95,6 +98,8 @@ export default class QuestionViewFactory {
                 return this._createNumericListQuestionView(model);
             case QuestionTypes.Date:
                 return this._createDateQuestionView(model);
+            case QuestionTypes.EmailOpen:
+                return new EmailQuestionView(model);
             case QuestionTypes.Ranking:
                 return this._createRankingQuestionView(model);
             case QuestionTypes.HorizontalRatingScaleSingle:
@@ -194,6 +199,11 @@ export default class QuestionViewFactory {
             if (model.carousel) {
                 return new CarouselMultiGridQuestionView(model, this._questionViewSettings);
             }
+
+            if(model.innerQuestions.some(question => question.answerButtons)){
+                return new AnswerButtonsMultiGridQuestionView(model, this._questionViewSettings);
+            }
+
             return new MultiGridQuestionView(model, this._questionViewSettings);
         }
 
@@ -250,6 +260,10 @@ export default class QuestionViewFactory {
 
         if (model.captureOrder) {
             return new CaptureOrderMultiQuestionView(model, this._questionViewSettings);
+        }
+
+        if(model.rankByDrag) {
+            return new RankByDragQuestionView(model, this._questionViewSettings)
         }
 
         if(model.rankByNumber){

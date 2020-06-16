@@ -2,13 +2,14 @@ import QuestionViewFactory from './question-view-factory.js';
 import QuestionViewSettings from './question-view-settings.js';
 import HiddenQuestionView from './questions/hidden-question-view.js';
 import PageErrorBlock from './error/page-error-block.js';
-import $ from 'jquery';
 import SmartBanner from './controls/smart-banner.js';
 import AutoNextNavigator from './controls/auto-next-navigator.js';
 import TestNavigatorView from './controls/test-navigator-view.js';
 import ProcessMonitor from '../process-monitor.js';
 import Event from 'event.js';
 import QuestionTypes from 'api/question-types.js';
+import HiddenInputs from './hidden-inputs';
+import $ from 'jquery';
 
 export default class PageView {
     /**
@@ -26,9 +27,11 @@ export default class PageView {
         this._processMonitor.changeStateEvent.on(this._onProcessMonitorStateChange.bind(this));
 
         this._testNavigatorView = this._page.testNavigator !== null ? new TestNavigatorView(this._page.testNavigator) : null;
+        this._hiddenInputs = new HiddenInputs(this._page.serverVariables);
         this._autoNextNavigator = null;
 
         this._questionViewFactory = new QuestionViewFactory(this._questionViewSettings);
+        this._registeredCustomQuestions = {};
         this._registeredCustomQuestionViews = {};
 
         this._pageForm = $('#page_form');
@@ -37,6 +40,7 @@ export default class PageView {
     }
 
     init() {
+        this._registerCustomQuestions();
         this._attachQuestionViews();
         this._attachModelHandlers();
         this._attachControlHandlers();
@@ -57,6 +61,10 @@ export default class PageView {
         this._questionViewFactory = questionViewFactory;
     }
 
+    registerCustomQuestion(customQuestionGuid, createViewFn) {
+        this._registeredCustomQuestions[customQuestionGuid] = createViewFn;
+    }
+
     registerCustomQuestionView(questionId, createViewFn) {
         this._registeredCustomQuestionViews[questionId] = createViewFn;
     }
@@ -71,6 +79,28 @@ export default class PageView {
 
     getHiddenInputs() {
         return $('.cf-page__hidden-fields').find('input[type=hidden]').serializeArray();
+    }
+
+    _registerCustomQuestions() {
+        this._page.questions.filter(question => question.customQuestion !== null).forEach(question => {
+            this._registerCustomQuestion(question);
+        });
+    }
+
+    _registerCustomQuestion(question) {
+        if(question.type === QuestionTypes.DynamicQuestionPlaceholder) {
+            return;
+        }
+
+        const createCustomQuestionFn = this._registeredCustomQuestions[question.customQuestion.id];
+        if (createCustomQuestionFn === undefined) {
+            // eslint-disable-next-line no-console
+            console.warn(`Custom question(${question.id}): creation function is not registered.`);
+            return;
+        }
+        this.registerCustomQuestionView(question.id, (question, questionViewSettings) => {
+            return createCustomQuestionFn(question, question.customQuestion.settings, questionViewSettings);
+        });
     }
 
     _attachQuestionViews() {
@@ -186,7 +216,7 @@ export default class PageView {
     }
 
     _preventFormSubmitOnEnter() {
-        let textInputs = 'input[type=text], input[type=number], input[type=date], input[type=password]';
+        let textInputs = 'input[type=text], input[type=number], input[type=date], input[type=password], input[type=email]';
 
         this._pageForm.on('keypress', textInputs, (e) => {
             if (e.keyCode === 13 || e.keyCode === 10) {
@@ -197,15 +227,12 @@ export default class PageView {
     }
 
     _renderNavigationHiddenView(next) {
-        const name = next ? '__fwd' : '__bck';
-        const input = $('<input/>', {
-            type: 'hidden',
-            class: 'cf-hidden-navigation',
-            name: name,
-            value: '1'
-        });
-        this._pageForm.find('.cf-hidden-navigation').remove();
-        this._pageForm.append(input);
+        const forwardInputName = '__fwd';
+        const backwardInputName = '__bck';
+        const value = '1';
+        this._page.serverVariables.remove(forwardInputName);
+        this._page.serverVariables.remove(backwardInputName);
+        this._page.serverVariables.add(next ? forwardInputName : backwardInputName, value);
     }
 
     replaceDynamicQuestion(model, html, startupScript) {
@@ -217,7 +244,12 @@ export default class PageView {
             return;
         }
 
+        // have to register custom question before view init.
+        if(model.customQuestion !== null) {
+            this._registerCustomQuestion(model);
+        }
         this._attachQuestionView(model);
+
         if (startupScript) {
             this._runDynamicQuestionStartupScript(startupScript)
         }
@@ -245,15 +277,6 @@ export default class PageView {
     }
 
     _onOkButtonClick() {
-        try {
-            if (window.parent && typeof (window.parent.postMessage) === 'function') {
-                window.parent.postMessage({type: 'cf-survey-end'}, '*');
-            }
-        } catch (error) {
-            // eslint-disable-next-line no-console
-            console.error(error);
-        }
-
         this._onNavigationButtonClick(true);
     }
 

@@ -9,7 +9,6 @@ export default class StarRatingGridQuestionView extends GridQuestionView {
     constructor(question, settings) {
         super(question, settings);
 
-        this._scaleGroupCssClass = 'cf-sr-grid-answer__control';
         this._selectedScaleCssClass = 'cf-sr-grid-answer__scale-item--selected';
         this._selectedNonScoredItemCssClass = 'cf-sr-grid-answer__na-item--selected';
 

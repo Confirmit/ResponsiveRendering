@@ -8,6 +8,7 @@ import NumericQuestion from './models/questions/numeric-question.js';
 import NumericListQuestion from './models/questions/numeric-list-question.js';
 import InfoQuestion from './models/questions/info-question.js';
 import DateQuestion from './models/questions/date-question.js';
+import EmailQuestion from './models/questions/email-question';
 import RankingQuestion from './models/questions/ranking-question.js';
 import SingleRatingQuestion from './models/questions/single-rating-question.js';
 import GridRatingQuestion from './models/questions/grid-rating-question.js';
@@ -65,6 +66,8 @@ export default class QuestionFactory {
                 return new InfoQuestion(rawModel);
             case QuestionTypes.Date:
                 return new DateQuestion(rawModel);
+            case QuestionTypes.EmailOpen:
+                return new EmailQuestion(rawModel);
             case QuestionTypes.Ranking:
                 return new RankingQuestion(rawModel);
             case QuestionTypes.HorizontalRatingScaleSingle:
