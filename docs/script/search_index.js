@@ -42,6 +42,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "se.rendering.responsive/app/api/models/questions/email-question.js~emailquestion",
+    "class/app/api/models/questions/email-question.js~EmailQuestion.html",
+    "<span>EmailQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/email-question.js</span>",
+    "class"
+  ],
+  [
     "se.rendering.responsive/app/event.js~event",
     "class/app/event.js~Event.html",
     "<span>Event</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/event.js</span>",
@@ -204,6 +210,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "se.rendering.responsive/app/api/models/server-variables.js~servervariables",
+    "class/app/api/models/server-variables.js~ServerVariables.html",
+    "<span>ServerVariables</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/server-variables.js</span>",
+    "class"
+  ],
+  [
     "se.rendering.responsive/app/api/models/questions/single-question.js~singlequestion",
     "class/app/api/models/questions/single-question.js~SingleQuestion.html",
     "<span>SingleQuestion</span> <span class=\"search-result-import-path\">se.rendering.responsive/app/api/models/questions/single-question.js</span>",
@@ -262,6 +274,18 @@ window.esdocSearchIndex = [
     "file/app/api/api.js.html",
     "app/api/api.js",
     "file"
+  ],
+  [
+    "app/api/api.js~cfapi#capi",
+    "class/app/api/api.js~cfApi.html#instance-get-Capi",
+    "app/api/api.js~cfApi#Capi",
+    "member"
+  ],
+  [
+    "app/api/api.js~cfapi#cati",
+    "class/app/api/api.js~cfApi.html#instance-get-Cati",
+    "app/api/api.js~cfApi#Cati",
+    "member"
   ],
   [
     "app/api/api.js~cfapi#constructor",
@@ -444,6 +468,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/base/custom-question.js",
+    "file/app/api/models/base/custom-question.js.html",
+    "app/api/models/base/custom-question.js",
+    "file"
+  ],
+  [
     "app/api/models/base/head-group.js",
     "file/app/api/models/base/head-group.js.html",
     "app/api/models/base/head-group.js",
@@ -502,6 +532,12 @@ window.esdocSearchIndex = [
     "class/app/api/models/base/question-base.js~QuestionBase.html#instance-constructor-constructor",
     "app/api/models/base/question-base.js~QuestionBase#constructor",
     "method"
+  ],
+  [
+    "app/api/models/base/question-base.js~questionbase#customquestion",
+    "class/app/api/models/base/question-base.js~QuestionBase.html#instance-get-customQuestion",
+    "app/api/models/base/question-base.js~QuestionBase#customQuestion",
+    "member"
   ],
   [
     "app/api/models/base/question-base.js~questionbase#customrendering",
@@ -726,6 +762,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/page.js~page#changelanguageonthenextpage",
+    "class/app/api/models/page.js~Page.html#instance-method-changeLanguageOnTheNextPage",
+    "app/api/models/page.js~Page#changeLanguageOnTheNextPage",
+    "method"
+  ],
+  [
     "app/api/models/page.js~page#constructor",
     "class/app/api/models/page.js~Page.html#instance-constructor-constructor",
     "app/api/models/page.js~Page#constructor",
@@ -742,6 +784,12 @@ window.esdocSearchIndex = [
     "class/app/api/models/page.js~Page.html#instance-get-dynamicQuestionsChangeCompleteEvent",
     "app/api/models/page.js~Page#dynamicQuestionsChangeCompleteEvent",
     "member"
+  ],
+  [
+    "app/api/models/page.js~page#fastforward",
+    "class/app/api/models/page.js~Page.html#instance-method-fastForward",
+    "app/api/models/page.js~Page#fastForward",
+    "method"
   ],
   [
     "app/api/models/page.js~page#formvalues",
@@ -778,6 +826,12 @@ window.esdocSearchIndex = [
     "class/app/api/models/page.js~Page.html#instance-method-replaceDynamicQuestions",
     "app/api/models/page.js~Page#replaceDynamicQuestions",
     "method"
+  ],
+  [
+    "app/api/models/page.js~page#servervariables",
+    "class/app/api/models/page.js~Page.html#instance-get-serverVariables",
+    "app/api/models/page.js~Page#serverVariables",
+    "member"
   ],
   [
     "app/api/models/page.js~page#surveyinfo",
@@ -946,6 +1000,36 @@ window.esdocSearchIndex = [
     "class/app/api/models/questions/dynamic-question-placeholder.js~DynamicQuestionPlaceholder.html#instance-constructor-constructor",
     "app/api/models/questions/dynamic-question-placeholder.js~DynamicQuestionPlaceholder#constructor",
     "method"
+  ],
+  [
+    "app/api/models/questions/email-question.js",
+    "file/app/api/models/questions/email-question.js.html",
+    "app/api/models/questions/email-question.js",
+    "file"
+  ],
+  [
+    "app/api/models/questions/email-question.js~emailquestion#constructor",
+    "class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-constructor-constructor",
+    "app/api/models/questions/email-question.js~EmailQuestion#constructor",
+    "method"
+  ],
+  [
+    "app/api/models/questions/email-question.js~emailquestion#formvalues",
+    "class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-formValues",
+    "app/api/models/questions/email-question.js~EmailQuestion#formValues",
+    "member"
+  ],
+  [
+    "app/api/models/questions/email-question.js~emailquestion#setvalue",
+    "class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-method-setValue",
+    "app/api/models/questions/email-question.js~EmailQuestion#setValue",
+    "method"
+  ],
+  [
+    "app/api/models/questions/email-question.js~emailquestion#value",
+    "class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-value",
+    "app/api/models/questions/email-question.js~EmailQuestion#value",
+    "member"
   ],
   [
     "app/api/models/questions/geolocation-question.js",
@@ -1956,6 +2040,42 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "app/api/models/server-variables.js",
+    "file/app/api/models/server-variables.js.html",
+    "app/api/models/server-variables.js",
+    "file"
+  ],
+  [
+    "app/api/models/server-variables.js~servervariables#add",
+    "class/app/api/models/server-variables.js~ServerVariables.html#instance-method-add",
+    "app/api/models/server-variables.js~ServerVariables#add",
+    "method"
+  ],
+  [
+    "app/api/models/server-variables.js~servervariables#changeevent",
+    "class/app/api/models/server-variables.js~ServerVariables.html#instance-get-changeEvent",
+    "app/api/models/server-variables.js~ServerVariables#changeEvent",
+    "member"
+  ],
+  [
+    "app/api/models/server-variables.js~servervariables#constructor",
+    "class/app/api/models/server-variables.js~ServerVariables.html#instance-constructor-constructor",
+    "app/api/models/server-variables.js~ServerVariables#constructor",
+    "method"
+  ],
+  [
+    "app/api/models/server-variables.js~servervariables#edit",
+    "class/app/api/models/server-variables.js~ServerVariables.html#instance-method-edit",
+    "app/api/models/server-variables.js~ServerVariables#edit",
+    "method"
+  ],
+  [
+    "app/api/models/server-variables.js~servervariables#remove",
+    "class/app/api/models/server-variables.js~ServerVariables.html#instance-method-remove",
+    "app/api/models/server-variables.js~ServerVariables#remove",
+    "method"
+  ],
+  [
     "app/api/models/survey-info.js",
     "file/app/api/models/survey-info.js.html",
     "app/api/models/survey-info.js",
@@ -2253,6 +2373,18 @@ window.esdocSearchIndex = [
     "app/api/searchable-answer-list-service.js",
     "file/app/api/searchable-answer-list-service.js.html",
     "app/api/searchable-answer-list-service.js",
+    "file"
+  ],
+  [
+    "app/capi.js",
+    "file/app/capi.js.html",
+    "app/capi.js",
+    "file"
+  ],
+  [
+    "app/cati.js",
+    "file/app/cati.js.html",
+    "app/cati.js",
     "file"
   ],
   [

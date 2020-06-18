@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../../">
-  <title data-ice="title">VideoUploadQuestion | Responsive Rendering</title>
+  <title data-ice="title">EmailQuestion | Responsive Rendering</title>
    <link rel="shortcut icon" type="image/x-icon" href="./image/favicon.ico">
    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
    <link type="text/css" rel="stylesheet" href="css/style.css">
@@ -65,7 +65,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/code-capture-question.js~CodeCaptureQuestion.html">CodeCaptureQuestion</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/date-question.js~DateQuestion.html">DateQuestion</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/dynamic-question-placeholder.js~DynamicQuestionPlaceholder.html">DynamicQuestionPlaceholder</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html">EmailQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span class="active"><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html">EmailQuestion</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/geolocation-question.js~GeolocationQuestion.html">GeolocationQuestion</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/grid-3d-question.js~Grid3DQuestion.html">Grid3DQuestion</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/grid-question-base.js~GridQuestionBase.html">GridQuestionBase</a></span></span></li>
@@ -85,7 +85,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/single-question.js~SingleQuestion.html">SingleQuestion</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/single-rating-question.js~SingleRatingQuestion.html">SingleRatingQuestion</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/telephone-question.js~TelephoneQuestion.html">TelephoneQuestion</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span class="active"><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html">VideoUploadQuestion</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name" class="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html">VideoUploadQuestion</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name" class="name"><span><a href="function/index.html#static-function-SearchableQuestionMixin">SearchableQuestionMixin</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name" class="name"><span><a href="typedef/index.html#static-typedef-CultureInfo">CultureInfo</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name" class="name"><span><a href="typedef/index.html#static-typedef-SearchableQuestion">SearchableQuestion</a></span></span></li>
@@ -104,17 +104,17 @@
   
   
   
-  <span data-ice="source">| <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L8">source</a></span></span>
+  <span data-ice="source">| <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/email-question.js#L10">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
-  <h1 data-ice="name">VideoUploadQuestion</h1>
+  <h1 data-ice="name">EmailQuestion</h1>
 
   
 
   
   
-  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="class/app/api/models/base/question-base.js~QuestionBase.html">QuestionBase</a></span> &#x2192; <span><a href="class/app/api/models/base/question.js~Question.html">Question</a></span> &#x2192; VideoUploadQuestion</div></div>
+  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="class/app/api/models/base/question-base.js~QuestionBase.html">QuestionBase</a></span> &#x2192; <span><a href="class/app/api/models/base/question.js~Question.html">Question</a></span> &#x2192; EmailQuestion</div></div>
   
   
   
@@ -124,7 +124,7 @@
 
   
   
-  <div class="description" data-ice="description"><p>VideoUploadQuestion.</p>
+  <div class="description" data-ice="description"><p>Email question.</p>
 </div>
   
 
@@ -157,13 +157,14 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(model: <span>object</span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(model: <span>object</span>)</span>
         </p>
       </div>
       <div>
         
         
-        
+        <div data-ice="description" class="inline"><p>Create instance.</p>
+</div>
         <div data-ice="parent" class="inline"></div>
       </div>
     </td>
@@ -194,7 +195,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-formValues">formValues</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-formValues">formValues</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -207,7 +208,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L27">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/email-question.js#L31">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -224,13 +225,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-maxDurationInSeconds">maxDurationInSeconds</a></span></span><span class="code" data-ice="signature">: <span>number</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-value">value</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description" class="inline"><p>Maximum duration of video file in seconds.</p>
+        <div data-ice="description" class="inline"><p>Email value.</p>
 </div>
         
       </div>
@@ -238,7 +239,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L51">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/email-question.js#L24">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -255,69 +256,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-minDurationInSeconds">minDurationInSeconds</a></span></span><span class="code" data-ice="signature">: <span>number</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description" class="inline"><p>Minimum duration of video file in seconds.</p>
-</div>
-        
-      </div>
-    </td>
-    <td>
-      
-      
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L42">source</a></span></span>
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      <span class="kind" data-ice="kind">get</span>
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-value">value</a></span></span><span class="code" data-ice="signature">: {videoId: ?<span>string</span>, previewUrl: ?<span>string</span>, duration: ?<span>number</span>}</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description" class="inline"><p>Video upload value.</p>
-</div>
-        
-      </div>
-    </td>
-    <td>
-      
-      
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L60">source</a></span></span>
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      <span class="kind" data-ice="kind">get</span>
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-customQuestion">customQuestion</a></span></span><span class="code" data-ice="signature">: <span>CustomQuestion</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-customQuestion">customQuestion</a></span></span><span class="code" data-ice="signature">: <span>CustomQuestion</span></span>
         </p>
       </div>
       <div>
@@ -348,7 +287,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-customRendering">customRendering</a></span></span><span class="code" data-ice="signature">: <span>boolean</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-customRendering">customRendering</a></span></span><span class="code" data-ice="signature">: <span>boolean</span></span>
         </p>
       </div>
       <div>
@@ -379,7 +318,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-formValues">formValues</a></span></span><span class="code" data-ice="signature">: <span>object</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-formValues">formValues</a></span></span><span class="code" data-ice="signature">: <span>object</span></span>
         </p>
       </div>
       <div>
@@ -410,7 +349,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-id">id</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-id">id</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
         </p>
       </div>
       <div>
@@ -441,7 +380,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-instruction">instruction</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-instruction">instruction</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
         </p>
       </div>
       <div>
@@ -472,7 +411,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-isRtl">isRtl</a></span></span><span class="code" data-ice="signature">: <span>bool</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-isRtl">isRtl</a></span></span><span class="code" data-ice="signature">: <span>bool</span></span>
         </p>
       </div>
       <div>
@@ -503,7 +442,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-text">text</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-text">text</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
         </p>
       </div>
       <div>
@@ -534,7 +473,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-title">title</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-title">title</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
         </p>
       </div>
       <div>
@@ -565,7 +504,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-triggeredQuestions">triggeredQuestions</a></span></span><span class="code" data-ice="signature">: <span>Array</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-triggeredQuestions">triggeredQuestions</a></span></span><span class="code" data-ice="signature">: <span>Array</span></span>
         </p>
       </div>
       <div>
@@ -596,7 +535,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-type">type</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-type">type</a></span></span><span class="code" data-ice="signature">: <span>string</span></span>
         </p>
       </div>
       <div>
@@ -627,7 +566,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-allowValidateOnChange">allowValidateOnChange</a></span></span><span class="code" data-ice="signature">: <span>boolean</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-allowValidateOnChange">allowValidateOnChange</a></span></span><span class="code" data-ice="signature">: <span>boolean</span></span>
         </p>
       </div>
       <div>
@@ -658,7 +597,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-set-allowValidateOnChange">allowValidateOnChange</a></span></span><span class="code" data-ice="signature">(value: <span>boolean</span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-set-allowValidateOnChange">allowValidateOnChange</a></span></span><span class="code" data-ice="signature">(value: <span>boolean</span>)</span>
         </p>
       </div>
       <div>
@@ -689,7 +628,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-changeEvent">changeEvent</a></span></span><span class="code" data-ice="signature">: <span><a href="class/app/event.js~Event.html">Event</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-changeEvent">changeEvent</a></span></span><span class="code" data-ice="signature">: <span><a href="class/app/event.js~Event.html">Event</a></span></span>
         </p>
       </div>
       <div>
@@ -720,7 +659,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-readOnly">readOnly</a></span></span><span class="code" data-ice="signature">: <span>boolean</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-readOnly">readOnly</a></span></span><span class="code" data-ice="signature">: <span>boolean</span></span>
         </p>
       </div>
       <div>
@@ -751,7 +690,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-required">required</a></span></span><span class="code" data-ice="signature">: <span>boolean</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-required">required</a></span></span><span class="code" data-ice="signature">: <span>boolean</span></span>
         </p>
       </div>
       <div>
@@ -782,7 +721,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-triggeredQuestions">triggeredQuestions</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-triggeredQuestions">triggeredQuestions</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -812,7 +751,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-validationCompleteEvent">validationCompleteEvent</a></span></span><span class="code" data-ice="signature">: <span><a href="class/app/event.js~Event.html">Event</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-validationCompleteEvent">validationCompleteEvent</a></span></span><span class="code" data-ice="signature">: <span><a href="class/app/event.js~Event.html">Event</a></span></span>
         </p>
       </div>
       <div>
@@ -843,7 +782,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-get-validationEvent">validationEvent</a></span></span><span class="code" data-ice="signature">: <span><a href="class/app/event.js~Event.html">Event</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-get-validationEvent">validationEvent</a></span></span><span class="code" data-ice="signature">: <span><a href="class/app/event.js~Event.html">Event</a></span></span>
         </p>
       </div>
       <div>
@@ -881,7 +820,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-method-setValue">setValue</a></span></span><span class="code" data-ice="signature">(videoId: <span>string</span>, previewUrl: <span>string</span>, duration: <span>number</span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-method-setValue">setValue</a></span></span><span class="code" data-ice="signature">(answerValue: <span>string</span>)</span>
         </p>
       </div>
       <div>
@@ -895,7 +834,7 @@
     <td>
       
       
-      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L70">source</a></span></span>
+      <span data-ice="source"> <span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/email-question.js#L45">source</a></span></span>
     </td>
   </tr>
 <tr data-ice="target">
@@ -912,7 +851,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-method-validate">validate</a></span></span><span class="code" data-ice="signature">(raiseValidationCompleteEvent: <span>boolean</span>, validationRuleFilter: <span>function</span>): <span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html">QuestionValidationResult</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-method-validate">validate</a></span></span><span class="code" data-ice="signature">(raiseValidationCompleteEvent: <span>boolean</span>, validationRuleFilter: <span>function</span>): <span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html">QuestionValidationResult</a></span></span>
         </p>
       </div>
       <div>
@@ -943,7 +882,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/video-upload-question.js~VideoUploadQuestion.html#instance-method-validate">validate</a></span></span><span class="code" data-ice="signature">(raiseValidationCompleteEvent: <span>boolean</span>, validationRuleFilter: <span>function</span>): <span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html">QuestionValidationResult</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/app/api/models/questions/email-question.js~EmailQuestion.html#instance-method-validate">validate</a></span></span><span class="code" data-ice="signature">(raiseValidationCompleteEvent: <span>boolean</span>, validationRuleFilter: <span>function</span>): <span><a href="class/app/api/models/validation/question-validation-result.js~QuestionValidationResult.html">QuestionValidationResult</a></span></span>
         </p>
       </div>
       <div>
@@ -982,7 +921,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L13">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/email-question.js#L15">source</a></span></span>
     </span>
   </h3>
 
@@ -1006,7 +945,7 @@
       <td data-ice="name" class="code" data-depth="0">model</td>
       <td data-ice="type" class="code"><span>object</span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Raw question model.</p>
+      <td data-ice="description"><p>The instance of the model.</p>
 </td>
     </tr>
 </tbody>
@@ -1046,7 +985,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L27">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/email-question.js#L31">source</a></span></span>
     </span>
   </h3>
 
@@ -1079,94 +1018,6 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-get-maxDurationInSeconds">
-    <span class="access" data-ice="access">public</span>
-    
-    <span class="kind" data-ice="kind">get</span>
-    
-    
-    
-    <span class="code" data-ice="name">maxDurationInSeconds</span><span class="code" data-ice="signature">: <span>number</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L51">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Maximum duration of video file in seconds.</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-get-minDurationInSeconds">
-    <span class="access" data-ice="access">public</span>
-    
-    <span class="kind" data-ice="kind">get</span>
-    
-    
-    
-    <span class="code" data-ice="name">minDurationInSeconds</span><span class="code" data-ice="signature">: <span>number</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L42">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Minimum duration of video file in seconds.</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-get-value">
     <span class="access" data-ice="access">public</span>
     
@@ -1174,18 +1025,18 @@
     
     
     
-    <span class="code" data-ice="name">value</span><span class="code" data-ice="signature">: {videoId: ?<span>string</span>, previewUrl: ?<span>string</span>, duration: ?<span>number</span>}</span>
+    <span class="code" data-ice="name">value</span><span class="code" data-ice="signature">: <span>string</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L60">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/email-question.js#L24">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Video upload value.</p>
+  <div data-ice="description"><p>Email value.</p>
 </div>
 
   
@@ -2013,11 +1864,11 @@
     
     
     
-    <span class="code" data-ice="name">setValue</span><span class="code" data-ice="signature">(videoId: <span>string</span>, previewUrl: <span>string</span>, duration: <span>number</span>)</span>
+    <span class="code" data-ice="name">setValue</span><span class="code" data-ice="signature">(answerValue: <span>string</span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/video-upload-question.js#L70">source</a></span></span>
+      <span data-ice="source"><span><a href="https://github.com/Confirmit/ResponsiveSurveyRendering/tree/master/app/api/models/questions/email-question.js#L45">source</a></span></span>
     </span>
   </h3>
 
@@ -2038,24 +1889,10 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">videoId</td>
+      <td data-ice="name" class="code" data-depth="0">answerValue</td>
       <td data-ice="type" class="code"><span>string</span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Video ID.</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">previewUrl</td>
-      <td data-ice="type" class="code"><span>string</span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Video preview URL.</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">duration</td>
-      <td data-ice="type" class="code"><span>number</span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Video file duration in seconds.</p>
+      <td data-ice="description"><p>Answer value.</p>
 </td>
     </tr>
 </tbody>
