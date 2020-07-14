@@ -13,6 +13,8 @@ export default class ServerVariables {
 
     /**
      * Fired on server variables changes.
+     * The handler callback function can take parameters. When the handler is called, object will be passed as only parameter.
+     * Object has two properties: type - type change event. value - server variable value.
      * @event changeEvent
      * @type {Event}
      */

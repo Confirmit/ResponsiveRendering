@@ -66,6 +66,8 @@ export default class Question extends QuestionBase {
 
     /**
      * Fired on answer changes.
+     * The handler callback function can take parameters. When the handler is called, object will be passed as only parameter.
+     * Object has two properties: model - it is question model. changes - object with changes difference.
      * @event changeEvent
      * @type {Event}
      * @memberOf Question
@@ -76,6 +78,7 @@ export default class Question extends QuestionBase {
 
     /**
      * Fired on question validation. Use to implement custom validation logic.
+     * The handler callback function can take parameters. When the handler is called, instance of {@link QuestionValidationResult} will be passed as only parameter.
      * @event validationEvent
      * @type {Event}
      * @memberOf Question
@@ -86,6 +89,7 @@ export default class Question extends QuestionBase {
 
     /**
      * Fired on question validation complete. Use to implement custom error handling.
+     * The handler callback function can take parameters. When the handler is called, instance of {@link QuestionValidationResult} will be passed as only parameter.
      * @event validationEvent
      * @type {Event}
      * @memberOf Question

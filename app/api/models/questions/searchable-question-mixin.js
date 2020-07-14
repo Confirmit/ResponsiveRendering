@@ -110,7 +110,7 @@ const SearchableQuestionMixin = base => class extends base {
     }
 
     /**
-     * Fired on loading more answers is complete.
+     * Fired on loading more answers is complete. Handler function accepts a single parameter - array of {@link Answer}.
      * @event loadMoreAnswersCompleteEvent
      * @type {Event}
      */
@@ -120,6 +120,7 @@ const SearchableQuestionMixin = base => class extends base {
 
     /**
      * Fired on filtering answers is complete.
+     * The handler callback function can take parameters. When the handler is called, array of {@link Answer} will be passed as only parameter.
      * @event filterAnswersCompleteEvent
      * @type {Event}
      */

@@ -157,12 +157,14 @@
 This example can be used with single questions.</p>
 <h3 id="implementation">Implementation</h3><p>Set &apos;disable default rendering&apos; on the question skin - default markup won&apos;t be used in that example so it can be disabled.  </p>
 <p>Add the jQuery and jQueryUI js files to the question theme as external js files.</p>
-<pre><code class="lang-log"><code class="source-code prettyprint">https://code.jquery.com/jquery-3.2.1.min.js  
+<pre><code class="lang-log"><code class="source-code prettyprint">https://code.jquery.com/jquery-3.2.1.min.js, 
 https://code.jquery.com/ui/1.12.1/jquery-ui.min.js  </code>
 </code></pre>
-<p>Code to add to the JavaScript section:  </p>
+<p>Add the jQueryUI css file to the question theme as an external css file.</p>
+<pre><code><code class="source-code prettyprint">https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css</code>
+</code></pre><p>Code to add to the JavaScript section:  </p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">$(function() {
-    var container = $(&apos;.cf-question[data-question-id=&apos; + currentQuestion.id + &apos;]&apos;);
+    var container = $(&apos;#&apos; + currentQuestion.id);
 
     var sliderContainer = $(&apos;&lt;div class=&quot;single-slider&quot; style=&quot;max-width: 300px; margin: 20px;&quot;&gt;&lt;/div&gt;&apos;);
     container.append(sliderContainer);
@@ -185,7 +187,7 @@ https://code.jquery.com/ui/1.12.1/jquery-ui.min.js  </code>
 <h2 id="grid-slider">Grid slider</h2><h3 id="overview">Overview</h3><p>It is also possible to adjust part of the default question markup. Here we will adjust the grid question to display sliders instead of radio buttons.
 This example can be used with grid questions.</p>
 <h3 id="implementation">Implementation</h3><p>Add the jQuery and jQueryUI js files to the question theme as external js files.</p>
-<pre><code><code class="source-code prettyprint">https://code.jquery.com/jquery-1.12.4.js
+<pre><code><code class="source-code prettyprint">https://code.jquery.com/jquery-1.12.4.js, 
 https://code.jquery.com/ui/1.12.1/jquery-ui.js</code>
 </code></pre><p>Add the jQueryUI css file to the question theme as an external css file.</p>
 <pre><code><code class="source-code prettyprint">https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css</code>
@@ -247,8 +249,7 @@ new SliderSimpleGridQuestionView(currentQuestion);</code>
 <h2 id="grid-slider-re-rendered">Grid slider re-rendered</h2><h3 id="overview">Overview</h3><p>The previous example could also be implemented in a different way - by disabling the default markup and creating it manually.
 This example can be used with grid questions.</p>
 <h3 id="implementation">Implementation</h3><p>Set &apos;Disable default rendering&apos; in the question skin&apos;s properties.<br>Add the jQuery and jQueryUI js files to the question theme as external js files.</p>
-<pre><code><code class="source-code prettyprint">https://code.jquery.com/jquery-1.12.4.js
-https://code.jquery.com/ui/1.12.1/jquery-ui.js</code>
+<pre><code><code class="source-code prettyprint">https://code.jquery.com/jquery-1.12.4.js, https://code.jquery.com/ui/1.12.1/jquery-ui.js</code>
 </code></pre><p>Add the jQueryUI css file to the question theme as an external css file.</p>
 <pre><code><code class="source-code prettyprint">https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css</code>
 </code></pre><p>Code to add to the JavaScript section:</p>
@@ -394,8 +395,8 @@ This example can be used with multi questions.</p>
 Add the jQuery and Bootstrap js files to the question theme as external js files.</p>
 <pre><code><code class="source-code prettyprint">https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css</code>
 </code></pre><p>Add the Bootstrap css file to the question theme as an external css file.</p>
-<pre><code><code class="source-code prettyprint">https://code.jquery.com/jquery-3.2.1.slim.min.js
-https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js
+<pre><code><code class="source-code prettyprint">https://code.jquery.com/jquery-3.2.1.slim.min.js,
+https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js,
 https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js</code>
 </code></pre><p>Code to add to the JavaScript section:</p>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">class AccordionMultiQuestionView {

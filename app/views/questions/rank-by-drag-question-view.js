@@ -399,6 +399,8 @@ export default class RankByDragQuestionView extends QuestionWithAnswersView {
 
         event.preventDefault();
 
+        this._handleAutoScrollOnPointerMove(event.clientY);
+
         const position = this._getMouseEventPointerPosition(event);
         this._onAnswerMove(position);
     }
@@ -411,6 +413,10 @@ export default class RankByDragQuestionView extends QuestionWithAnswersView {
         event.preventDefault();
 
         const position = this._getMouseEventPointerPosition(event);
+
+        // disable auto scroll
+        this._autoScroll = false;
+
         this._onAnswerMoveEnd(position);
     }
 

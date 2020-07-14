@@ -62,6 +62,7 @@ export default class Page {
 
     /**
      * Fired on page validation; Use to implement custom validation logic.
+     * The handler callback function can take parameters. When the handler is called, {@link PageValidationResult} will be passed as only parameter.
      * @event validationEvent
      * @type {Event}
      * @memberOf Page
@@ -72,6 +73,7 @@ export default class Page {
 
     /**
      * Fired on page validation complete; Use to implement custom error handling.
+     * The handler callback function can take parameters. When the handler is called, {@link PageValidationResult} will be passed as only parameter.
      * @event validationCompleteEvent
      * @type {Event}
      * @memberOf Page
@@ -81,7 +83,9 @@ export default class Page {
     }
 
     /**
-     * Fired before navigation.
+     * Fired before question models validation.
+     * The handler callback function can take parameters. When the handler is called, object will be passed as only parameter.
+     * Object has boolean property next that define way of navigation
      * @event beforeNavigateEvent
      * @type {Event}
      * @memberOf Page
@@ -91,7 +95,9 @@ export default class Page {
     }
 
     /**
-     * Fired on navigation.
+     * Fired after question models validation.
+     * The handler callback function can take parameters. When the handler is called, object will be passed as only parameter.
+     * Object has boolean property next that define way of navigation
      * @event navigateEvent
      * @type {Event}
      * @memberOf Page
@@ -102,6 +108,7 @@ export default class Page {
 
     /**
      * Fired on dynamic question trigger changed.
+     * The handler callback function can take parameters. When the handler is called, question model will be passed as only parameter.
      * @event dynamicQuestionTriggerChangedEvent
      * @type {Event}
      * @memberOf Page
@@ -112,6 +119,7 @@ export default class Page {
 
     /**
      * Fired after dynamic question trigger fire and dynamic questions are changed.
+     * The handler callback function can take parameters. When the handler is called, array of question models will be passed as only parameter.
      * @event dynamicQuestionTriggerChangedEvent
      * @type {Event}
      * @memberOf Page
