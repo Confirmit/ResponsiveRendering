@@ -7,7 +7,6 @@ export default class FloatingLabels {
         this._lastItem = lastItem;
         this._clone = null;
 
-        this._onScroll = () => this._handleScroll();
         this._init();
     }
 
@@ -16,23 +15,35 @@ export default class FloatingLabels {
             return;
         }
 
+        this._onScroll = this._onScroll.bind(this);
+        this._onResize = this._onResize.bind(this);
+
         this._clone = this._panel
             .clone()
             .addClass('cf-label-panel--floating')
             .css('visibility', 'hidden')
             .insertAfter(this._panel);
 
-        $(window).on('resize', ()=> this._adjust());
 
-        this._adjust();
+        $(window).on('resize', this._onResize);
+        if(window.ResizeObserver !== undefined) {
+            new window.ResizeObserver(() => {
+                this._adjustWidthAndPosition();
+            }).observe(this._panel[0]);
+        }
+
+        this._adjustWidthAndPosition();
+        this._onOffPanel();
     }
 
-    _adjust() {
+    _adjustWidthAndPosition() {
         this._clone.css({
             width: this._panel.outerWidth() + 'px',
             left: this._panel.offset().left
         });
+    }
 
+    _onOffPanel() {
         if(window.innerWidth <= this._mobileThreshold) {
             this._float();
         }
@@ -70,5 +81,14 @@ export default class FloatingLabels {
                 visibility: 'visible'
             });
         }
+    }
+
+    _onResize() {
+        this._adjustWidthAndPosition();
+        this._onOffPanel();
+    }
+
+    _onScroll() {
+        this._handleScroll();
     }
 }

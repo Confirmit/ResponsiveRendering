@@ -24,6 +24,7 @@ import GridBarsGridQuestionView from './questions/grid-bars-grid-question-view.j
 import GridBarsSingleQuestionView from './questions/grid-bars-single-question-view.js';
 import StarRatingGridQuestionView from './questions/star-rating-grid-question-view.js';
 import StarRatingSingleQuestionView from './questions/star-rating-single-question-view.js';
+import AccordionGridQuestionView from './questions/accordion-grid-question-view';
 import CarouselGridQuestionView from './questions/carousel-grid-question-view.js';
 import CarouselHorizontalRatingGridQuestionView from './questions/carousel-horizontal-rating-grid-question-view.js';
 import CarouselGridBarsGridQuestionView from './questions/carousel-grid-bars-grid-question-view.js';
@@ -83,6 +84,7 @@ export default Object.freeze({
     'GridBarsSingleQuestionView': GridBarsSingleQuestionView,
     'StarRatingGridQuestionView': StarRatingGridQuestionView,
     'StarRatingSingleQuestionView': StarRatingSingleQuestionView,
+    'AccordionGridQuestionView' : AccordionGridQuestionView,
     'CarouselGridQuestionView': CarouselGridQuestionView,
     'CarouselHorizontalRatingGridQuestionView': CarouselHorizontalRatingGridQuestionView,
     'CarouselGridBarsGridQuestionView': CarouselGridBarsGridQuestionView,

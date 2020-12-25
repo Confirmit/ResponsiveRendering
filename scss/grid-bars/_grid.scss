@@ -178,7 +178,7 @@ $gb-item-indent: 4px;
   .cf-gb-grid-answer--rtl{
     .cf-gb-grid-answer {
       &__na {
-        @include na_scale(true);
+        @include radio_list(1.4em, true);
       }
 
       &__scale-item {

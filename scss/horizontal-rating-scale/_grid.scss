@@ -118,7 +118,7 @@ $hrs-item-indent: 4px;
   .cf-hrs-grid--rtl {
     .cf-hrs-grid-answer {
       &__na {
-        @include na_scale(true);
+        @include radio_list(1.4em, true);
       }
       &__scale-item {
         margin-right: 0;

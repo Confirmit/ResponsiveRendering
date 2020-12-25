@@ -1,10 +1,29 @@
+const FLIP_X = 2;
+const ROTATE_180 = 3;
+const ROTATE_180_FLIP_X = 4;
+const ROTATE_90_FLIP_X = 5;
+const ROTATE_90 = 6;
+const ROTATE_270_FLIP_X = 7;
+const ROTATE_270 = 8;
+
+//markers
+const START_JPEG_MARKER = 0xFFD8;
+const START_JFIF_MARKER = 0xFFE0;
+const EXIF_HEADER = 0xFFE1;
+const START_EXIF_MARKER = 0x45786966;
+const INTEL_FORMAT_MARKER = 0x4949; //marker shows has littleEndian or not
+const EXIF_ORIENTATION_MARKER = 0x0112;
+
 export default class ImageProcessor {
     constructor() {
         this._downsamplingRatio = 0.5;
     }
 
     async process(file, maxImageWidth, maxImageHeight) {
-        let canvas = await this._drawToCanvas(file);
+        const arrayBuffer = await this._readFileToArrayBuffer(file);
+        const orientation = this._readAndThenResetOrientation(arrayBuffer);
+        const image = await this._loadImage(arrayBuffer, file.type);
+        let canvas = await this._drawImageToCanvas(image, orientation);
 
         const scaleRatio = this._getScaleRatio(canvas.height, canvas.width, maxImageHeight, maxImageWidth);
         if (scaleRatio < 1) {
@@ -29,69 +48,73 @@ export default class ImageProcessor {
         });
     }
 
-    async _getOrientation(file) {
-        const buffer = await this._readFileToArrayBuffer(file);
-        const dataView = new DataView(buffer);
+    _readAndThenResetOrientation(arrayBuffer) {
+        const dataView = new DataView(arrayBuffer);
 
-        if (dataView.getUint16(0, false) !== 0xFFD8) {
+        if (dataView.getUint16(0, false) !== START_JPEG_MARKER) {
             return null;
         }
 
-        let offset = 2;
-        let marker = null;
-        let little = null;
-        let tags = null;
+        let byteOffset = 2;
+        let currentMarker = null;
+        let orientation = null;
 
-        while (offset < dataView.byteLength) {
-            marker = dataView.getUint16(offset, false);
-            offset += 2;
+        while (byteOffset < dataView.byteLength) {
+            currentMarker = dataView.getUint16(byteOffset, false);
+            byteOffset += 2;
 
-            if (marker === 0xFFE1) {
-                if (dataView.getUint32(offset += 2, false) !== 0x45786966) {
+            if ((currentMarker & START_JFIF_MARKER) !== START_JFIF_MARKER) {
+                break;
+            }
+
+            if (currentMarker === EXIF_HEADER) {
+                byteOffset += 2;
+
+                if (dataView.getUint32(byteOffset, false) !== START_EXIF_MARKER) {
                     break;
                 }
+                byteOffset += 6;
 
-                little = dataView.getUint16(offset += 6, false) === 0x4949;
-                offset += dataView.getUint32(offset + 4, little);
+                const littleEndian = dataView.getUint16(byteOffset, false) === INTEL_FORMAT_MARKER;
+                byteOffset += dataView.getUint32(byteOffset + 4, littleEndian);
 
-                tags = dataView.getUint16(offset, little);
-                offset += 2;
+                const exifTags = dataView.getUint16(byteOffset, littleEndian);
+                byteOffset += 2;
 
-                for (let i = 0; i < tags; i++) {
-                    if (dataView.getUint16(offset + (i * 12), little) === 0x0112) {
-                        return dataView.getUint16(offset + (i * 12) + 8, little);
+                for (let i = 0; i < exifTags; i++) {
+                    if (dataView.getUint16(byteOffset + (i * 12), littleEndian) === EXIF_ORIENTATION_MARKER) {
+                        orientation = dataView.getUint16(byteOffset + (i * 12) + 8, littleEndian);
+                        dataView.setUint16(byteOffset + (i * 12) + 8, littleEndian, 0); // need for avoid browser rotation;
+                        return orientation;
                     }
                 }
             }
-            else if ((marker & 0xFF00) !== 0xFF00) {
-                break;
-            } else {
-                offset += dataView.getUint16(offset, false);
-            }
+
+            byteOffset += dataView.getUint16(byteOffset, false);
         }
 
         return null;
     }
 
-    async _loadImage(file) {
+    _loadImage(arrayBuffer, type) {
         return new Promise(resolve => {
+            const blob = new Blob([arrayBuffer],{type});
             const image = new Image();
+
             image.onload = () => {
                 resolve(image);
             };
-            image.src = URL.createObjectURL(file);
+
+            image.src = URL.createObjectURL(blob);
         });
     }
 
-    async _drawToCanvas(file) {
-        const orientation = await this._getOrientation(file);
-        const image = await this._loadImage(file);
-
+    _drawImageToCanvas(image, orientation = null) {
         const sourceWidth = image.width;
         const sourceHeight = image.height;
         const canvas = document.createElement('canvas');
 
-        if (orientation !== null && [5, 6, 7, 8].indexOf(orientation) > -1) {
+        if (orientation !== null && [ROTATE_90_FLIP_X, ROTATE_90, ROTATE_270_FLIP_X, ROTATE_270].indexOf(orientation) > -1) {
             canvas.width = sourceHeight;
             canvas.height = sourceWidth;
         } else {
@@ -100,32 +123,32 @@ export default class ImageProcessor {
         }
 
         switch (orientation) {
-            case 2:
-                canvas.getContext("2d").transform(-1, 0, 0, 1, sourceWidth, 0);
+            case FLIP_X:
+                canvas.getContext('2d').transform(-1, 0, 0, 1, sourceWidth, 0);
                 break;
-            case 3:
-                canvas.getContext("2d").transform(-1, 0, 0, -1, sourceWidth, sourceHeight);
+            case ROTATE_180:
+                canvas.getContext('2d').transform(-1, 0, 0, -1, sourceWidth, sourceHeight);
                 break;
-            case 4:
-                canvas.getContext("2d").transform(1, 0, 0, -1, 0, sourceHeight);
+            case ROTATE_180_FLIP_X:
+                canvas.getContext('2d').transform(1, 0, 0, -1, 0, sourceHeight);
                 break;
-            case 5:
-                canvas.getContext("2d").transform(0, 1, 1, 0, 0, 0);
+            case ROTATE_90_FLIP_X:
+                canvas.getContext('2d').transform(0, 1, 1, 0, 0, 0);
                 break;
-            case 6:
-                canvas.getContext("2d").transform(0, 1, -1, 0, sourceHeight, 0);
+            case ROTATE_90:
+                canvas.getContext('2d').transform(0, 1, -1, 0, sourceHeight, 0);
                 break;
-            case 7:
-                canvas.getContext("2d").transform(0, -1, -1, 0, sourceHeight, sourceWidth);
+            case ROTATE_270_FLIP_X:
+                canvas.getContext('2d').transform(0, -1, -1, 0, sourceHeight, sourceWidth);
                 break;
-            case 8:
-                canvas.getContext("2d").transform(0, -1, 1, 0, 0, sourceWidth);
+            case ROTATE_270:
+                canvas.getContext('2d').transform(0, -1, 1, 0, 0, sourceWidth);
                 break;
             default:
-                canvas.getContext("2d").transform(1, 0, 0, 1, 0, 0);
+                canvas.getContext('2d').transform(1, 0, 0, 1, 0, 0);
         }
 
-        canvas.getContext("2d").drawImage(image, 0, 0);
+        canvas.getContext('2d').drawImage(image, 0, 0);
         return canvas;
     }
 
@@ -174,15 +197,15 @@ if (!HTMLCanvasElement.prototype.toBlob) {
     Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
         value: function (callback, type, quality) {
             let canvas = this;
-            setTimeout(function() {
-                let binStr = atob( canvas.toDataURL(type, quality).split(',')[1] ),
+            setTimeout(function () {
+                let binStr = atob(canvas.toDataURL(type, quality).split(',')[1]),
                     len = binStr.length,
                     arr = new Uint8Array(len);
 
-                for (let i = 0; i < len; i++ ) {
+                for (let i = 0; i < len; i++) {
                     arr[i] = binStr.charCodeAt(i);
                 }
-                callback( new Blob( [arr], {type: type || 'image/png'} ) );
+                callback(new Blob([arr], {type: type || 'image/png'}));
             });
         }
     });

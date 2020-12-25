@@ -227,7 +227,10 @@ https://code.jquery.com/ui/1.12.1/jquery-ui.js</code>
             });
         });
 
-        $(&apos;#&apos; + this.question.id + &apos; .cf-grid-layout__row-control&apos;).css(&apos;max-width&apos;, &apos;600px&apos;).css(&apos;flex-grow&apos;, &apos;1&apos;);
+        $(&apos;#&apos; + this.question.id).find(&apos;.cf-grid&apos;).css(&apos;overflow&apos;, &apos;initial&apos;);
+        $(&apos;#&apos; + this.question.id + &apos; .cf-grid-answer&apos;).css(&apos;margin-bottom&apos;, &apos;15px&apos;);
+        $(&apos;#&apos; + this.question.id + &apos; .cf-grid-answer__text&apos;).css(&apos;margin-top&apos;, &apos;0&apos;);
+        $(&apos;#&apos; + this.question.id + &apos; .cf-grid-answer__control&apos;).css(&apos;align-self&apos;, &apos;center&apos;).css(&apos;max-width&apos;, &apos;600px&apos;).css(&apos;flex-grow&apos;, &apos;1&apos;);
     }
 
     onSliderChange(answerCode, event, data){
@@ -297,6 +300,8 @@ This example can be used with grid questions.</p>
           &apos;&lt;/div&gt;&apos;).appendTo(&apos;#&apos; + this.question.id);
         this.renderLabelPanel();
         this.renderRows();
+
+        $(&apos;.grid&apos;).css(&apos;overflow&apos;,&apos;initial&apos;);
     }
 
     renderLabelPanel(){
@@ -338,7 +343,10 @@ This example can be used with grid questions.</p>
                 change: this.onSliderChange.bind(this, answer.code)
             });
         });
-        $(&apos;#&apos; + this.question.id + &apos; .cf-grid-layout__row-control&apos;).css(&apos;max-width&apos;, &apos;600px&apos;).css(&apos;flex-grow&apos;, &apos;1&apos;);
+
+        $(&apos;#&apos; + this.question.id + &apos; .cf-grid-answer&apos;).css(&apos;margin-bottom&apos;, &apos;15px&apos;);
+        $(&apos;#&apos; + this.question.id + &apos; .cf-grid-answer__text&apos;).css(&apos;margin-top&apos;, &apos;0&apos;);
+        $(&apos;#&apos; + this.question.id + &apos; .cf-grid-answer__control&apos;).css(&apos;align-self&apos;, &apos;center&apos;).css(&apos;max-width&apos;, &apos;600px&apos;).css(&apos;flex-grow&apos;, &apos;1&apos;);
     }
 
     renderErrors(){

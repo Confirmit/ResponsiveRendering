@@ -71,7 +71,7 @@ export default class Utils {
             return false;
         }
 
-        const validEmail = new RegExp('^\\S+@\\S+$');
+        const validEmail = new RegExp('^\\S+@\\S+\\.\\S+$');
 
         return validEmail.test(value);
     }
